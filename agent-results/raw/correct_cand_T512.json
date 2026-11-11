@@ -1,0 +1,55 @@
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+[
+ {
+  "name": "o",
+  "max_abs": 0.0,
+  "rel_rms": 0.0,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "ht",
+  "max_abs": 0.0,
+  "rel_rms": 0.0,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "dq",
+  "max_abs": 0.0009765625,
+  "rel_rms": 4.899045052297879e-06,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "dk",
+  "max_abs": 0.00048828125,
+  "rel_rms": 3.6091157653572736e-06,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "dv",
+  "max_abs": 0.0,
+  "rel_rms": 0.0,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "dg",
+  "max_abs": 0.00048828125,
+  "rel_rms": 1.571222674101591e-05,
+  "nan_inf": false,
+  "ok": true
+ },
+ {
+  "name": "dh0",
+  "max_abs": 0.0,
+  "rel_rms": 0.0,
+  "nan_inf": false,
+  "ok": true
+ }
+]
+ALL_PASS True

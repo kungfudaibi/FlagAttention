@@ -1862,7 +1862,11 @@ def chunk_gla_bwd_dqk_intra(
     # factorized block-dot operands even when the final causal weight is
     # finite.  Explicit arguments remain available to profiling callers.
     if use_block_dot is None:
-        use_block_dot = q.dtype != torch.float16
+        # FP16 still avoids the block-dot path for wide K, where the
+        # factorized operands can overflow under strongly negative gates.
+        # For the 64x64 GLA shape the centered BC16 factorization stays
+        # bounded; this is the dominant backward stage at T512.
+        use_block_dot = q.dtype != torch.float16 or K == 64
     default_bc = 16 if q.dtype == torch.float16 or K < 128 else 32
     default_bk = 128 if K >= 128 else 64
     BC = min(default_bc if block_size_c is None else block_size_c, BT)
