@@ -53,7 +53,7 @@ Forward 69.2 s and DQR 117 s again: binaries from the earlier GCU-1 session do n
 
 ## Findings
 
-1. The 204 s is autotune/compile time in the backward, not kernel execution and not a first-run kernel launch. Warm steady state for the same call is sub-millisecond per launch (earlier 0.97-1.00 ms backward in experiments/steady.log); the cold cost is dominated by 12 DQR + 9 DKV config compiles at ~6-20 s each on this toolchain.
+1. The 204 s is autotune/compile time in the backward, not kernel execution and not a first-run kernel launch. The earlier 0.97-1.00 ms backward steady-state measurement in experiments/steady.log is BF16, not an FP16 measurement. The FP16 cold cost here is dominated by 12 DQR and 9 DKV config compiles at roughly 6-25 s each; FP16 steady-state latency remains unmeasured in this task.
 2. The DQR sweep is the single largest backward stage (~118 s cold) and includes clearly unprofitable BS=16 configs (~260 ms per bench call, ~8-12 s compile each), 60-190x slower than the selected tile.
 3. The DKV grouped sweep is the longest tail (~20 s per config, 9 configs ~180 s) and is the reason a partially cached rerun still finishes at ~204 s: forward and DQR are cache hits, DKV is not.
 4. Commit 16d168d does not affect D64/T256/G4 at all, for the reason above. The PARALLAX-002 statement that BF16 is "routed through the validated dense kernel" is inaccurate for this shape: the dense DKV launch is shadowed by `use_grouped_dkv`, and dense DQR requires K >= 128. Both dtypes take the identical autotuned path, which is why their cold stage timings match.
