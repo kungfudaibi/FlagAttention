@@ -36,6 +36,12 @@ PARALLEL_STATE_ENABLED = (
 PARALLEL_BWD_STATE_ENABLED = (
     os.environ.get("FLAGGEMS_ENFLAME_GLA_PARALLEL_BWD_STATE", "1") != "0"
 )
+# GLA-004 experimental sweep: FP16 states admitted to the parallel state
+# kernels beyond the 64x64 control.  Branch-only experiment; see
+# agent-results/GLA-004.md.
+EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES = frozenset(
+    {(32, 32), (64, 64), (64, 128), (128, 64), (128, 128)}
+)
 
 
 @triton.jit(do_not_specialize=["N"])
@@ -1156,10 +1162,13 @@ def chunk_fwd_h(
         # with the independently controlled parallel backward-state path.
         and (not states_in_fp32 or PARALLEL_BWD_STATE_ENABLED)
         and not state_v_first
-        # The FP16 specialization is validated for the 64x64 GLA state.
+        # GLA-004: FP16 admitted for the experimental shape allow-list.
         and (
             k.dtype == torch.bfloat16
-            or (k.dtype == torch.float16 and K == 64 and V == 64)
+            or (
+                k.dtype == torch.float16
+                and (K, V) in EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES
+            )
         )
         and v.dtype == k.dtype
         and g is None
@@ -1390,12 +1399,14 @@ def chunk_bwd_dh(
         and BT == 64
         and HQ == H
         and not state_v_first
-        # BF16 keeps the original unrestricted parallel path.  FP16 is only
-        # enabled for the 64x64 GLA state, matching the forward gate that
-        # PR #42 already validates.
+        # BF16 keeps the original unrestricted parallel path.  FP16 uses the
+        # same experimental shape allow-list as the forward gate.
         and (
             k.dtype == torch.bfloat16
-            or (k.dtype == torch.float16 and K == 64 and V == 64)
+            or (
+                k.dtype == torch.float16
+                and (K, V) in EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES
+            )
         )
         and q.dtype == k.dtype
         and do.dtype == k.dtype
