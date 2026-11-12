@@ -67,8 +67,9 @@ candidate `[[1059,1009,1013,982,1105],[1038,1003,1246,1000,1014],[1078,1070,1102
 | baseline (all rounds, both dtypes) | 4,276,224 B (4.08 MiB) | 274,726,912 B (262 MiB) |
 | candidate (all rounds, both dtypes) | 4,276,224 B (4.08 MiB) | 6,291,456 B (6 MiB) |
 
-Allocations are identical; the reserved difference is autotune benchmark
-workspace in the baseline process, not a steady-state working-set change.
+Peak allocated memory is identical. The larger reserved total in the baseline
+process is consistent with its autotune activity, but this measurement does
+not isolate the cause or the steady-state working set.
 
 ## Verdict
 
