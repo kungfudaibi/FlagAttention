@@ -1,0 +1,297 @@
+diff --git a/src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py b/src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py
+index b4f0f01..afdc604 100644
+--- a/src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py
++++ b/src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py
+@@ -36,6 +36,44 @@ def _fixed_d64_enabled():
+     return os.environ.get(_FIXED_D64_ENV, "0").strip().lower() in ("1", "true", "yes")
+ 
+ 
++# PARALLAX-006 experiment: opt-in static launch for the exact measured dense
++# target shape.  It keeps the old forward / fused-DQR / grouped-DKV kernels but
++# replaces the autotune sweep with the per-dtype configurations that the
++# PARALLAX-005 raw autotune logs measured fastest.  Default off.
++_STATIC_D64_ENV = "PARALLAX_STATIC_D64"
++
++# (BS, num_warps, num_stages) measured on GCU 1 at B2/T256/H2/HQ8/D64/G4.
++# Source: PARALLAX-005 p005-base-{fp16,bf16}-cold.log plus the three baseline
++# steady rounds; tie-broken by the median over all four runs.
++_STATIC_D64_CONFIGS = {
++    torch.float16: {
++        "fwd": (128, 1, 2),
++        "dqr": (128, 1, 2),
++        "dkv": (64, 1, 1),
++    },
++    torch.bfloat16: {
++        "fwd": (128, 1, 2),
++        "dqr": (64, 1, 1),
++        "dkv": (64, 1, 2),
++    },
++}
++
++
++def _static_d64_enabled():
++    return os.environ.get(_STATIC_D64_ENV, "0").strip().lower() in ("1", "true", "yes")
++
++
++def _static_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left):
++    """Return measured tiles only for the exact opt-in target shape."""
++    if not _static_d64_enabled():
++        return None
++    if q.device.type != "gcu" or cu_seqlens is not None or window_size_left >= 0:
++        return None
++    if B != 2 or T != 256 or H != 2 or HQ != 8 or K != 64 or HQ // H != 4:
++        return None
++    return _STATIC_D64_CONFIGS.get(q.dtype)
++
++
+ def _make_parallax_configs(tile_pairs):
+     """Build the Enflame fallback autotune space."""
+     return [
+@@ -2203,27 +2241,58 @@ def parallel_parallax_fwd(q, r, k, v, scale, cu_seqlens=None, chunk_indices=None
+                 num_stages=2,
+             )
+         else:
+-            parallel_parallax_fwd_kernel[query_grid](
+-                q,
+-                r,
+-                k,
+-                v,
+-                o,
+-                barv,
+-                d1,
+-                bart,
+-                m,
+-                scale,
+-                cu_seqlens,
+-                chunk_indices,
+-                T,
+-                HQ=HQ,
+-                H=H,
+-                G=G,
+-                K=K,
+-                WINDOW_SIZE_LEFT=window_size_left,
+-                BT=BT,
+-            )
++            static_cfg = _static_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left)
++            if static_cfg is not None:
++                # Same JIT kernel and heuristic (IS_VARLEN) as the autotuned
++                # launch, with the measured BK/BS/warps/stages fixed.
++                bs, warps, stages = static_cfg["fwd"]
++                parallel_parallax_fwd_kernel.fn[query_grid](
++                    q,
++                    r,
++                    k,
++                    v,
++                    o,
++                    barv,
++                    d1,
++                    bart,
++                    m,
++                    scale,
++                    cu_seqlens,
++                    chunk_indices,
++                    T,
++                    HQ=HQ,
++                    H=H,
++                    G=G,
++                    K=K,
++                    BK=BK,
++                    BS=bs,
++                    WINDOW_SIZE_LEFT=window_size_left,
++                    BT=BT,
++                    num_warps=warps,
++                    num_stages=stages,
++                )
++            else:
++                parallel_parallax_fwd_kernel[query_grid](
++                    q,
++                    r,
++                    k,
++                    v,
++                    o,
++                    barv,
++                    d1,
++                    bart,
++                    m,
++                    scale,
++                    cu_seqlens,
++                    chunk_indices,
++                    T,
++                    HQ=HQ,
++                    H=H,
++                    G=G,
++                    K=K,
++                    WINDOW_SIZE_LEFT=window_size_left,
++                    BT=BT,
++                )
+     else:
+         # Packed chunks are created with BT, so the autotune pruner keeps
+         # BS == BT for this path.  Dense inputs above remain fully decoupled.
+@@ -2292,6 +2361,8 @@ def parallel_parallax_bwd(
+         and num_sms > 0
+         and dkv_programs >= num_sms
+     )
++    static_cfg = _static_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left)
++
+     # Fixed dense DQR/DKV for the D64/T256/G4 dense causal shape. The
+     # autotuned fused DQR + grouped DKV pair is otherwise selected here.
+     use_fixed_d64 = (
+@@ -2538,8 +2609,11 @@ def parallel_parallax_bwd(
+                         WINDOW_SIZE_LEFT=window_size_left,
+                         BT=BT,
+                     )
+-            else:
+-                parallel_parallax_bwd_kernel_dqr_fused[query_grid](
++            elif static_cfg is not None:
++                # The measured tile covers every query row for T=256, so the
++                # autotuner's reset_to_zero pre-hook is a no-op here.
++                bs, warps, stages = static_cfg["dqr"]
++                parallel_parallax_bwd_kernel_dqr_fused.fn[query_grid](
+                     q,
+                     r,
+                     k,
+@@ -2562,36 +2636,41 @@ def parallel_parallax_bwd(
+                     H=H,
+                     G=G,
+                     K=K,
++                    BK=BK,
++                    BS=bs,
+                     WINDOW_SIZE_LEFT=window_size_left,
+                     BT=BT,
++                    num_warps=warps,
++                    num_stages=stages,
+                 )
+-            if use_fixed_d64:
+-                parallel_parallax_bwd_kernel_dkv_dense_aligned[(T // BT, B * HQ)](
++            else:
++                parallel_parallax_bwd_kernel_dqr_fused[query_grid](
+                     q,
+                     r,
+                     k,
+                     v,
++                    o,
++                    barv,
+                     d1,
+                     bart,
+                     m,
+                     delta_t,
+                     delta_b,
+                     grad_o,
+-                    grad_k_buf,
+-                    grad_v_buf,
++                    grad_q,
++                    grad_r,
+                     scale,
++                    cu_seqlens,
++                    chunk_indices,
+                     T,
+                     HQ=HQ,
+                     H=H,
+                     G=G,
+                     K=K,
+-                    BK=BK,
++                    WINDOW_SIZE_LEFT=window_size_left,
+                     BT=BT,
+-                    BS=64,
+-                    num_warps=1,
+-                    num_stages=1,
+                 )
+-            elif use_dense_aligned and not use_grouped_dkv:
++            if use_fixed_d64:
+                 parallel_parallax_bwd_kernel_dkv_dense_aligned[(T // BT, B * HQ)](
+                     q,
+                     r,
+@@ -2617,8 +2696,8 @@ def parallel_parallax_bwd(
+                     num_warps=1,
+                     num_stages=1,
+                 )
+-            elif use_grouped_dkv:
+-                parallel_parallax_bwd_kernel_dkv_grouped[grouped_dkv_grid](
++            elif use_dense_aligned and not use_grouped_dkv:
++                parallel_parallax_bwd_kernel_dkv_dense_aligned[(T // BT, B * HQ)](
+                     q,
+                     r,
+                     k,
+@@ -2629,19 +2708,77 @@ def parallel_parallax_bwd(
+                     delta_t,
+                     delta_b,
+                     grad_o,
+-                    grad_k,
+-                    grad_v,
++                    grad_k_buf,
++                    grad_v_buf,
+                     scale,
+-                    cu_seqlens,
+-                    chunk_indices,
+                     T,
+                     HQ=HQ,
+                     H=H,
+                     G=G,
+                     K=K,
+-                    WINDOW_SIZE_LEFT=window_size_left,
++                    BK=BK,
+                     BT=BT,
++                    BS=64,
++                    num_warps=1,
++                    num_stages=1,
+                 )
++            elif use_grouped_dkv:
++                if static_cfg is not None:
++                    bs, warps, stages = static_cfg["dkv"]
++                    static_grid = (triton.cdiv(T, bs), B * H)
++                    parallel_parallax_bwd_kernel_dkv_grouped.fn[static_grid](
++                        q,
++                        r,
++                        k,
++                        v,
++                        d1,
++                        bart,
++                        m,
++                        delta_t,
++                        delta_b,
++                        grad_o,
++                        grad_k,
++                        grad_v,
++                        scale,
++                        cu_seqlens,
++                        chunk_indices,
++                        T,
++                        HQ=HQ,
++                        H=H,
++                        G=G,
++                        K=K,
++                        BK=BK,
++                        BS=bs,
++                        WINDOW_SIZE_LEFT=window_size_left,
++                        BT=BT,
++                        num_warps=warps,
++                        num_stages=stages,
++                    )
++                else:
++                    parallel_parallax_bwd_kernel_dkv_grouped[grouped_dkv_grid](
++                        q,
++                        r,
++                        k,
++                        v,
++                        d1,
++                        bart,
++                        m,
++                        delta_t,
++                        delta_b,
++                        grad_o,
++                        grad_k,
++                        grad_v,
++                        scale,
++                        cu_seqlens,
++                        chunk_indices,
++                        T,
++                        HQ=HQ,
++                        H=H,
++                        G=G,
++                        K=K,
++                        WINDOW_SIZE_LEFT=window_size_left,
++                        BT=BT,
++                    )
+             else:
+                 parallel_parallax_bwd_kernel_dkv[dkv_grid](
+                     q,
