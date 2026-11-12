@@ -1,0 +1,70 @@
+[W1112 10:32:26.645372456 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+INFO 11-12 10:32:27 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 11-12 10:32:27 [__init__.py:46] - fl -> vllm_fl:register
+INFO 11-12 10:32:27 [__init__.py:58] Loading plugin fl
+INFO 11-12 10:32:33 [__init__.py:237] Platform plugin fl is activated
+WARNING 11-12 10:32:33 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+/flagos/lib/python3.12/site-packages/torch/jit/_script.py:362: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+WARNING 11-12 10:32:35 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:32:35] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.chunk_delta_h] Patched chunk_gated_delta_rule_fwd_h for GCU (grid.x <= 65535, grid.y <= 255)
+[2026-11-12 10:32:35] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+[2026-11-12 10:32:35] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.slot_mapping] Patched BlockTable.compute_slot_mapping for GCU (on-device int32; avoids int64 Triton kernel).
+[2026-11-12 10:32:35] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.flash_attn_backend] GCU: enabled native FLASH_ATTN backend (FA2; vendor flash_attn_varlen_func + flag_gems reshape_and_cache_flash)
+WARNING 11-12 10:32:35 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+WARNING 11-12 10:32:35 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:32:35] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.bilinear_pos_embed] Patched Qwen3-VL bilinear pos embed for GCU (grid.x <= 65535)
+[2026-11-12 10:32:35] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+{"probe": "correctness", "qlen": 128, "seq_len": 1024, "variant": "A_shipped", "pipeline_pass": true}
+{"probe": "correctness", "qlen": 128, "seq_len": 1024, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 128, "seq_len": 1024, "A_ms": 0.5475299954414368, "B_ms": 0.5490224957466125, "A_rounds": [0.560857504606247, 0.5471250116825104, 0.5475299954414368], "B_rounds": [0.5496155023574829, 0.5463449954986572, 0.5490224957466125], "speedup_B_over_A": 0.9972815316007295, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 128, "seq_len": 4096, "A_ms": 0.9320099949836731, "B_ms": 0.9302099943161011, "A_rounds": [0.9408825039863586, 0.9320099949836731, 0.9299474954605103], "B_rounds": [0.9316869974136353, 0.9295274913311005, 0.9302099943161011], "speedup_B_over_A": 1.0019350476543691, "correct_A": true, "correct_B": true}
+
+
+{"probe": "correctness", "qlen": 256, "seq_len": 2048, "variant": "A_shipped", "pipeline_pass": true}
+{"probe": "correctness", "qlen": 256, "seq_len": 2048, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 256, "seq_len": 2048, "A_ms": 1.3003725409507751, "B_ms": 1.2993150353431702, "A_rounds": [1.3058775067329407, 1.3003725409507751, 1.299922525882721], "B_rounds": [1.2993150353431702, 1.2990374565124512, 1.2994199991226196], "speedup_B_over_A": 1.0008138946897707, "correct_A": true, "correct_B": true}
+
+
+{"probe": "correctness", "qlen": 512, "seq_len": 1024, "variant": "A_shipped", "pipeline_pass": true}
+
+
+{"probe": "correctness", "qlen": 512, "seq_len": 1024, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 512, "seq_len": 1024, "A_ms": 1.3387199640274048, "B_ms": 1.242300033569336, "A_rounds": [1.3428075313568115, 1.3356294631958008, 1.3387199640274048], "B_rounds": [1.242300033569336, 1.2430649995803833, 1.24201500415802], "speedup_B_over_A": 1.0776140447980496, "correct_A": true, "correct_B": true}
+
+
+{"probe": "correctness", "qlen": 512, "seq_len": 2048, "variant": "A_shipped", "pipeline_pass": true}
+
+
+{"probe": "correctness", "qlen": 512, "seq_len": 2048, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 512, "seq_len": 2048, "A_ms": 1.8455249667167664, "B_ms": 1.6297199726104736, "A_rounds": [1.8464100360870361, 1.8453530073165894, 1.8455249667167664], "B_rounds": [1.6276425123214722, 1.6297199726104736, 1.6317450404167175], "speedup_B_over_A": 1.1324184508585349, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 512, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true}
+{"probe": "correctness", "qlen": 512, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 512, "seq_len": 4096, "A_ms": 2.247052550315857, "B_ms": 1.8163119554519653, "A_rounds": [2.2516274452209473, 2.247052550315857, 2.247052550315857], "B_rounds": [1.816860020160675, 1.8163119554519653, 1.814774990081787], "speedup_B_over_A": 1.2371512192996095, "correct_A": true, "correct_B": true}
+
+
+{"probe": "correctness", "qlen": 768, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true}
+
+
+{"probe": "correctness", "qlen": 768, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 768, "seq_len": 4096, "A_ms": 2.931765556335449, "B_ms": 1.8940500020980835, "A_rounds": [2.935402512550354, 2.931765556335449, 2.9261549711227417], "B_rounds": [1.8944550156593323, 1.8940500020980835, 1.8919275403022766], "speedup_B_over_A": 1.5478818157323533, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 1024, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true}
+{"probe": "correctness", "qlen": 1024, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true}
+{"probe": "whole_ab", "qlen": 1024, "seq_len": 4096, "A_ms": 2.652209997177124, "B_ms": 2.65003502368927, "A_rounds": [2.653387427330017, 2.652209997177124, 2.6505450010299683], "B_rounds": [2.6471104621887207, 2.6528100967407227, 2.65003502368927], "speedup_B_over_A": 1.0008207338651798, "correct_A": true, "correct_B": true}
+{"probe": "summary", "rows": [{"qlen": 128, "seq_len": 1024, "A_ms": 0.5475299954414368, "B_ms": 0.5490224957466125, "A_rounds": [0.560857504606247, 0.5471250116825104, 0.5475299954414368], "B_rounds": [0.5496155023574829, 0.5463449954986572, 0.5490224957466125], "speedup_B_over_A": 0.9972815316007295, "correct_A": true, "correct_B": true}, {"qlen": 128, "seq_len": 4096, "A_ms": 0.9320099949836731, "B_ms": 0.9302099943161011, "A_rounds": [0.9408825039863586, 0.9320099949836731, 0.9299474954605103], "B_rounds": [0.9316869974136353, 0.9295274913311005, 0.9302099943161011], "speedup_B_over_A": 1.0019350476543691, "correct_A": true, "correct_B": true}, {"qlen": 256, "seq_len": 2048, "A_ms": 1.3003725409507751, "B_ms": 1.2993150353431702, "A_rounds": [1.3058775067329407, 1.3003725409507751, 1.299922525882721], "B_rounds": [1.2993150353431702, 1.2990374565124512, 1.2994199991226196], "speedup_B_over_A": 1.0008138946897707, "correct_A": true, "correct_B": true}, {"qlen": 512, "seq_len": 1024, "A_ms": 1.3387199640274048, "B_ms": 1.242300033569336, "A_rounds": [1.3428075313568115, 1.3356294631958008, 1.3387199640274048], "B_rounds": [1.242300033569336, 1.2430649995803833, 1.24201500415802], "speedup_B_over_A": 1.0776140447980496, "correct_A": true, "correct_B": true}, {"qlen": 512, "seq_len": 2048, "A_ms": 1.8455249667167664, "B_ms": 1.6297199726104736, "A_rounds": [1.8464100360870361, 1.8453530073165894, 1.8455249667167664], "B_rounds": [1.6276425123214722, 1.6297199726104736, 1.6317450404167175], "speedup_B_over_A": 1.1324184508585349, "correct_A": true, "correct_B": true}, {"qlen": 512, "seq_len": 4096, "A_ms": 2.247052550315857, "B_ms": 1.8163119554519653, "A_rounds": [2.2516274452209473, 2.247052550315857, 2.247052550315857], "B_rounds": [1.816860020160675, 1.8163119554519653, 1.814774990081787], "speedup_B_over_A": 1.2371512192996095, "correct_A": true, "correct_B": true}, {"qlen": 768, "seq_len": 4096, "A_ms": 2.931765556335449, "B_ms": 1.8940500020980835, "A_rounds": [2.935402512550354, 2.931765556335449, 2.9261549711227417], "B_rounds": [1.8944550156593323, 1.8940500020980835, 1.8919275403022766], "speedup_B_over_A": 1.5478818157323533, "correct_A": true, "correct_B": true}, {"qlen": 1024, "seq_len": 4096, "A_ms": 2.652209997177124, "B_ms": 2.65003502368927, "A_rounds": [2.653387427330017, 2.652209997177124, 2.6505450010299683], "B_rounds": [2.6471104621887207, 2.6528100967407227, 2.65003502368927], "speedup_B_over_A": 1.0008207338651798, "correct_A": true, "correct_B": true}]}
+DONE

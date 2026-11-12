@@ -1,0 +1,36 @@
+=== Thu Nov 12 10:58:57 UTC 2026 device fault capture
+--- efsmi -L
+-------------------------------------------------------------------------------
+--------------------- Enflame System Management Interface ---------------------
+--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------
+-------------------------------------------------------------------------------
+                                                                               
+DEV    SN                Slot    ID           Bus             CPU Affinity     UUID
+-------------------------------------------------------------------------------------------
+0      A0D4P60511291     N/A     1ea0:2a22    0000:63:00.0    128-255          TS9P63031306
+1      A0D5460520864     N/A     1ea0:2a22    0000:83:00.0    128-255          TS9B37120204
+--- efsmi rc=0
+--- /dev/gcu*
+crw-rw-rw- 1 root root 241,  0 Nov 12 09:37 /dev/gcu0
+crw-rw-rw- 1 root root 239,  0 Nov 12 09:37 /dev/gcu0vid0
+crw-rw-rw- 1 root root 239,  1 Nov 12 09:37 /dev/gcu0vid1
+crw-rw-rw- 1 root root 239,  2 Nov 12 09:37 /dev/gcu0vid2
+crw-rw-rw- 1 root root 239,  3 Nov 12 09:37 /dev/gcu0vid3
+--- enumerate via torch
+[W1112 10:58:58.423664448 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+device_count 2
+0 GCU
+1 GCU
+--- log tail
+    return _orig_run(self, *a, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 790, in run
+    launch_metadata = kernel.launch_metadata(grid, stream, *bound_args.values())
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/compiler/compiler.py", line 536, in launch_metadata
+    self._init_handles()
+  File "/opt/flagtree/triton/compiler/compiler.py", line 519, in _init_handles
+    self.module, self.function, self.n_regs, self.n_spills, self.n_max_threads = kernel_driver.utils.load_binary(
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Kurama Error [TOPS]:  Code: 303, Message: topsErrorSharedObjectInitFailed
+EE: [2026-11-12 10:57:50.156] [tid:175370] efdrv/src/driver/dtu_context_obj.cc:212:sync_worker_function Receive Abort message from KMD: Sip exception

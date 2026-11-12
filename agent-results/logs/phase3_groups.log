@@ -1,0 +1,66 @@
+[W1112 10:26:18.598606399 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+INFO 11-12 10:26:19 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 11-12 10:26:19 [__init__.py:46] - fl -> vllm_fl:register
+INFO 11-12 10:26:19 [__init__.py:58] Loading plugin fl
+INFO 11-12 10:26:25 [__init__.py:237] Platform plugin fl is activated
+WARNING 11-12 10:26:25 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+/flagos/lib/python3.12/site-packages/torch/jit/_script.py:362: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+WARNING 11-12 10:26:27 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:26:27] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.chunk_delta_h] Patched chunk_gated_delta_rule_fwd_h for GCU (grid.x <= 65535, grid.y <= 255)
+[2026-11-12 10:26:27] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+[2026-11-12 10:26:27] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.slot_mapping] Patched BlockTable.compute_slot_mapping for GCU (on-device int32; avoids int64 Triton kernel).
+[2026-11-12 10:26:27] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.flash_attn_backend] GCU: enabled native FLASH_ATTN backend (FA2; vendor flash_attn_varlen_func + flag_gems reshape_and_cache_flash)
+WARNING 11-12 10:26:27 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+WARNING 11-12 10:26:27 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:26:27] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.bilinear_pos_embed] Patched Qwen3-VL bilinear pos embed for GCU (grid.x <= 65535)
+[2026-11-12 10:26:27] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+{"qlen": 512, "seq_len": 4096, "topk": 16, "shipped_group": 16, "group_q": 1, "ms": 4.009214878082275, "bit_exact": false, "max_abs": 0.000244140625}
+
+
+{"qlen": 512, "seq_len": 4096, "topk": 16, "shipped_group": 16, "group_q": 2, "ms": 3.009526014328003, "bit_exact": false, "max_abs": 0.000244140625}
+
+
+{"qlen": 512, "seq_len": 4096, "topk": 16, "shipped_group": 16, "group_q": 4, "ms": 2.5815000534057617, "bit_exact": false, "max_abs": 0.000244140625}
+{"qlen": 512, "seq_len": 4096, "topk": 16, "shipped_group": 16, "group_q": 8, "ms": 1.8790349960327148, "bit_exact": false, "max_abs": 0.000244140625}
+{"qlen": 512, "seq_len": 4096, "topk": 16, "shipped_group": 16, "group_q": 16, "ms": 1.4601290225982666, "bit_exact": true, "max_abs": 0.0}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/msa-stage-profile/agent-results/scripts/msa002_groups.py", line 111, in <module>
+    grouped_launch(data, topk_idx, out, qlen, gq)
+  File "/workspace/agent-workspaces/msa-stage-profile/agent-results/scripts/msa002_groups.py", line 72, in grouped_launch
+    _gqa_sparse_fwd_grouped8[grid](
+  File "/opt/flagtree/triton/runtime/jit.py", line 400, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 766, in run
+    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 910, in _do_compile
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/compiler/compiler.py", line 357, in compile
+    next_module = compile_ir(module, metadata)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/backends/enflame/compiler.py", line 720, in <lambda>
+    stages["fatbin"] = lambda src, metadata: make_fatbin(src, metadata, options)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/backends/enflame/compiler.py", line 345, in make_fatbin
+    raise OutOfResources(local_mem_size, options.max_local, "local memory")
+triton.runtime.errors.OutOfResources: out of resource: local memory, Required: 1572480, Hardware limit: 1572352. Reducing block sizes or `num_stages` may help.

@@ -1,0 +1,54 @@
+[W1112 10:35:59.671036936 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+INFO 11-12 10:36:00 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 11-12 10:36:00 [__init__.py:46] - fl -> vllm_fl:register
+INFO 11-12 10:36:00 [__init__.py:58] Loading plugin fl
+INFO 11-12 10:36:06 [__init__.py:237] Platform plugin fl is activated
+WARNING 11-12 10:36:06 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+/flagos/lib/python3.12/site-packages/torch/jit/_script.py:362: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+WARNING 11-12 10:36:08 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:36:08] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.chunk_delta_h] Patched chunk_gated_delta_rule_fwd_h for GCU (grid.x <= 65535, grid.y <= 255)
+[2026-11-12 10:36:08] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+[2026-11-12 10:36:08] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.slot_mapping] Patched BlockTable.compute_slot_mapping for GCU (on-device int32; avoids int64 Triton kernel).
+[2026-11-12 10:36:08] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.flash_attn_backend] GCU: enabled native FLASH_ATTN backend (FA2; vendor flash_attn_varlen_func + flag_gems reshape_and_cache_flash)
+WARNING 11-12 10:36:08 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+WARNING 11-12 10:36:08 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-12 10:36:08] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.bilinear_pos_embed] Patched Qwen3-VL bilinear pos embed for GCU (grid.x <= 65535)
+[2026-11-12 10:36:08] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+{"probe": "correctness", "qlen": 512, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 1, "topk": 16}
+{"probe": "correctness", "qlen": 512, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 1, "topk": 16}
+{"probe": "whole_ab", "batch": 1, "qlen": 512, "seq_len": 4096, "topk": 16, "A_ms": 2.237939953804016, "B_ms": 1.821007490158081, "A_rounds": [2.2439099550247192, 2.236799955368042, 2.237939953804016], "B_rounds": [1.8206474781036377, 1.823467493057251, 1.821007490158081], "speedup_B_over_A": 1.2289570284028548, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 256, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 2, "topk": 16}
+{"probe": "correctness", "qlen": 256, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 2, "topk": 16}
+{"probe": "whole_ab", "batch": 2, "qlen": 256, "seq_len": 4096, "topk": 16, "A_ms": 2.3058674335479736, "B_ms": 1.8555675148963928, "A_rounds": [2.3092124462127686, 2.3058674335479736, 2.305275082588196], "B_rounds": [1.8575474619865417, 1.855222463607788, 1.8555675148963928], "speedup_B_over_A": 1.2426750387881864, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 4, "topk": 16}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 4, "topk": 16}
+{"probe": "whole_ab", "batch": 4, "qlen": 128, "seq_len": 4096, "topk": 16, "A_ms": 2.3371649980545044, "B_ms": 1.879830002784729, "A_rounds": [2.3509124517440796, 2.333872437477112, 2.3371649980545044], "B_rounds": [1.8793049454689026, 1.879830002784729, 1.8818475008010864], "speedup_B_over_A": 1.2432852941980348, "correct_A": true, "correct_B": true}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 8, "topk": 16}
+{"probe": "correctness", "qlen": 128, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 8, "topk": 16}
+{"probe": "whole_ab", "batch": 8, "qlen": 128, "seq_len": 4096, "topk": 16, "A_ms": 2.8551000356674194, "B_ms": 2.854485034942627, "A_rounds": [2.8589099645614624, 2.8551000356674194, 2.8536524772644043], "B_rounds": [2.8558045625686646, 2.854485034942627, 2.8510425090789795], "speedup_B_over_A": 1.000215450674032, "correct_A": true, "correct_B": true}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+{"probe": "correctness", "qlen": 384, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 1, "topk": 16}
+{"probe": "correctness", "qlen": 384, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 1, "topk": 16}
+{"probe": "whole_ab", "batch": 1, "qlen": 384, "seq_len": 4096, "topk": 16, "A_ms": 1.625302493572235, "B_ms": 1.6219199895858765, "A_rounds": [1.6320074796676636, 1.625302493572235, 1.6235174536705017], "B_rounds": [1.623907446861267, 1.6219199895858765, 1.6199179887771606], "speedup_B_over_A": 1.0020854937407992, "correct_A": true, "correct_B": true}
+
+
+{"probe": "correctness", "qlen": 640, "seq_len": 4096, "variant": "A_shipped", "pipeline_pass": true, "batch": 1, "topk": 16}
+
+
+{"probe": "correctness", "qlen": 640, "seq_len": 4096, "variant": "B_group16", "pipeline_pass": true, "batch": 1, "topk": 16}
+{"probe": "whole_ab", "batch": 1, "qlen": 640, "seq_len": 4096, "topk": 16, "A_ms": 2.9258549213409424, "B_ms": 1.896405041217804, "A_rounds": [2.93184757232666, 2.9258549213409424, 2.9255025386810303], "B_rounds": [1.896405041217804, 1.8970494866371155, 1.8941695094108582], "speedup_B_over_A": 1.5428428303808253, "correct_A": true, "correct_B": true}
+{"probe": "summary", "rows": [{"batch": 1, "qlen": 512, "seq_len": 4096, "topk": 16, "A_ms": 2.237939953804016, "B_ms": 1.821007490158081, "A_rounds": [2.2439099550247192, 2.236799955368042, 2.237939953804016], "B_rounds": [1.8206474781036377, 1.823467493057251, 1.821007490158081], "speedup_B_over_A": 1.2289570284028548, "correct_A": true, "correct_B": true}, {"batch": 2, "qlen": 256, "seq_len": 4096, "topk": 16, "A_ms": 2.3058674335479736, "B_ms": 1.8555675148963928, "A_rounds": [2.3092124462127686, 2.3058674335479736, 2.305275082588196], "B_rounds": [1.8575474619865417, 1.855222463607788, 1.8555675148963928], "speedup_B_over_A": 1.2426750387881864, "correct_A": true, "correct_B": true}, {"batch": 4, "qlen": 128, "seq_len": 4096, "topk": 16, "A_ms": 2.3371649980545044, "B_ms": 1.879830002784729, "A_rounds": [2.3509124517440796, 2.333872437477112, 2.3371649980545044], "B_rounds": [1.8793049454689026, 1.879830002784729, 1.8818475008010864], "speedup_B_over_A": 1.2432852941980348, "correct_A": true, "correct_B": true}, {"batch": 8, "qlen": 128, "seq_len": 4096, "topk": 16, "A_ms": 2.8551000356674194, "B_ms": 2.854485034942627, "A_rounds": [2.8589099645614624, 2.8551000356674194, 2.8536524772644043], "B_rounds": [2.8558045625686646, 2.854485034942627, 2.8510425090789795], "speedup_B_over_A": 1.000215450674032, "correct_A": true, "correct_B": true}, {"batch": 1, "qlen": 384, "seq_len": 4096, "topk": 16, "A_ms": 1.625302493572235, "B_ms": 1.6219199895858765, "A_rounds": [1.6320074796676636, 1.625302493572235, 1.6235174536705017], "B_rounds": [1.623907446861267, 1.6219199895858765, 1.6199179887771606], "speedup_B_over_A": 1.0020854937407992, "correct_A": true, "correct_B": true}, {"batch": 1, "qlen": 640, "seq_len": 4096, "topk": 16, "A_ms": 2.9258549213409424, "B_ms": 1.896405041217804, "A_rounds": [2.93184757232666, 2.9258549213409424, 2.9255025386810303], "B_rounds": [1.896405041217804, 1.8970494866371155, 1.8941695094108582], "speedup_B_over_A": 1.5428428303808253, "correct_A": true, "correct_B": true}]}
+DONE

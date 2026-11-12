@@ -1,0 +1,21 @@
+[W1112 10:21:36.684106997 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+device 1 GCU
+props _GcuDeviceProperties(name='GCU', major=3, minor=0, total_memory=41846MB, multi_processor_count=2, sip_count=24)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+{"probe": "matmul", "m": 4096, "k": 4096, "n": 4096, "ms": 89.46500244140626, "tflops": 1.5362314840600777}
+{"probe": "matmul", "m": 8192, "k": 8192, "n": 8192, "ms": 524.1068115234375, "tflops": 2.0978770044602464}
+{"probe": "matmul", "m": 16384, "k": 4096, "n": 4096, "ms": 302.0140625, "tflops": 1.8202987282686545}
+{"probe": "copy", "numel": 16777216, "ms": 0.16013559699058533, "gbyte_per_s": 419.07524161505114}
+{"probe": "copy", "numel": 67108864, "ms": 0.6291584968566895, "gbyte_per_s": 426.65792060525024}
+{"probe": "copy", "numel": 268435456, "ms": 2.49733362197876, "gbyte_per_s": 429.9552989436877}
+{"probe": "sum", "numel": 67108864, "ms": 44.87903747558593, "gbyte_per_s": 2.990655226797456}
+DONE

@@ -1,0 +1,37 @@
+[W1112 10:14:44.198655264 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+ACTS ['CPU'] events 82
+    outer cpu_us 246.22599999999966 dev_us 0
+    aten::mul cpu_us 29.259000000000015 dev_us 0
+    aten::empty cpu_us 7.128999999999962 dev_us 0
+    GCU::empty cpu_us 9.120000000000005 dev_us 0
+    aten::mul cpu_us 408.0430000000001 dev_us 0
+    aten::_to_cpu cpu_us 9.94900000000007 dev_us 0
+    aten::to cpu_us 2.0400000000000205 dev_us 0
+    aten::_to_copy cpu_us 12.939999999999998 dev_us 0
+   table rows 14
+ACTS ['PrivateUse1'] events 0
+   table rows 0
+ACTS ['CPU', 'PrivateUse1'] events 82
+    outer cpu_us 149.9380000000001 dev_us 0
+    aten::mul cpu_us 13.289000000000215 dev_us 0
+    aten::empty cpu_us 4.549999999999997 dev_us 0
+    GCU::empty cpu_us 8.120000000000005 dev_us 0
+    aten::mul cpu_us 456.5500000000002 dev_us 0
+    aten::_to_cpu cpu_us 3.709999999999809 dev_us 0
+    aten::to cpu_us 2.0000000000001137 dev_us 0
+    aten::_to_copy cpu_us 4.6200000000000045 dev_us 0
+   table rows 14
+ACTS ['PrivateUse1'] events 0
+   table rows 0
+trace bytes 27062 has_kernel False has_Memcpy False
+trace head    {     "schemaVersion": 1,     "deviceProperties": [     ],       "trace_id": "30AC5DED428D454094405C0B69953279",   "displayTimeUnit": "ms",   "baseTimeNanoseconds": 1790857026000000000,   "traceEvents": [   {     "ph": "X", "cat": "cpu_op", "name": "aten::mul", "pid": 89345, "tid": 89345,     "ts
