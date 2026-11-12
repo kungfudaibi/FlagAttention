@@ -10,6 +10,7 @@ import os
 import sys
 import time
 
+import triton
 import torch
 import torch.nn.functional as F
 
@@ -31,11 +32,19 @@ p.add_argument("--samples", type=int, default=5)
 p.add_argument("--warmup", type=int, default=2)
 p.add_argument("--no-timing", action="store_true")
 p.add_argument("--mem", action="store_true")
+p.add_argument("--force-fallback", action="store_true",
+               help="disable the parallel state route in this process (numerical oracle)")
+p.add_argument("--f32-default", default="ieee", choices=["ieee", "tf32", "unset"],
+               help="TRITON_F32_DEFAULT used for this process")
 a = p.parse_args()
 
 os.environ["FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP16_STATE"] = str(a.exp_fp16)
 os.environ["FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP32_STATE"] = str(a.exp_fp32)
-os.environ.setdefault("TRITON_F32_DEFAULT", "ieee")
+if a.f32_default != "unset":
+    os.environ["TRITON_F32_DEFAULT"] = a.f32_default
+if a.force_fallback:
+    os.environ["FLAGGEMS_ENFLAME_GLA_PARALLEL_STATE"] = "0"
+    os.environ["FLAGGEMS_ENFLAME_GLA_PARALLEL_BWD_STATE"] = "0"
 
 from flag_attn import chunk_gla  # noqa: E402
 import importlib  # noqa: E402
@@ -99,6 +108,9 @@ result = {
     "chunk_h_file": Hmod.__file__,
     "git_head": os.environ.get("GLA_TREE_HEAD", ""),
     "device": "gcu:0",
+    "triton_version": triton.__version__,
+    "force_fallback": bool(a.force_fallback),
+    "triton_f32_default": os.environ.get("TRITON_F32_DEFAULT", "<unset>"),
     "exit": 0,
 }
 t_start = time.perf_counter()
