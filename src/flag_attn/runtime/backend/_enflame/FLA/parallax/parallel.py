@@ -7,6 +7,7 @@
 #   https://github.com/fla-org/flash-linear-attention/graphs/contributors
 
 import copy
+import os
 
 import torch
 import triton
@@ -24,6 +25,15 @@ _BLOCK_T = 64
 _SHORT_MULTI_MAX_TILES = 2
 _DENSE_ALIGNED_MAX_T = 2048
 _GROUPED_DKV_G2_MIN_T = 8192
+
+# PARALLAX-004 experiment: when set to 1, D64/T256/G4 dense causal
+# backward launches the fixed dense-aligned DQR/DKV kernels instead of the
+# autotuned fused DQR / grouped DKV pair. Default off.
+_FIXED_D64_ENV = "PARALLAX_FIXED_D64"
+
+
+def _fixed_d64_enabled():
+    return os.environ.get(_FIXED_D64_ENV, "0").strip().lower() in ("1", "true", "yes")
 
 
 def _make_parallax_configs(tile_pairs):
@@ -2282,6 +2292,19 @@ def parallel_parallax_bwd(
         and num_sms > 0
         and dkv_programs >= num_sms
     )
+    # Fixed dense DQR/DKV for the D64/T256/G4 dense causal shape. The
+    # autotuned fused DQR + grouped DKV pair is otherwise selected here.
+    use_fixed_d64 = (
+        q.device.type == "gcu"
+        and q.dtype in (torch.bfloat16, torch.float16)
+        and cu_seqlens is None
+        and window_size_left < 0
+        and K == 64
+        and T == 256
+        and G == 4
+        and T % BT == 0
+        and _fixed_d64_enabled()
+    )
 
     if cu_seqlens is None and NQ <= _SHORT_MULTI_MAX_TILES and G == 1:
         # Fixed short MHA kernels write four equally sized, disjoint outputs.
@@ -2291,7 +2314,7 @@ def parallel_parallax_bwd(
     else:
         grad_q = torch.empty_like(q)
         grad_r = torch.empty_like(r)
-        if use_grouped_dkv or G == 1:
+        if (use_grouped_dkv and not use_fixed_d64) or G == 1:
             grad_k = torch.empty_like(k)
             grad_v = torch.empty_like(v)
             grad_k_buf, grad_v_buf = grad_k, grad_v
@@ -2400,7 +2423,52 @@ def parallel_parallax_bwd(
             # program without excessive register pressure.  Larger heads
             # retain the separately autotuned preprocess pass.
             use_split_dqr = K >= 128
-            if use_split_dqr:
+            if use_fixed_d64:
+                # Fixed launches only: no autotune sweep for either kernel.
+                fixed_dqr_grid = (NQ, B * HQ)
+                parallel_parallax_bwd_kernel_preprocess.fn[fixed_dqr_grid](
+                    grad_o,
+                    o,
+                    barv,
+                    delta_t,
+                    delta_b,
+                    cu_seqlens,
+                    chunk_indices,
+                    T,
+                    HQ=HQ,
+                    K=K,
+                    BK=BK,
+                    BT=BT,
+                    BP=BT,
+                    num_warps=1,
+                    num_stages=1,
+                )
+                parallel_parallax_bwd_kernel_dqr_dense_aligned[fixed_dqr_grid](
+                    q,
+                    r,
+                    k,
+                    v,
+                    d1,
+                    bart,
+                    m,
+                    delta_t,
+                    delta_b,
+                    grad_o,
+                    grad_q,
+                    grad_r,
+                    scale,
+                    T,
+                    HQ=HQ,
+                    H=H,
+                    G=G,
+                    K=K,
+                    BK=BK,
+                    BT=BT,
+                    BS=32,
+                    num_warps=1,
+                    num_stages=2,
+                )
+            elif use_split_dqr:
 
                 def preprocess_grid(meta):
                     return triton.cdiv(T, meta["BP"]), B * HQ
@@ -2497,7 +2565,33 @@ def parallel_parallax_bwd(
                     WINDOW_SIZE_LEFT=window_size_left,
                     BT=BT,
                 )
-            if use_dense_aligned and not use_grouped_dkv:
+            if use_fixed_d64:
+                parallel_parallax_bwd_kernel_dkv_dense_aligned[(T // BT, B * HQ)](
+                    q,
+                    r,
+                    k,
+                    v,
+                    d1,
+                    bart,
+                    m,
+                    delta_t,
+                    delta_b,
+                    grad_o,
+                    grad_k_buf,
+                    grad_v_buf,
+                    scale,
+                    T,
+                    HQ=HQ,
+                    H=H,
+                    G=G,
+                    K=K,
+                    BK=BK,
+                    BT=BT,
+                    BS=64,
+                    num_warps=1,
+                    num_stages=1,
+                )
+            elif use_dense_aligned and not use_grouped_dkv:
                 parallel_parallax_bwd_kernel_dkv_dense_aligned[(T // BT, B * HQ)](
                     q,
                     r,
@@ -2683,7 +2777,7 @@ def parallel_parallax_bwd(
                 num_warps=1,
                 num_stages=1,
             )
-    if G > 1 and not use_grouped_dkv:
+    if G > 1 and (use_fixed_d64 or not use_grouped_dkv):
         if grad_k is None:
             grad_k = torch.empty_like(k)
             grad_v = torch.empty_like(v)
