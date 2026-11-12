@@ -48,5 +48,5 @@ for name, dtype in (("fp16", torch.float16), ("bf16", torch.bfloat16)):
         "dqr_effective_configs_for_D64": len([c for c in dqr_configs if c.kwargs.get("BK") == 64]),
         "dkv_autotune_configs": len(p.PARALLAX_DKV_CONFIGS),
         "dkv_effective_configs_for_D64": len([c for c in p.PARALLAX_DKV_CONFIGS if c.kwargs.get("BK") == 64]),
-        "note": "fused DQR is launched without a tuner; DKV and FWD are autotuned",
+        "note": "fused DQR, grouped DKV, and FWD are autotuned",
     }))
