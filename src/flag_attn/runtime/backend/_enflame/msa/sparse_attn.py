@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import os
+
 import torch
 import triton
 import triton.language as tl
@@ -19,6 +21,10 @@ from flag_attn.runtime.backend._enflame.utils import SPARSE_BLOCK_SIZE
 
 
 _PREFILL_HALF_KV_MAX_BLOCK_SIZE_QH = 8
+
+# MSA-002: default-off switch for the relaxed group-16 gate in
+# ``minimax_m3_sparse_attn``. Unset/0 keeps the shipped launch decisions.
+_MSA002_GROUP16_EXPERIMENT = os.environ.get("MSA002_GROUP16_EXPERIMENT", "0") == "1"
 
 
 @triton.jit
@@ -780,6 +786,22 @@ def minimax_m3_sparse_attn(
         and block_table.shape[1] <= 2 * topk
         and total_q >= 16 * batch
         and triton.cdiv(total_q, 16) * num_kv_heads >= 64
+    ):
+        grouped_query_size = 16
+    # MSA-002 experiment (default off): on this 2-multi-processor GCU the
+    # dense-pool case still wins at 32 programs, so allow group 16 down to
+    # cdiv(total_q, 16) >= 32 when the pool is small. Scoped identically to
+    # the dense-pool branch above; the shipped path is untouched when the
+    # environment variable is unset.
+    if (
+        _MSA002_GROUP16_EXPERIMENT
+        and grouped_query_size != 16
+        and block_size_h <= 8
+        and 0 < topk <= 16
+        and block_table.shape[1] <= 2 * topk
+        and total_q >= 512
+        and total_q >= 16 * batch
+        and triton.cdiv(total_q, 16) * num_kv_heads >= 32
     ):
         grouped_query_size = 16
     use_grouped8 = (
