@@ -1,0 +1,53 @@
+=== 2026-11-12T10:56:36Z final_fp16_64x32 ===
+== preflight 2026-11-12T10:56:36Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.8458570200018585 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.899808082729578 err None
+  dq         max_abs=6.104e-05 rel=4.617e-07 ok=True strict=True
+  dg         max_abs=7.629e-06 rel=9.742e-08 ok=True strict=True
+  h          max_abs=9.766e-04 rel=7.923e-06 ok=True strict=True
+DONE
+=== 2026-11-12T10:57:04Z final_fp16_256x64_g10 ===
+== preflight 2026-11-12T10:57:04Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.8707875460386276 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.943857129663229 err None
+  o          max_abs=3.125e-02 rel=5.261e-06 ok=True strict=True
+  ht         max_abs=1.907e-06 rel=8.681e-08 ok=True strict=True
+  dq         max_abs=3.906e-03 rel=6.862e-06 ok=True strict=True
+  dk         max_abs=9.766e-04 rel=4.963e-06 ok=True strict=True
+  dv         max_abs=3.906e-03 rel=1.821e-06 ok=True strict=True
+  dg         max_abs=7.812e-03 rel=6.217e-06 ok=True strict=True
+  h          max_abs=3.906e-03 rel=6.945e-06 ok=True strict=True
+  ht_state   max_abs=1.907e-06 rel=8.681e-08 ok=True strict=True
+DONE
+=== 2026-11-12T10:57:31Z final_fp16_64x256 ===
+== preflight 2026-11-12T10:57:31Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.915651367045939 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.9200541912578046 err None
+  dq         max_abs=2.441e-04 rel=6.534e-07 ok=True strict=True
+  dk         max_abs=9.766e-04 rel=4.874e-06 ok=True strict=True
+  dv         max_abs=9.766e-04 rel=7.717e-07 ok=True strict=True
+  dg         max_abs=4.883e-04 rel=2.796e-06 ok=True strict=True
+  h          max_abs=9.766e-04 rel=4.364e-06 ok=True strict=True
+DONE
+=== 2026-11-12T10:57:58Z final_fp16_T300_96x128 ===
+== preflight 2026-11-12T10:57:58Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.9386065411381423 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 7.6612849668599665 err None
+  dk         max_abs=4.883e-04 rel=2.596e-06 ok=True strict=True
+  dv         max_abs=9.766e-04 rel=7.886e-07 ok=True strict=True
+  dg         max_abs=4.883e-04 rel=3.677e-06 ok=True strict=True
+  h          max_abs=9.766e-04 rel=3.503e-06 ok=True strict=True
+DONE
+FINAL_CONFIRM_DONE 2026-11-12T10:58:30Z

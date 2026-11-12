@@ -1319,10 +1319,7 @@ def chunk_fwd_h(
                 N_BATCH_HEADS=B * H,
                 USE_INITIAL_STATE=h0 is not None,
                 STORE_FINAL_STATE=ht is not None,
-                # FP32 inputs already store FP32 states; avoid the
-                # FP32->FP32 no-op conversion that Enflame layout removal
-                # cannot fold (same specialization as states_in_fp32=True).
-                STATE_IN_FP32=(states_in_fp32 or k.dtype == torch.float32),
+                STATE_IN_FP32=False,
                 USE_GRID_REMAP=scan_grid_remap,
                 num_warps=1,
                 num_stages=1,
@@ -1554,7 +1551,7 @@ def chunk_bwd_dh(
                 N_BATCH_HEADS=B * H,
                 USE_FINAL_STATE_GRADIENT=dht is not None,
                 STORE_INITIAL_STATE_GRADIENT=dh0 is not None,
-                STATE_IN_FP32=(states_in_fp32 or k.dtype == torch.float32),
+                STATE_IN_FP32=False,
                 USE_GRID_REMAP=scan_grid_remap,
                 num_warps=1,
                 num_stages=1,

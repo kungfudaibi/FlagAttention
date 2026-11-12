@@ -1,0 +1,8 @@
+fwd_varlen_cu_seqlens error= None done= {'chunk_fwd_kernel_h': 1}
+fwd_state_v_first error= None done= {'chunk_fwd_kernel_h': 1}
+fwd_given_gate_tensor error= None done= {'chunk_fwd_kernel_h': 1}
+fwd_states_in_fp32_bwd_parallel_on error= None done= {'_chunk_fwd_local_state_kernel': 1}
+fwd_states_in_fp32_bwd_parallel_off error= None done= {'chunk_fwd_kernel_h': 1}
+fwd_split_size error= None done= {'chunk_fwd_kernel_h': 1}
+bwd_varlen_cu_seqlens error= None done= {'chunk_bwd_kernel_dh': 1}
+bwd_given_gate_tensor error= None done= {'chunk_bwd_kernel_dh': 1}

@@ -1,0 +1,73 @@
+=== 2026-11-12T09:58:43Z bf16_B2T256H2_32x64 ===
+== preflight 2026-11-12T09:58:43Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 48.07872178265825 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 7.029471840243787 err None
+DONE
+=== 2026-11-12T09:59:59Z bf16_B2T256H2_64x32 ===
+== preflight 2026-11-12T09:59:59Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 49.76636336604133 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 10.545385917183012 err None
+DONE
+=== 2026-11-12T10:01:21Z bf16_B2T256H2_256x64 ===
+== preflight 2026-11-12T10:01:21Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 49.96321337996051 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 7.743112776894122 err None
+DONE
+=== 2026-11-12T10:02:41Z bf16_B2T256H2_64x64 ===
+== preflight 2026-11-12T10:02:41Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 35.73039765190333 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 10.67678015679121 err None
+DONE
+=== 2026-11-12T10:03:50Z bf16_B2T256H2_128x128 ===
+== preflight 2026-11-12T10:03:50Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 50.992166134063154 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 11.592236197087914 err None
+DONE
+=== 2026-11-12T10:05:16Z fp32_B1T128H1_64x64 ===
+== preflight 2026-11-12T10:05:16Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 50.353501627687365 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 10.156024110037833 err None
+DONE
+=== 2026-11-12T10:06:39Z fp32_B1T128H1_32x64 ===
+== preflight 2026-11-12T10:06:39Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 47.19502601772547 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 8.547164476010948 err None
+DONE
+=== 2026-11-12T10:07:57Z fp32_B1T128H1_64x32 ===
+== preflight 2026-11-12T10:07:57Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 35.60719867516309 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 8.705376693047583 err None
+DONE
+=== 2026-11-12T10:09:05Z fp32_B1T128H1_32x32 ===
+== preflight 2026-11-12T10:09:05Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 33.80288981599733 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 8.424955029971898 err None
+DONE
+PHASE2_BATCH_DONE 2026-11-12T10:10:10Z

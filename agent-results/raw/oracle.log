@@ -1,0 +1,474 @@
+[W1112 10:25:09.418325036 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py:86: UserWarning: GCU not support Double use Float replace, maybe lead to unexpected overflow issues. (Triggered internally at /builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_utils.h:24.)
+  qr = q.detach().double().cpu().requires_grad_()
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32x64 {"o": [0.00178432, 0.00023861], "ht": [0.00020862, 7.647e-05], "dq": [0.00188398, 0.00020463], "dk": [0.00307369, 0.00026126], "dv": [0.00232172, 0.00021687], "dg": [0.00207806, 0.00024679], "dh0": [0.00014172, 0.00027526]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x32 {"o": [0.00266695, 0.00023002], "ht": [0.00016487, 5.953e-05], "dq": [0.00053406, 0.00020354], "dk": [0.00274611, 0.00026907], "dv": [0.00381947, 0.00021632], "dg": [0.00294638, 0.00025762], "dh0": [7.44e-05, 0.00019748]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x64 {"o": [0.00271368, 0.00023203], "ht": [0.00025892, 8.27e-05], "dq": [0.00093603, 0.00020997], "dk": [0.00484467, 0.00029081], "dv": [0.00400257, 0.00021925], "dg": [0.00507164, 0.00027316], "dh0": [5.686e-05, 0.00016816]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+GLA006_ORACLE [{"shape": [32, 64], "dtype": "fp16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.0017843246459960938, "rel_rms": 0.0002386056730756536, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0002086162567138672, "rel_rms": 7.646745507372543e-05, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.0018839836120605469, "rel_rms": 0.00020463224791456014, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.0030736923217773438, "rel_rms": 0.00026125548174604774, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.0023217201232910156, "rel_rms": 0.00021686522813979536, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.0020780563354492188, "rel_rms": 0.0002467872982379049, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.00014171749353408813, "rel_rms": 0.00027525945915840566, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [64, 32], "dtype": "fp16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.002666950225830078, "rel_rms": 0.0002300170890521258, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.00016486644744873047, "rel_rms": 5.953285290161148e-05, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.0005340576171875, "rel_rms": 0.00020354334264993668, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.002746105194091797, "rel_rms": 0.000269067648332566, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.0038194656372070312, "rel_rms": 0.00021631905110552907, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.0029463768005371094, "rel_rms": 0.0002576249826233834, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 7.440149784088135e-05, "rel_rms": 0.0001974807819351554, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [64, 64], "dtype": "fp16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.0027136802673339844, "rel_rms": 0.0002320255880476907, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0002589225769042969, "rel_rms": 8.270253601949662e-05, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.0009360313415527344, "rel_rms": 0.00020996689272578806, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.00484466552734375, "rel_rms": 0.0002908058522734791, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.004002571105957031, "rel_rms": 0.00021925411419942975, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.0050716400146484375, "rel_rms": 0.000273160170763731, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 5.6862831115722656e-05, "rel_rms": 0.00016815905109979212, "nan_inf": false, "ok": true}}, "ALL_PASS": true}]
+[W1112 10:27:17.110465103 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py:86: UserWarning: GCU not support Double use Float replace, maybe lead to unexpected overflow issues. (Triggered internally at /builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_utils.h:24.)
+  qr = q.detach().double().cpu().requires_grad_()
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x64 {"o": [9.5e-07, 1.1e-07], "ht": [3.34e-06, 8e-07], "dq": [4.77e-06, 5.1e-07], "dk": [1.335e-05, 8e-07], "dv": [1.097e-05, 2.8e-07], "dg": [1.049e-05, 1.16e-06], "dh0": [3e-08, 8e-08]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+32x64 {"o": [7.2e-07, 1.1e-07], "ht": [1.79e-06, 7.5e-07], "dq": [2.62e-06, 4.5e-07], "dk": [1.097e-05, 8.4e-07], "dv": [1.192e-05, 3.2e-07], "dg": [8.11e-06, 1.12e-06], "dh0": [3e-08, 7e-08]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+64x32 {"o": [9.5e-07, 8e-08], "ht": [2.15e-06, 6.9e-07], "dq": [2.03e-06, 4.5e-07], "dk": [1.478e-05, 8.7e-07], "dv": [7.81e-06, 2.3e-07], "dg": [1.001e-05, 1.19e-06], "dh0": [4e-08, 8e-08]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+32x32 {"o": [7.2e-07, 1e-07], "ht": [2.26e-06, 8.5e-07], "dq": [3.1e-06, 5.3e-07], "dk": [5.72e-06, 6.5e-07], "dv": [7.63e-06, 2.7e-07], "dg": [7.39e-06, 1.22e-06], "dh0": [4e-08, 8e-08]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+GLA006_ORACLE [{"shape": [64, 64], "dtype": "fp32", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 9.5367431640625e-07, "rel_rms": 1.0507044834184853e-07, "nan_inf": false, "ok": true}, "ht": {"max_abs": 3.337860107421875e-06, "rel_rms": 8.017501613721834e-07, "nan_inf": false, "ok": true}, "dq": {"max_abs": 4.76837158203125e-06, "rel_rms": 5.056916165813163e-07, "nan_inf": false, "ok": true}, "dk": {"max_abs": 1.33514404296875e-05, "rel_rms": 7.969743478497548e-07, "nan_inf": false, "ok": true}, "dv": {"max_abs": 1.0967254638671875e-05, "rel_rms": 2.808209842442011e-07, "nan_inf": false, "ok": true}, "dg": {"max_abs": 1.049041748046875e-05, "rel_rms": 1.1621471003309125e-06, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 2.9802322387695312e-08, "rel_rms": 8.088662895033849e-08, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [32, 64], "dtype": "fp32", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 7.152557373046875e-07, "rel_rms": 1.0682138906759064e-07, "nan_inf": false, "ok": true}, "ht": {"max_abs": 1.7881393432617188e-06, "rel_rms": 7.497490059904521e-07, "nan_inf": false, "ok": true}, "dq": {"max_abs": 2.6226043701171875e-06, "rel_rms": 4.5205189280750346e-07, "nan_inf": false, "ok": true}, "dk": {"max_abs": 1.0967254638671875e-05, "rel_rms": 8.376499636142398e-07, "nan_inf": false, "ok": true}, "dv": {"max_abs": 1.1920928955078125e-05, "rel_rms": 3.2391565696343605e-07, "nan_inf": false, "ok": true}, "dg": {"max_abs": 8.106231689453125e-06, "rel_rms": 1.115081772695703e-06, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 2.9802322387695312e-08, "rel_rms": 7.27053901528052e-08, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [64, 32], "dtype": "fp32", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 9.5367431640625e-07, "rel_rms": 8.148625596504644e-08, "nan_inf": false, "ok": true}, "ht": {"max_abs": 2.1457672119140625e-06, "rel_rms": 6.857478069832723e-07, "nan_inf": false, "ok": true}, "dq": {"max_abs": 2.0265579223632812e-06, "rel_rms": 4.495888106248458e-07, "nan_inf": false, "ok": true}, "dk": {"max_abs": 1.4781951904296875e-05, "rel_rms": 8.696620170667302e-07, "nan_inf": false, "ok": true}, "dv": {"max_abs": 7.808208465576172e-06, "rel_rms": 2.3297779705444555e-07, "nan_inf": false, "ok": true}, "dg": {"max_abs": 1.0013580322265625e-05, "rel_rms": 1.191148498946859e-06, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 4.470348358154297e-08, "rel_rms": 7.614470831640574e-08, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [32, 32], "dtype": "fp32", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 7.152557373046875e-07, "rel_rms": 1.0082910506525877e-07, "nan_inf": false, "ok": true}, "ht": {"max_abs": 2.2649765014648438e-06, "rel_rms": 8.545265473003383e-07, "nan_inf": false, "ok": true}, "dq": {"max_abs": 3.0994415283203125e-06, "rel_rms": 5.334504180609656e-07, "nan_inf": false, "ok": true}, "dk": {"max_abs": 5.7220458984375e-06, "rel_rms": 6.544319717249891e-07, "nan_inf": false, "ok": true}, "dv": {"max_abs": 7.62939453125e-06, "rel_rms": 2.7186703732695605e-07, "nan_inf": false, "ok": true}, "dg": {"max_abs": 7.3909759521484375e-06, "rel_rms": 1.2188654636702267e-06, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 4.470348358154297e-08, "rel_rms": 8.131119244580987e-08, "nan_inf": false, "ok": true}}, "ALL_PASS": true}]
+[W1112 10:32:42.380407699 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py:86: UserWarning: GCU not support Double use Float replace, maybe lead to unexpected overflow issues. (Triggered internally at /builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_utils.h:24.)
+  qr = q.detach().double().cpu().requires_grad_()
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+32x64 {"o": [0.01270342, 0.00194654], "ht": [0.00139296, 0.00051333], "dq": [0.00781083, 0.00170674], "dk": [0.02167416, 0.00208467], "dv": [0.035429, 0.00179187], "dg": [0.02071667, 0.00237128], "dh0": [0.00077426, 0.00204935]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x32 {"o": [0.02069283, 0.00188959], "ht": [0.00214899, 0.00071806], "dq": [0.003896, 0.0016505], "dk": [0.02274895, 0.00212999], "dv": [0.02821255, 0.00169153], "dg": [0.01527023, 0.00192767], "dh0": [0.00056714, 0.00183653]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+256x64 {"o": [0.04672146, 0.00181857], "ht": [0.00215292, 0.00069433], "dq": [0.00384879, 0.00165435], "dk": [0.03114414, 0.00238198], "dv": [0.05333519, 0.00176984], "dg": [0.02682018, 0.00232063], "dh0": [0.00030302, 0.00170013]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x64 {"o": [0.02212811, 0.00193388], "ht": [0.00168049, 0.00063058], "dq": [0.00776458, 0.00167851], "dk": [0.03228188, 0.00215972], "dv": [0.03211498, 0.00171787], "dg": [0.03257847, 0.00229676], "dh0": [0.00055279, 0.0018712]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+128x128 {"o": [0.02687263, 0.0019252], "ht": [0.00167048, 0.00057916], "dq": [0.0077796, 0.00166843], "dk": [0.05084991, 0.00220599], "dv": [0.04157257, 0.00171611], "dg": [0.04348946, 0.00215606], "dh0": [0.00067957, 0.00261462]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+GLA006_ORACLE [{"shape": [32, 64], "dtype": "bf16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.012703418731689453, "rel_rms": 0.0019465417135506868, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.001392960548400879, "rel_rms": 0.0005133343511261046, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.007810831069946289, "rel_rms": 0.0017067373264580965, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.021674156188964844, "rel_rms": 0.002084667794406414, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.03542900085449219, "rel_rms": 0.0017918698722496629, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.02071666717529297, "rel_rms": 0.00237127672880888, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.0007742643356323242, "rel_rms": 0.0020493504125624895, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [64, 32], "dtype": "bf16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.020692825317382812, "rel_rms": 0.0018895876128226519, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0021489858627319336, "rel_rms": 0.0007180618704296649, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.003895998001098633, "rel_rms": 0.0016504968516528606, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.022748947143554688, "rel_rms": 0.0021299924701452255, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.028212547302246094, "rel_rms": 0.001691532088443637, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.015270233154296875, "rel_rms": 0.0019276710227131844, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.0005671381950378418, "rel_rms": 0.0018365316791459918, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [256, 64], "dtype": "bf16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.046721458435058594, "rel_rms": 0.0018185718217864633, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0021529197692871094, "rel_rms": 0.0006943266489543021, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.0038487911224365234, "rel_rms": 0.0016543532256036997, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.031144142150878906, "rel_rms": 0.0023819843772798777, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.05333518981933594, "rel_rms": 0.001769836526364088, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.02682018280029297, "rel_rms": 0.0023206304758787155, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.0003030151128768921, "rel_rms": 0.0017001336673274636, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [64, 64], "dtype": "bf16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.02212810516357422, "rel_rms": 0.0019338791025802493, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0016804933547973633, "rel_rms": 0.0006305754650384188, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.007764577865600586, "rel_rms": 0.0016785141779109836, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.03228187561035156, "rel_rms": 0.0021597181912511587, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.03211498260498047, "rel_rms": 0.001717871055006981, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.032578468322753906, "rel_rms": 0.00229676254093647, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.0005527883768081665, "rel_rms": 0.0018711962038651109, "nan_inf": false, "ok": true}}, "ALL_PASS": true}, {"shape": [128, 128], "dtype": "bf16", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "ieee", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 0.026872634887695312, "rel_rms": 0.001925195916555822, "nan_inf": false, "ok": true}, "ht": {"max_abs": 0.0016704797744750977, "rel_rms": 0.0005791605799458921, "nan_inf": false, "ok": true}, "dq": {"max_abs": 0.007779598236083984, "rel_rms": 0.0016684273723512888, "nan_inf": false, "ok": true}, "dk": {"max_abs": 0.05084991455078125, "rel_rms": 0.002205988857895136, "nan_inf": false, "ok": true}, "dv": {"max_abs": 0.04157257080078125, "rel_rms": 0.0017161082942038774, "nan_inf": false, "ok": true}, "dg": {"max_abs": 0.04348945617675781, "rel_rms": 0.002156055299565196, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 0.0006795749068260193, "rel_rms": 0.0026146196760237217, "nan_inf": false, "ok": true}}, "ALL_PASS": true}]
+[W1112 10:36:01.593954447 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+Traceback (most recent call last):
+  File "/opt/flagtree/triton/language/core.py", line 65, in wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/language/core.py", line 2076, in dot
+    res = _semantic.dot(input, other, acc, input_precision, max_num_imprecise_acc, out_dtype)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/language/semantic.py", line 1559, in dot
+    input_precision = self._str_to_dot_input_precision(input_precision)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/language/semantic.py", line 1508, in _str_to_dot_input_precision
+    assert input_precision.lower() in self.builder.options.allowed_dot_input_precisions, \
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: input_precision must be one of ('ieee',). Got tf32
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py", line 77, in <module>
+    o, ht = chunk_gla(q=q, k=k, v=v, g=g, scale=scale, initial_state=h0,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/flagos/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 1181, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/gla-general-local-state/src/flag_attn/runtime/backend/_enflame/FLA/gla/chunk_gla.py", line 2341, in chunk_gla
+    o, final_state = ChunkGLAFunction.apply(
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/flagos/lib/python3.12/site-packages/torch/autograd/function.py", line 583, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/gla-general-local-state/src/flag_attn/runtime/backend/_enflame/FLA/utils.py", line 86, in wrapper
+    return fn(*contiguous_args, **contiguous_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/gla-general-local-state/src/flag_attn/runtime/backend/_enflame/FLA/gla/chunk_gla.py", line 2190, in forward
+    g_cumsum, A, _, ht, o = chunk_gla_fwd(
+                            ^^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/gla-general-local-state/src/flag_attn/runtime/backend/_enflame/FLA/gla/chunk_gla.py", line 2017, in chunk_gla_fwd
+    h, ht = chunk_fwd_h(
+            ^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/gla-general-local-state/src/flag_attn/runtime/backend/_enflame/FLA/chunk_h.py", line 1216, in chunk_fwd_h
+    _chunk_fwd_local_state_kernel[local_grid](
+  File "/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py", line 52, in call
+    out = launcher(*args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 400, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 766, in run
+    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 910, in _do_compile
+    kernel = self.compile(src, target=target, options=options.__dict__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/compiler/compiler.py", line 337, in compile
+    module = backend.make_ir(src, options, codegen_fns, module_map, context)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/backends/compiler.py", line 90, in make_ir
+    return src.make_ir(self.target, options, codegen_fns, module_map, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/compiler/compiler.py", line 103, in make_ir
+    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+triton.compiler.errors.CompilationError: at 72:14:
+    )
+    last_idx = min((i_t + 1) * BT, T) - 1
+    o_k = i_k * BK + tl.arange(0, BK)
+    p_gk_last = gk + ((i_b * T + last_idx) * H + i_h) * K + o_k
+
+    b_k = tl.load(p_k, boundary_check=(0, 1))
+    b_v = tl.load(p_v, boundary_check=(0, 1))
+    b_gk = tl.load(p_gk, boundary_check=(0, 1))
+    b_gk_last = tl.load(p_gk_last, mask=o_k < K, other=0.0)
+    b_k = (b_k * exp2(b_gk_last[:, None] - b_gk)).to(b_k.dtype)
+    b_local = tl.zeros([BK, BV], dtype=tl.float32)
+    b_local = tl.dot(b_k, b_v, acc=b_local, out_dtype=tl.float32)
+              ^
+input_precision must be one of ('ieee',). Got tf32
+[W1112 10:36:19.293790448 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/gla-general-local-state/agent-results/scripts/gla006_oracle.py:86: UserWarning: GCU not support Double use Float replace, maybe lead to unexpected overflow issues. (Triggered internally at /builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_utils.h:24.)
+  qr = q.detach().double().cpu().requires_grad_()
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+64x64 {"o": [9.5e-07, 1.1e-07], "ht": [3.34e-06, 8e-07], "dq": [4.77e-06, 5.1e-07], "dk": [1.335e-05, 8e-07], "dv": [1.097e-05, 2.8e-07], "dg": [1.049e-05, 1.16e-06], "dh0": [3e-08, 8e-08]} PASS True {'_chunk_fwd_local_state_kernel': 2, '_chunk_fwd_state_scan_kernel': 1, '_chunk_bwd_local_state_kernel': 1, '_chunk_bwd_state_scan_fp32_2d_group_kernel': 1}
+GLA006_ORACLE [{"shape": [64, 64], "dtype": "fp32", "B": 1, "T": 64, "H": 1, "gln": 1.0, "seed": 42, "f32_default": "<unset>", "force_fallback": false, "paths": {"attempt": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}, "done": {"_chunk_fwd_local_state_kernel": 2, "_chunk_fwd_state_scan_kernel": 1, "_chunk_bwd_local_state_kernel": 1, "_chunk_bwd_state_scan_fp32_2d_group_kernel": 1}}, "tensors": {"o": {"max_abs": 9.5367431640625e-07, "rel_rms": 1.0507044834184853e-07, "nan_inf": false, "ok": true}, "ht": {"max_abs": 3.337860107421875e-06, "rel_rms": 8.017501613721834e-07, "nan_inf": false, "ok": true}, "dq": {"max_abs": 4.76837158203125e-06, "rel_rms": 5.056916165813163e-07, "nan_inf": false, "ok": true}, "dk": {"max_abs": 1.33514404296875e-05, "rel_rms": 7.969743478497548e-07, "nan_inf": false, "ok": true}, "dv": {"max_abs": 1.0967254638671875e-05, "rel_rms": 2.808209842442011e-07, "nan_inf": false, "ok": true}, "dg": {"max_abs": 1.049041748046875e-05, "rel_rms": 1.1621471003309125e-06, "nan_inf": false, "ok": true}, "dh0": {"max_abs": 2.9802322387695312e-08, "rel_rms": 8.088662895033849e-08, "nan_inf": false, "ok": true}}, "ALL_PASS": true}]

@@ -1,0 +1,85 @@
+=== 2026-11-12T10:12:39Z AB 32x64 ===
+== preflight 2026-11-12T10:12:39Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 32x64 r 1 rc 0 cold 2781.6 fwd_h 2.3819 bwd_dh 2.306 fwd 2.5387 e2e 9.9123 pf False pb False
+cand 32x64 r 1 rc 0 cold 2788.2 fwd_h 0.1802 bwd_dh 0.244 fwd 0.4357 e2e 3.8525 pf True pb True
+cand 32x64 r 2 rc 0 cold 2759.3 fwd_h 0.1522 bwd_dh 0.2083 fwd 0.3868 e2e 3.6805 pf True pb True
+base 32x64 r 2 rc 0 cold 2722.1 fwd_h 2.3602 bwd_dh 2.2708 fwd 2.5086 e2e 9.9073 pf False pb False
+base 32x64 r 3 rc 0 cold 2813.7 fwd_h 2.375 bwd_dh 2.2799 fwd 2.5249 e2e 9.6468 pf False pb False
+cand 32x64 r 3 rc 0 cold 2845.1 fwd_h 0.1836 bwd_dh 0.2354 fwd 0.4576 e2e 3.896 pf True pb True
+DONE
+=== 2026-11-12T10:13:47Z AB 64x32 ===
+== preflight 2026-11-12T10:13:47Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 64x32 r 1 rc 0 cold 41148.3 fwd_h 2.3523 bwd_dh 2.2482 fwd 2.5142 e2e 9.3738 pf False pb False
+cand 64x32 r 1 rc 0 cold 7016.7 fwd_h 0.167 bwd_dh 0.2247 fwd 0.433 e2e 3.094 pf True pb True
+cand 64x32 r 2 rc 0 cold 2805.4 fwd_h 0.1839 bwd_dh 0.2565 fwd 0.4689 e2e 3.4425 pf True pb True
+base 64x32 r 2 rc 0 cold 2831.6 fwd_h 2.3566 bwd_dh 2.2513 fwd 2.5107 e2e 12.9215 pf False pb False
+base 64x32 r 3 rc 0 cold 2831.7 fwd_h 2.3566 bwd_dh 2.2696 fwd 2.5229 e2e 9.5692 pf False pb False
+cand 64x32 r 3 rc 0 cold 2778.9 fwd_h 0.1714 bwd_dh 0.2337 fwd 0.3819 e2e 6.9521 pf True pb True
+DONE
+=== 2026-11-12T10:15:39Z AB 256x64 ===
+== preflight 2026-11-12T10:15:39Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 256x64 r 1 rc 0 cold 2759.7 fwd_h 12.35 bwd_dh 11.8846 fwd 12.6319 e2e 40.4616 pf False pb False
+cand 256x64 r 1 rc 0 cold 2780.4 fwd_h 0.1567 bwd_dh 0.2124 fwd 0.4738 e2e 4.6052 pf True pb True
+cand 256x64 r 2 rc 0 cold 2833.7 fwd_h 0.1546 bwd_dh 0.206 fwd 0.4655 e2e 4.3874 pf True pb True
+base 256x64 r 2 rc 0 cold 2832.2 fwd_h 12.3636 bwd_dh 11.8985 fwd 12.637 e2e 40.4862 pf False pb False
+base 256x64 r 3 rc 0 cold 2828.6 fwd_h 12.3216 bwd_dh 11.8619 fwd 12.5815 e2e 40.2575 pf False pb False
+cand 256x64 r 3 rc 0 cold 2834.9 fwd_h 0.1592 bwd_dh 0.2145 fwd 0.4436 e2e 4.493 pf True pb True
+DONE
+=== 2026-11-12T10:16:49Z AB 64x64 ===
+== preflight 2026-11-12T10:16:49Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 64x64 r 1 rc 0 cold 31164.1 fwd_h 0.1469 bwd_dh 0.1982 fwd 0.3676 e2e 3.8445 pf True pb True
+cand 64x64 r 1 rc 0 cold 7055.9 fwd_h 0.1462 bwd_dh 0.205 fwd 0.3767 e2e 3.7332 pf True pb True
+cand 64x64 r 2 rc 0 cold 2780.6 fwd_h 0.1418 bwd_dh 0.1975 fwd 0.3851 e2e 6.9378 pf True pb True
+base 64x64 r 2 rc 0 cold 2776.2 fwd_h 0.1776 bwd_dh 0.2493 fwd 0.4466 e2e 6.9463 pf True pb True
+base 64x64 r 3 rc 0 cold 2774.7 fwd_h 0.1851 bwd_dh 0.2693 fwd 0.4796 e2e 3.912 pf True pb True
+cand 64x64 r 3 rc 0 cold 2763.7 fwd_h 0.1398 bwd_dh 0.2176 fwd 0.386 e2e 3.7973 pf True pb True
+DONE
+=== 2026-11-12T10:18:28Z AB 48x80 ===
+== preflight 2026-11-12T10:18:28Z ==
+gcu0_free=43708841984 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 48x80 r 1 rc 0 cold 40876.1 fwd_h 4.567 bwd_dh 4.4089 fwd 4.7508 e2e 16.4308 pf False pb False
+cand 48x80 r 1 rc 0 cold 11022.5 fwd_h 0.1533 bwd_dh 0.1984 fwd 0.3741 e2e 3.6316 pf True pb True
+cand 48x80 r 2 rc 0 cold 2836.4 fwd_h 0.1874 bwd_dh 0.2585 fwd 0.4491 e2e 3.994 pf True pb True
+base 48x80 r 2 rc 0 cold 2823.8 fwd_h 4.5687 bwd_dh 4.4121 fwd 4.7303 e2e 16.5684 pf False pb False
+base 48x80 r 3 rc 0 cold 2803.9 fwd_h 4.611 bwd_dh 4.424 fwd 4.7725 e2e 16.6735 pf False pb False
+cand 48x80 r 3 rc 0 cold 2820.6 fwd_h 0.191 bwd_dh 0.2448 fwd 0.4503 e2e 4.226 pf True pb True
+DONE
+=== 2026-11-12T10:20:23Z AB 96x128 ===
+== preflight 2026-11-12T10:20:23Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 96x128 r 1 rc 0 cold 41221.6 fwd_h 8.98 bwd_dh 8.58 fwd 9.2084 e2e 29.9931 pf False pb False
+cand 96x128 r 1 rc 0 cold 11418.9 fwd_h 0.1587 bwd_dh 0.2115 fwd 0.4022 e2e 4.56 pf True pb True
+cand 96x128 r 2 rc 0 cold 2815.8 fwd_h 0.2019 bwd_dh 0.252 fwd 0.456 e2e 4.98 pf True pb True
+base 96x128 r 2 rc 0 cold 2787.0 fwd_h 8.9798 bwd_dh 8.5807 fwd 9.1784 e2e 30.2389 pf False pb False
+base 96x128 r 3 rc 0 cold 2790.4 fwd_h 8.9787 bwd_dh 8.5724 fwd 9.1741 e2e 30.6468 pf False pb False
+cand 96x128 r 3 rc 0 cold 2800.2 fwd_h 0.1584 bwd_dh 0.2139 fwd 0.4114 e2e 4.5822 pf True pb True
+DONE
+=== 2026-11-12T10:22:20Z AB 64x256 ===
+== preflight 2026-11-12T10:22:20Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+base 64x256 r 1 rc 0 cold 33775.9 fwd_h 12.3061 bwd_dh 11.8813 fwd 12.4652 e2e 40.4298 pf False pb False
+cand 64x256 r 1 rc 0 cold 11139.9 fwd_h 0.1529 bwd_dh 0.2047 fwd 0.3615 e2e 4.3277 pf True pb True
+cand 64x256 r 2 rc 0 cold 2836.7 fwd_h 0.163 bwd_dh 0.2104 fwd 0.3899 e2e 4.3363 pf True pb True
+base 64x256 r 2 rc 0 cold 2830.7 fwd_h 12.3075 bwd_dh 11.8594 fwd 12.5034 e2e 40.174 pf False pb False
+base 64x256 r 3 rc 0 cold 2841.8 fwd_h 12.3086 bwd_dh 11.8705 fwd 12.495 e2e 40.4696 pf False pb False
+cand 64x256 r 3 rc 0 cold 2799.1 fwd_h 0.1684 bwd_dh 0.217 fwd 0.3909 e2e 4.3829 pf True pb True
+DONE
+PHASE3_BATCH_DONE 2026-11-12T10:24:08Z

@@ -1,0 +1,41 @@
+=== 2026-11-12T10:40:16Z mem 2x32 ===
+== preflight 2026-11-12T10:40:16Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 47.9599728686735 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 9.671398858074099 err None
+DONE
+=== 2026-11-12T10:41:36Z mem 64x32 ===
+== preflight 2026-11-12T10:41:36Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.8819187860935926 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.904864300042391 err None
+  dq         max_abs=6.104e-05 rel=4.617e-07 ok=True strict=True
+  dg         max_abs=7.629e-06 rel=9.742e-08 ok=True strict=True
+  h          max_abs=9.766e-04 rel=7.923e-06 ok=True strict=True
+DONE
+=== 2026-11-12T10:42:04Z mem 256x64 ===
+== preflight 2026-11-12T10:42:04Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel False False wall 2.909985971171409 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.899005754850805 err None
+  dq         max_abs=4.883e-04 rel=2.825e-06 ok=True strict=True
+  dk         max_abs=1.221e-04 rel=9.210e-07 ok=True strict=True
+  dv         max_abs=1.526e-05 rel=1.156e-08 ok=True strict=True
+  dg         max_abs=2.441e-04 rel=1.713e-06 ok=True strict=True
+  h          max_abs=9.766e-04 rel=3.149e-06 ok=True strict=True
+DONE
+=== 2026-11-12T10:42:30Z mem 64x64 ===
+== preflight 2026-11-12T10:42:30Z ==
+gcu0_free=43793776640 gcu0_total=43878711296 gcu0_allocated=0
+gcu0_reserved 0
+PREFLIGHT_OK
+BASE rc 0 parallel True True wall 2.8776643676683307 err None
+CAND rc 0 parallel True True ALL_PASS True STRICT True wall 2.9004011480137706 err None
+DONE
+MEM_BATCH_DONE 2026-11-12T10:42:56Z

@@ -42,7 +42,9 @@ for r in rounds:
             cmd = ["taskset", "-c", "128-159", "/flagos/bin/python", case,
                    "--B", B, "--T", T, "--H", H, "--K", str(K), "--V", str(V),
                    "--dtype", dtype, "--tag", f"{who}_{name}_r{r}",
-                   "--samples", samples, "--warmup", "2"]
+                   "--samples", samples, "--warmup", "2",
+                   "--exp-fp16", (exp16 if who == "cand" else "0"),
+                   "--exp-fp32", (exp32 if who == "cand" else "0")]
             if mem:
                 cmd.append("--mem")
             t0 = time.time()
