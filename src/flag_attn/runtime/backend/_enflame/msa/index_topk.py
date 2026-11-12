@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import os
+
 import torch
 import triton
 import triton.language as tl
@@ -16,6 +18,9 @@ from flag_attn.minimax_sparse_attention.index_topk import _index_block_score_ker
 # The standalone prefill scorer uses the portable Triton implementation;
 # Enflame specializes fused score/TopK and decode scoring below.
 from flag_attn.runtime.backend._enflame.utils import SPARSE_BLOCK_SIZE, round_up
+
+# MSA-002: default-off cap on the decode index-score chunk count (0 = shipped).
+_MSA002_DECODE_CHUNK_CAP = int(os.environ.get("MSA002_DECODE_CHUNK_CAP", "0") or 0)
 
 
 # Preserve the portable score algorithm; specialize its launch on S60.
@@ -1318,6 +1323,12 @@ def minimax_m3_index_decode_score(
             512 // max(1, seq_lens.shape[0]),
         ),
     )
+    # MSA-002 experiment (default off): single-token decode currently launches
+    # one 128-token page per CTA, so each program performs one small
+    # [8,128]x[128,128] dot and exits. Capping the chunk count keeps the result
+    # bit-identical and shortens the stage. 0 reproduces the shipped launch.
+    if _MSA002_DECODE_CHUNK_CAP > 0 and decode_query_len == 1:
+        target = max(1, min(target, _MSA002_DECODE_CHUNK_CAP))
     num_kv_chunks = 1 << (target.bit_length() - 1)
 
     grid = (
