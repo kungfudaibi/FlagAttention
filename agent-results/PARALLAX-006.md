@@ -97,19 +97,17 @@ threshold. Metrics are the same as PARALLAX-005's old-route numbers.
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
 | FP16 | candidate static | 36.577 | 3 | 36.534 | 0 | 24 / 7.5 MB |
 | BF16 | candidate static | 35.842 | 3 | 35.798 | 0 | 24 / 7.5 MB |
-| FP16 | old, same session | 394.087 | 30 | 361.856 | 30 | 241 / 71.2 MB |
-| BF16 | old, PARALLAX-005 historical | 381.237 | 30 | 359.609 | 30 | 240 / 71.2 MB |
+| FP16 | old, same session | 394.087 | 30 | 361.856 | 30 | 240 / 71.1 MB |
+| BF16 | old, same session | 385.591 | 30 | 363.013 | 30 | 240 / 71.2 MB |
 
-The FP16 old-code cold call was re-run in this session from
-`.baseline-70bdc5` with a fresh `/tmp/p006-cache-baseline-fp16-target-cold`
-(0 files before, 30 autotune configs, exit 0, validation 5/5 pass) and took
-394.087 s, consistent with PARALLAX-005's 379.798 s. The BF16 old-code number is
-PARALLAX-005's historical baseline cold run: the BF16 re-run started at 07:03Z
-but cannot finish inside the 45-minute box (380 s plus validation), so it is
-reported as historical context, not same-session A/B. Differences vs the 005
-runs: different Triton cache directory (`/tmp/p006-*` vs `/tmp/p005-*`),
-different process, different `parallel.py` for the candidate (static gate
-only). This is a compile/cold metric, never a steady speedup.
+Both old-code cold calls were re-run same-session from `.baseline-70bdc5`
+with fresh caches (0 files before): FP16 394.087 s, BF16 385.591 s, 30 autotune
+configs each, exit 0, validation 5/5 pass each. These match PARALLAX-005's
+historical 379.798 s / 381.237 s. The candidate static runs compiled 3 kernels
+and 0 autotune configs in ~36 s. Differences from the 005 runs: different
+Triton cache directory (`/tmp/p006-*` vs `/tmp/p005-*`), different process,
+and the candidate `parallel.py` adds only the static gate. This is a
+compile/cold metric, never a steady speedup.
 
 ## Steady A/B
 
@@ -124,9 +122,8 @@ Results are in `agent-results/PARALLAX-006-steady.md` and raw in
 
 ## Limits
 
-- FP16 cold was re-measured same-session against the exact old worktree; BF16
-  old-code cold is PARALLAX-005 historical because another ~380 s sweep plus
-  validation does not fit the box.
+- Cold was re-measured same-session against the exact old worktree for both
+  dtypes; both old calls fit under the 600 s per-command cap.
 - The static config is only valid for the measured shape/dtype/device class.
   It is a fixed heuristic, not a persisted autotune cache; other shapes keep
   the autotuner.

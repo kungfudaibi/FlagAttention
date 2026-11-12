@@ -1,0 +1,45 @@
+CMD route=candidate dtype=fp16 mode=steady round=2 case=target tag=ab-fp16-r2-candidate
+TREE=/workspace/agent-workspaces/parallax-static-tune HEAD=8190827adf39454f57a202d30c13ebca279b90ee
+PARALLAX_STATIC_D64=1 TRITON_CACHE_DIR=/tmp/p006-cache-candidate-fp16-target-steady CACHE_FILES_BEFORE=24
+DATE_START=2026-11-12T06:53:15Z
+DEVICE_BEFORE:
+| TEMP   Lpm   Pwr(Usage/Cap) | Mem      GCU Virt | DUsed       SN            |
+| 0      ZIXIAOC200           | 35.6.5            | 00:84:00.0  Enable        |
+| 58℃    LP0      137W / 300W | 42976MiB  Disable | 0%          A0D4P60511588 |
+| 1      ZIXIAOC200           | 35.6.5            | 00:a3:00.0  Enable        |
+| 58℃    LP0      138W / 300W | 42976MiB  Disable | 0%          A0D4P60511328 |
+OTHER_PROCS:
+[W1112 06:53:16.708397977 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 471376 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/agent-workspaces/parallax-static-tune/experiments/parallax_static_tune.py:178: ResourceWarning: unclosed file <_io.TextIOWrapper name=14 encoding='UTF-8'>
+  head = os.popen(f"git -C {tree} rev-parse HEAD").read().strip()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"event": "import_probe", "route": "candidate", "dtype": "fp16", "mode": "steady", "case": "target", "flag_attn_file": "/workspace/agent-workspaces/parallax-static-tune/src/flag_attn/__init__.py", "tree": "/workspace/agent-workspaces/parallax-static-tune", "git_head": "8190827adf39454f57a202d30c13ebca279b90ee", "parallel_py_sha256_16": "5f6fc383ec213bcc", "static_d64_env": "1", "device": 1, "pid": 471330, "affinity": [160, 161, 162, "..."], "affinity_count": 32}
+{"event": "setup", "case": "target", "shape": [2, 256, 8, 64], "dtype": "fp16", "scale": 0.125, "torch_version": "2.10.0+cpu", "cache": {"cache_dir": "/tmp/p006-cache-candidate-fp16-target-steady", "cache_files": 24, "cache_mb": 7.5}}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 2.618}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.01}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.011}
+{"event": "path_probe", "launches": {"parallel_parallax_fwd_kernel": 1, "parallel_parallax_bwd_kernel_dqr_fused": 1, "parallel_parallax_bwd_kernel_dkv_grouped": 1}, "devices": [1], "autotune_configs": 0, "static_d64_env": "1"}
+{"event": "launch", "kernel": "parallel_parallax_fwd_kernel", "grid": [4, 16], "grid_callable": false, "tag": "launch", "device": 1, "BT": 64, "BS": 128, "BK": 64, "num_warps": 1, "num_stages": 2}
+{"event": "launch", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "grid": [4, 16], "grid_callable": false, "tag": "launch", "device": 1, "BT": 64, "BS": 128, "BK": 64, "num_warps": 1, "num_stages": 2}
+{"event": "launch", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "grid": [4, 4], "grid_callable": false, "tag": "launch", "device": 1, "BT": 64, "BS": 64, "BK": 64, "num_warps": 1, "num_stages": 1}
+{"event": "sample", "route": "candidate", "dtype": "fp16", "round": 2, "sample": 0, "forward_s": 0.000421, "backward_s": 0.000851, "full_s": 0.001049}
+{"event": "sample", "route": "candidate", "dtype": "fp16", "round": 2, "sample": 1, "forward_s": 0.000409, "backward_s": 0.000848, "full_s": 0.001014}
+{"event": "sample", "route": "candidate", "dtype": "fp16", "round": 2, "sample": 2, "forward_s": 0.000409, "backward_s": 0.000835, "full_s": 0.001036}
+{"event": "sample", "route": "candidate", "dtype": "fp16", "round": 2, "sample": 3, "forward_s": 0.000408, "backward_s": 0.000827, "full_s": 0.001019}
+{"event": "sample", "route": "candidate", "dtype": "fp16", "round": 2, "sample": 4, "forward_s": 0.00042, "backward_s": 0.000842, "full_s": 0.001}
+{"event": "steady_summary", "route": "candidate", "dtype": "fp16", "round": 2, "samples": 5, "peak_memory_allocated_bytes": 4276224, "peak_memory_reserved_bytes": 6291456, "summary": {"forward_s": {"median": 0.000409, "mean": 0.0004134000000000001, "stdev": 6.503845016603634e-06, "variance": 3.383999999999994e-11, "min": 0.000408, "max": 0.000421, "spread": 1.299999999999999e-05, "samples": [0.000421, 0.000409, 0.000409, 0.000408, 0.00042]}, "backward_s": {"median": 0.000842, "mean": 0.0008406, "stdev": 9.762171889492602e-06, "variance": 7.623999999999964e-11, "min": 0.000827, "max": 0.000851, "spread": 2.3999999999999933e-05, "samples": [0.000851, 0.000848, 0.000835, 0.000827, 0.000842]}, "full_s": {"median": 0.001019, "mean": 0.0010236, "stdev": 1.9165072397463066e-05, "variance": 2.938400000000005e-10, "min": 0.001, "max": 0.001049, "spread": 4.9e-05, "samples": [0.001049, 0.001014, 0.001036, 0.001019, 0.001]}}}
+DATE_END=2026-11-12T06:53:25Z
+EXIT=0

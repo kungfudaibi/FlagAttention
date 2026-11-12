@@ -1,0 +1,102 @@
+CMD route=baseline dtype=bf16 mode=steady round=1 case=target tag=ab-bf16-r1-baseline
+TREE=/workspace/agent-workspaces/parallax-static-tune/.baseline-70bdc5 HEAD=70bdc5e3ed75e877445b9888250b9155523ef852
+PARALLAX_STATIC_D64=0 TRITON_CACHE_DIR=/tmp/p006-cache-baseline-bf16-target-steady CACHE_FILES_BEFORE=240
+DATE_START=2026-11-12T06:54:17Z
+DEVICE_BEFORE:
+| TEMP   Lpm   Pwr(Usage/Cap) | Mem      GCU Virt | DUsed       SN            |
+| 0      ZIXIAOC200           | 35.6.5            | 00:84:00.0  Enable        |
+| 58℃    LP0      137W / 300W | 42976MiB  Disable | 0%          A0D4P60511588 |
+| 1      ZIXIAOC200           | 35.6.5            | 00:a3:00.0  Enable        |
+| 58℃    LP0      138W / 300W | 42976MiB  Disable | 0%          A0D4P60511328 |
+OTHER_PROCS:
+[W1112 06:54:18.533812673 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/subprocess.py:1127: ResourceWarning: subprocess 471918 is still running
+  _warn("subprocess %s is still running" % self.pid,
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/workspace/agent-workspaces/parallax-static-tune/experiments/parallax_static_tune.py:178: ResourceWarning: unclosed file <_io.TextIOWrapper name=14 encoding='UTF-8'>
+  head = os.popen(f"git -C {tree} rev-parse HEAD").read().strip()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{"event": "import_probe", "route": "baseline", "dtype": "bf16", "mode": "steady", "case": "target", "flag_attn_file": "/workspace/agent-workspaces/parallax-static-tune/.baseline-70bdc5/src/flag_attn/__init__.py", "tree": "/workspace/agent-workspaces/parallax-static-tune/.baseline-70bdc5", "git_head": "70bdc5e3ed75e877445b9888250b9155523ef852", "parallel_py_sha256_16": "51cf806459d5d043", "static_d64_env": "0", "device": 1, "pid": 471872, "affinity": [160, 161, 162, "..."], "affinity_count": 32}
+{"event": "setup", "case": "target", "shape": [2, 256, 8, 64], "dtype": "bf16", "scale": 0.125, "torch_version": "2.10.0+cpu", "cache": {"cache_dir": "/tmp/p006-cache-baseline-bf16-target-steady", "cache_files": 240, "cache_mb": 71.2}}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 2.64}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 3.199, "median_ms": 0.4897}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.542, "median_ms": 0.4935}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 32, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.543, "median_ms": 0.9269}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.541, "median_ms": 0.4279}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.545, "median_ms": 0.4343}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 64, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.542, "median_ms": 0.6961}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.542, "median_ms": 0.3972}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.542, "median_ms": 0.3878}
+{"event": "jit_compile", "kernel": "parallel_parallax_fwd_kernel", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_fwd_kernel", "config": "BK: 64, BS: 128, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.546, "median_ms": 0.8401}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.01}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 16, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 2.379, "median_ms": 257.1495}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 16, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 2.36, "median_ms": 257.0046}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 16, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 2.342, "median_ms": 256.5033}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.54, "median_ms": 1.1695}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.547, "median_ms": 1.1634}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 32, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.551, "median_ms": 1.7998}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.551, "median_ms": 1.1618}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.553, "median_ms": 1.1423}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 64, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.558, "median_ms": 1.4645}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.558, "median_ms": 1.114}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.56, "median_ms": 1.0928}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "config": "BK: 64, BS: 128, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.564, "median_ms": 1.408}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.012}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.625, "median_ms": 0.891}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 32, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.565, "median_ms": 0.8811}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 32, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.572, "median_ms": 1.255}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.577, "median_ms": 0.5823}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 64, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.575, "median_ms": 0.5801}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 64, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.581, "median_ms": 1.1547}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.584, "median_ms": 0.6515}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.002}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 128, num_warps: 1, num_ctas: 1, num_stages: 2, maxnreg: None", "wall_s": 0.588, "median_ms": 0.6602}
+{"event": "jit_compile", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "wall_s": 0.003}
+{"event": "autotune_config", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "config": "BK: 64, BS: 128, num_warps: 2, num_ctas: 1, num_stages: 1, maxnreg: None", "wall_s": 0.585, "median_ms": 0.776}
+{"event": "path_probe", "launches": {"parallel_parallax_fwd_kernel": 1, "parallel_parallax_bwd_kernel_dqr_fused": 1, "parallel_parallax_bwd_kernel_dkv_grouped": 1}, "devices": [1], "autotune_configs": 30, "static_d64_env": "0"}
+{"event": "launch", "kernel": "parallel_parallax_fwd_kernel", "grid": [4, 16], "grid_callable": false, "tag": "launch", "device": 1, "BT": 64, "BS": 128, "BK": 64, "num_warps": 1, "num_stages": 2}
+{"event": "launch", "kernel": "parallel_parallax_bwd_kernel_dqr_fused", "grid": [4, 16], "grid_callable": false, "tag": "launch", "device": 1, "BT": 64, "BS": 128, "BK": 64, "num_warps": 1, "num_stages": 2}
+{"event": "launch", "kernel": "parallel_parallax_bwd_kernel_dkv_grouped", "grid": null, "grid_callable": true, "tag": "launch", "device": 1, "BT": 64, "BS": 64, "BK": 64, "num_warps": 1, "num_stages": 2}
+{"event": "sample", "route": "baseline", "dtype": "bf16", "round": 1, "sample": 0, "forward_s": 0.000438, "backward_s": 0.000865, "full_s": 0.001086}
+{"event": "sample", "route": "baseline", "dtype": "bf16", "round": 1, "sample": 1, "forward_s": 0.000439, "backward_s": 0.000871, "full_s": 0.001074}
+{"event": "sample", "route": "baseline", "dtype": "bf16", "round": 1, "sample": 2, "forward_s": 0.00043, "backward_s": 0.000872, "full_s": 0.001078}
+{"event": "sample", "route": "baseline", "dtype": "bf16", "round": 1, "sample": 3, "forward_s": 0.000435, "backward_s": 0.000857, "full_s": 0.001038}
+{"event": "sample", "route": "baseline", "dtype": "bf16", "round": 1, "sample": 4, "forward_s": 0.000435, "backward_s": 0.000847, "full_s": 0.00104}
+{"event": "steady_summary", "route": "baseline", "dtype": "bf16", "round": 1, "samples": 5, "peak_memory_allocated_bytes": 4276224, "peak_memory_reserved_bytes": 274726912, "summary": {"forward_s": {"median": 0.000435, "mean": 0.0004354, "stdev": 3.507135583350042e-06, "variance": 9.840000000000032e-12, "min": 0.00043, "max": 0.000439, "spread": 9.000000000000002e-06, "samples": [0.000438, 0.000439, 0.00043, 0.000435, 0.000435]}, "backward_s": {"median": 0.000865, "mean": 0.0008623999999999999, "stdev": 1.0478549517943809e-05, "variance": 8.784000000000034e-11, "min": 0.000847, "max": 0.000872, "spread": 2.5000000000000066e-05, "samples": [0.000865, 0.000871, 0.000872, 0.000857, 0.000847]}, "full_s": {"median": 0.001074, "mean": 0.0010631999999999998, "stdev": 2.2521101216414787e-05, "variance": 4.057599999999997e-10, "min": 0.001038, "max": 0.001086, "spread": 4.7999999999999866e-05, "samples": [0.001086, 0.001074, 0.001078, 0.001038, 0.00104]}}}
+DATE_END=2026-11-12T06:54:48Z
+EXIT=0
