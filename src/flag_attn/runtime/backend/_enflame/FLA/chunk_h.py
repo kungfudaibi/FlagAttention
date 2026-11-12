@@ -43,6 +43,32 @@ EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES = frozenset(
     {(32, 32), (64, 64), (64, 128), (128, 64), (128, 128)}
 )
 
+# GLA-006 opt-in experiments.  Both default to off so the production dispatch
+# above is unchanged.  The FP16 flag admits every remaining FP16 K/V pair that
+# already satisfies the semantic guards; the FP32 flag exists only for
+# small-shape compile/numerical smoke tests and is never a production route.
+EXPERIMENTAL_FP16_STATE_ENABLED = (
+    os.environ.get("FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP16_STATE", "0") == "1"
+)
+EXPERIMENTAL_FP32_STATE_ENABLED = (
+    os.environ.get("FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP32_STATE", "0") == "1"
+)
+
+
+def _parallel_state_dtype_allowed(
+    dtype: torch.dtype, key_dim: int, value_dim: int
+) -> bool:
+    if dtype == torch.bfloat16:
+        return True
+    if dtype == torch.float16:
+        return (
+            (key_dim, value_dim) in EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES
+            or EXPERIMENTAL_FP16_STATE_ENABLED
+        )
+    if dtype == torch.float32:
+        return EXPERIMENTAL_FP32_STATE_ENABLED
+    return False
+
 
 @triton.jit(do_not_specialize=["N"])
 def _prepare_chunk_offsets_kernel(
@@ -1162,14 +1188,8 @@ def chunk_fwd_h(
         # with the independently controlled parallel backward-state path.
         and (not states_in_fp32 or PARALLEL_BWD_STATE_ENABLED)
         and not state_v_first
-        # GLA-004: FP16 admitted for the experimental shape allow-list.
-        and (
-            k.dtype == torch.bfloat16
-            or (
-                k.dtype == torch.float16
-                and (K, V) in EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES
-            )
-        )
+        # GLA-006: BF16 unchanged; FP16/FP32 only via opt-in experiments.
+        and _parallel_state_dtype_allowed(k.dtype, K, V)
         and v.dtype == k.dtype
         and g is None
         and g_gamma is None
@@ -1299,7 +1319,10 @@ def chunk_fwd_h(
                 N_BATCH_HEADS=B * H,
                 USE_INITIAL_STATE=h0 is not None,
                 STORE_FINAL_STATE=ht is not None,
-                STATE_IN_FP32=False,
+                # FP32 inputs already store FP32 states; avoid the
+                # FP32->FP32 no-op conversion that Enflame layout removal
+                # cannot fold (same specialization as states_in_fp32=True).
+                STATE_IN_FP32=(states_in_fp32 or k.dtype == torch.float32),
                 USE_GRID_REMAP=scan_grid_remap,
                 num_warps=1,
                 num_stages=1,
@@ -1399,15 +1422,9 @@ def chunk_bwd_dh(
         and BT == 64
         and HQ == H
         and not state_v_first
-        # BF16 keeps the original unrestricted parallel path.  FP16 uses the
-        # same experimental shape allow-list as the forward gate.
-        and (
-            k.dtype == torch.bfloat16
-            or (
-                k.dtype == torch.float16
-                and (K, V) in EXPERIMENTAL_FP16_PARALLEL_STATE_SHAPES
-            )
-        )
+        # BF16 keeps the original unrestricted parallel path.  FP16/FP32 use
+        # the same opt-in experiments as the forward gate.
+        and _parallel_state_dtype_allowed(k.dtype, K, V)
         and q.dtype == k.dtype
         and do.dtype == k.dtype
         and g is None
@@ -1537,7 +1554,7 @@ def chunk_bwd_dh(
                 N_BATCH_HEADS=B * H,
                 USE_FINAL_STATE_GRADIENT=dht is not None,
                 STORE_INITIAL_STATE_GRADIENT=dh0 is not None,
-                STATE_IN_FP32=False,
+                STATE_IN_FP32=(states_in_fp32 or k.dtype == torch.float32),
                 USE_GRID_REMAP=scan_grid_remap,
                 num_warps=1,
                 num_stages=1,
