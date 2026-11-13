@@ -54,6 +54,7 @@ _S60_STATE_BK_SMALL = 64
 _S60_STATE_BK_MEDIUM = 128
 _S60_STATE_BK_LARGE = 256
 _S60_STATE_BV = 256
+_S60_STATE_BV_SPLIT = 128
 _S60_STATE_NUM_WARPS = 1
 _S60_STATE_NUM_STAGES = 2
 _S60_FUSED_BT = 64
@@ -67,6 +68,27 @@ _S60_FUSED_BT = 64
 _S60_TILE_MIN = 64
 _S60_TILE_MAX = 256
 _S60_TILES_ADAPT = os.environ.get("FLAG_ATTN_GDN2_FIXED_TILES", "0") != "1"
+
+# K2 walks the chunks of one (batch, head, V-tile) serially and is parallel
+# over (V-tile, batch*head) only, so a single 256-wide V tile leaves half of
+# the machine idle whenever 128 < V <= 256: 2 V tiles measured 1.07-1.11x
+# faster on every such shape.  Splitting the V axis cannot perturb any
+# accumulation order because the state update (kg^T @ v) and the readout
+# (qg @ h) both reduce over K and over chunks, never over V, so the result
+# is bit-identical.  V > 256 keeps one 256 tile: capping those too regressed
+# V=512 from 7.69 to 9.85 ms.  FLAG_ATTN_GDN2_STATE_BV_SPLIT=0 restores the
+# accepted GDN2-003 rule without disturbing any other tile.
+_S60_STATE_BV_SPLIT_ENABLED = (
+    os.environ.get("FLAG_ATTN_GDN2_STATE_BV_SPLIT", "1") != "0"
+)
+
+
+def _s60_state_bv(extent: int) -> int:
+    """V tile for K2: split wide-but-not-huge V into two tiles."""
+    if not _S60_TILES_ADAPT or not _S60_STATE_BV_SPLIT_ENABLED:
+        return _S60_STATE_BV
+    limit = _S60_STATE_BV_SPLIT if extent <= _S60_STATE_BV else _S60_STATE_BV
+    return _s60_tile(extent, limit)
 
 
 def _s60_tile(extent: int, limit: int) -> int:
@@ -1125,7 +1147,7 @@ def chunk_gdn2_fwd_h_o_infer(
         state_bk = _S60_STATE_BK_MEDIUM
     else:
         state_bk = _S60_STATE_BK_LARGE
-    state_bv = _s60_tile(V, _S60_STATE_BV)
+    state_bv = _s60_state_bv(V)
 
     if BT != _S60_FUSED_BT:
         raise ValueError(
