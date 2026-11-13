@@ -52,6 +52,7 @@ import importlib  # noqa: E402
 C = importlib.import_module("flag_attn.runtime.backend._enflame.FLA.gla.chunk_gla")
 Hmod = importlib.import_module("flag_attn.runtime.backend._enflame.FLA.chunk_h")
 
+torch.gcu.set_device(4)
 dev = torch.device("gcu:4")
 B, T, H, K, V = a.B, a.T, a.H, a.K, a.V
 DT = {"fp16": torch.float16, "bf16": torch.bfloat16, "fp32": torch.float32}[a.dtype]
