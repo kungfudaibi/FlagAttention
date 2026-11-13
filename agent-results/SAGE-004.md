@@ -56,9 +56,12 @@ the legacy full call and a candidate full call into one alternating A/B. SAGE-00
 - Base commit **`8473113cf505af02d3673ddd0279bb32c490689d`** (the accepted
   SAGE-003 head); branch `agent/enflame-sage-attn-kernel-gcu5`; clone
   `/workspace/agent-workspaces/sage-attn-kernel-gcu5`. Nothing pushed or merged.
-- Result commit SHA is recorded in `agent-results/raw/sage004_commit.txt` and in
-  the delivery message. A commit cannot contain its own hash, so that file holds
-  the hash of the commit that carries this report.
+- Result commit **`5cf5b51713825c8330548f4397919dc4ce99ee1a`**
+  (`5cf5b51`) on `agent/enflame-sage-attn-kernel-gcu5`. It carries the two
+  scripts, the extended tests, all raw JSONL/exits/environment and this report.
+  A commit cannot contain its own hash, so the follow-up commit on top only adds
+  `agent-results/raw/sage004_commit.txt` with that hash; no measured artifact
+  changes in it.
 - Container **GCU 5**, `efsmi -L` DEV 5 = PCI **`0000:83:00.0`**, SN
   `A0D5460520864`, 42976 MiB. DEV 6 (`0000:84:00.0`) and DEV 7
   (`0000:a3:00.0`) were never touched; no other clone or the main repo was
