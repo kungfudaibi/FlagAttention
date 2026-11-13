@@ -52,7 +52,7 @@ import importlib  # noqa: E402
 C = importlib.import_module("flag_attn.runtime.backend._enflame.FLA.gla.chunk_gla")
 Hmod = importlib.import_module("flag_attn.runtime.backend._enflame.FLA.chunk_h")
 
-dev = torch.device("gcu:0")
+dev = torch.device("gcu:4")
 B, T, H, K, V = a.B, a.T, a.H, a.K, a.V
 DT = {"fp16": torch.float16, "bf16": torch.bfloat16, "fp32": torch.float32}[a.dtype]
 
@@ -107,7 +107,7 @@ result = {
     "pythonpath_head": os.environ.get("PYTHONPATH", "").split(":")[0],
     "chunk_h_file": Hmod.__file__,
     "git_head": os.environ.get("GLA_TREE_HEAD", ""),
-    "device": "gcu:0",
+    "device": "gcu:4",
     "triton_version": triton.__version__,
     "force_fallback": bool(a.force_fallback),
     "triton_f32_default": os.environ.get("TRITON_F32_DEFAULT", "<unset>"),
