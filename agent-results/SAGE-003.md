@@ -49,9 +49,11 @@ device baseline as rigorously as this task requires. SAGE-003:
 ## Exact revision, device, and scope
 
 - Base commit `3c3634fba806df4e0713e7bce14f901f262bb1f1`; result commit
-  **`a4cfb68`** on branch `agent/enflame-sage-sdpa-device-5`; clone
+  **`17936d6`** on branch `agent/enflame-sage-sdpa-device-5`; clone
   `/workspace/agent-workspaces/sage-sdpa-device-5`. Working tree clean, nothing
-  pushed or merged.
+  pushed or merged. (A commit cannot contain its own hash: `17936d6` holds the
+  code, data, and this report; the follow-up commit on top only corrects this
+  line.)
 - Container **GCU 5**, `efsmi -L` DEV 5 = PCI **`0000:83:00.0`**, SN
   `A0D5460520864`, 42976 MiB total. DEV 6 (`0000:84:00.0`) and DEV 7
   (`0000:a3:00.0`) were never used.
