@@ -314,7 +314,8 @@ too few samples → exit 3.
 | `sage004_profile.exit` | 0 |
 | `sage004_ab_float16.exit` | 0 |
 | `sage004_ab_bfloat16.exit` | 0 |
-| `sage004_tests.exit` | 0 |
+| `sage004_tests.exit` / `sage004_tests_final.exit` | 0 / 0 |
+| `sage004_ab_verify.exit` (the exact command from the task config) | 0 |
 | wrong-device negative control | 4 (expected) |
 | missing-samples negative control | 3 (expected) |
 
