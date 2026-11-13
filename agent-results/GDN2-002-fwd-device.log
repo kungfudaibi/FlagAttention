@@ -1,4 +1,4 @@
-[W1113 01:51:59.121891447 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+[W1113 02:39:37.244125519 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
 ============================= test session starts ==============================
 platform linux -- Python 3.12.13, pytest-8.3.5, pluggy-1.7.0 -- /flagos/bin/python
 cachedir: .pytest_cache
@@ -64,5 +64,5 @@ tests/flag_attn/test_gdn2_backward_reference.py::test_device_gradients_match_fp6
     warnings.warn(msg, ImportWarning)
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-=================== 17 passed, 1 skipped, 1 warning in 3.26s ===================
+=================== 17 passed, 1 skipped, 1 warning in 3.37s ===================
 EXIT=0
