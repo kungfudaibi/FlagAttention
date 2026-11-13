@@ -464,3 +464,183 @@ def test_full_call_latency_swing_is_device_side_not_counter_noise():
             assert 1.5 < stats["mode_ratio"] < 2.4, (
                 f"{name} modes are {stats['mode_ratio']:.2f}x apart"
             )
+
+
+# ==========================================================================
+# SAGE-004: attention-kernel bottleneck evidence and full-call A/B discipline
+# ==========================================================================
+AB_SCRIPT_004 = os.path.join(REPO_ROOT, "agent-results", "scripts", "sage004_ab.py")
+PROFILE_SCRIPT_004 = os.path.join(
+    REPO_ROOT, "agent-results", "scripts", "sage004_profile.py"
+)
+KERNEL_SOURCE_004 = os.path.join(
+    REPO_ROOT,
+    "src",
+    "flag_attn",
+    "runtime",
+    "backend",
+    "_enflame",
+    "sage_attention",
+    "attn_qk_int8_per_block.py",
+)
+
+
+def _load_script(path, name):
+    """Import a harness module by path so its pure helpers can be tested."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def test_sage004_profile_pins_one_replacement_per_variant():
+    """Every ablation must be a single-site edit of the shipped kernel.
+
+    If a pattern stopped matching exactly once, the variant would silently stop
+    measuring 'the shipped kernel minus this stage' and the profile table would
+    describe code that is not the kernel. This pins the anchors to the source.
+    """
+    sys.path.insert(0, os.path.join(REPO_ROOT, "agent-results", "scripts"))
+    from sage004_profile import VARIANTS
+
+    with open(KERNEL_SOURCE_004) as handle:
+        source = handle.read()
+    for name, (removed, replacements) in VARIANTS.items():
+        assert isinstance(removed, str) and removed, f"{name} has no description"
+        if not replacements:
+            assert name == "full", f"{name} changes nothing but is not 'full'"
+            continue
+        for old, new in replacements:
+            assert source.count(old) == 1, (
+                f"{name}: ablation anchor occurs {source.count(old)} times, "
+                "expected exactly 1"
+            )
+            assert old != new, f"{name} replaces a pattern with itself"
+    # The two ceiling variants must keep every matmul they claim to keep.
+    assert "both_dots" in VARIANTS and "qk_matmul_only" in VARIANTS
+    assert any(old == "            acc = tl.dot(p, v, acc)"
+               for old, _ in VARIANTS["both_dots"][1]) is False
+    assert any(old == "            acc = tl.dot(p, v, acc)"
+               for old, _ in VARIANTS["qk_matmul_only"][1]) is True
+
+
+def test_sage004_ab_prefers_fast_mode_and_never_scores_a_cpu_fallback():
+    """The full-call A/B must be conservative and must reject a host baseline.
+
+    Two properties decide whether the headline ratio means what the report
+    says: a bimodal candidate is scored on its fast mode (the most favourable
+    reading for the candidate), and a device baseline that shows host-fallback
+    ops fails the run instead of being compared.
+    """
+    module = _load_script(AB_SCRIPT_004, "sage004_ab")
+
+    mixed = [9.06, 5.32, 5.33, 9.03, 5.32, 5.31, 9.04, 5.32]
+    stats = module.summarize(mixed)
+    assert stats["bimodal"] is True
+    assert module.comparable_ms(stats) < stats["median_ms"] or stats["slow_call_fraction"] < 0.5
+    assert 5.0 < module.comparable_ms(stats) < 5.7
+
+    steady = module.summarize([5.32, 5.33, 5.31, 5.32])
+    assert steady["bimodal"] is False
+    assert module.comparable_ms(steady) == steady["median_ms"]
+
+    device_names = ["aten::_scaled_dot_product_flash_attention", "GCU::_scaled_dot_product_flash_attention"]
+    fallback_names = ["aten::_scaled_dot_product_flash_attention_for_cpu", "aten::_to_cpu"]
+    sdpa_names = ["aten::scaled_dot_product_attention", "aten::_scaled_dot_product_flash_attention_for_cpu"]
+
+    assert module.dispatch_violations(device_names, sdpa_names, 0.2, 32.0) == []
+    # A CPU fallback standing in for the device baseline must be refused.
+    violations = module.dispatch_violations(fallback_names, sdpa_names, 0.2, 32.0)
+    assert any("host-fallback" in v for v in violations)
+    # A device-native F.sdpa means the reference identity changed.
+    violations = module.dispatch_violations(
+        device_names, ["aten::_scaled_dot_product_flash_attention"], 0.2, 0.3
+    )
+    assert any("dispatch identity changed" in v for v in violations)
+
+
+@pytest.mark.skipif(not IS_ENFLAME, reason="harness device guard is Enflame-specific")
+def test_sage004_ab_fails_closed_on_wrong_device():
+    """A wrong device assignment must exit nonzero without touching the GCU."""
+    proc = subprocess.run(
+        [sys.executable, AB_SCRIPT_004, "--expect-index", "6"],
+        capture_output=True, text=True, cwd=REPO_ROOT, timeout=300,
+    )
+    assert proc.returncode == 4, (
+        f"expected exit 4 for a wrong device, got {proc.returncode}\n"
+        f"{proc.stdout[-2000:]}\n{proc.stderr[-2000:]}"
+    )
+    assert "problems" in proc.stdout
+
+
+@pytest.mark.skipif(not IS_ENFLAME, reason="A/B run is Enflame-specific")
+def test_sage004_ab_fails_on_missing_samples():
+    """Too few samples must exit nonzero rather than report a fast run."""
+    proc = subprocess.run(
+        [sys.executable, AB_SCRIPT_004,
+         "--shapes", "1x2x128x64",
+         "--rounds", "1", "--pairs", "1", "--warmup", "1", "--min-samples", "99"],
+        capture_output=True, text=True, cwd=REPO_ROOT, timeout=1200,
+    )
+    assert proc.returncode == 3, (
+        f"expected exit 3 for a missing-sample run, got {proc.returncode}\n"
+        f"{proc.stdout[-2000:]}\n{proc.stderr[-2000:]}"
+    )
+    assert "only 2 samples" in proc.stdout
+
+
+@pytest.mark.skipif(not IS_ENFLAME, reason="device kernels are Enflame-specific")
+@pytest.mark.parametrize("head_dim,seq_len", [(64, 256), (128, 256)])
+def test_sage004_candidate_full_call_is_bitwise_legacy(head_dim, seq_len):
+    """The candidate full call must not change a single output value.
+
+    SAGE-004's evidence says the attention-kernel gap is not removable by a
+    numerically free change, so no kernel edit is kept. The shipped call must
+    therefore reproduce the legacy (pre-SAGE-003 quantizer launch) full call
+    bit for bit, which is what makes 'no numerical regression' checkable
+    rather than asserted.
+    """
+    from flag_attn.runtime.backend._enflame.sage_attention.quant_per_block import (
+        quant_per_block_int8_kernel as _quant_kernel,
+    )
+
+    q, k, v = _inputs(seq_len, head_dim=head_dim)
+
+    def legacy_full():
+        q8 = torch.empty(q.shape, dtype=torch.int8, device=q.device)
+        k8 = torch.empty(k.shape, dtype=torch.int8, device=k.device)
+        b, h, qo_len, dim = q.shape
+        _, h_kv, kv_len, _ = k.shape
+        q_scale = torch.empty((b, h, (qo_len + 127) // 128), device=q.device,
+                              dtype=torch.float32)
+        k_scale = torch.empty((b, h_kv, (kv_len + 63) // 64), device=q.device,
+                              dtype=torch.float32)
+        _quant_kernel[((qo_len + 127) // 128, h, b)](
+            q, q8, q_scale, qo_len,
+            q.stride(0), q.stride(1), q.stride(2),
+            q8.stride(0), q8.stride(1), q8.stride(2),
+            q_scale.stride(0), q_scale.stride(1),
+            sm_scale=(dim ** -0.5) * 1.44269504, C=dim, BLK=128,
+            num_warps=4, num_stages=3,
+        )
+        _quant_kernel[((kv_len + 63) // 64, h_kv, b)](
+            k, k8, k_scale, kv_len,
+            k.stride(0), k.stride(1), k.stride(2),
+            k8.stride(0), k8.stride(1), k8.stride(2),
+            k_scale.stride(0), k_scale.stride(1),
+            sm_scale=1.0, C=dim, BLK=64, num_warps=4, num_stages=3,
+        )
+        return sage_attention(q8, k8, v, q_scale, k_scale,
+                              output_dtype=torch.float16)[0]
+
+    legacy = legacy_full()
+    pre = per_block_int8(q, k)
+    candidate = sage_attention(pre[0], pre[2], v, pre[1], pre[3],
+                               output_dtype=torch.float16)[0]
+    assert torch.equal(legacy, candidate), (
+        "the shipped full call is no longer bitwise identical to the legacy call; "
+        "re-derive the SAGE-004 no-change decision before keeping an edit"
+    )
+    assert torch.isfinite(candidate).all().item()

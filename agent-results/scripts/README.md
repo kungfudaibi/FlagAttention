@@ -23,6 +23,8 @@ their recorded raw data used; they are kept unchanged for audit.
 | `sage003_attn_sweep.py` | Sweeps the attention kernel's launch knobs (`block_m`, `block_n`, `num_warps`, `num_stages`) on **pre-quantized** inputs, so quantization is excluded and the kernel gets its most favourable setting; validates every candidate against the device op before timing it. Exit 3 if any candidate leaves the numeric gate. |
 | `sage003_summarize.py` | Regenerates every table in the report from `agent-results/raw/sage003_ab_*.jsonl`, plus the launch sweep, the bimodality breakdown, and the exit-code controls; exits nonzero when a decision record is missing, not PASS, or an exit code disagrees. |
 | `preflight_gcu5.sh` | Refuses unless efsmi DEV 5 is PCI `0000:83:00.0` with the assigned serial; prints used MiB. |
+| `sage004_ab.py` | The SAGE-004 formal **full-call** A/B: exact legacy Sage (pre-SAGE-003 4-warp/3-stage quantizer) versus candidate Sage (shipped quantizer, same attention kernel) on identical FP16 Q/K/V; 3 alternating ABBA rounds, per-sample rows, host wall clock and GCU events, cold compile with an empty `TRITON_CACHE_DIR`, peak memory per candidate; gates the output **and** the INT8 quantization intermediates. Exit 4 wrong device, 3 numeric/sample/scope failure, 5 changed dispatch. Replaces the seeded fail-closed placeholder. |
+| `sage004_profile.py` | Localises the SAGE-004 attention-kernel bottleneck by **single-site ablation** of the shipped kernel on pre-quantized inputs (`full`, per-stage removals, both-dots ceiling, QK-matmul-only floor) and reports TFLOPS against the tile FLOPs. Never mixed into the full-call A/B. Exit 4 wrong device, 3 if an ablation fails. |
 
 ## SAGE-002 scripts (recorded on GCU 1)
 
