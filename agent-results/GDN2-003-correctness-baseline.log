@@ -1,0 +1,41 @@
+[W1113 06:17:47.785892136 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+..................................................................................  T=  1 fp16 B1 H1 K64 V64 o  max_abs=1.125e-05 rms_rel=2.749e-04 ref_rms=9.417e-03 ref_max=3.116e-02 gateA=PASS gateB=PASS
+  T=  1 fp16 B1 H1 K64 V64 ht max_abs=1.068e-04 rms_rel=1.986e-04 ref_rms=5.644e-02 ref_max=4.942e-01 gateA=PASS gateB=PASS
+.  T=  2 fp16 B1 H1 K64 V64 o  max_abs=5.059e-05 rms_rel=6.454e-04 ref_rms=1.125e-02 ref_max=7.573e-02 gateA=PASS gateB=PASS
+  T=  2 fp16 B1 H1 K64 V64 ht max_abs=3.617e-04 rms_rel=3.763e-04 ref_rms=9.330e-02 ref_max=8.868e-01 gateA=PASS gateB=PASS
+.  T= 65 fp16 B1 H1 K64 V64 o  max_abs=6.770e-05 rms_rel=5.171e-04 ref_rms=2.646e-02 ref_max=1.446e-01 gateA=PASS gateB=PASS
+  T= 65 fp16 B1 H1 K64 V64 ht max_abs=5.109e-04 rms_rel=4.058e-04 ref_rms=2.367e-01 ref_max=1.118e+00 gateA=PASS gateB=PASS
+.  T=130 fp16 B1 H2 K64 V64 o  max_abs=8.531e-05 rms_rel=5.297e-04 ref_rms=2.694e-02 ref_max=1.510e-01 gateA=PASS gateB=PASS
+  T=130 fp16 B1 H2 K64 V64 ht max_abs=6.497e-04 rms_rel=4.337e-04 ref_rms=2.238e-01 ref_max=1.146e+00 gateA=PASS gateB=PASS
+.  T=130 fp16 B2 H3 K64 V64 o  max_abs=1.104e-04 rms_rel=5.305e-04 ref_rms=2.695e-02 ref_max=2.107e-01 gateA=PASS gateB=PASS
+  T=130 fp16 B2 H3 K64 V64 ht max_abs=7.410e-04 rms_rel=4.326e-04 ref_rms=2.212e-01 ref_max=1.168e+00 gateA=PASS gateB=PASS
+.  T=  1 bf16 B1 H1 K64 V64 o  max_abs=1.206e-04 rms_rel=2.610e-03 ref_rms=9.414e-03 ref_max=3.125e-02 gateA=PASS gateB=PASS
+  T=  1 bf16 B1 H1 K64 V64 ht max_abs=1.072e-03 rms_rel=1.876e-03 ref_rms=5.643e-02 ref_max=4.948e-01 gateA=PASS gateB=PASS
+.  T=  2 bf16 B1 H1 K64 V64 o  max_abs=2.149e-04 rms_rel=3.377e-03 ref_rms=1.124e-02 ref_max=7.587e-02 gateA=PASS gateB=PASS
+  T=  2 bf16 B1 H1 K64 V64 ht max_abs=2.078e-03 rms_rel=2.369e-03 ref_rms=9.334e-02 ref_max=8.919e-01 gateA=PASS gateB=PASS
+.  T= 65 bf16 B1 H1 K64 V64 o  max_abs=5.846e-04 rms_rel=4.103e-03 ref_rms=2.646e-02 ref_max=1.444e-01 gateA=PASS gateB=PASS
+  T= 65 bf16 B1 H1 K64 V64 ht max_abs=4.945e-03 rms_rel=3.023e-03 ref_rms=2.367e-01 ref_max=1.115e+00 gateA=PASS gateB=PASS
+.  T=130 bf16 B1 H2 K64 V64 o  max_abs=7.733e-04 rms_rel=4.180e-03 ref_rms=2.694e-02 ref_max=1.508e-01 gateA=PASS gateB=PASS
+  T=130 bf16 B1 H2 K64 V64 ht max_abs=5.276e-03 rms_rel=3.436e-03 ref_rms=2.238e-01 ref_max=1.147e+00 gateA=PASS gateB=PASS
+.  T=130 bf16 B2 H3 K64 V64 o  max_abs=9.438e-04 rms_rel=4.187e-03 ref_rms=2.695e-02 ref_max=2.109e-01 gateA=PASS gateB=PASS
+  T=130 bf16 B2 H3 K64 V64 ht max_abs=5.897e-03 rms_rel=3.435e-03 ref_rms=2.212e-01 ref_max=1.170e+00 gateA=FAIL gateB=PASS
+.  T= 65 fp16 B2 H2 K128 V128 o  max_abs=6.862e-05 rms_rel=5.280e-04 ref_rms=1.319e-02 ref_max=8.051e-02 gateA=PASS gateB=PASS
+  T= 65 fp16 B2 H2 K128 V128 ht max_abs=4.373e-04 rms_rel=4.074e-04 ref_rms=1.622e-01 ref_max=8.815e-01 gateA=PASS gateB=PASS
+.  T= 65 bf16 B2 H2 K128 V128 o  max_abs=5.249e-04 rms_rel=4.123e-03 ref_rms=1.319e-02 ref_max=8.054e-02 gateA=PASS gateB=PASS
+  T= 65 bf16 B2 H2 K128 V128 ht max_abs=4.407e-03 rms_rel=2.906e-03 ref_rms=1.622e-01 ref_max=8.801e-01 gateA=FAIL gateB=PASS
+.s
+=============================== warnings summary ===============================
+../../../flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389
+  /flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+      *************************************************************************************************************
+      The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+      The backend in torch.distributed.init_process_group set to eccl now..
+      The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+      The device parameters have been replaced with gcu in the function below:
+      torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+      *************************************************************************************************************
+      
+    warnings.warn(msg, ImportWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+94 passed, 1 skipped, 1 warning in 212.66s (0:03:32)

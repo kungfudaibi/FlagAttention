@@ -53,6 +53,7 @@ SEED = 42
 CHUNK_SIZE = 64
 STEADY_SAMPLES = 15
 WARMUP_ITERS = 5
+CLOCK_WARMUP_S = 3.0
 
 # T/state axes: short and long T, two head counts, and K/V = 64, 128, 256.
 # The 256 case is the control: its tiles are already 256, so it must not move.
@@ -191,6 +192,27 @@ def _install_kernel_tracer():
     return records
 
 
+def _clock_warmup(call, seconds=CLOCK_WARMUP_S):
+    """Keep the S60 clocks boosted before sampling.
+
+    A cold process starts at low clocks: the first steady samples can be ~8x
+    slower than the sustained rate.  Timing those samples would compare clock
+    ramp-up, not the kernel.  This loop is timed separately from the steady
+    samples and its iteration count is recorded.
+    """
+    import time
+
+    import torch
+
+    deadline = time.perf_counter() + seconds
+    iterations = 0
+    while iterations < WARMUP_ITERS or time.perf_counter() < deadline:
+        call()
+        iterations += 1
+    torch.gcu.synchronize()
+    return iterations
+
+
 def _time_call(call, samples=STEADY_SAMPLES):
     import torch
 
@@ -300,6 +322,8 @@ def command_run(args) -> int:
             torch.gcu.synchronize()
             peak_mib = (torch.gcu.max_memory_allocated() - base_alloc) / 2**20
 
+            clock_iters = _clock_warmup(call)
+
             tracer.clear()
             steady = _time_call(call)
             steady_launches = [dict(item) for item in tracer]
@@ -324,7 +348,12 @@ def command_run(args) -> int:
                 "cold_launches": cold_launches,
                 "steady_launches": steady_launches,
                 "steady": steady,
+                "clock_warmup_iters": clock_iters,
+                "clock_warmup_s": CLOCK_WARMUP_S,
                 "peak_alloc_mib": round(peak_mib, 6),
+                "peak_reserved_mib": round(
+                    (torch.gcu.max_memory_reserved() - torch.gcu.memory_reserved()) / 2**20, 6
+                ) if hasattr(torch.gcu, "max_memory_reserved") else None,
                 "efsmi_used_mib": _efsmi_used_mib(0),
                 "metrics": metrics,
                 "loadavg": _loadavg(),
@@ -366,9 +395,13 @@ def command_drive(args) -> int:
     root = Path(tempfile.mkdtemp(prefix="gdn2-003-ab-"))
     code = 0
     try:
+        paths = {
+            "legacy": root / "legacy",
+            "adaptive": root / "adaptive",
+        }
         trees = {
-            "legacy": _extract(workspace, args.old_ref, root / "legacy"),
-            "adaptive": _extract(workspace, args.new_ref, root / "adaptive"),
+            "legacy": _extract(workspace, args.old_ref, paths["legacy"]),
+            "adaptive": _extract(workspace, args.new_ref, paths["adaptive"]),
         }
         _jsonl_write(out, {
             "schema": 1, "kind": "driver", "task": "GDN2-003",
@@ -379,61 +412,73 @@ def command_drive(args) -> int:
             "hostname": platform.node(), "started_at": time.time(),
             "loadavg": _loadavg(),
         })
+        shape_override = list(args.shape or [])
         for round_index in range(1, args.rounds + 1):
             order = ("legacy", "adaptive") if round_index % 2 else ("adaptive", "legacy")
             for variant in order:
                 for dtype_name in args.dtypes:
-                    cache = root / f"triton-{round_index}-{variant}-{dtype_name}"
-                    cache.mkdir()
-                    env = os.environ.copy()
-                    env["PYTHONPATH"] = os.pathsep.join(
-                        [str(trees[variant] / "src"), str(trees[variant]),
-                         env.get("PYTHONPATH", "")]
-                    ).rstrip(os.pathsep)
-                    env["TOPS_VISIBLE_DEVICES"] = "0"
-                    env["TRITON_CACHE_DIR"] = str(cache)
-                    env.pop("CUDA_VISIBLE_DEVICES", None)
-                    if variant == "legacy":
-                        env["FLAG_ATTN_GDN2_FIXED_TILES"] = "1"
-                    else:
-                        env.pop("FLAG_ATTN_GDN2_FIXED_TILES", None)
-                    per_run = root / f"records-{round_index}-{variant}-{dtype_name}.jsonl"
-                    argv = [
-                        "taskset", "-c", CPU_LIST, sys.executable,
-                        str(Path(__file__).resolve()), "run",
-                        "--tree", str(trees[variant]), "--variant", variant,
-                        "--commit", trees[variant], "--round", str(round_index),
-                        "--dtype", dtype_name, "--out", str(per_run),
+                    shapes = shape_override or [
+                        ",".join(str(x) for x in item)
+                        for item in (BF16_SHAPES if dtype_name == "bfloat16" else FP16_SHAPES)
                     ]
-                    started = time.time()
-                    proc = subprocess.run(argv, env=env, capture_output=True, text=True)
-                    log = root / f"log-{round_index}-{variant}-{dtype_name}.txt"
-                    log.write_text(
-                        f"$ {' '.join(argv)}\n\n[stdout]\n{proc.stdout}\n[stderr]\n{proc.stderr}",
-                        encoding="utf-8",
-                    )
-                    if proc.returncode != 0:
-                        code = 1
-                    if per_run.exists():
-                        with out.open("a", encoding="utf-8") as sink, per_run.open(encoding="utf-8") as src:
-                            for line in src:
-                                record = json.loads(line)
-                                record["round"] = round_index
-                                record["variant"] = variant
-                                record["commit"] = trees[variant]
-                                record["child_exit_code"] = proc.returncode
-                                record["child_log"] = str(log)
-                                sink.write(json.dumps(record, sort_keys=True) + "\n")
-                    _jsonl_write(out, {
-                        "schema": 1, "kind": "invocation", "task": "GDN2-003",
-                        "round": round_index, "variant": variant, "dtype": dtype_name,
-                        "child_exit_code": proc.returncode, "argv": argv,
-                        "env": {k: env.get(k) for k in
-                                ("PYTHONPATH", "TOPS_VISIBLE_DEVICES", "TRITON_CACHE_DIR",
-                                 "FLAG_ATTN_GDN2_FIXED_TILES")},
-                        "duration_s": round(time.time() - started, 3),
-                        "loadavg": _loadavg(),
-                    })
+                    for index, shape in enumerate(shapes):
+                        # One process and one fresh Triton cache per shape, so
+                        # cold_compile_s always means a real first compile.
+                        cache = root / f"triton-{round_index}-{variant}-{dtype_name}-{index}"
+                        cache.mkdir()
+                        env = os.environ.copy()
+                        relative = Path(__file__).resolve().relative_to(workspace) \
+                            if Path(__file__).resolve().is_relative_to(workspace) else None
+                        env["PYTHONPATH"] = os.pathsep.join(
+                            [str(paths[variant] / "src"), str(paths[variant]),
+                             env.get("PYTHONPATH", "")]
+                        ).rstrip(os.pathsep)
+                        env["TOPS_VISIBLE_DEVICES"] = "0"
+                        env["TRITON_CACHE_DIR"] = str(cache)
+                        env.pop("CUDA_VISIBLE_DEVICES", None)
+                        if variant == "legacy":
+                            env["FLAG_ATTN_GDN2_FIXED_TILES"] = "1"
+                        else:
+                            env.pop("FLAG_ATTN_GDN2_FIXED_TILES", None)
+                        per_run = root / f"records-{round_index}-{variant}-{dtype_name}-{index}.jsonl"
+                        argv = [
+                            "taskset", "-c", CPU_LIST, sys.executable,
+                            str(Path(__file__).resolve()), "run",
+                            "--tree", str(paths[variant]), "--variant", variant,
+                            "--commit", trees[variant], "--round", str(round_index),
+                            "--dtype", dtype_name, "--shape", shape,
+                            "--out", str(per_run),
+                        ]
+                        started = time.time()
+                        proc = subprocess.run(argv, env=env, capture_output=True, text=True)
+                        log = root / f"log-{round_index}-{variant}-{dtype_name}-{index}.txt"
+                        log.write_text(
+                            f"$ {' '.join(argv)}\n\n[stdout]\n{proc.stdout}\n[stderr]\n{proc.stderr}",
+                            encoding="utf-8",
+                        )
+                        if proc.returncode != 0:
+                            code = 1
+                        if per_run.exists():
+                            with out.open("a", encoding="utf-8") as sink, per_run.open(encoding="utf-8") as src:
+                                for line in src:
+                                    record = json.loads(line)
+                                    record["round"] = round_index
+                                    record["variant"] = variant
+                                    record["commit"] = trees[variant]
+                                    record["child_exit_code"] = proc.returncode
+                                    record["child_log"] = str(log)
+                                    sink.write(json.dumps(record, sort_keys=True) + "\n")
+                        _jsonl_write(out, {
+                            "schema": 1, "kind": "invocation", "task": "GDN2-003",
+                            "round": round_index, "variant": variant, "dtype": dtype_name,
+                            "shape": shape, "child_exit_code": proc.returncode, "argv": argv,
+                            "env": {k: env.get(k) for k in
+                                    ("PYTHONPATH", "TOPS_VISIBLE_DEVICES", "TRITON_CACHE_DIR",
+                                     "FLAG_ATTN_GDN2_FIXED_TILES")},
+                            "duration_s": round(time.time() - started, 3),
+                            "loadavg": _loadavg(),
+                            "efsmi_used_mib": _efsmi_used_mib(0),
+                        })
         _jsonl_write(out, {"schema": 1, "kind": "driver_end", "task": "GDN2-003",
                            "exit_code": code, "ended_at": time.time(),
                            "loadavg": _loadavg()})
@@ -463,6 +508,7 @@ def main(argv=None) -> int:
     drive.add_argument("--rounds", type=int, default=3)
     drive.add_argument("--dtypes", nargs="+", default=["bfloat16", "float16"],
                        choices=["bfloat16", "float16"])
+    drive.add_argument("--shape", action="append", help="override B,T,H,K,V; repeatable")
     drive.add_argument("--out", required=True)
     drive.set_defaults(func=command_drive)
 

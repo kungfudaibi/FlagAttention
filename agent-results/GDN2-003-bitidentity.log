@@ -1,0 +1,37 @@
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 8, 64, 64], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+{"dtype": "bfloat16", "shape": [1, 2048, 8, 64, 64], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+
+
+
+
+{"dtype": "bfloat16", "shape": [1, 4096, 16, 64, 64], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 2048, 4, 128, 128], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+{"dtype": "bfloat16", "shape": [1, 1024, 4, 256, 256], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 8, 64, 64], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 2048, 4, 128, 128], "o_equal": true, "ht_equal": true, "o_maxdiff": 0.0, "ht_maxdiff": 0.0}
+ALL_EQUAL True

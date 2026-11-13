@@ -1,0 +1,111 @@
+-------------------------------------------------------------------------------
+--------------------- Enflame System Management Interface ---------------------
+--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------
+-------------------------------------------------------------------------------
+                                                                               
+DEV ID 0
+    Driver Info
+        Ver                     : 1.10.6
+    Device Info
+        Dev Name                : ZIXIAOC200
+        Dev UUID                : TS9P58200903
+        Dev SN                  : A0D5460521022
+        Dev PN                  : EFB-0088700-00
+        Dev MFD                 : 2026-5-4
+        Health                  : True
+    Firmware Info
+        AP FW Version           : 1.2.7
+        SP FW Version           : 3.4.21
+        SSM RT FW Version       : 35.6.16.5
+        SSM Boot FW Version     : 35.6.5
+        VPU FW Version          : 3.1.12
+    PCIe Info
+        Vendor ID               : 1ea0
+        Device ID               : 2a22
+        Domain                  : 0000
+        Bus                     : 23
+        Dev                     : 00
+        Func                    : 0
+        Receiver Error          : 0
+        Bad TLP                 : 0
+        Bad DLLP                : 0
+        Link Info               
+            Max Link Speed      : Gen5
+            Max Link Width      : X16
+            Cur Link Speed      : Gen5
+            Cur Link Width      : X16
+            Tx Throughput       : 0 MiB/s
+            Rx Throughput       : 0 MiB/s
+    Clock Info
+        Mem CLK                 : 7000 MHz
+    GCU Power Readings
+        Power Usage             : 137 W
+        Current Power Limit     : 300 W
+        Requested Power Limit   : 300 W
+        Default Power Limit     : 300 W
+        Min Power Limit         : N/A
+        Max Power Limit         : N/A
+    Low Power Mode
+        Low Power Mode          : LP0
+    Device Mem Info
+        Total Size              : 42976 MiB
+        Reserved Size           : 1129 MiB
+        Used Size               : 81 MiB
+        Free Size               : 41765 MiB
+    BAR1 Mem Info
+        Total Size              : 16 MiB
+    BAR2 Mem Info
+        Total Size              : 64 GiB
+    Temperature Info
+        GCU Temp                : 56 ℃
+        Memory Temp             : N/A
+        Board Temp              : 39 ℃
+    Voltage Info
+        VDD GCU                 : 0.908 V
+        VDD SOC                 : 0.852 V
+        VDD MEMQC               : 1.351 V
+    Device Usage Info
+        GCU Usage               : 0.0 %
+    ECC Mode
+        Current                 : Enable
+        Pending                 : Enable
+    ECC Errors
+        Volatile
+            L1 Cache CECC       : N/A
+            L1 Cache UECC/Parity: N/A
+            L2 Cache CECC       : N/A
+            L2 Cache UECC       : N/A
+            Device Memory CECC  : N/A
+            Device Memory UECC  : N/A
+        Aggregate
+            L1 Cache CECC       : N/A
+            L1 Cache UECC/Parity: N/A
+            L2 Cache CECC       : N/A
+            L2 Cache UECC       : N/A
+            Device Memory CECC  : N/A
+            Device Memory UECC  : N/A
+    MCM Info
+        MCM Mode                : Dual
+    RMA Info
+        Flags                   : False
+        Total DBE               : 0
+    Power Cable
+        Status                  : Normal
+    VPU Info
+        Encoder Usage           : 0 %
+        Decoder Usage           : 0 %
+    Error Records
+        Total Error Count       : 7
+        Reset Count             : 7
+        Last Reset Date         : 2026-11-06 06:43:47
+    Error Details
+        User Triggered Reset    : 0
+        Internal Error          : 0
+        SIP Error               : 3
+        Bus Error               : 0
+        FW Error                : 0
+        DTE Error               : 4
+        DRAM HBM Error          : 0
+        PCIE Error              : 0
+        GCU-LARE Error          : 0
+        Unknown Error           : 0
