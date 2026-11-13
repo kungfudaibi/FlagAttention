@@ -1,0 +1,134 @@
+[W1113 03:11:27.564420722 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+DEV gcu:1 sage_ok value=-0.004410
+DEV done mode=single
+single EXIT=0
+[W1113 03:11:37.844071177 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+DEV gcu:0 sage_ok value=-0.065002
+EE: [2026-11-13 03:11:41.613] [tid:418209] efdrv/src/platform/tops_memory_mgr.cpp:29:getMemoryObject HostMemory VA(0x460206500000) is not REGISTER_PORTABLE for current device[1]
+EE: [2026-11-13 03:11:41.613] [tid:418209] efdrv/src/platform/api_memory.cpp:280:itopsMemcpy Can't find a valid memobj for dst VA(0x460206500000) in current device[1], kind:topsMemcpyDeviceToHost
+2026-11-13 03:11:41.779918: C[T 418209]/builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_functions.h:87 : Check failed: false 
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 33, in run
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 39, in <module>
+
+GCU error: (topsMemcpyAsync(dst, src, nbytes, kind, stream)) = topsErrorInvalidValue    @     0x7b2acdc1a2a4  (unknown)
+    @     0x7b2acd4a3099  (unknown)
+    @     0x7b2acd8b9901  (unknown)
+    @     0x7b2acd8b9dc0  (unknown)
+    @     0x7b2b2684e5be  at::_ops::_local_scalar_dense::redispatch()
+    @     0x7b2b29156fa6  c10::impl::wrap_kernel_functor_unboxed_<>::call()
+    @     0x7b2b268acbe5  at::_ops::_local_scalar_dense::call()
+    @     0x7b2b25e72daa  at::native::item()
+    @     0x7b2b2706af9c  c10::impl::wrap_kernel_functor_unboxed_<>::call()
+    @     0x7b2b266de295  at::_ops::item::call()
+    @     0x7b2b276b3d26  at::Tensor::item<>()
+    @     0x7b2b3914d149  torch::autograd::dispatch_to<>()
+    @     0x7b2b3914d611  torch::autograd::THPVariable_float_scalar()
+    @          0x18835e8  method_vectorcall_NOARGS.llvm.14506952379218136809
+    @          0x1b25782  vectorcall_method.cold
+    @          0x186fe5f  slot_nb_float
+    @          0x186fdb9  PyNumber_Float
+    @          0x181ec05  _PyEval_EvalFrameDefault
+    @          0x18984a0  PyEval_EvalCode
+    @          0x18b2e09  run_mod.llvm.6623901159503828452
+    @          0x19b1fdf  pyrun_file
+    @          0x19b1946  _PyRun_SimpleFileObject
+    @          0x19b16ca  _PyRun_AnyFileObject
+    @          0x19b1650  pymain_run_file_obj
+    @          0x19b155d  pymain_run_file
+    @          0x1ae0ce3  Py_RunMain.warm
+    @          0x194d25f  pymain_main.llvm.6583880508392768026
+    @          0x194d06c  main
+    @     0x7b2b3ac641ca  +0x2a1c9)
+    @     0x7b2b3ac6428b  __libc_start_main
+    @          0x19afda9  _start
+
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Check failed: false 
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 33, in run
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 39, in <module>
+
+GCU error: (topsMemcpyAsync(dst, src, nbytes, kind, stream)) = topsErrorInvalidValue
+timeout: the monitored command dumped core
+first_zero EXIT=134
+[W1113 03:11:43.362607673 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+DEV gcu:1 sage_ok value=-0.016998
+EE: [2026-11-13 03:11:47.126] [tid:418266] efdrv/src/platform/tops_memory_mgr.cpp:29:getMemoryObject HostMemory VA(0x460216200000) is not REGISTER_PORTABLE for current device[0]
+EE: [2026-11-13 03:11:47.126] [tid:418266] efdrv/src/platform/api_memory.cpp:280:itopsMemcpy Can't find a valid memobj for dst VA(0x460216200000) in current device[0], kind:topsMemcpyDeviceToHost
+2026-11-13 03:11:47.294644: C[T 418266]/builds/workspace/torch_gcu/torch_gcu/csrc/gcu/gcu_functions.h:87 : Check failed: false 
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 33, in run
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 42, in <module>
+
+GCU error: (topsMemcpyAsync(dst, src, nbytes, kind, stream)) = topsErrorInvalidValue    @     0x70e07671a2a4  +0xa1b2a3)
+    @     0x70e075fa3099  +0x2a4098)
+    @     0x70e0763b9901  +0x6ba900)
+    @     0x70e0763b9dc0  +0x6badbf)
+    @     0x70e0cf24e5be  at::_ops::_local_scalar_dense::redispatch()
+    @     0x70e0d1b56fa6  c10::impl::wrap_kernel_functor_unboxed_<>::call()
+    @     0x70e0cf2acbe5  at::_ops::_local_scalar_dense::call()
+    @     0x70e0ce872daa  at::native::item()
+    @     0x70e0cfa6af9c  c10::impl::wrap_kernel_functor_unboxed_<>::call()
+    @     0x70e0cf0de295  at::_ops::item::call()
+    @     0x70e0d00b3d26  at::Tensor::item<>()
+    @     0x70e0e1b4d149  torch::autograd::dispatch_to<>()
+    @     0x70e0e1b4d611  torch::autograd::THPVariable_float_scalar()
+    @          0x18835e8  method_vectorcall_NOARGS.llvm.14506952379218136809
+    @          0x1b25782  vectorcall_method.cold
+    @          0x186fe5f  slot_nb_float
+    @          0x186fdb9  PyNumber_Float
+    @          0x181ec05  _PyEval_EvalFrameDefault
+    @          0x18984a0  PyEval_EvalCode
+    @          0x18b2e09  run_mod.llvm.6623901159503828452
+    @          0x19b1fdf  pyrun_file
+    @          0x19b1946  _PyRun_SimpleFileObject
+    @          0x19b16ca  _PyRun_AnyFileObject
+    @          0x19b1650  pymain_run_file_obj
+    @          0x19b155d  pymain_run_file
+    @          0x1ae0ce3  Py_RunMain.warm
+    @          0x194d25f  pymain_main.llvm.6583880508392768026
+    @          0x194d06c  main
+    @     0x70e0e37311ca  +0x2a1c9)
+    @     0x70e0e373128b  __libc_start_main
+    @          0x19afda9  _start
+
+terminate called after throwing an instance of 'std::runtime_error'
+  what():  Check failed: false 
+Traceback (most recent call last):
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 33, in run
+  File "/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_two_device_probe.py", line 42, in <module>
+
+GCU error: (topsMemcpyAsync(dst, src, nbytes, kind, stream)) = topsErrorInvalidValue
+timeout: the monitored command dumped core
+first_one EXIT=134

@@ -1,0 +1,148 @@
+[W1113 02:35:53.590505514 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+{"event": "meta", "device": "gcu:1", "pci": "0000:83:00.0", "torch": "2.10.0+cpu", "torch_gcu": "2.10.0+3.7.20260408", "time": "2026-11-13T02:35:54Z"}
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_baseline_dispatch.py:24: ResourceWarning: unclosed file <_io.TextIOWrapper name='/proc/self/stat' mode='r' encoding='UTF-8'>
+  fields = open("/proc/self/stat").read().split()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:209] GCU versions. TOPSPTI: 4; Runtime: 1090; Driver: 1090
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:01  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 30 GCU records (1200 bytes)
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:01  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 53 GCU records (2120 bytes)
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+{"event": "shape", "shape": [1, 2, 512, 64], "exact": {"event_median_ms": 0.9332769811153412, "event_min_ms": 0.9099760055541992, "wall_median_ms": 1.005995785817504, "cpu_median_ms": 30.00000000000025, "samples_ms": [1.081246018409729, 0.9778199791908264, 0.9320700168609619, 0.9359840154647827, 0.9159899950027466, 1.490280032157898, 0.9426900148391724, 0.9172499775886536, 0.9598060250282288, 0.927914023399353, 0.9531000256538391, 0.9254400134086609, 1.8607959747314453, 1.439386010169983, 0.9211199879646301, 0.9328939914703369, 0.910830020904541, 0.9176700115203857, 0.9099760055541992, 0.9336599707603455]}, "vendor": {"event_median_ms": 0.07835200056433678, "event_min_ms": 0.07410000264644623, "wall_median_ms": 0.1528523862361908, "cpu_median_ms": 0.0, "samples_ms": [0.0882439985871315, 0.08002600073814392, 0.07915399968624115, 0.08184000104665756, 0.07783400267362595, 0.07610999792814255, 0.0775500014424324, 0.09475400298833847, 0.07902000099420547, 0.07906600087881088, 0.07831399887800217, 0.07839000225067139, 0.07812000066041946, 0.07880999892950058, 0.07727999985218048, 0.0768439993262291, 0.07864399999380112, 0.07641000300645828, 0.07410000264644623, 0.07762400060892105]}, "exact_vs_vendor": {"cosine": 0.9999966621398926, "relative_l2": 0.0006390786729753017}, "exact_profile": [{"name": "aten::scaled_dot_product_attention", "self_cpu_ms": 0.012389999999999417, "calls": 1}, {"name": "GCU::wrapper_CompositeImplicitAutograd_gcu__scaled_dot_product_attention", "self_cpu_ms": 0.0793670000000011, "calls": 1}, {"name": "aten::_to_cpu", "self_cpu_ms": 0.014889000000000237, "calls": 1}, {"name": "aten::_to_copy", "self_cpu_ms": 0.04341999999999973, "calls": 4}, {"name": "aten::copy_", "self_cpu_ms": 0.013808999999999572, "calls": 4}, {"name": "aten::_copy_from", "self_cpu_ms": 0.005189999999999714, "calls": 4}, {"name": "GCU::_copy_from", "self_cpu_ms": 0.04638099999999912, "calls": 4}, {"name": "aten::_scaled_dot_product_flash_attention_for_cpu", "self_cpu_ms": 5.0616129999999995, "calls": 1}], "vendor_profile": [{"name": "aten::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.03347000000000003, "calls": 1}, {"name": "GCU::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.10179200000000037, "calls": 1}]}
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:01  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 30 GCU records (1200 bytes)
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:01  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 53 GCU records (2120 bytes)
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:54 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:54 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+{"event": "shape", "shape": [1, 2, 1024, 64], "exact": {"event_median_ms": 4.503772974014282, "event_min_ms": 2.5332140922546387, "wall_median_ms": 4.590586526319385, "cpu_median_ms": 139.99999999999966, "samples_ms": [4.6432061195373535, 4.760176181793213, 4.658505916595459, 5.03218412399292, 8.211600303649902, 4.586730003356934, 5.606369972229004, 4.545313835144043, 4.667759895324707, 4.5381760597229, 4.469369888305664, 2.5748701095581055, 2.5332140922546387, 2.5589840412139893, 2.544045925140381, 2.5770161151885986, 2.5435938835144043, 2.5366199016571045, 2.5427238941192627, 2.558069944381714]}, "vendor": {"event_median_ms": 0.07748899981379509, "event_min_ms": 0.07412999868392944, "wall_median_ms": 0.14878204092383385, "cpu_median_ms": 0.0, "samples_ms": [0.07744400203227997, 0.127020001411438, 0.08413399755954742, 0.08037000149488449, 0.07878000289201736, 0.07682999968528748, 0.09870000183582306, 0.07743000239133835, 0.07818000018596649, 0.07559999823570251, 0.07508999854326248, 0.08384999632835388, 0.07753399759531021, 0.07504600286483765, 0.07412999868392944, 0.07843399792909622, 0.08170600235462189, 0.0751200020313263, 0.07504399865865707, 0.07678399980068207]}, "exact_vs_vendor": {"cosine": 0.9999939203262329, "relative_l2": 0.000720685173291713}, "exact_profile": [{"name": "aten::scaled_dot_product_attention", "self_cpu_ms": 0.005799999999999727, "calls": 1}, {"name": "GCU::wrapper_CompositeImplicitAutograd_gcu__scaled_dot_product_attention", "self_cpu_ms": 0.03086999999999989, "calls": 1}, {"name": "aten::_to_cpu", "self_cpu_ms": 0.003619999999999976, "calls": 1}, {"name": "aten::_to_copy", "self_cpu_ms": 0.01519999999999976, "calls": 4}, {"name": "aten::copy_", "self_cpu_ms": 0.006839000000000141, "calls": 4}, {"name": "aten::_copy_from", "self_cpu_ms": 0.003081000000000131, "calls": 4}, {"name": "GCU::_copy_from", "self_cpu_ms": 0.024247999999999593, "calls": 4}, {"name": "aten::_scaled_dot_product_flash_attention_for_cpu", "self_cpu_ms": 2.798453, "calls": 1}], "vendor_profile": [{"name": "aten::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.03342000000000005, "calls": 1}, {"name": "GCU::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.08632899999999989, "calls": 1}]}
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:02  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 30 GCU records (1200 bytes)
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:02  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 51 GCU records (2040 bytes)
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+{"event": "shape", "shape": [1, 2, 2048, 64], "exact": {"event_median_ms": 6.65305495262146, "event_min_ms": 6.63047981262207, "wall_median_ms": 6.743599660694599, "cpu_median_ms": 220.00000000000153, "samples_ms": [8.65017032623291, 10.519889831542969, 6.674923896789551, 6.65172004699707, 6.63047981262207, 6.655350208282471, 6.689414024353027, 6.66834020614624, 6.667049884796143, 6.65093994140625, 6.65201997756958, 6.657120227813721, 6.649933815002441, 6.645284175872803, 6.649620056152344, 6.642615795135498, 6.6504597663879395, 6.661049842834473, 6.65408992767334, 6.642029762268066]}, "vendor": {"event_median_ms": 0.13203799724578857, "event_min_ms": 0.1263599991798401, "wall_median_ms": 0.20264158956706524, "cpu_median_ms": 0.0, "samples_ms": [0.13909399509429932, 0.1430560052394867, 0.13349999487400055, 0.13133999705314636, 0.1312199980020523, 0.1377899944782257, 0.1333799958229065, 0.13204599916934967, 0.15022599697113037, 0.13202999532222748, 0.13152000308036804, 0.14396999776363373, 0.13149000704288483, 0.1270660012960434, 0.12802599370479584, 0.13353000581264496, 0.12752999365329742, 0.1296740025281906, 0.1263599991798401, 0.13401000201702118]}, "exact_vs_vendor": {"cosine": 0.9999940395355225, "relative_l2": 0.0007492090226151049}, "exact_profile": [{"name": "aten::scaled_dot_product_attention", "self_cpu_ms": 0.007109999999999673, "calls": 1}, {"name": "GCU::wrapper_CompositeImplicitAutograd_gcu__scaled_dot_product_attention", "self_cpu_ms": 0.04138000000000011, "calls": 1}, {"name": "aten::_to_cpu", "self_cpu_ms": 0.0038600000000000136, "calls": 1}, {"name": "aten::_to_copy", "self_cpu_ms": 0.01896999999999997, "calls": 4}, {"name": "aten::copy_", "self_cpu_ms": 0.007769000000000347, "calls": 4}, {"name": "aten::_copy_from", "self_cpu_ms": 0.004079999999999984, "calls": 4}, {"name": "GCU::_copy_from", "self_cpu_ms": 0.03199100000000013, "calls": 4}, {"name": "aten::_scaled_dot_product_flash_attention_for_cpu", "self_cpu_ms": 5.724100000000001, "calls": 1}], "vendor_profile": [{"name": "aten::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.033280000000000004, "calls": 1}, {"name": "GCU::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.08561000000000019, "calls": 1}]}
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:02  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 30 GCU records (1200 bytes)
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+  Log file: /tmp/libkineto_activities_378347.json
+  Trace start time: 2026-11-13 02:36:02  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:251] Processed 51 GCU records (2040 bytes)
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:35:55 378347:378347 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:35:55 378347:378347 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+{"event": "shape", "shape": [1, 2, 4096, 64], "exact": {"event_median_ms": 14.864234924316406, "event_min_ms": 14.638666152954102, "wall_median_ms": 14.958861051127315, "cpu_median_ms": 480.00000000000045, "samples_ms": [14.865750312805176, 14.6703462600708, 14.648520469665527, 14.70367431640625, 14.849803924560547, 14.910420417785645, 14.866410255432129, 14.638666152954102, 14.714070320129395, 14.775480270385742, 14.773139953613281, 14.98388957977295, 15.249075889587402, 14.805990219116211, 14.862719535827637, 14.966806411743164, 15.126839637756348, 15.199350357055664, 14.866589546203613, 15.127140045166016]}, "vendor": {"event_median_ms": 0.2817379981279373, "event_min_ms": 0.27565398812294006, "wall_median_ms": 0.3590979613363743, "cpu_median_ms": 0.0, "samples_ms": [0.2944200038909912, 0.28621599078178406, 0.2847599983215332, 0.28727999329566956, 0.2814739942550659, 0.2860960066318512, 0.28024399280548096, 0.28835999965667725, 0.2814140021800995, 0.2816559970378876, 0.287339985370636, 0.28111401200294495, 0.28654399514198303, 0.28159400820732117, 0.2812660038471222, 0.27702000737190247, 0.27565398812294006, 0.28181999921798706, 0.27781400084495544, 0.2823300063610077]}, "exact_vs_vendor": {"cosine": 0.9999927282333374, "relative_l2": 0.0003477399004623294}, "exact_profile": [{"name": "aten::scaled_dot_product_attention", "self_cpu_ms": 0.008029999999998837, "calls": 1}, {"name": "GCU::wrapper_CompositeImplicitAutograd_gcu__scaled_dot_product_attention", "self_cpu_ms": 0.05171000000000094, "calls": 1}, {"name": "aten::_to_cpu", "self_cpu_ms": 0.005539999999999736, "calls": 1}, {"name": "aten::_to_copy", "self_cpu_ms": 0.02547799999999893, "calls": 4}, {"name": "aten::copy_", "self_cpu_ms": 0.01171100000000115, "calls": 4}, {"name": "aten::_copy_from", "self_cpu_ms": 0.004978999999998223, "calls": 4}, {"name": "GCU::_copy_from", "self_cpu_ms": 0.04402999999999929, "calls": 4}, {"name": "aten::_scaled_dot_product_flash_attention_for_cpu", "self_cpu_ms": 13.219895, "calls": 1}], "vendor_profile": [{"name": "aten::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.03568, "calls": 1}, {"name": "GCU::_scaled_dot_product_flash_attention", "self_cpu_ms": 0.10283699999999985, "calls": 1}]}

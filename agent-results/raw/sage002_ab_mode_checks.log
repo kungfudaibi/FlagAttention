@@ -1,0 +1,3 @@
+MODE_CHECK tag=negative_control baseline=both cosine_gate=0.999999 exit=3
+MODE_CHECK tag=baseline_device baseline=device cosine_gate=0.99 exit=0
+MODE_CHECK tag=baseline_exact baseline=exact cosine_gate=0.99 exit=0

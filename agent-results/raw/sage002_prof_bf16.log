@@ -1,0 +1,46 @@
+[W1113 02:34:01.925305997 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:209] GCU versions. TOPSPTI: 4; Runtime: 1090; Driver: 1090
+  Log file: /tmp/libkineto_activities_373371.json
+  Trace start time: 2026-11-13 02:34:09  Trace duration: 500ms
+  Warmup duration: 5s
+  Max GCU buffer size: 128MB
+  Enabled activities: cpu_op,user_annotation,external_correlation,gcu_runtime,gcu_driver,cpu_instant_event,python_function,xpu_runtime,privateuse1_runtime,privateuse1_driver
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:848] Enabling GCU tracing
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:886] Tracing starting in 6s
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:891] Tracing will end in 7s
+STAGE:2026-11-13 02:34:02 373371:373371 ActivityProfilerController.cpp:315] Completed Stage: Warm Up
+STAGE:2026-11-13 02:34:02 373371:373371 ActivityProfilerController.cpp:322] Completed Stage: Collection
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:222] Processing 1 CPU buffers
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:251] Processed 30 GCU records (1200 bytes)
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:285] Record counts: Out-of-range = 0, Blocklisted runtime = 0, Invalid ext correlations = 0, CPU GCU out-of-order = 0, Unexpected GCU events = 0, TOPSPTI stopped early? = 0
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:1078] Traces Recorded:
+INFO:2026-11-13 02:34:02 373371:373371 TopsptiActivityProfiler.cpp:1081] PyTorch Profiler: 1 iterations
+STAGE:2026-11-13 02:34:02 373371:373371 ActivityProfilerController.cpp:327] Completed Stage: Post Processing
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+      aten::_scaled_dot_product_flash_attention_for_cpu        52.57%       3.845ms        53.47%       3.911ms       3.911ms             1  
+                                  topsStreamSynchronize        38.54%       2.819ms        38.54%       2.819ms     704.839us             4  
+                                        topsMemcpyAsync         3.33%     243.336us         3.33%     243.336us      60.834us             4  
+GCU::wrapper_CompositeImplicitAutograd_gcu__scaled_d...         1.08%      79.090us        99.14%       7.252ms       7.252ms             1  
+                                  topsDeviceSynchronize         0.67%      49.270us         0.67%      49.270us      49.270us             1  
+                                         aten::_to_copy         0.66%      48.128us        44.30%       3.240ms     810.109us             4  
+                                        GCU::_copy_from         0.65%      47.748us        42.53%       3.111ms     777.857us             4  
+                                    aten::empty_strided         0.60%      44.191us         0.88%      64.570us      12.914us             5  
+                                            aten::empty         0.48%      34.939us         0.48%      34.939us      11.646us             3  
+                                     GCU::empty_strided         0.27%      19.840us         0.27%      20.059us      20.059us             1  
+                                          aten::_to_cpu         0.19%      13.879us         7.00%     511.880us     511.880us             1  
+                                        aten::transpose         0.19%      13.569us         0.33%      24.069us       4.012us             6  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 7.315ms
+

@@ -1,0 +1,39 @@
+.........Fatal Python error: Aborted
+
+Current thread 0x00007e1baaa74740 (most recent call first):
+  File "/workspace/agent-workspaces/sage-bottleneck/tests/flag_attn/test_sage_bottleneck.py", line 94 in test_full_path_matches_sdpa_same_dtype
+  File "/flagos/lib/python3.12/site-packages/_pytest/python.py", line 159 in pytest_pyfunc_call
+  File "/flagos/lib/python3.12/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/flagos/lib/python3.12/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/flagos/lib/python3.12/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/flagos/lib/python3.12/site-packages/_pytest/python.py", line 1627 in runtest
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 174 in pytest_runtest_call
+  File "/flagos/lib/python3.12/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/flagos/lib/python3.12/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/flagos/lib/python3.12/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 242 in <lambda>
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 341 in from_call
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 241 in call_and_report
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 132 in runtestprotocol
+  File "/flagos/lib/python3.12/site-packages/_pytest/runner.py", line 113 in pytest_runtest_protocol
+  File "/flagos/lib/python3.12/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/flagos/lib/python3.12/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/flagos/lib/python3.12/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/flagos/lib/python3.12/site-packages/_pytest/main.py", line 362 in pytest_runtestloop
+  File "/flagos/lib/python3.12/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/flagos/lib/python3.12/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/flagos/lib/python3.12/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/flagos/lib/python3.12/site-packages/_pytest/main.py", line 337 in _main
+  File "/flagos/lib/python3.12/site-packages/_pytest/main.py", line 283 in wrap_session
+  File "/flagos/lib/python3.12/site-packages/_pytest/main.py", line 330 in pytest_cmdline_main
+  File "/flagos/lib/python3.12/site-packages/pluggy/_execution.py", line 147 in _multicall
+  File "/flagos/lib/python3.12/site-packages/pluggy/_manager.py", line 183 in _hookexec
+  File "/flagos/lib/python3.12/site-packages/pluggy/_caller.py", line 197 in __call__
+  File "/flagos/lib/python3.12/site-packages/_pytest/config/__init__.py", line 175 in main
+  File "/flagos/lib/python3.12/site-packages/_pytest/config/__init__.py", line 201 in console_main
+  File "/flagos/lib/python3.12/site-packages/pytest/__main__.py", line 9 in <module>
+  File "<frozen runpy>", line 88 in _run_code
+  File "<frozen runpy>", line 198 in _run_module_as_main
+
+Extension modules: numpy.core._multiarray_umath, numpy.core._multiarray_tests, numpy.linalg._umath_linalg, numpy.fft._pocketfft_internal, numpy.random._common, numpy.random.bit_generator, numpy.random._bounded_integers, numpy.random._mt19937, numpy.random.mtrand, numpy.random._philox, numpy.random._pcg64, numpy.random._sfc64, numpy.random._generator, torch._C, torch._C._dynamo.autograd_compiler, torch._C._dynamo.eval_frame, torch._C._dynamo.guards, torch._C._dynamo.utils, torch._C._fft, torch._C._linalg, torch._C._nested, torch._C._nn, torch._C._sparse, torch._C._special, torch_gcu._C, yaml._yaml, gcu_utils, __triton_launcher (total: 28)
+timeout: the monitored command dumped core

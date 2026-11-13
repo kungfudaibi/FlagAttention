@@ -1,0 +1,20 @@
+[W1113 02:28:11.891546312 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+/workspace/agent-workspaces/sage-bottleneck/agent-results/scripts/sage002_dtype_probe.py:5: ResourceWarning: unclosed file <_io.TextIOWrapper name='/proc/self/stat' mode='r' encoding='UTF-8'>
+  p=open("/proc/self/stat").read().split(); return (int(p[13])+int(p[14]))/os.sysconf("SC_CLK_TCK")
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+DT sdpa_torch.float16_T512 wall=1.017 cpu=30.000 event=0.951 min_ev=0.942
+DT sdpa_torch.float16_T4096 wall=15.090 cpu=480.000 event=15.007 min_ev=14.546
+DT mm512_torch.float16 wall=107.489 cpu=110.000 event=107.398 min_ev=107.149
+DT sdpa_torch.bfloat16_T512 wall=0.728 cpu=30.000 event=0.666 min_ev=0.651
+DT sdpa_torch.bfloat16_T4096 wall=13.195 cpu=440.000 event=12.990 min_ev=12.773
+DT mm512_torch.bfloat16 wall=0.773 cpu=30.000 event=0.712 min_ev=0.683

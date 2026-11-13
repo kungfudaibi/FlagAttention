@@ -1,0 +1,10 @@
+[W1113 02:25:32.172675934 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+ENUM count 2
+ENUM 0 43878764544 2 24 GCU
+ENUM 1 43878764544 2 24 GCU
+ENUM 2 ERR AssertionError('Invalid device id')
+ENUM 3 ERR AssertionError('Invalid device id')
+ENUM 4 ERR AssertionError('Invalid device id')
+ENUM 5 ERR AssertionError('Invalid device id')
+ENUM 6 ERR AssertionError('Invalid device id')
+ENUM 7 ERR AssertionError('Invalid device id')
