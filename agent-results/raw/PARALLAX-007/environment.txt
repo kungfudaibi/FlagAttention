@@ -1,0 +1,39 @@
+DATE_UTC=2026-11-13T06:40:10Z
+HOST=vm-dhrj-gd-zone7-d-s60-48g-1-17
+KERNEL=Linux vm-dhrj-gd-zone7-d-s60-48g-1-17 6.8.0-117-generic #117-Ubuntu SMP PREEMPT_DYNAMIC Tue May  5 19:26:24 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+CPU_AFFINITY_ALLOWED=0-255
+TOPS_VISIBLE_DEVICES=0,1,2,3,4,5
+CUDA_VISIBLE_DEVICES=unset
+PYTHON=Python 3.12.13
+PYTHON_BIN=/flagos/bin/python
+GIT_CANDIDATE_HEAD=ab9c807b2466fea69bff06e38b0e14847beb601b
+GIT_CANDIDATE_BRANCH=agent/enflame-parallax-static-tune-release
+GIT_CANDIDATE_STATUS_BEGIN
+ M agent-results/scripts/parallax007_ab.py
+?? agent-results/raw/
+?? experiments/parallax007_probe.py
+?? tests/flag_attn/test_parallax_static_d64.py
+GIT_CANDIDATE_STATUS_END
+GIT_BASELINE_HEAD=70bdc5e3ed75e877445b9888250b9155523ef852
+PARALLEL_CANDIDATE_SHA256=5f6fc383ec213bcc5b432aec1a19b90857cea2b629907359ef558da3318ea513  src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py
+PARALLEL_BASELINE_SHA256=51cf806459d5d043188b034fe093a76e80b5b6d2aaa161636f7d9e8919ab31a2  .baseline-70bdc5/src/flag_attn/runtime/backend/_enflame/FLA/parallax/parallel.py
+FLAGTREE_HEAD=n/a
+EFSMI_L_BEGIN
+-------------------------------------------------------------------------------
+--------------------- Enflame System Management Interface ---------------------
+--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------
+-------------------------------------------------------------------------------
+                                                                               
+DEV    SN                Slot    ID           Bus             CPU Affinity     UUID
+-------------------------------------------------------------------------------------------
+0      A0D5460521022     N/A     1ea0:2a22    0000:23:00.0    0-127            TS9P58200903
+1      A0D4P60511214     N/A     1ea0:2a22    0000:33:00.0    0-127            TS9N12191103
+2      A0D4P60511819     N/A     1ea0:2a22    0000:34:00.0    0-127            TS9P63130805
+3      A0D4P60510457     N/A     1ea0:2a22    0000:43:00.0    0-127            TS9P63120105
+4      A0D4P60511291     N/A     1ea0:2a22    0000:63:00.0    128-255          TS9P63031306
+5      A0D5460520864     N/A     1ea0:2a22    0000:83:00.0    128-255          TS9B37120204
+6      A0D4P60511588     N/A     1ea0:2a22    0000:84:00.0    128-255          TS9P63020400
+7      A0D4P60511328     N/A     1ea0:2a22    0000:a3:00.0    128-255          TS9P63050401
+EFSMI_L_END
+EFSMI_SN=Invalid field: SN
+TRITON_KNOWNS=2.10.0+cpu 3.6.0
