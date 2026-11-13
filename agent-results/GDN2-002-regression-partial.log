@@ -1,0 +1,13 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.13, pytest-8.3.5, pluggy-1.7.0 -- /flagos/bin/python
+cachedir: .pytest_cache
+rootdir: /workspace/agent-workspaces/gdn2-backward-reference
+configfile: pyproject.toml
+plugins: platformdirs-4.13.5, anyio-4.15.1
+collecting ... collected 77 items
+
+tests/flag_attn/test_gdn2.py::test_chunk_gdn2_matches_native_triton[shape0-dtype0-backend] PASSED [  1%]
+tests/flag_attn/test_gdn2.py::test_chunk_gdn2_matches_native_triton[shape1-dtype1-backend] PASSED [  2%]
+tests/flag_attn/test_gdn2.py::test_chunk_gdn2_matches_native_triton[shape2-dtype2-backend] PASSED [  3%]
+tests/flag_attn/test_gdn2.py::test_chunk_gdn2_matches_native_triton[shape3-dtype3-backend] PASSED [  5%]
+tests/flag_attn/test_gdn2.py::test_chunk_gdn2_matches_native_triton[shape4-dtype4-backend] 

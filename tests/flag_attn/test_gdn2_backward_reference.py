@@ -273,7 +273,7 @@ def test_device_gradients_match_fp64():
     for name, gdev in grads.items():
         assert gdev is not None, f"{name}: no device gradient"
         assert torch.isfinite(gdev).all(), f"{name}: non-finite device grad"
-        m, rr, _ = _metrics(ana[name], gdev.cpu())
+        m, rr, _, _ = _metrics(ana[name], gdev.cpu())
         assert m <= FWD_ATOL + FWD_RTOL * ana[name].abs().max().item(), (
             f"{name}: device grad mismatch max_abs={m:.3e}"
         )
