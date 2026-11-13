@@ -12,10 +12,10 @@ import sys
 import torch
 import torch_gcu  # noqa: F401
 
-ROOT = "/workspace/agent-workspaces/msa-group16-validate"
+ROOT = "/workspace/agent-workspaces/msa-group16-validate-2"
 sys.path.insert(0, ROOT)
 sys.path.insert(0, ROOT + "/src")
-torch.gcu.set_device(1)
+torch.gcu.set_device(2)
 
 import triton  # noqa: E402
 
@@ -93,7 +93,7 @@ def metrics(out, ref):
 RESULTS = {}
 for qlen, seq_len in ((128, 4096), (512, 4096), (1024, 4096), (512, 16384)):
     g = torch.Generator(device="cpu").manual_seed(0)
-    data = bench.make_data(1, seq_len, 1, 8, torch.device("gcu:1"), "bf16",
+    data = bench.make_data(1, seq_len, 1, 8, torch.device("gcu:2"), "bf16",
                            decode=False, decode_qlen=1, query_len=qlen,
                            randomize_pages=True, generator=g)
     scores = minimax_m3_index_score(
