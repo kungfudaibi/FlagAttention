@@ -1,0 +1,56 @@
+# SAGE-003 environment
+
+captured_utc: 2026-11-13T06:52:40Z
+host: vm-dhrj-gd-zone7-d-s60-48g-1-17
+repo: /workspace/agent-workspaces/sage-sdpa-device-5
+branch: agent/enflame-sage-sdpa-device-5
+head: 0457a9309fbbd546bc0b01727f398d9047bbe392
+base: 3c3634fba806df4e0713e7bce14f901f262bb1f1
+
+## python
+Python 3.12.13
+
+## packages
+flagtree                                 0.7.0+enflame3.6
+numpy                                    1.26.4
+pytest                                   8.3.5
+torch                                    2.10.0+cpu
+torch_gcu                                2.10.0+3.7.20260408
+
+## runtime
+python 3.12.13
+torch 2.10.0+cpu
+torch_gcu 2.10.0+3.7.20260408
+triton 3.6.0
+device_count 6
+gcu5 GCU major 3 minor 0 sm 2 mem_mib 41846
+cuda_compiled None
+
+## visible devices
+TOPS_VISIBLE_DEVICES=0,1,2,3,4,5
+
+## efsmi -L
+DEV    SN                Slot    ID           Bus             CPU Affinity     UUID
+-------------------------------------------------------------------------------------------
+0      A0D5460521022     N/A     1ea0:2a22    0000:23:00.0    0-127            TS9P58200903
+1      A0D4P60511214     N/A     1ea0:2a22    0000:33:00.0    0-127            TS9N12191103
+2      A0D4P60511819     N/A     1ea0:2a22    0000:34:00.0    0-127            TS9P63130805
+3      A0D4P60510457     N/A     1ea0:2a22    0000:43:00.0    0-127            TS9P63120105
+4      A0D4P60511291     N/A     1ea0:2a22    0000:63:00.0    128-255          TS9P63031306
+5      A0D5460520864     N/A     1ea0:2a22    0000:83:00.0    128-255          TS9B37120204
+6      A0D4P60511588     N/A     1ea0:2a22    0000:84:00.0    128-255          TS9P63020400
+7      A0D4P60511328     N/A     1ea0:2a22    0000:a3:00.0    128-255          TS9P63050401
+
+## efsmi dev 5
+        Total Size              : 42976 MiB
+        Used Size               : 182 MiB
+        Free Size               : 41663 MiB
+        Total Size              : 16 MiB
+        Total Size              : 64 GiB
+        GCU Usage               : 0.0 %
+
+## cpu
+256
+Model name:                              AMD EPYC 9754 128-Core Processor
+Socket(s):                               2
+NUMA node0 CPU(s):                       0-127

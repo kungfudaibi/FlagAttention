@@ -14,6 +14,7 @@
 
 
 import math
+import os
 
 import pytest
 import torch
@@ -24,6 +25,26 @@ from flag_attn.sage_attention import per_block_int8
 
 
 pytestmark = pytest.mark.skipif(not test_backend.supports_operator("sage_attention"), reason=test_backend.skip_reason("sage_attention"))
+
+# ``test_backend.device`` is the bare backend name ("gcu"), which resolves to
+# ordinal 0. The assigned container device is explicit so a test run can never
+# allocate on another tenant's GCU -- on this image a second device context in
+# one process aborts the whole interpreter. Matches test_sage_bottleneck.py.
+DEVICE = os.environ.get("SAGE002_TEST_DEVICE", "gcu:5" if test_backend.device == "gcu" else test_backend.device)
+
+
+@pytest.fixture(autouse=True)
+def _pin_assigned_device():
+    if test_backend.device != "gcu":
+        yield
+        return
+    index = int(DEVICE.split(":")[1]) if ":" in DEVICE else 0
+    previous = torch.gcu.current_device()
+    torch.gcu.set_device(index)
+    try:
+        yield
+    finally:
+        torch.gcu.set_device(previous)
 
 def _expand_scale(scale, block_size, length):
     return scale.repeat_interleave(block_size, dim=-1)[..., :length, None]
@@ -73,9 +94,9 @@ def _reference(q, k, v, q_scale, k_scale, tensor_layout, attn_mask=None):
 def test_forward_matches_dequantized_reference(tensor_layout, num_kv_heads):
     torch.manual_seed(2026)
     batch_size, num_query_heads, seq_len, head_dim = 1, 2, 128, 64
-    q = torch.randn(batch_size, num_query_heads, seq_len, head_dim, device=test_backend.device, dtype=torch.float16)
-    k = torch.randn(batch_size, num_kv_heads, seq_len, head_dim, device=test_backend.device, dtype=torch.float16)
-    v = torch.randn(batch_size, num_kv_heads, seq_len, head_dim, device=test_backend.device, dtype=torch.float16)
+    q = torch.randn(batch_size, num_query_heads, seq_len, head_dim, device=DEVICE, dtype=torch.float16)
+    k = torch.randn(batch_size, num_kv_heads, seq_len, head_dim, device=DEVICE, dtype=torch.float16)
+    v = torch.randn(batch_size, num_kv_heads, seq_len, head_dim, device=DEVICE, dtype=torch.float16)
 
     if tensor_layout == "NHD":
         q = q.transpose(1, 2).contiguous()
@@ -107,11 +128,11 @@ def test_forward_matches_dequantized_reference(tensor_layout, num_kv_heads):
 
 @pytest.mark.sage_attention
 def test_forward_rejects_non_positive_maxnreg():
-    q = torch.zeros((1, 1, 128, 64), device=test_backend.device, dtype=torch.int8)
+    q = torch.zeros((1, 1, 128, 64), device=DEVICE, dtype=torch.int8)
     k = torch.zeros_like(q)
-    v = torch.zeros(q.shape, device=test_backend.device, dtype=torch.float16)
-    q_scale = torch.ones((1, 1, 1), device=test_backend.device)
-    k_scale = torch.ones((1, 1, 2), device=test_backend.device)
+    v = torch.zeros(q.shape, device=DEVICE, dtype=torch.float16)
+    q_scale = torch.ones((1, 1, 1), device=DEVICE)
+    k_scale = torch.ones((1, 1, 2), device=DEVICE)
 
     with pytest.raises(ValueError, match="maxnreg must be positive"):
         sage_attention(q, k, v, q_scale, k_scale, maxnreg=0)
@@ -122,15 +143,15 @@ def test_forward_rejects_non_positive_maxnreg():
 @pytest.mark.parametrize("kv_len", [70, 257])
 def test_forward_supports_masks_and_partial_blocks(mask_kind, kv_len):
     torch.manual_seed(7)
-    q = torch.randn((1, 1, 129, 128), device=test_backend.device, dtype=torch.float16)
-    k = torch.randn((1, 1, kv_len, 128), device=test_backend.device, dtype=torch.float16)
+    q = torch.randn((1, 1, 129, 128), device=DEVICE, dtype=torch.float16)
+    k = torch.randn((1, 1, kv_len, 128), device=DEVICE, dtype=torch.float16)
     v = torch.randn_like(k)
 
     if mask_kind == "bool":
-        attn_mask = torch.ones((1, 1, 129, kv_len), device=test_backend.device, dtype=torch.bool)
+        attn_mask = torch.ones((1, 1, 129, kv_len), device=DEVICE, dtype=torch.bool)
         attn_mask[..., ::3] = False
     else:
-        attn_mask = torch.zeros((1, 1, 129, kv_len), device=test_backend.device, dtype=torch.float32)
+        attn_mask = torch.zeros((1, 1, 129, kv_len), device=DEVICE, dtype=torch.float32)
         attn_mask[..., ::3] = -2.0
 
     q_int8, q_scale, k_int8, k_scale = per_block_int8(q, k)

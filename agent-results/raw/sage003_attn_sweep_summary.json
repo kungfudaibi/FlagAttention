@@ -1,0 +1,527 @@
+{
+  "device_index": 5,
+  "event": "decision",
+  "failures": [],
+  "pci": "0000:83:00.0",
+  "results": {
+    "1x2x4096x64": {
+      "best": {
+        "accuracy": {
+          "cosine": 0.9999221563339233,
+          "finite": true,
+          "max_abs": 0.00201416015625,
+          "relative_l2": 0.01199478842318058
+        },
+        "config": {
+          "block_m": 128,
+          "block_n": 128,
+          "num_stages": 2,
+          "num_warps": 1
+        },
+        "over_device": 3.7861226516508393,
+        "timing": {
+          "bimodal": false,
+          "fast_median_ms": null,
+          "max_ms": 1.067986011505127,
+          "mean_ms": 1.056407128061567,
+          "median_ms": 1.0525799989700317,
+          "min_ms": 1.048483967781067,
+          "mode_ratio": 1.0,
+          "n": 7,
+          "p10_ms": 1.048483967781067,
+          "p90_ms": 1.0663800239562988,
+          "slow_call_fraction": 0.0,
+          "slow_median_ms": null,
+          "stdev_ms": 0.007467976625389812
+        },
+        "valid": true
+      },
+      "configs": [
+        {
+          "accuracy": {
+            "cosine": 0.9999221563339233,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.01199478842318058
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 3.791518178547646,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 1.1043599843978882,
+            "mean_ms": 1.0624739953449793,
+            "median_ms": 1.0540800094604492,
+            "min_ms": 1.0443459749221802,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 1.0443459749221802,
+            "p90_ms": 1.0703259706497192,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.01862077460045911
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999221563339233,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.01199478842318058
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 2,
+            "num_warps": 1
+          },
+          "over_device": 3.7861226516508393,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 1.067986011505127,
+            "mean_ms": 1.056407128061567,
+            "median_ms": 1.0525799989700317,
+            "min_ms": 1.048483967781067,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 1.048483967781067,
+            "p90_ms": 1.0663800239562988,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.007467976625389812
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999219179153442,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.011994543485343456
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 64,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 5.056436705362553,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 1.4226460456848145,
+            "mean_ms": 1.4030162947518485,
+            "median_ms": 1.4057400226593018,
+            "min_ms": 1.383646011352539,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 1.383646011352539,
+            "p90_ms": 1.4175139665603638,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.01455484391011482
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999221563339233,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.011994387023150921
+          },
+          "config": {
+            "block_m": 64,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 6.134023721794404,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 1.7522259950637817,
+            "mean_ms": 1.7170482873916626,
+            "median_ms": 1.7053200006484985,
+            "min_ms": 1.694085955619812,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 1.694085955619812,
+            "p90_ms": 1.7433600425720215,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.021059743782085947
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999221563339233,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.01199478842318058
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 2
+          },
+          "over_device": 4.57002971977821,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 1.2893840074539185,
+            "mean_ms": 1.2718817165919714,
+            "median_ms": 1.2705140113830566,
+            "min_ms": 1.2548099756240845,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 1.2548099756240845,
+            "p90_ms": 1.2879300117492676,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.012107574892395768
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999221563339233,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.011994670145213604
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 4
+          },
+          "over_device": 12.024710595566175,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 3.368730068206787,
+            "mean_ms": 3.34333484513419,
+            "median_ms": 3.342989921569824,
+            "min_ms": 3.327929973602295,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 3.327929973602295,
+            "p90_ms": 3.346574068069458,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.01188412580919964
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999219179153442,
+            "finite": true,
+            "max_abs": 0.00201416015625,
+            "relative_l2": 0.011994543485343456
+          },
+          "config": {
+            "block_m": 64,
+            "block_n": 64,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 8.163432623663393,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 2.3552238941192627,
+            "mean_ms": 2.286655698503767,
+            "median_ms": 2.2695159912109375,
+            "min_ms": 2.264159917831421,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 2.264159917831421,
+            "p90_ms": 2.303459882736206,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.030572538590279787
+          },
+          "valid": true
+        }
+      ],
+      "device_ms": 0.2780100107192993,
+      "shape": [
+        1,
+        2,
+        4096,
+        64
+      ]
+    },
+    "4x32x1024x128": {
+      "best": {
+        "accuracy": {
+          "cosine": 0.9999344348907471,
+          "finite": true,
+          "max_abs": 0.008056640625,
+          "relative_l2": 0.012221311219036579
+        },
+        "config": {
+          "block_m": 128,
+          "block_n": 128,
+          "num_stages": 1,
+          "num_warps": 1
+        },
+        "over_device": 3.3133839556301328,
+        "timing": {
+          "bimodal": false,
+          "fast_median_ms": null,
+          "max_ms": 3.9421799182891846,
+          "mean_ms": 3.9066880089896068,
+          "median_ms": 3.9014101028442383,
+          "min_ms": 3.8970000743865967,
+          "mode_ratio": 1.0,
+          "n": 7,
+          "p10_ms": 3.8970000743865967,
+          "p90_ms": 3.9044699668884277,
+          "slow_call_fraction": 0.0,
+          "slow_median_ms": null,
+          "stdev_ms": 0.014727391076413302
+        },
+        "valid": true
+      },
+      "configs": [
+        {
+          "accuracy": {
+            "cosine": 0.9999344348907471,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012221311219036579
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 3.3133839556301328,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 3.9421799182891846,
+            "mean_ms": 3.9066880089896068,
+            "median_ms": 3.9014101028442383,
+            "min_ms": 3.8970000743865967,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 3.8970000743865967,
+            "p90_ms": 3.9044699668884277,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.014727391076413302
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999344348907471,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012221311219036579
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 2,
+            "num_warps": 1
+          },
+          "over_device": 3.315408591022638,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 3.940769910812378,
+            "mean_ms": 3.9079114368983676,
+            "median_ms": 3.903794050216675,
+            "min_ms": 3.8990399837493896,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 3.8990399837493896,
+            "p90_ms": 3.9058361053466797,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.013628900682479787
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999345541000366,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012220706790685654
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 64,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 5.096002625809758,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 6.040890216827393,
+            "mean_ms": 6.007461479731968,
+            "median_ms": 6.00039005279541,
+            "min_ms": 5.995230197906494,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 5.995230197906494,
+            "p90_ms": 6.00846004486084,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.014346579238121148
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999343752861023,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012220856733620167
+          },
+          "config": {
+            "block_m": 64,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 6.864888845512362,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 8.131996154785156,
+            "mean_ms": 8.091998781476702,
+            "median_ms": 8.083200454711914,
+            "min_ms": 8.077396392822266,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 8.077396392822266,
+            "p90_ms": 8.11087417602539,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.01957089072465972
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999343156814575,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012221160344779491
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 2
+          },
+          "over_device": 9.223471029733327,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 10.962869644165039,
+            "mean_ms": 10.881726673671178,
+            "median_ms": 10.860360145568848,
+            "min_ms": 10.851630210876465,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 10.851630210876465,
+            "p90_ms": 10.911510467529297,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.03809628267551724
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999343156814575,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012221160344779491
+          },
+          "config": {
+            "block_m": 128,
+            "block_n": 128,
+            "num_stages": 1,
+            "num_warps": 4
+          },
+          "over_device": 17.720783361178228,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 20.962575912475586,
+            "mean_ms": 20.87830979483468,
+            "median_ms": 20.865690231323242,
+            "min_ms": 20.85470962524414,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 20.85470962524414,
+            "p90_ms": 20.879926681518555,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.03531583723162911
+          },
+          "valid": true
+        },
+        {
+          "accuracy": {
+            "cosine": 0.9999345541000366,
+            "finite": true,
+            "max_abs": 0.008056640625,
+            "relative_l2": 0.012220706790685654
+          },
+          "config": {
+            "block_m": 64,
+            "block_n": 64,
+            "num_stages": 1,
+            "num_warps": 1
+          },
+          "over_device": 8.388290200574366,
+          "timing": {
+            "bimodal": false,
+            "fast_median_ms": null,
+            "max_ms": 9.943320274353027,
+            "mean_ms": 9.885278565543038,
+            "median_ms": 9.876959800720215,
+            "min_ms": 9.86814022064209,
+            "mode_ratio": 1.0,
+            "n": 7,
+            "p10_ms": 9.86814022064209,
+            "p90_ms": 9.882913589477539,
+            "slow_call_fraction": 0.0,
+            "slow_median_ms": null,
+            "stdev_ms": 0.02418468699841373
+          },
+          "valid": true
+        }
+      ],
+      "device_ms": 1.1774699687957764,
+      "shape": [
+        4,
+        32,
+        1024,
+        128
+      ]
+    }
+  },
+  "status": "PASS"
+}
