@@ -194,6 +194,21 @@ def _check_case(seqs, prefixes, kv, group, topk, shipped, candidate, case_id):
     data = refmod.make_data(seqs, kv, group, decode=False, prefix_lens=prefixes, mode="bf16")
     import flag_attn.runtime.backend._enflame.msa.sparse_attn as enflame_sparse
 
+    # The case must run on the device it was allocated on; a silent rebound to
+    # device 0 would still produce correct numbers but would violate the task's
+    # GCU 2 isolation.
+    expected_device = int(os.environ.get("S60_TEST_DEVICE", torch.gcu.current_device()))
+    assert torch.gcu.current_device() == expected_device, (
+        f"{case_id}: current device {torch.gcu.current_device()} != {expected_device}"
+    )
+    stream_device = torch.gcu.current_stream().device
+    assert getattr(stream_device, "index", None) == expected_device, (
+        f"{case_id}: current stream {stream_device} is not gcu:{expected_device}"
+    )
+    assert data.q.device.index == expected_device, (
+        f"{case_id}: tensors allocated on {data.q.device}, expected gcu:{expected_device}"
+    )
+
     try:
         ref_scores = refmod._ref_index_score(data)
         ref_topk = refmod._ref_topk(ref_scores, data, topk, 1, 2)

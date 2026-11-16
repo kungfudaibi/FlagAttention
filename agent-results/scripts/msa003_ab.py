@@ -1,5 +1,5 @@
-"""MSA-004: reference-checked, alternating 3-round full-call A/B of the
-opt-in group-16 prefill gate (``MSA002_GROUP16_EXPERIMENT``).
+"""MSA-004/MSA-005: reference-checked, alternating 3-round full-call A/B of
+the opt-in group-16 prefill gate (``MSA002_GROUP16_EXPERIMENT``).
 
 Variant A = shipped dispatch (switch off). Variant B = identical source with
 the experiment switch on. Both run on GCU 2 only.
@@ -29,6 +29,7 @@ import platform
 import statistics
 import subprocess
 import sys
+import tempfile
 import time
 
 os.environ.setdefault("FLAG_ATTN_TEST_DEVICE", "gcu:2")
@@ -64,7 +65,12 @@ triton.knobs.autotuning.adjust_block_size = False
 ROUNDS = 3
 SAMPLES_PER_ROUND = 15
 WARMUP = 3
-OUT_PATH = os.path.join(ROOT, "agent-results", "raw", "MSA-004", "ab.jsonl")
+# Default to an ephemeral file outside the repository so a formal re-run
+# cannot overwrite the committed MSA-005 evidence or dirty the task branch.
+# The session runner sets MSA_AB_OUT to the evidence path under agent-results.
+OUT_PATH = os.environ.get(
+    "MSA_AB_OUT", os.path.join(tempfile.gettempdir(), "msa005_ab.jsonl")
+)
 
 # seq_lens, prefix_lens, num_kv_heads, gqa_group_size, topk, case id
 # Prefixes are chosen so every "qNNN" id really has NNN queries in total.
@@ -214,6 +220,26 @@ def _attention_launch(launches: list) -> dict:
 
 def _set_variant(enabled: bool) -> None:
     enflame_sparse._MSA002_GROUP16_EXPERIMENT = bool(enabled)
+
+
+def _efsmi_device2() -> dict:
+    """Identity of container DEV 2 as the management interface sees it."""
+    out = subprocess.run(["efsmi", "-L"], capture_output=True, text=True).stdout
+    for line in out.splitlines():
+        fields = line.split()
+        if fields and fields[0] == "2" and len(fields) >= 6:
+            return {"dev": "2", "serial": fields[1], "pci": fields[4]}
+    return {}
+
+
+def _binding_failures(current_device: int, stream_device, expected: int) -> list[str]:
+    """Device/stream binding must match the task's single allowed card."""
+    failures = []
+    if int(current_device) != expected:
+        failures.append(f"current device {current_device} != {expected}")
+    if getattr(stream_device, "index", None) != expected:
+        failures.append(f"current stream device {stream_device} != gcu:{expected}")
+    return failures
 
 
 def _measure_memory(data, topk: int, enabled: bool) -> dict:
@@ -518,6 +544,10 @@ def main() -> int:
         "triton": triton.__version__,
         "device": f"gcu:{DEVICE_INDEX}",
         "device_name": torch.gcu.get_device_name(DEVICE_INDEX),
+        "current_device": int(torch.gcu.current_device()),
+        "current_stream": str(torch.gcu.current_stream()),
+        "current_stream_device": str(torch.gcu.current_stream().device),
+        "efsmi_device2": _efsmi_device2(),
         "cpu_affinity": sorted(os.sched_getaffinity(0)),
         "loadavg": os.getloadavg(),
         "git_head": subprocess.run(["git", "-C", ROOT, "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip(),
@@ -526,12 +556,42 @@ def main() -> int:
         "samples_per_round": SAMPLES_PER_ROUND,
         "warmup": WARMUP,
         "experiment_flag": "MSA002_GROUP16_EXPERIMENT",
+        "out_path": OUT_PATH,
     }
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     sink = open(OUT_PATH, "w", encoding="utf-8")
     sink.write(json.dumps(header) + "\n")
     sink.flush()
     print(json.dumps(header), flush=True)
+    binding = _binding_failures(
+        header["current_device"], torch.gcu.current_stream().device, DEVICE_INDEX
+    )
+    if header["efsmi_device2"].get("pci") != "0000:34:00.0":
+        binding.append(
+            f"efsmi DEV 2 is {header['efsmi_device2']}, expected PCI 0000:34:00.0"
+        )
+    if binding:
+        # Fail before spending minutes on a sweep that would not be GCU 2
+        # evidence. The header is already on disk.
+        failures.extend(binding)
+        sink.write(
+            json.dumps(
+                {
+                    "probe": "summary",
+                    "cases": 0,
+                    "expected_cases": len(CASES),
+                    "failures": failures,
+                    "elapsed_seconds": time.time() - started,
+                    "aborted": "device/stream binding mismatch",
+                }
+            )
+            + "\n"
+        )
+        sink.close()
+        print("FAILED", flush=True)
+        for failure in failures:
+            print(f"- {failure}", flush=True)
+        return 1
 
     cold = {}
     for tag in ("A", "B"):

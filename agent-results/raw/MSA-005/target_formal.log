@@ -1,0 +1,33 @@
+== target formal-equivalent run ==
+2026-11-16T02:25:10Z
+HEAD=bdf5129856cff6d9b0ad731148efd931b1a445fe
+BRANCH=agent/enflame-msa-group16-formal-5
+STATUS= M agent-results/scripts/msa003_ab.py| M tests/flag_attn/test_msa_group16.py|?? agent-results/raw/MSA-005/|
+PYTHONPATH=/workspace/agent-workspaces/msa-group16-formal-5/src:/workspace/agent-workspaces/msa-group16-formal-5:/opt/flagtree
+AFFINITY=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255]
+LOADAVG_BEFORE=43.40 38.32 31.73 3/14139 1129345
+EFSMI_DEV2_BEFORE=        Used Size               : 0 MiB
+== command ==
+timeout --signal=TERM --kill-after=10s 900s taskset -c 64-95 /flagos/bin/python -c <declared target>
+[W1116 02:25:11.787886742 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+...................                                                      [100%]
+=============================== warnings summary ===============================
+../../../flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389
+  /flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+      *************************************************************************************************************
+      The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+      The backend in torch.distributed.init_process_group set to eccl now..
+      The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+      The device parameters have been replaced with gcu in the function below:
+      torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+      *************************************************************************************************************
+      
+    warnings.warn(msg, ImportWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+19 passed, 1 warning in 331.96s (0:05:31)
+TARGET_EXIT=0
+TARGET_SECONDS=339
+LOADAVG_AFTER=52.02 48.93 38.55 2/14253 1141815
+EFSMI_DEV2_AFTER=        Used Size               : 0 MiB
+STATUS_AFTER= M agent-results/scripts/msa003_ab.py| M tests/flag_attn/test_msa_group16.py|?? agent-results/raw/MSA-005/|
