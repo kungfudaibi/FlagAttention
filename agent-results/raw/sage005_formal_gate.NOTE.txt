@@ -1,0 +1,13 @@
+SUPERSEDED — do not cite as the formal gate.
+
+`sage005_formal_gate.txt` records a LOCAL manual pre-check run during SAGE-005:
+exit 1, 40 passed, 2 failed. Its command line did not export PYTHONPATH, so the
+two tests that spawn a subprocess could not import `flag_attn`.
+
+The orchestrator's formal accuracy check for SAGE-005 is a different run and it
+PASSED: see `sage006_formal_gate_record.json` (exit 0, device 5, PCI 83:00.0,
+CPUs 160-191, commit 167c360) and `sage006_formal_gate_stdout.log`
+(42 passed, 1 warning in 55.69s).
+
+The orchestrator does export PYTHONPATH (`orchestrator/core.py:405`), contrary
+to what SAGE-005 §11 originally claimed. This file is kept for audit only.

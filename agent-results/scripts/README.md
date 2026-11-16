@@ -1,4 +1,4 @@
-# SAGE-002 / SAGE-003 / SAGE-004 / SAGE-005 scripts
+# SAGE-002 / SAGE-003 / SAGE-004 / SAGE-005 / SAGE-006 scripts
 
 All authoritative SAGE-003/004/005 scripts target container **GCU 5** (PCI
 `0000:83:00.0`, serial `A0D5460520864`) and must be run with the CPU pinning
@@ -37,6 +37,32 @@ container-local, and the three SAGE tasks each ran on a different host.
 | `sage005_micro.py` | Four probes into where the fused-SDPA gap lives. `--probe resident` runs pure `tl.dot` with both operands resident (the compute-only ceiling). `--probe tilemajor` adds a per-iteration tile load in the shipped kernel's layout, so the delta is the cost of the tile feed. `--probe slope` benchmarks the shipped kernel across query lengths and reports **microseconds per KV iteration** with launch/prologue/epilogue differenced out, for single-fragment ablations of the kernel; a companion `ablation_artifact` record proves the dot ops survived the ablation. `--probe epilogue` prices the softmax primitives separately. `--probe` accepts a comma-separated list. |
 | `sage005_dispatch.py` | Proves which op actually ran, per path: the device fused op, the repository `F.sdpa` host fallback, the Sage full call and the attention-only kernel. Records the CPU op chain, host-copy count, device ops, and a GCU-event latency. Residency is decided by device-event time because the Kineto GCU activity stream is **unreliable on this image** (identical repeated profiles return either the full runtime list or only two `aten::empty` records); that flakiness is itself recorded rather than papered over. |
 | `sage005_cold_memory.py` | Cold compile in a child process with its own empty `TRITON_CACHE_DIR` (the parent would reuse the on-disk cache and report a warm number), plus peak device MiB per path with allocator counters reset immediately before the call. |
+
+### SAGE-006: evidence repair for the SAGE-005 review
+
+SAGE-005 quoted several numbers whose generating script only printed a median to
+stdout. The review was right that no per-sample JSONL existed for them. SAGE-006
+does not pretend otherwise; it separates four provenance levels:
+
+| level | meaning | where |
+| --- | --- | --- |
+| A | per-sample JSONL committed during SAGE-005 | `raw/sage005_*.jsonl` |
+| B | per-sample JSONL produced by a SAGE-006 re-run | `raw/sage006_recheck_*.jsonl` |
+| C | verbatim stdout recovered from the SAGE-005 session log | `raw/sage005_recovered/*.log` |
+| D | not recoverable | none — every claim fell into A, B or C |
+
+| Script | What it measures |
+|---|---|
+| `sage005_guard.py` | Shared GCU-5 guard (PCI **and** serial), event timer, JSONL writer, repo-root resolution. Imported by the recheck script; not run directly. |
+| `sage005_recheck.py` | Short re-runs of exactly the claims that lacked raw data: `--probe fp16` (pure-FP16 Triton vs native), `fuse` (the two rejected row-max rewrites plus bitwise equality), `flags` (`predequantize_k` x `tile_major_predequant_k` x `qk_scale_before_dot`), `stages` (`num_stages` 1-4, row-major and tile-major, plain vs manual prefetch), `waves` (16-192 CTAs at fixed work, plus `block_m`), `bw` (copy/read at 2-32 KiB blocks), `marginal` (single-wave slope; only `nCTA <= 24` enters the fit). `--probe` takes a comma-separated list, `--jsonl` is required, and every run writes an `env` record first. |
+| `sage006_artifacts.py` | Recomputes every IR and disassembly number from the committed artefacts, with no device: op-level counts per IR level, async call sites and how many LLVM ops precede their `tops_wait_dte`, symbol sizes, instruction/opcode histograms per `flash_attn_fwd_kernel` instantiation, and SHA-256 of the vendor library, fatbin, kernel and disassembly. `--ir`, `--vendor`, `--sha256`, `--jsonl`. |
+| `recovered/*.py` | The 49 `/tmp` probe scripts exactly as SAGE-005 ran them (three of them are the fuse variants), plus `recovered/sage005_micro_variants/` with the nine files `sage005_micro.py` generated: three microbenchmark kernels (resident, tile-major, epilogue) and six ablation variants of the shipped kernel. Kept for audit; they hard-code `set_device(5)` and print rather than write JSONL. Use `sage005_recheck.py` for anything reproducible. |
+
+`recovered/` deliberately keeps the original defects so the audit trail is
+honest: `sage005_marg2.py` sweeps D128 to `T=4096`, which crosses into a second
+wave and inflates the slope (see `SAGE-006.md` §3.4); `sage005_fuse.py` crashes
+before printing its equality check; `sage005_waves.py` fails on a tuple
+`.float()`. The recheck script fixes all three.
 
 The SAGE-005 formal A/B reuses `sage004_ab.py` unchanged: legacy Sage as the
 control, shipped Sage as the candidate, 3 alternating rounds. Note it needs

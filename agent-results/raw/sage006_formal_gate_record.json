@@ -1,0 +1,29 @@
+{
+  "id": "20261116T054641Z-38b71c5c",
+  "kind": "correctness",
+  "name": "accuracy",
+  "exit_code": 0,
+  "machine": "enflame-1",
+  "device": 5,
+  "pci": "83:00.0",
+  "cpu": "160-191",
+  "started_at": 1794807937.3327951,
+  "ended_at": 1794808001.5553684,
+  "baseline": "087a3621bbfeb843d9efe2445b67faa7f1ed46ec",
+  "branch": "agent/enflame-sage-fused-sdpa-study-5",
+  "commit": "167c360085ffe46371626eeb108d17ea66fb92bf",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "1800s",
+    "taskset",
+    "-c",
+    "160-191",
+    "/flagos/bin/python",
+    "-c",
+    "import os, torch, torch_gcu, pytest; os.environ['SAGE002_TEST_DEVICE']='gcu:5'; torch.gcu.set_device(5); raise SystemExit(pytest.main(['tests/flag_attn/test_sage_attention.py','tests/flag_attn/test_sage_bottleneck.py','-q']))"
+  ],
+  "stdout": "/home/dsagent/gcu-agent-orchestrator/state/runs/SAGE-005/20261116T023106Z-6e7ebb7c/checks/20261116T054641Z-38b71c5c/stdout.log",
+  "stderr": "/home/dsagent/gcu-agent-orchestrator/state/runs/SAGE-005/20261116T023106Z-6e7ebb7c/checks/20261116T054641Z-38b71c5c/stderr.log"
+}

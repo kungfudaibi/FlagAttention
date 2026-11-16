@@ -3,6 +3,17 @@
 **Scope.** Investigation only. One clone, one branch, one device. No routing
 change, no push, no merge.
 
+> **Revised by [SAGE-006](SAGE-006.md).** The review of this report found that
+> several numbers were quoted without committed raw data, that two performance
+> claims had the wrong sign or the wrong sample set, and that §11 reported a
+> local pre-check as if it were the orchestrator's formal gate. SAGE-006
+> recovered the `/tmp` scripts and transcripts, re-ran the short probes into
+> `raw/sage006_recheck_*.jsonl`, and corrected the text below in place.
+> Each correction is marked **"Corrected in SAGE-006"**. The qualitative
+> conclusions did not change: the 3.3-3.9x gap is real, it reproduces without
+> INT8, and both candidate optimisations are still rejected. The formal gate
+> **passed** (42 passed, exit 0).
+
 | item | value |
 | --- | --- |
 | clone | `/workspace/agent-workspaces/sage-fused-sdpa-study-5` |
@@ -91,9 +102,19 @@ epilogue, **no INT8, no quantizer, no per-block scales** — reproduces the gap:
 
 So the deficit is **not** Sage's INT8 pipeline, **not** the quantizer, and
 **not** the dequantize/scale arithmetic. It is a Triton-versus-vendor
-code-generation gap on identical FP16 QK/PV math. SAGE-004's "online-softmax
-bookkeeping" diagnosis was a correct measurement of where the *time* goes, but
-not the cause of the *gap*.
+code-generation gap on identical FP16 QK/PV math.
+
+**Evidence status (corrected in SAGE-006).** The script that produced this
+table was never written to a JSONL; the numbers above come from the session's
+stdout, recovered verbatim into
+`raw/sage005_recovered/fp16attn.log`. The per-sample records do not exist and
+are not claimed. SAGE-006 re-ran the same probe and committed the raw data
+(`raw/sage006_recheck_fp16.jsonl`, exit 0): 1.0124 ms vs 0.2705 ms = **3.74x**
+and 4.2508 ms vs 1.1730 ms = **3.62x**, within 0.3 % of the values quoted here.
+The conclusion is unchanged; only the provenance is now honest.
+
+SAGE-004's "online-softmax bookkeeping" diagnosis was a correct measurement of
+where the *time* goes, but not the cause of the *gap*.
 
 ## 3. Triton can saturate this device, but not with a per-iteration tile feed
 
@@ -119,15 +140,26 @@ runs of these two probes agree within ~1 % (e.g. 67.78-68.00 TF resident at
 the mechanism: with `num_stages=1` the load cannot overlap the dot, so each
 iteration serialises `global load -> matmul -> row reduce -> matmul`.
 
-This is not a tuning miss. A `num_stages` sweep 1-4 on the tile-fed kernel never
-improves it (28.05 / 28.41 / 25.01 / 24.10 TF at 24 CTAs, D128 — stages 1-2 are a
-wash and stages 3-4 degrade), and manual double-buffered K prefetch in the loop
-microbenchmark moved 186-187 us to 173-175 us, ~7 % against the 2.4-3.0x that
-would be needed. The compiled GCUIR contains **no async copy, no `gcu.dma`, no
-`memref.copy`**, and 51 `memref.alloc` / 42 `memref.dealloc` plus 8 `gcu.mfence`
-around 10 `gcu.matmul` for a single tile loop — i.e. every matmul goes through a
-freshly allocated buffer bracketed by fences, with no software pipeline. The
-Triton GCU backend does not implement pipelining for this loop on `gcu300`.
+This is not a tuning miss. A `num_stages` sweep 1-4 on the tile-major K loop
+never improves it (28.68 / 28.18 / 24.64 / 24.06 TF at 24 CTAs, D128 — stages
+1-2 are a wash and stages 3-4 degrade), and manual double-buffered K prefetch
+in the loop microbenchmark is **slower**, not faster: 187.3 / 188.1 / 186.9 /
+189.0 us against 176.4 / 174.7 / 177.6 / 174.6 us plain, i.e. **+6-8 %**.
+(An earlier draft of this report had the sign of that comparison backwards; it
+has been corrected against the recovered stdout and a SAGE-006 re-run.) The
+compiled GCUIR contains **no `gcu.dma` and no `memref.copy`**, 51 `memref.alloc`
+/ 42 `memref.dealloc`, and **4 `gcu.mfence` around 4 `gcu.matmul`** for a single
+tile loop — i.e. every matmul goes through a freshly allocated buffer bracketed
+by fences, with no cross-iteration overlap.
+
+The LLIR *does* contain async copies — 24 `tops_*_async` call sites, 7 of them
+`tops_memcpy_async` — so "no async copy at all" would be wrong. But each is
+followed by a `tops_wait_dte` after only 1-12 LLVM operations: 19 sites wait
+after 1 op, 2 after 2, 1 after 9, 2 after 12. The pipeline is opened and closed
+inside the same basic block, so the transfer is synchronous in effect. "No software
+pipeline for this loop on `gcu300`" therefore stands as an **inference** from
+the IR shape plus the two negative timing results, not as a backend-source
+proof.
 
 ## 4. Where the per-iteration time actually goes
 
@@ -137,16 +169,21 @@ conflates CTA count with loop depth. Measured two ways.
 **(a) Single-wave marginal cost**, one call per point, `nCTA <= 24` so no second
 wave quantisation, per additional 128-wide KV tile:
 
-| D | path | us per extra 128-KV tile |
-| --- | --- | --- |
-| 64 | native | 8.02 (7.12 .. 8.88) |
-| 64 | Sage | **15.21** (14.88 .. 15.47) |
-| 128 | native | 10.49 (9.31 .. 12.33) |
-| 128 | Sage | **15.38** (10.60 .. 24.10) |
+| D | path | SAGE-005 (session stdout) | SAGE-006 re-run (raw JSONL) | ratio |
+| --- | --- | --- | --- | --- |
+| 64 | native | 8.02 (7.12 .. 8.88) | 8.26 (7.61 .. 9.00) | — |
+| 64 | Sage | **15.21** (14.88 .. 15.47) | **14.91** (14.25 .. 15.25) | **1.81x** |
+| 128 | native | 10.49 (9.31 .. 12.33) | 9.84 (9.33 .. 10.73) | — |
+| 128 | Sage | 15.38 (10.60 .. 24.10) | **11.06** (10.72 .. 11.36) | **1.12x** |
 
-The Sage slope is essentially flat at ~15 us/tile regardless of depth, while the
-native slope is 8-10 us. The kernel costs ~1.5-1.9x per KV tile even before any
-wave effect.
+**Corrected in SAGE-006.** The D128 figure of 15.38 us is wrong. The original
+`/tmp/sage005_marg2.py` swept to `T=3584/4096`, where `nCTA` is 28/32 — already
+into a second wave — and those two points (24.63 and 24.10 us) dominate the
+mean. Restricting the sweep to `nCTA <= 24`, as the D64 sweep already did, gives
+11.06 us/tile, i.e. **1.12x** the native slope, not 1.5-1.9x. D64 is unaffected
+(1.81x) and *is* flat at ~15 us/tile regardless of depth. The claim that the
+Sage slope is "essentially flat at ~15 us regardless of depth" therefore holds
+for D64 only.
 
 **(b) Per-variant slope with launch, prologue and epilogue differenced out**
 (`sage005_micro.py --probe slope`; each ablation rewrites exactly one source
@@ -162,6 +199,15 @@ survived — 10 `gcu.matmul` for every variant except `no_pv_dot` (9) and
 | both_dots (all softmax bookkeeping removed) | **9.03** | 0.61 | 10 |
 | no_pv_dot | 13.37 | 0.90 | 9 |
 | qk_matmul_only | 0.16 | 0.01 | 6 |
+
+The `gcu.matmul` column is `sage005_micro.py`'s own discriminator: it counts
+occurrences of the string `gcu.matmul` in the compiled GCUIR, which also matches
+the `triton_gcu.matmul` border attributes. It is therefore **2.5x the op-level
+count** (10 here vs 4 `"gcu.matmul"` ops in the committed GCUIR) but is used
+only to prove the ablation did not delete the dots, and it discriminates
+correctly: full/no_row_max/no_sub/both_dots all keep 10, `no_pv_dot` drops to 9,
+`qk_matmul_only` to 6. SAGE-006 left the probe's semantics unchanged and
+recorded the distinction rather than silently rescaling the column.
 
 Observed facts:
 
@@ -230,25 +276,40 @@ Observed facts:
 ## 6. What the vendor kernel does differently (artifact inspection, label: inference)
 
 Disassembling `flash_attn_fwd_kernel<__bf16,256>` from
-`libkernel_flash_attn_fwd.so` (73,600 bytes, 18,861 instructions) via
-`llvm-objcopy` -> `clang-offload-bundler --unbundle` -> `llvm-objdump`:
+`libkernel_flash_attn_fwd.so` (73,600-byte symbol, 18,861 instruction slots)
+via `llvm-objcopy` -> `clang-offload-bundler --unbundle` -> `llvm-objdump`:
 
-- 173 distinct opcodes, dominated by **padding**: `m.nop` 4593, `v.nop` 4470,
-  `c.nop` 3830, `s.nop16` 837 — over 13,700 of 18,861 instructions are
-  scheduling slots, i.e. a statically scheduled, fully pipelined SIMT program
-  with bubbles already filled by the compiler, plus scalar loads/stores
-  (`l.st.w` 1136, `l.ld.w` 725).
-- Triton's output instead emits 10 `gcu.matmul` intrinsics into freshly
-  `memref.alloc`'d `memref<256x128xf32>` / `memref<256x64xf32>` buffers, with 8
+- **47** distinct opcodes (not 173 — see below), dominated by **padding**:
+  `m.nop` 4593, `v.nop` 4470, `c.nop` 3830, `s.nop16` 837 — 13,730 of 18,861
+  slots are scheduling nops, i.e. a statically scheduled, fully pipelined SIMT
+  program with bubbles already filled by the compiler, plus scalar loads/stores
+  (`l.st.w` 1136, `l.ld.w` 725). 17,364 of the 18,861 address lines decode;
+  1,497 do not (data interleaved in the text section). The other three
+  instantiations behave the same way: `bf16_128` 18,920 / 17,422 / 1,498 with
+  46 opcodes, `fp16_256` 17,722 / 16,483 / 1,239 with 43, `fp16_128`
+  17,554 / 16,330 / 1,224 with 43.
+- Triton's output instead emits 4 `gcu.matmul` intrinsics into freshly
+  `memref.alloc`'d `memref<256x128xf32>` / `memref<256x64xf32>` buffers, with 4
   `gcu.mfence`, and broadcasts via `memref_ext.broadcast_start`.
+
+**Corrected in SAGE-006.** The "173 distinct opcodes" and "10 `gcu.matmul` /
+8 `gcu.mfence`" figures were produced by counting substrings rather than
+operations. The opcode regex took the first token after the encoded bytes, so
+lines without a tab contributed operand hex (`44`, `18`, `00`) as if they were
+mnemonics; taking the token after the tab gives 47. Likewise `10`/`8` count the
+*m entions* of `gcu.matmul`/`gcu.mfence`, which also appear in the
+`triton_gcu.matmul` border attributes and the `gcu.mfence_type` attribute; the
+op-level counts are **4 and 4**. Both are recomputed from the committed
+artefacts by `scripts/sage006_artifacts.py` (`raw/sage006_artifacts.jsonl`).
 
 Inference (not observable, so labelled): the vendor kernel overlaps tile loads
 with matmul via explicit static double buffering encoded in those nops, whereas
-Triton on `gcu300` emits a fence-synchronised, allocation-per-op sequence with
-no async copy and therefore cannot overlap. This is consistent with every
-measurement above (no `num_stages` effect, load+dot = 2.4-3.0x cost, no
-`gcu.dma`/`async` in GCUIR) but the vendor source is not available, so the
-scheduling claim itself is inferred.
+Triton on `gcu300` emits a fence-synchronised, allocation-per-op sequence whose
+async copies are waited on immediately and therefore cannot overlap. This is
+consistent with every measurement above (no `num_stages` effect, manual
+prefetch 6-8 % *slower*, load+dot = 2.4-3.0x cost, async copies only 1-12 ops
+ahead of their wait) but the vendor source is not available, so the scheduling
+claim itself is inferred.
 
 ## 7. Experiment decision: no change shipped (negative result)
 
@@ -262,15 +323,35 @@ both are dead:
    (`p32 = qk - m_ij[:,None]` reused, and in-place `qk -= m_ij[:,None]`):
    base **1.0316 ms**, fused_expr **1.0340 ms**, inplace_sub **1.0292 ms** at
    D64. Within noise. The compiler already emits one broadcast; there is no
-   duplicated subtract to remove. **Rejected.**
+   duplicated subtract to remove. SAGE-006 re-ran this and added the check the
+   original run crashed before printing: both rewrites are **bitwise identical**
+   to base (maxabs 0.0, D64 and D128), confirming there is nothing to fuse.
+   **Rejected.**
 2. **Feed INT8 K and dequantize in-kernel** to halve K bytes per iteration,
    instead of the shipped `predequantize_k=True` FP16 temp. Swept
-   `predequantize_k` x `tile_major_predequant_k` x `qk_scale_before_dot`:
-   D64 1.0274-1.0431 ms, D128 3.9031-3.9062 ms, i.e. **< 1.5 % spread**. Since
-   the kernel is not bandwidth-bound (82 GB/s of 450 available), halving K bytes
-   buys nothing. **Rejected.**
+   `predequantize_k` x `tile_major_predequant_k` x `qk_scale_before_dot`.
 
-Because neither candidate moves the needle, and because the gap is reproduced by
+   **Corrected in SAGE-006.** The earlier "< 1.5 % spread, D64 1.0274-1.0431 ms,
+   D128 3.9031-3.9062 ms" quoted a range that silently excluded every
+   `qk_scale_before_dot=False` row. The full sweep (re-run, committed as
+   `raw/sage006_recheck_flags.jsonl`) is:
+
+   | shape | `qk_scale_before_dot=True` | `=False` | cost | max output diff |
+   | --- | ---: | ---: | ---: | ---: |
+   | D64 | 1.0248-1.0335 ms | 1.3461-1.3499 ms | **+31.4 %** | 3.66e-04 |
+   | D128 | 3.8880-3.8924 ms | 4.0986-4.1011 ms | **+5.4 %** | 9.77e-04 |
+
+   The two K-layout switches (`predequantize_k`, `tile_major_predequant_k`)
+   really are free: with `qk_scale_before_dot=True`, all four of their
+   combinations land within 0.85 % at D64 and 0.11 % at D128. But
+   `qk_scale_before_dot` is **not** a free knob: turning it off costs 31 % at
+   D64, 5.4 % at D128, and changes the numerics. The rejection still stands —
+   no default should move — but the "< 1.5 % spread" justification does not.
+   Since the kernel is not bandwidth-bound (82 GB/s of 450 available), halving K
+   bytes buys nothing. **Rejected.**
+
+Because neither candidate improves on the shipped path (one is bit-identical,
+the other only gets slower), and because the gap is reproduced by
 a quantization-free FP16 kernel, no routing change and no new default is
 justified. The original route stays the control. **This is a negative result:**
 Sage's fused SDPA on gcu300 is 3.3-3.9x slower than the vendor op, and no
@@ -301,17 +382,27 @@ Relative L2 is ~1.2e-02 in every case, which is the INT8 per-block quantization
 error floor, identical to SAGE-002/003/004 and independent of shape, partial
 blocks and output dtype. No NaNs, no infinities, no shape-dependent blow-up.
 
+The two D128 rows report a cosine of 1.0016 / 1.0013. Cosine similarity cannot
+exceed 1; this is a normalisation artefact of `F.cosine_similarity` on flattened
+tensors of 16.7 M elements in float32 (the dot product of `a` with `b` slightly
+exceeds `|a||b|` after rounding), not a gate failure. The metric that matters,
+relative L2 ~1.2e-02 and max abs ~1.1e-02, is in line with every other row. The
+per-shape records are committed as `raw/sage005_recovered/sage005_acc.json`;
+the generating script `sage005_acc.py` is in `scripts/recovered/`.
+
 ## 9. Ranked next steps
 
 1. **Fix the Triton `gcu300` pipeline, not the kernel.** The largest and only
    well-supported win: teach the backend to emit async copy / double buffering
    so a tile load can overlap a `gcu.matmul`. Evidence: resident dots hit
-   68-83 TF but a per-iteration feed drops them to 28 TF, `num_stages` and
-   manual prefetch do nothing, and GCUIR has no `async`/`gcu.dma`. Expected
-   ceiling if fixed: the `both_dots` floor and possibly the full kernel move
-   toward the 28.3 TF tile-fed rate, i.e. the current 3.3-3.9x could plausibly
-   halve. This is upstream work, outside this operator, and should be raised as
-   a backend issue rather than smuggled into Sage.
+   68-83 TF but a per-iteration feed drops them to 28 TF, `num_stages` does
+   nothing, manual prefetch is 6-8 % slower, GCUIR has no `gcu.dma`/`memref.copy`,
+   and the 24 LLIR async copies are all waited on within 1-12 operations.
+   Expected ceiling if fixed: the `both_dots` floor and possibly the full kernel
+   move toward the 28.3 TF tile-fed rate, i.e. the current 3.3-3.9x could
+   plausibly halve. **That halving is an extrapolation, not a measurement.**
+   This is upstream work, outside this operator, and should be raised as a
+   backend issue rather than smuggled into Sage.
 2. **Reproduce the vendor scheduling by hand for one shape.** A hand-written
    SIMT kernel avoiding `gcu.matmul`/`memref.alloc` in favour of statically
    scheduled matrix ops with explicit double buffering, benchmarked against
@@ -325,9 +416,10 @@ blocks and output dtype. No NaNs, no infinities, no shape-dependent blow-up.
 4. **Drop the row-max broadcast subtract via a different softmax
    parameterisation** (e.g. keep `m_i` in the exponent and scale `acc` only).
    Worth ~4.3 us/iteration in isolation but needs a genuinely different
-   algorithm rather than a source-level rewrite; the two rewrites tried here
-   were within noise.
-5. **Do not pursue**: INT8 K feed (not bandwidth-bound, < 1.5 % spread), extra
+   algorithm rather than a source-level rewrite; the two source-level rewrites
+   tried here were bit-identical to base and therefore cannot help.
+5. **Do not pursue**: INT8 K feed (not bandwidth-bound; the K-layout switches
+   are within 0.85 %, `qk_scale_before_dot=False` is 5-31 % *slower*), extra
    warps (monotonically worse: 18.24 -> 1.95 TF for warps 1 -> 8), extra stages
    (< 2 % effect), and the vendor Sage kernel (no `gcu300` build exists).
 
@@ -335,6 +427,14 @@ blocks and output dtype. No NaNs, no infinities, no shape-dependent blow-up.
 
 All scripts pin GCU 5 by PCI address and serial before the first device action
 and abort otherwise. See `agent-results/scripts/README.md`.
+
+SAGE-006 added `agent-results/scripts/sage005_recheck.py`, which re-runs the
+probes whose original output was never written to JSONL, and
+`sage006_artifacts.py`, which recomputes every IR and disassembly count from the
+committed artefacts. The verbatim SAGE-005 session stdout and the original
+`/tmp` scripts are under `raw/sage005_recovered/` and `scripts/recovered/`.
+The `/tmp` JSONL never existed for those probes; the report no longer implies
+that it did.
 
 ```
 env PYTHONPATH=/opt/flagtree:$PWD/src taskset -c 160-191 /flagos/bin/python -u \
@@ -356,29 +456,60 @@ env PYTHONPATH=/opt/flagtree:$PWD/src taskset -c 160-191 /flagos/bin/python -u \
 Raw evidence: `agent-results/raw/sage005_*.jsonl` with sibling `.exit` files
 (all 0). Peak memory and cold compile in `sage005_cold_memory.jsonl`; formal A/B
 in `sage005_ab_ab.jsonl` + `sage005_ab_ab_summary.json` (`status: PASS`).
+SAGE-006 re-runs: `raw/sage006_recheck_{fp16,fuse,flags,stages,waves,bw_marginal}.jsonl`
+and `raw/sage006_artifacts.jsonl`, all with `.exit` 0. Recovered SAGE-005 session
+stdout: `raw/sage005_recovered/*.log` (provenance level C — verbatim stdout, not
+per-sample JSONL).
 
 ## 11. Formal accuracy gate
 
-Run exactly as the orchestrator configures it, on commit `6b2487b`:
-`/flagos/bin/python -c "pytest.main(['tests/flag_attn/test_sage_attention.py',
-'tests/flag_attn/test_sage_bottleneck.py', '-q'])"` with
-`SAGE002_TEST_DEVICE=gcu:5`.
+**This section was wrong in the original report and is corrected here.**
 
-- **exit 1, 40 passed, 2 failed**: `test_harness_fails_on_missing_samples` and
-  `test_sage004_ab_fails_on_missing_samples`, both with
-  `ERROR: cannot import the runtime: No module named 'flag_attn'`.
-- **Cause**: the orchestrator command sets no `PYTHONPATH`, so the pytest
-  subprocesses those two tests spawn cannot import the package. It is not a
-  numerical or device failure, and it is not specific to this work.
-- **Baseline control**: the same command on unmodified `087a362` fails the
-  *same two test ids* with 40 passed, identically. The two failures pre-date
-  SAGE-005.
-- **With the documented environment** (`PYTHONPATH=/opt/flagtree:$PWD/src`):
-  **exit 0, 42 passed**.
+SAGE-005's formal check is executed by the orchestrator after the session, and
+it **passed**:
+
+| item | value |
+| --- | --- |
+| check id | `20261116T054641Z-38b71c5c` |
+| kind / name | `correctness` / `accuracy` |
+| commit | `167c360085ffe46371626eeb108d17ea66fb92bf` |
+| device / pci / cpu | `5` / `83:00.0` / `160-191` |
+| exit code | **0** |
+| stdout tail | `42 passed, 1 warning in 55.69s` |
+| evidence | `raw/sage006_formal_gate_record.json`, `raw/sage006_formal_gate_stdout.log` |
+
+The `command` array in `record.json` holds only the `timeout ...` line below.
+The `cd` and the `export PYTHONPATH="$PWD/src:$PWD:$PYTHONPATH"` are the working
+directory and environment the orchestrator sets on the child
+(`orchestrator/core.py:405`), so they are not in the array. The record also
+carries baseline `087a3621bbfeb843d9efe2445b67faa7f1ed46ec` and branch
+`agent/enflame-sage-fused-sdpa-study-5`.
+
+```
+cd <workspace> && export PYTHONPATH="$PWD/src:$PWD:$PYTHONPATH" && \
+  timeout --signal=TERM --kill-after=10s 1800s taskset -c 160-191 \
+  /flagos/bin/python -c "import os, torch, torch_gcu, pytest; \
+  os.environ['SAGE002_TEST_DEVICE']='gcu:5'; torch.gcu.set_device(5); \
+  raise SystemExit(pytest.main(['tests/flag_attn/test_sage_attention.py', \
+  'tests/flag_attn/test_sage_bottleneck.py','-q']))"
+```
+
+Three corrections against the original text:
+
+1. The "exit 1, 40 passed, 2 failed" result was a **local manual pre-check**
+   (`raw/sage005_formal_gate.txt`), not the orchestrator's formal check. Its
+   command line omitted `PYTHONPATH`, so the two subprocess-spawning tests could
+   not import `flag_attn`. It was never the acceptance result. That file is kept
+   for audit and now labelled *superseded*.
+2. The conclusion drawn from it — "the orchestrator sets no `PYTHONPATH`" — is
+   false: `orchestrator/core.py:405` exports `PYTHONPATH="$PWD/src:$PWD:$PYTHONPATH"`
+   before every check command. The formal run above therefore had the package on
+   its path and passed.
+3. The original text said the check ran on commit `6b2487b`. The formal record
+   says `167c360`, which is this report's own commit.
 
 SAGE-005 changed no file under `src/` or `tests/`; `git diff --name-only
-087a362 HEAD` lists only `agent-results/*`. Evidence:
-`agent-results/raw/sage005_formal_gate.txt`.
+087a362 HEAD` lists only `agent-results/*`.
 
-**The orchestrator's formal accuracy check after this session is still
-required; this report is not acceptance.**
+**This report is still not acceptance.** Acceptance is the orchestrator's formal
+check, and on SAGE-005 that check already passed with 42 passed / exit 0.
