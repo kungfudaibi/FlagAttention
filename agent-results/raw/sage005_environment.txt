@@ -1,0 +1,45 @@
+SAGE-005 environment
+date: 2026-11-16T04:13:28+00:00
+host: vm-dhrj-gd-zone7-d-s60-48g-1-17
+kernel: 6.8.0-117-generic
+python: Python 3.12.13
+torch: 2.10.0+cpu
+torch_gcu: 2.10.0+3.7.20260408
+triton: 3.6.0
+cpu: AMD EPYC 9754 128-Core Processor
+nproc: 256
+--- device 5
+                                                                               
+DEV ID 5
+    Device Info
+        Dev Name                : ZIXIAOC200
+        Dev UUID                : TS9B37120204
+        Dev SN                  : A0D5460520864
+        Dev PN                  : EFB-0088700-00
+        Dev MFD                 : 2026-5-4
+        Health                  : True
+DEV ID 5
+    PCIe Info
+        Vendor ID               : 1ea0
+        Device ID               : 2a22
+        Domain                  : 0000
+        Bus                     : 83
+        Dev                     : 00
+        Func                    : 0
+        Receiver Error          : 0
+        Bad TLP                 : 0
+        Bad DLLP                : 0
+--- load at capture
+ 04:13:36 up 46 days, 22:47,  0 user,  load average: 26.73, 27.01, 28.18
+--- git
+087a3621bbfeb843d9efe2445b67faa7f1ed46ec
+?? agent-results/SAGE-005.md
+?? agent-results/raw/sage005_ab_ab.exit
+?? agent-results/raw/sage005_ab_ab.jsonl
+?? agent-results/raw/sage005_ab_ab_summary.json
+?? agent-results/raw/sage005_cold_memory.exit
+?? agent-results/raw/sage005_cold_memory.jsonl
+?? agent-results/raw/sage005_dispatch.exit
+?? agent-results/raw/sage005_dispatch.jsonl
+?? agent-results/raw/sage005_environment.txt
+?? agent-results/raw/sage005_micro_epilogue.jsonl

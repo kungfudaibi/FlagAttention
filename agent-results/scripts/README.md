@@ -1,6 +1,6 @@
-# SAGE-002 / SAGE-003 scripts
+# SAGE-002 / SAGE-003 / SAGE-004 / SAGE-005 scripts
 
-All authoritative SAGE-003 scripts target container **GCU 5** (PCI
+All authoritative SAGE-003/004/005 scripts target container **GCU 5** (PCI
 `0000:83:00.0`, serial `A0D5460520864`) and must be run with the CPU pinning
 from the task:
 
@@ -25,6 +25,24 @@ their recorded raw data used; they are kept unchanged for audit.
 | `preflight_gcu5.sh` | Refuses unless efsmi DEV 5 is PCI `0000:83:00.0` with the assigned serial; prints used MiB. |
 | `sage004_ab.py` | The SAGE-004 formal **full-call** A/B: exact legacy Sage (pre-SAGE-003 4-warp/3-stage quantizer) versus candidate Sage (shipped quantizer, same attention kernel) on identical FP16 Q/K/V; 3 alternating ABBA rounds, per-sample rows, host wall clock and GCU events, cold compile with an empty `TRITON_CACHE_DIR`, peak memory per candidate; gates the output **and** the INT8 quantization intermediates. Exit 4 wrong device, 3 numeric/sample/scope failure, 5 changed dispatch. Replaces the seeded fail-closed placeholder. |
 | `sage004_profile.py` | Localises the SAGE-004 attention-kernel bottleneck by **single-site ablation** of the shipped kernel on pre-quantized inputs (`full`, per-stage removals, both-dots ceiling, QK-matmul-only floor) and reports TFLOPS against the tile FLOPs. Never mixed into the full-call A/B. Exit 4 wrong device, 3 if an ablation fails. |
+
+## SAGE-005 scripts (recorded on GCU 5)
+
+All three pin GCU 5 by PCI address *and* serial through `efsmi` before the first
+device action, and abort otherwise. That guard is not decorative: the ordinal is
+container-local, and the three SAGE tasks each ran on a different host.
+
+| Script | What it measures |
+|---|---|
+| `sage005_micro.py` | Four probes into where the fused-SDPA gap lives. `--probe resident` runs pure `tl.dot` with both operands resident (the compute-only ceiling). `--probe tilemajor` adds a per-iteration tile load in the shipped kernel's layout, so the delta is the cost of the tile feed. `--probe slope` benchmarks the shipped kernel across query lengths and reports **microseconds per KV iteration** with launch/prologue/epilogue differenced out, for single-fragment ablations of the kernel; a companion `ablation_artifact` record proves the dot ops survived the ablation. `--probe epilogue` prices the softmax primitives separately. `--probe` accepts a comma-separated list. |
+| `sage005_dispatch.py` | Proves which op actually ran, per path: the device fused op, the repository `F.sdpa` host fallback, the Sage full call and the attention-only kernel. Records the CPU op chain, host-copy count, device ops, and a GCU-event latency. Residency is decided by device-event time because the Kineto GCU activity stream is **unreliable on this image** (identical repeated profiles return either the full runtime list or only two `aten::empty` records); that flakiness is itself recorded rather than papered over. |
+| `sage005_cold_memory.py` | Cold compile in a child process with its own empty `TRITON_CACHE_DIR` (the parent would reuse the on-disk cache and report a warm number), plus peak device MiB per path with allocator counters reset immediately before the call. |
+
+The SAGE-005 formal A/B reuses `sage004_ab.py` unchanged: legacy Sage as the
+control, shipped Sage as the candidate, 3 alternating rounds. Note it needs
+`--pairs 24` with `--min-samples 40`; at `--pairs 12` each round yields 24
+samples and the run correctly fails its own sample-count gate (`status: FAIL`,
+exit 3) rather than reporting an underpowered comparison.
 
 ## SAGE-002 scripts (recorded on GCU 1)
 

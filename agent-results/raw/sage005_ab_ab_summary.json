@@ -1,0 +1,74 @@
+{
+  "aggregate": {
+    "1x2x4096x64": {
+      "max_candidate_over_legacy": 0.7260198402203036,
+      "median_candidate_ms": 1.147777497768402,
+      "median_candidate_over_legacy": 0.7235151329677171,
+      "median_legacy_ms": 1.5809175372123718,
+      "min_candidate_over_legacy": 0.7101311278776643,
+      "round_candidate_ms": [
+        1.149554967880249,
+        1.1408549547195435,
+        1.147777497768402
+      ],
+      "round_candidate_over_legacy": [
+        0.7101311278776643,
+        0.7235151329677171,
+        0.7260198402203036
+      ],
+      "round_legacy_ms": [
+        1.6187925338745117,
+        1.5768225193023682,
+        1.5809175372123718
+      ],
+      "rounds_where_candidate_faster": 3
+    },
+    "4x32x1024x128": {
+      "max_candidate_over_legacy": 0.44471394858591756,
+      "median_candidate_ms": 5.344125032424927,
+      "median_candidate_over_legacy": 0.44279298615472173,
+      "median_legacy_ms": 12.069127559661865,
+      "min_candidate_over_legacy": 0.44188626794239855,
+      "round_candidate_ms": [
+        5.335484981536865,
+        5.344125032424927,
+        5.345122575759888
+      ],
+      "round_candidate_over_legacy": [
+        0.44188626794239855,
+        0.44279298615472173,
+        0.44471394858591756
+      ],
+      "round_legacy_ms": [
+        12.074339866638184,
+        12.069127559661865,
+        12.019237518310547
+      ],
+      "rounds_where_candidate_faster": 3
+    }
+  },
+  "cold_records": 0,
+  "device_index": 5,
+  "event": "decision",
+  "failures": [],
+  "input_dtype": "float16",
+  "output_dtype": "float16",
+  "pairs_per_round": 24,
+  "pci": "0000:83:00.0",
+  "rounds": 3,
+  "shapes": [
+    [
+      1,
+      2,
+      4096,
+      64
+    ],
+    [
+      4,
+      32,
+      1024,
+      128
+    ]
+  ],
+  "status": "PASS"
+}

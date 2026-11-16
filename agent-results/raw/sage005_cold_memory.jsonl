@@ -1,0 +1,10 @@
+{"cold_ms": 5.48728508874774, "device_index": 5, "path": "native", "pci": "0000:83:00.0", "probe": "cold", "shape": [1, 2, 4096, 64]}
+{"cold_ms": 8862.41235723719, "device_index": 5, "path": "sage", "pci": "0000:83:00.0", "probe": "cold", "shape": [1, 2, 4096, 64]}
+{"cold_ms": 8.479308802634478, "device_index": 5, "path": "native", "pci": "0000:83:00.0", "probe": "cold", "shape": [4, 32, 1024, 128]}
+{"cold_ms": 7939.502192195505, "device_index": 5, "path": "sage", "pci": "0000:83:00.0", "probe": "cold", "shape": [4, 32, 1024, 128]}
+{"device_index": 5, "path": "native_device_op", "pci": "0000:83:00.0", "peak_mib": 1.0322265625, "probe": "memory", "shape": [1, 2, 4096, 64]}
+{"device_index": 5, "path": "sage_attn_only", "pci": "0000:83:00.0", "peak_mib": 1.0, "probe": "memory", "shape": [1, 2, 4096, 64]}
+{"device_index": 5, "path": "sage_full", "pci": "0000:83:00.0", "peak_mib": 2.0009765625, "probe": "memory", "shape": [1, 2, 4096, 64]}
+{"device_index": 5, "path": "native_device_op", "pci": "0000:83:00.0", "peak_mib": 32.5009765625, "probe": "memory", "shape": [4, 32, 1024, 128]}
+{"device_index": 5, "path": "sage_attn_only", "pci": "0000:83:00.0", "peak_mib": 32.0, "probe": "memory", "shape": [4, 32, 1024, 128]}
+{"device_index": 5, "path": "sage_full", "pci": "0000:83:00.0", "peak_mib": 64.01171875, "probe": "memory", "shape": [4, 32, 1024, 128]}
