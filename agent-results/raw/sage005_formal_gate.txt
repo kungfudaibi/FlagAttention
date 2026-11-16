@@ -1,0 +1,23 @@
+SAGE-005 formal accuracy gate
+date: 2026-11-16T04:24:39+00:00
+command (orchestrator config):
+  /flagos/bin/python -c "...pytest.main([tests/flag_attn/test_sage_attention.py, tests/flag_attn/test_sage_bottleneck.py, -q])"
+
+RESULT on commit 6b2487b, environment exactly as the orchestrator runs it:
+  exit 1, 2 failed, 40 passed
+  FAILED test_harness_fails_on_missing_samples
+  FAILED test_sage004_ab_fails_on_missing_samples
+  both: ERROR: cannot import the runtime: No module named flag_attn
+  cause: the orchestrator command does not set PYTHONPATH, so the pytest
+  subprocesses those two tests spawn cannot import the package.
+
+CONTROL - same two tests at baseline 087a362, same command:
+  exit 1, 2 failed, 40 passed, identical two test ids
+  => pre-existing and environmental, not introduced by SAGE-005.
+
+CONTROL - same command plus the documented PYTHONPATH:
+  PYTHONPATH=/opt/flagtree:$PWD/src
+  exit 0, 42 passed
+
+SAGE-005 changed no file under src/ or tests/ (verified: git diff --name-only
+087a362 HEAD lists only agent-results/*).
