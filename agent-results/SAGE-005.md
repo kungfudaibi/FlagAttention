@@ -357,5 +357,28 @@ Raw evidence: `agent-results/raw/sage005_*.jsonl` with sibling `.exit` files
 (all 0). Peak memory and cold compile in `sage005_cold_memory.jsonl`; formal A/B
 in `sage005_ab_ab.jsonl` + `sage005_ab_ab_summary.json` (`status: PASS`).
 
+## 11. Formal accuracy gate
+
+Run exactly as the orchestrator configures it, on commit `6b2487b`:
+`/flagos/bin/python -c "pytest.main(['tests/flag_attn/test_sage_attention.py',
+'tests/flag_attn/test_sage_bottleneck.py', '-q'])"` with
+`SAGE002_TEST_DEVICE=gcu:5`.
+
+- **exit 1, 40 passed, 2 failed**: `test_harness_fails_on_missing_samples` and
+  `test_sage004_ab_fails_on_missing_samples`, both with
+  `ERROR: cannot import the runtime: No module named 'flag_attn'`.
+- **Cause**: the orchestrator command sets no `PYTHONPATH`, so the pytest
+  subprocesses those two tests spawn cannot import the package. It is not a
+  numerical or device failure, and it is not specific to this work.
+- **Baseline control**: the same command on unmodified `087a362` fails the
+  *same two test ids* with 40 passed, identically. The two failures pre-date
+  SAGE-005.
+- **With the documented environment** (`PYTHONPATH=/opt/flagtree:$PWD/src`):
+  **exit 0, 42 passed**.
+
+SAGE-005 changed no file under `src/` or `tests/`; `git diff --name-only
+087a362 HEAD` lists only `agent-results/*`. Evidence:
+`agent-results/raw/sage005_formal_gate.txt`.
+
 **The orchestrator's formal accuracy check after this session is still
 required; this report is not acceptance.**
