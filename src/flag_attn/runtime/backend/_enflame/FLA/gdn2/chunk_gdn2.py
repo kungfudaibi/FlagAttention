@@ -86,7 +86,9 @@ _S60_STATE_BV_SPLIT_ENABLED = (
 def _s60_state_bv(extent: int) -> int:
     """V tile for K2: split wide-but-not-huge V into two tiles."""
     if not _S60_TILES_ADAPT or not _S60_STATE_BV_SPLIT_ENABLED:
-        return _S60_STATE_BV
+        # With the split off this must be exactly the accepted GDN2-003
+        # rule, not a blanket 256: the adaptive rule still clamps V <= 128.
+        return _s60_tile(extent, _S60_STATE_BV)
     limit = _S60_STATE_BV_SPLIT if extent <= _S60_STATE_BV else _S60_STATE_BV
     return _s60_tile(extent, limit)
 
