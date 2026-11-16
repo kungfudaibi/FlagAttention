@@ -1,0 +1,7 @@
+SAGE-005 evidence commit
+branch: agent/enflame-sage-fused-sdpa-study-5
+commit: 6b2487b06fbc62d94e6a0b053d84fb90fbcb5a6a
+parent: 087a3621bbfeb843d9efe2445b67faa7f1ed46ec
+subject: experiment(enflame): localise the SAGE-005 gap to Triton code generation
+committed: 2026-11-16T04:18:11+00:00
+files:  17 files changed, 1626 insertions(+), 2 deletions(-)
