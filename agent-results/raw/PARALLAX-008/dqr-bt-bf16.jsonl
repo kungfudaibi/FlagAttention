@@ -1,0 +1,24 @@
+{"BS": 64, "BT": 64, "us": 252.67, "rel_q": 3.46e-06, "rel_r": 6.36e-06}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+{"BS": 64, "BT": 128, "us": 226.98, "rel_q": 3.46e-06, "rel_r": 6.36e-06}
+
+
+{"BS": 64, "BT": 256, "us": 211.31, "rel_q": 3.56e-06, "rel_r": 6.37e-06}
+{"BS": 128, "BT": 64, "us": 212.86, "rel_q": 0.0, "rel_r": 0.0}
+
+
+{"BS": 128, "BT": 128, "us": 203.34, "rel_q": 0.0, "rel_r": 0.0}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"BS": 128, "BT": 256, "err": "OutOfResources(1572480, 1572352, 'local memory')"}
+{"BS": 256, "BT": 64, "us": 219.28, "rel_q": 8.4e-07, "rel_r": 1.62e-06}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"BS": 256, "BT": 128, "err": "OutOfResources(1572480, 1572352, 'local memory')"}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"BS": 256, "BT": 256, "err": "OutOfResources(1572480, 1572352, 'local memory')"}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+

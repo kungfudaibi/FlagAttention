@@ -1,0 +1,1 @@
+{"mode": "bandwidth", "device": 1, "copy_8MB": {"us": 45.41, "GBps": 369.5}, "fill_8MB": {"us": 5999.85, "GBps": 1.4}, "copy_64MB": {"us": 313.58, "GBps": 428.0}, "fill_64MB": {"us": 34364.14, "GBps": 2.0}, "copy_256MB": {"us": 1236.21, "GBps": 434.3}, "fill_256MB": {"us": 100628.28, "GBps": 2.7}}

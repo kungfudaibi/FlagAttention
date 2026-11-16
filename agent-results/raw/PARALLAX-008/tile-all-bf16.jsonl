@@ -1,0 +1,46 @@
+{"k": "fwd", "BS": 64, "BT": 64, "us": 246.71, "rel_o": 0.00096802}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+{"k": "fwd", "BS": 64, "BT": 128, "us": 253.51, "rel_o": 0.00096802}
+
+
+{"k": "fwd", "BS": 64, "BT": 256, "us": 197.24, "rel_o": 0.00096802}
+{"k": "fwd", "BS": 128, "BT": 64, "us": 213.7, "rel_o": 0.0}
+
+
+{"k": "fwd", "BS": 128, "BT": 128, "us": 216.1, "rel_o": 2.76e-06}
+
+
+{"k": "fwd", "BS": 128, "BT": 256, "us": 164.75, "rel_o": 6.17e-06}
+
+
+{"k": "fwd", "BS": 256, "BT": 64, "us": 180.33, "rel_o": 0.00063564}
+
+
+{"k": "fwd", "BS": 256, "BT": 128, "us": 186.87, "rel_o": 0.00063567}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"k": "fwd", "BS": 256, "BT": 256, "err": "OutOfResources(1572480, 1572352, 'local memory')"}
+{"k": "dqr", "BS": 64, "BT": 64, "us": 244.4, "rel_q": 1.89e-06, "rel_r": 6.4e-06}
+{"k": "dqr", "BS": 64, "BT": 64, "us": 244.48, "rel_q": 1.89e-06, "rel_r": 6.4e-06}
+{"k": "dqr", "BS": 64, "BT": 64, "us": 243.73, "rel_q": 1.89e-06, "rel_r": 6.4e-06}
+{"k": "dqr", "BS": 128, "BT": 64, "us": 212.28, "rel_q": 0.0, "rel_r": 0.0}
+{"k": "dqr", "BS": 128, "BT": 64, "us": 212.53, "rel_q": 0.0, "rel_r": 0.0}
+{"k": "dqr", "BS": 128, "BT": 64, "us": 212.9, "rel_q": 0.0, "rel_r": 0.0}
+
+
+{"k": "dqr", "BS": 256, "BT": 64, "us": 206.2, "rel_q": 1.708e-05, "rel_r": 7.1e-07}
+{"k": "dqr", "BS": 256, "BT": 64, "us": 205.49, "rel_q": 1.708e-05, "rel_r": 7.1e-07}
+{"k": "dqr", "BS": 256, "BT": 64, "us": 205.51, "rel_q": 1.708e-05, "rel_r": 7.1e-07}
+{"k": "dkv", "BS": 32, "BT": 64, "us": 653.1, "rel_k": 0.0, "rel_v": 0.0}
+{"k": "dkv", "BS": 32, "BT": 128, "us": 409.66, "rel_k": 2.7e-07, "rel_v": 8.39e-06}
+{"k": "dkv", "BS": 32, "BT": 256, "us": 363.5, "rel_k": 7.138e-05, "rel_v": 2.322e-05}
+{"k": "dkv", "BS": 64, "BT": 64, "us": 355.64, "rel_k": 0.0, "rel_v": 0.0}
+{"k": "dkv", "BS": 64, "BT": 128, "us": 243.37, "rel_k": 2.7e-07, "rel_v": 8.39e-06}
+{"k": "dkv", "BS": 64, "BT": 256, "us": 208.77, "rel_k": 7.138e-05, "rel_v": 2.322e-05}
+{"k": "dkv", "BS": 128, "BT": 64, "us": 430.76, "rel_k": 0.0, "rel_v": 5.59e-06}
+{"k": "dkv", "BS": 128, "BT": 128, "us": 317.2, "rel_k": 2.7e-07, "rel_v": 8.39e-06}
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"k": "dkv", "BS": 128, "BT": 256, "err": "OutOfResources(1572480, 1572352, 'local memory')"}

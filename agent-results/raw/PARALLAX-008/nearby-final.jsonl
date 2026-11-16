@@ -1,0 +1,31 @@
+{"mode": "nearby", "dtype": "fp16", "shape": [1, 256, 2, 8, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.0003330560866743326, "dq": 0.00035977709922008216, "dr": 0.0003126016817986965, "dk": 0.0003239156794734299, "dv": 0.0002894426870625466}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+{"mode": "nearby", "dtype": "fp16", "shape": [2, 128, 2, 8, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.00034830515505746007, "dq": 0.0003710279706865549, "dr": 0.0003193869488313794, "dk": 0.00039141986053436995, "dv": 0.0003577522293198854}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}
+
+
+
+
+{"mode": "nearby", "dtype": "fp16", "shape": [1, 63, 1, 1, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.000426761107519269, "dq": 0.0004890115815214813, "dr": 0.00034850064548663795, "dk": 0.000420240918174386, "dv": 0.0002888683811761439}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}
+{"mode": "nearby", "dtype": "bf16", "shape": [1, 256, 2, 8, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.0027237413451075554, "dq": 0.0030306291300803423, "dr": 0.0025795588735491037, "dk": 0.0026747568044811487, "dv": 0.0023871150333434343}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}
+
+
+
+
+
+
+
+
+{"mode": "nearby", "dtype": "bf16", "shape": [2, 128, 2, 8, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.0027926734182983637, "dq": 0.0030537976417690516, "dr": 0.0026104378048330545, "dk": 0.0032395021989941597, "dv": 0.00288738333620131}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}
+
+
+
+
+{"mode": "nearby", "dtype": "bf16", "shape": [1, 63, 1, 1, 64], "identical_flag0_vs_flag1": true, "rel_vs_fp32_ref": {"o": 0.0033240506891161203, "dq": 0.0036143381148576736, "dr": 0.002706261118873954, "dk": 0.003271879628300667, "dv": 0.0022720606066286564}, "max_abs_diff_o": 0.0, "max_abs_diff_dq": 0.0, "max_abs_diff_dr": 0.0, "max_abs_diff_dk": 0.0, "max_abs_diff_dv": 0.0, "finite": true}

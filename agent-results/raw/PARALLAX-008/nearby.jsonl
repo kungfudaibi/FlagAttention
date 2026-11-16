@@ -1,0 +1,42 @@
+{"dtype": "fp16", "gate": "0", "what": "nearby", "shape": "B2/T256/H2/HQ8/D64", "o": 0.000337, "dq": 0.000347, "dr": 0.000314, "dk": 0.000324, "dv": 0.000296, "finite": true}
+{"dtype": "fp16", "gate": "0", "what": "nearby", "shape": "B1/T256/H2/HQ8/D64", "o": 0.000327, "dq": 0.000356, "dr": 0.000323, "dk": 0.000327, "dv": 0.000299, "finite": true}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+{"dtype": "fp16", "gate": "0", "what": "nearby", "shape": "B1/T63/H1/HQ1/D64", "o": 0.000339, "dq": 0.000393, "dr": 0.000311, "dk": 0.000356, "dv": 0.000314, "finite": true}
+
+
+
+
+
+
+
+
+{"dtype": "fp16", "gate": "0", "what": "nearby", "shape": "B2/T128/H2/HQ8/D64", "o": 0.000335, "dq": 0.000365, "dr": 0.000329, "dk": 0.000387, "dv": 0.00037, "finite": true}
+{"dtype": "fp16", "gate": "1", "what": "nearby", "shape": "B2/T256/H2/HQ8/D64", "o": 0.000337, "dq": 0.000347, "dr": 0.000314, "dk": 0.000325, "dv": 0.000296, "finite": true}
+{"dtype": "fp16", "gate": "1", "what": "nearby", "shape": "B1/T256/H2/HQ8/D64", "o": 0.000327, "dq": 0.000356, "dr": 0.000323, "dk": 0.000327, "dv": 0.000299, "finite": true}
+{"dtype": "fp16", "gate": "1", "what": "nearby", "shape": "B1/T63/H1/HQ1/D64", "o": 0.000339, "dq": 0.000393, "dr": 0.000311, "dk": 0.000356, "dv": 0.000314, "finite": true}
+{"dtype": "fp16", "gate": "1", "what": "nearby", "shape": "B2/T128/H2/HQ8/D64", "o": 0.000335, "dq": 0.000365, "dr": 0.000329, "dk": 0.000387, "dv": 0.00037, "finite": true}
+{"dtype": "bf16", "gate": "0", "what": "nearby", "shape": "B2/T256/H2/HQ8/D64", "o": 0.002692, "dq": 0.00277, "dr": 0.002545, "dk": 0.002577, "dv": 0.002359, "finite": true}
+{"dtype": "bf16", "gate": "0", "what": "nearby", "shape": "B1/T256/H2/HQ8/D64", "o": 0.002612, "dq": 0.002723, "dr": 0.002568, "dk": 0.00258, "dv": 0.002343, "finite": true}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+{"dtype": "bf16", "gate": "0", "what": "nearby", "shape": "B1/T63/H1/HQ1/D64", "o": 0.003746, "dq": 0.004424, "dr": 0.002495, "dk": 0.003206, "dv": 0.002148, "finite": true}
+
+
+
+
+
+
+
+
+{"dtype": "bf16", "gate": "0", "what": "nearby", "shape": "B2/T128/H2/HQ8/D64", "o": 0.002656, "dq": 0.002832, "dr": 0.002634, "dk": 0.00318, "dv": 0.002896, "finite": true}
+{"dtype": "bf16", "gate": "1", "what": "nearby", "shape": "B2/T256/H2/HQ8/D64", "o": 0.002692, "dq": 0.00277, "dr": 0.002545, "dk": 0.002577, "dv": 0.002359, "finite": true}
+{"dtype": "bf16", "gate": "1", "what": "nearby", "shape": "B1/T256/H2/HQ8/D64", "o": 0.002612, "dq": 0.002723, "dr": 0.002568, "dk": 0.00258, "dv": 0.002343, "finite": true}
+{"dtype": "bf16", "gate": "1", "what": "nearby", "shape": "B1/T63/H1/HQ1/D64", "o": 0.003746, "dq": 0.004424, "dr": 0.002495, "dk": 0.003206, "dv": 0.002148, "finite": true}
+{"dtype": "bf16", "gate": "1", "what": "nearby", "shape": "B2/T128/H2/HQ8/D64", "o": 0.002656, "dq": 0.002832, "dr": 0.002634, "dk": 0.00318, "dv": 0.002896, "finite": true}

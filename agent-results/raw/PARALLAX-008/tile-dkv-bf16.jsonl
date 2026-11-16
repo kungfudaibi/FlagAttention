@@ -1,0 +1,24 @@
+{"kernel": "dkv", "BS": 16, "BT": 16, "ctas": 64, "us": 260511.18, "rel_k": 5.603e-05, "rel_v": 7.978e-05, "finite": true}
+{"kernel": "dkv", "BS": 16, "BT": 32, "ctas": 64, "us": 125777.99, "rel_k": 5.575e-05, "rel_v": 4.857e-05, "finite": true}
+{"kernel": "dkv", "BS": 16, "BT": 64, "ctas": 64, "us": 126927.78, "rel_k": 5.466e-05, "rel_v": 4.857e-05, "finite": true}
+{"kernel": "dkv", "BS": 16, "BT": 128, "ctas": 64, "us": 124812.54, "rel_k": 5.468e-05, "rel_v": 4.857e-05, "finite": true}
+{"kernel": "dkv", "BS": 16, "BT": 256, "ctas": 64, "us": 149502.36, "rel_k": 5.468e-05, "rel_v": 4.861e-05, "finite": true}
+{"kernel": "dkv", "BS": 32, "BT": 16, "ctas": 32, "us": 211477.25, "rel_k": 1.231e-05, "rel_v": 6.33e-05, "finite": true}
+{"kernel": "dkv", "BS": 32, "BT": 32, "ctas": 32, "us": 1064.5, "rel_k": 1.1e-05, "rel_v": 2e-08, "finite": true}
+{"kernel": "dkv", "BS": 32, "BT": 64, "ctas": 32, "us": 655.85, "rel_k": 0.0, "rel_v": 0.0, "finite": true}
+{"kernel": "dkv", "BS": 32, "BT": 128, "ctas": 32, "us": 411.52, "rel_k": 3.697e-05, "rel_v": 2.9e-07, "finite": true}
+{"kernel": "dkv", "BS": 32, "BT": 256, "ctas": 32, "us": 374.85, "rel_k": 3.697e-05, "rel_v": 1.98e-06, "finite": true}
+{"kernel": "dkv", "BS": 64, "BT": 16, "ctas": 16, "us": 210657.54, "rel_k": 1.231e-05, "rel_v": 6.33e-05, "finite": true}
+{"kernel": "dkv", "BS": 64, "BT": 32, "ctas": 16, "us": 572.52, "rel_k": 1.1e-05, "rel_v": 2e-08, "finite": true}
+{"kernel": "dkv", "BS": 64, "BT": 64, "ctas": 16, "us": 357.26, "rel_k": 0.0, "rel_v": 0.0, "finite": true}
+{"kernel": "dkv", "BS": 64, "BT": 128, "ctas": 16, "us": 243.57, "rel_k": 3.697e-05, "rel_v": 2.9e-07, "finite": true}
+{"kernel": "dkv", "BS": 64, "BT": 256, "ctas": 16, "us": 212.28, "rel_k": 3.697e-05, "rel_v": 1.98e-06, "finite": true}
+{"kernel": "dkv", "BS": 128, "BT": 16, "ctas": 8, "us": 428106.98, "rel_k": 3.896e-05, "rel_v": 6.33e-05, "finite": true}
+{"kernel": "dkv", "BS": 128, "BT": 32, "ctas": 8, "us": 698.03, "rel_k": 3.857e-05, "rel_v": 2e-08, "finite": true}
+{"kernel": "dkv", "BS": 128, "BT": 64, "ctas": 8, "us": 431.36, "rel_k": 3.697e-05, "rel_v": 0.0, "finite": true}
+{"kernel": "dkv", "BS": 128, "BT": 128, "ctas": 8, "us": 317.0, "rel_k": 3.697e-05, "rel_v": 2.9e-07, "finite": true}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+info: Insufficient L1 memory to alloc for current block size config if in auto tuning mode  you can ignore it!!!!!!!!!!!!
+
+{"BS": 128, "BT": 256, "err": "OutOfResources(1572480, 1572352, 'local memory')"}
+{"best": {"kernel": "dkv", "BS": 64, "BT": 64, "ctas": 16, "us": 357.26, "rel_k": 0.0, "rel_v": 0.0, "finite": true}, "baseline_us": 357.26}

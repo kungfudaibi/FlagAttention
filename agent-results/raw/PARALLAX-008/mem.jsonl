@@ -1,0 +1,4 @@
+{"mode": "mem", "dtype": "fp16", "route": "shipped", "peak_alloc_MB": 5.33, "peak_reserved_MB": 6.0, "wall_s": 2.85}
+{"mode": "mem", "dtype": "fp16", "route": "candidate", "peak_alloc_MB": 5.33, "peak_reserved_MB": 6.0, "wall_s": 2.83}
+{"mode": "mem", "dtype": "bf16", "route": "shipped", "peak_alloc_MB": 5.33, "peak_reserved_MB": 6.0, "wall_s": 2.85}
+{"mode": "mem", "dtype": "bf16", "route": "candidate", "peak_alloc_MB": 5.33, "peak_reserved_MB": 6.0, "wall_s": 2.82}

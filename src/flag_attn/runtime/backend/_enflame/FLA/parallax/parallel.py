@@ -74,6 +74,76 @@ def _static_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left):
     return _STATIC_D64_CONFIGS.get(q.dtype)
 
 
+# PARALLAX-008 experiment: opt-in *row-tile* for the same exact dense target
+# shape.  PARALLAX-004..007 swept and froze only the (BS, num_warps,
+# num_stages) axes; the query-row tile BT was pinned to _BLOCK_T = 64 by
+# construction, so it never entered any sweep.  Widening BT is a different
+# axis, and at this shape it is the dominant one.
+#   * DKV loops over query row blocks *serially* inside the GQA group loop.  At
+#     BS=BT=64 the four column CTAs together walk 10 row blocks per group (40
+#     per (b, h)); at BS=64/BT=256 each CTA walks exactly one, i.e. 16 per
+#     (b, h), with 4x wider MMAs.  That costs 1.6x more row x col element work
+#     (65536 vs 40960 per group, because the wide tile also walks the
+#     masked-out upper triangle) and still buys a 1.71x drop in DKV time, so
+#     this kernel is bound by serial iteration count and MMA width rather than
+#     by element count.
+#   * FWD and DQR are grid-parallel over tiles, so their gain is much smaller
+#     and comes from launch width, not from mask avoidance.  FWD drops from 4
+#     CTAs x 6 column iterations to 1 CTA x 2 at 4x wider MMAs, while its
+#     unmasked "safe" fraction falls 0.33 -> 0.00: at BT=256 every column block
+#     is causally masked and still faster.  That is the direct evidence that
+#     this change is about launch shape, not about skipping masks.
+# Measured on GCU 1 with one kernel instrumented per pass (3 rounds, alternating
+# routes, median of 30 calls): DKV 367.2 -> 214.5 us, DQR 221.7 -> 194.3 us,
+# FWD 193.0 -> 181.9 us at FP16, same sign for BF16 and in every round.  Full
+# call 776-780 -> 620 us in two independent 9-round runs (FP16 and BF16), with
+# 9/9 alternating rounds improving in every run.  This is a launch-shape change
+# only; the kernels, their math and the autotune path for every other shape are
+# untouched.  Default off.
+_ROW_TILE_D64_ENV = "PARALLAX_ROW_TILE_D64"
+
+# (fwd, dqr, dkv) launch entries, each (BS, BT, num_warps, num_stages).
+# BT is validated against the kernels' real constraints: BT and BS must divide
+# T, and BT x BS must fit the CTA's local memory (BS=128/BT=256 and
+# BS=256/BT>=128 overflow it on GCU 1).
+_ROW_TILE_D64_CONFIGS = {
+    torch.float16: {
+        "fwd": (128, 256, 1, 1),
+        "dqr": (128, 128, 1, 1),
+        "dkv": (64, 256, 1, 1),
+    },
+    torch.bfloat16: {
+        "fwd": (128, 256, 1, 1),
+        "dqr": (128, 128, 1, 1),
+        "dkv": (64, 256, 1, 1),
+    },
+}
+
+
+def _row_tile_d64_enabled():
+    return os.environ.get(_ROW_TILE_D64_ENV, "0").strip().lower() in ("1", "true", "yes")
+
+
+def _row_tile_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left):
+    """Return the wider row tile only for the exact opt-in target shape.
+
+    Gated separately from PARALLAX_STATIC_D64 so the two axes can be A/B'd
+    independently.  The callers give the PARALLAX-007 static table and
+    PARALLAX_FIXED_D64 precedence, so enabling this alongside either of them
+    never produces a mixed-shape call; it simply has no effect.
+    """
+    if not _row_tile_d64_enabled():
+        return None
+    if q.device.type != "gcu" or cu_seqlens is not None or window_size_left >= 0:
+        return None
+    if B != 2 or T != 256 or H != 2 or HQ != 8 or K != 64 or HQ // H != 4:
+        return None
+    # The frozen launch shape relies on the sequence dividing into whole tiles.
+    if T % 64 != 0:
+        return None
+    return _ROW_TILE_D64_CONFIGS.get(q.dtype)
+
+
 def _make_parallax_configs(tile_pairs):
     """Build the Enflame fallback autotune space."""
     return [
@@ -2241,7 +2311,16 @@ def parallel_parallax_fwd(q, r, k, v, scale, cu_seqlens=None, chunk_indices=None
                 num_stages=2,
             )
         else:
+            # PARALLAX-007 fixed shape owns the target when enabled; the
+            # PARALLAX-008 row-tile shape is suppressed then so the two opt-in
+            # paths never mix (fwd would otherwise launch a row tile while the
+            # backward pass launched the fixed-D64 kernels).
             static_cfg = _static_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left)
+            row_cfg = (
+                None
+                if static_cfg is not None or _fixed_d64_enabled()
+                else _row_tile_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left)
+            )
             if static_cfg is not None:
                 # Same JIT kernel and heuristic (IS_VARLEN) as the autotuned
                 # launch, with the measured BK/BS/warps/stages fixed.
@@ -2268,6 +2347,36 @@ def parallel_parallax_fwd(q, r, k, v, scale, cu_seqlens=None, chunk_indices=None
                     BS=bs,
                     WINDOW_SIZE_LEFT=window_size_left,
                     BT=BT,
+                    num_warps=warps,
+                    num_stages=stages,
+                )
+            elif row_cfg is not None:
+                # Fixed launch shape from the PARALLAX-008 row-tile ablation:
+                # same JIT kernel, same heuristics, only BS/BT/warps/stages set.
+                bs, bt, warps, stages = row_cfg["fwd"]
+                query_grid = (triton.cdiv(T, bt), B * HQ)
+                parallel_parallax_fwd_kernel.fn[query_grid](
+                    q,
+                    r,
+                    k,
+                    v,
+                    o,
+                    barv,
+                    d1,
+                    bart,
+                    m,
+                    scale,
+                    cu_seqlens,
+                    chunk_indices,
+                    T,
+                    HQ=HQ,
+                    H=H,
+                    G=G,
+                    K=K,
+                    BK=BK,
+                    BS=bs,
+                    WINDOW_SIZE_LEFT=window_size_left,
+                    BT=bt,
                     num_warps=warps,
                     num_stages=stages,
                 )
@@ -2375,6 +2484,14 @@ def parallel_parallax_bwd(
         and G == 4
         and T % BT == 0
         and _fixed_d64_enabled()
+    )
+    # PARALLAX-008 row-tile launch shape (opt-in, exact shape).  Suppressed when
+    # PARALLAX_FIXED_D64 is active (it replaces the backward kernels) and when the
+    # PARALLAX-007 static table owns the shape, so fwd and bwd always agree.
+    row_cfg = (
+        None
+        if use_fixed_d64 or static_cfg is not None
+        else _row_tile_d64_config(q, B, T, H, HQ, K, cu_seqlens, window_size_left)
     )
 
     if cu_seqlens is None and NQ <= _SHORT_MULTI_MAX_TILES and G == 1:
@@ -2609,6 +2726,39 @@ def parallel_parallax_bwd(
                         WINDOW_SIZE_LEFT=window_size_left,
                         BT=BT,
                     )
+            elif row_cfg is not None:
+                # PARALLAX-008 row-tile launch: same fused DQR kernel.
+                bs, bt, warps, stages = row_cfg["dqr"]
+                parallel_parallax_bwd_kernel_dqr_fused.fn[(triton.cdiv(T, bt), B * HQ)](
+                    q,
+                    r,
+                    k,
+                    v,
+                    o,
+                    barv,
+                    d1,
+                    bart,
+                    m,
+                    delta_t,
+                    delta_b,
+                    grad_o,
+                    grad_q,
+                    grad_r,
+                    scale,
+                    cu_seqlens,
+                    chunk_indices,
+                    T,
+                    HQ=HQ,
+                    H=H,
+                    G=G,
+                    K=K,
+                    BK=BK,
+                    BS=bs,
+                    WINDOW_SIZE_LEFT=window_size_left,
+                    BT=bt,
+                    num_warps=warps,
+                    num_stages=stages,
+                )
             elif static_cfg is not None:
                 # The measured tile covers every query row for T=256, so the
                 # autotuner's reset_to_zero pre-hook is a no-op here.
@@ -2723,7 +2873,40 @@ def parallel_parallax_bwd(
                     num_stages=1,
                 )
             elif use_grouped_dkv:
-                if static_cfg is not None:
+                if row_cfg is not None:
+                    # PARALLAX-008 row-tile launch: the grouped DKV CTA walks
+                    # its query blocks serially inside the group loop, so a
+                    # BT that covers the sequence removes that serial walk.
+                    bs, bt, warps, stages = row_cfg["dkv"]
+                    parallel_parallax_bwd_kernel_dkv_grouped.fn[(triton.cdiv(T, bs), B * H)](
+                        q,
+                        r,
+                        k,
+                        v,
+                        d1,
+                        bart,
+                        m,
+                        delta_t,
+                        delta_b,
+                        grad_o,
+                        grad_k,
+                        grad_v,
+                        scale,
+                        cu_seqlens,
+                        chunk_indices,
+                        T,
+                        HQ=HQ,
+                        H=H,
+                        G=G,
+                        K=K,
+                        BK=BK,
+                        BS=bs,
+                        WINDOW_SIZE_LEFT=window_size_left,
+                        BT=bt,
+                        num_warps=warps,
+                        num_stages=stages,
+                    )
+                elif static_cfg is not None:
                     bs, warps, stages = static_cfg["dkv"]
                     static_grid = (triton.cdiv(T, bs), B * H)
                     parallel_parallax_bwd_kernel_dkv_grouped.fn[static_grid](

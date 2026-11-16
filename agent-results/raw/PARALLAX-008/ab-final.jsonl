@@ -1,0 +1,84 @@
+{"mode": "floor", "launch_floor_us": 13.649}
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"mode": "final-ab", "dtype": "fp16", "rounds": 9, "iters": 30, "shipped_med_us": 813.77, "candidate_med_us": 619.23, "ratio": 0.7609, "delta_pct": -23.91, "per_round_delta_pct": [-23.91, -24.35, -23.76, -23.64, -24.09, -24.02, -23.8, -23.63, -23.83], "shipped_all": [813.77, 818.02, 812.27, 811.46, 815.26, 814.78, 812.63, 810.94, 815.43], "candidate_all": [619.18, 618.84, 619.24, 619.63, 618.85, 619.04, 619.23, 619.33, 621.12], "all_rounds_improve": true}
+{"mode": "mem-warm", "dtype": "fp16", "route": "shipped", "peak_alloc_MB": 5.33, "peak_reserved_MB": 262.0}
+{"mode": "mem-warm", "dtype": "fp16", "route": "candidate", "peak_alloc_MB": 5.33, "peak_reserved_MB": 262.0}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"mode": "final-ab", "dtype": "bf16", "rounds": 9, "iters": 30, "shipped_med_us": 775.32, "candidate_med_us": 620.56, "ratio": 0.8004, "delta_pct": -19.96, "per_round_delta_pct": [-19.98, -20.03, -20.34, -20.41, -19.89, -19.89, -20.01, -19.38, -20.02], "shipped_all": [775.51, 780.68, 777.25, 779.08, 775.32, 774.67, 774.26, 773.27, 773.96], "candidate_all": [620.58, 624.33, 619.13, 620.04, 621.14, 620.56, 619.32, 623.39, 619.04], "all_rounds_improve": true}
+{"mode": "mem-warm", "dtype": "bf16", "route": "shipped", "peak_alloc_MB": 5.33, "peak_reserved_MB": 262.0}
+{"mode": "mem-warm", "dtype": "bf16", "route": "candidate", "peak_alloc_MB": 5.33, "peak_reserved_MB": 262.0}
