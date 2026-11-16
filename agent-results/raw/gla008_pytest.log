@@ -1,0 +1,45 @@
+[W1113 10:20:37.163355315 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+..............................F..                                        [100%]
+=================================== FAILURES ===================================
+__________________ test_production_default_route_is_unchanged __________________
+
+preflight = True
+tmp_path = PosixPath('/tmp/pytest-of-gcuagent/pytest-1/test_production_default_route_0')
+
+    def test_production_default_route_is_unchanged(preflight, tmp_path):
+        """No flags: the default route must be the pre-existing one, per shape."""
+        # The pre-existing route: BF16 is admitted for every shape, FP16 only for
+        # the legacy whitelist, FP32 never.  FP16 64x64 is in that whitelist and is
+        # therefore parallel by default too -- expecting only BF16 here would have
+        # asserted the opposite of the code under test.
+        expect_parallel = {(64, 64), (128, 64), (128, 128), (32, 32)}
+        seen = {}
+        for shape in [(32, 64), (64, 64), (96, 128), (256, 64)]:
+            for dtype in ["fp16", "bf16"]:
+                fb_run, fb = _run(_case(shape, dtype, 1.0, "default"))
+                assert fb_run.returncode == 0 and fb and fb["exit"] == 0, \
+                    (fb or {}).get("error")
+                used_parallel = bool(fb["parallel_fwd_h"])
+                want = dtype in ("fp16", "bf16") and shape in expect_parallel
+>               assert used_parallel == want, (shape, dtype, used_parallel, want)
+E               AssertionError: ((32, 64), 'bf16', True, False)
+E               assert True == False
+
+tests/flag_attn/test_gla_dtype_dispatch.py:150: AssertionError
+=============================== warnings summary ===============================
+../../../flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389
+  /flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+      *************************************************************************************************************
+      The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+      The backend in torch.distributed.init_process_group set to eccl now..
+      The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+      The device parameters have been replaced with gcu in the function below:
+      torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+      *************************************************************************************************************
+      
+    warnings.warn(msg, ImportWarning)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/flag_attn/test_gla_dtype_dispatch.py::test_production_default_route_is_unchanged
+1 failed, 32 passed, 1 warning in 691.51s (0:11:31)

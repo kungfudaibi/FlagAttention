@@ -1,0 +1,8 @@
+AB 32 64 fp16 10.0 r 0 fallback median 13.0029
+AB 32 64 fp16 10.0 r 0 parallel median 13.9182
+AB 32 64 fp16 10.0 r 1 parallel median 14.8906
+AB 32 64 fp16 10.0 r 1 fallback median 14.9237
+AB 32 64 fp16 10.0 r 2 fallback median 15.982
+AB 32 64 fp16 10.0 r 2 parallel median 13.9041
+GLA008_AB_OK 6
+EXIT=0

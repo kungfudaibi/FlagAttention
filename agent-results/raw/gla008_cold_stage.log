@@ -1,0 +1,14 @@
+32x64 fp16 fwd_h: 4.29 s (8 cache files) ok=True
+32x64 fp16 bwd_dh: 4.20 s (8 cache files) ok=True
+32x64 bf16 fwd_h: 5.26 s (16 cache files) ok=True
+32x64 bf16 bwd_dh: 6.06 s (16 cache files) ok=True
+32x64 fp32 fwd_h: 5.10 s (8 cache files) ok=True
+32x64 fp32 bwd_dh: 5.01 s (8 cache files) ok=True
+96x128 fp16 fwd_h: 4.26 s (8 cache files) ok=True
+96x128 fp16 bwd_dh: 4.18 s (8 cache files) ok=True
+96x128 bf16 fwd_h: 6.13 s (16 cache files) ok=True
+96x128 bf16 bwd_dh: 6.76 s (16 cache files) ok=True
+96x128 fp32 fwd_h: 5.10 s (8 cache files) ok=True
+96x128 fp32 bwd_dh: 5.00 s (8 cache files) ok=True
+wrote /workspace/agent-workspaces/gla-dtype-dispatch-policy-4/agent-results/raw/gla008_cold_stage.jsonl (12 rows)
+EXIT=0

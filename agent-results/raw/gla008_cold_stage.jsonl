@@ -1,0 +1,12 @@
+{"stage": "fwd_h", "K": 32, "V": 64, "dtype": "fp16", "cold_ms": 4285.5449500493705, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "bwd_dh", "K": 32, "V": 64, "dtype": "fp16", "cold_ms": 4200.691950041801, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "fwd_h", "K": 32, "V": 64, "dtype": "bf16", "cold_ms": 5259.780324064195, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 16}
+{"stage": "bwd_dh", "K": 32, "V": 64, "dtype": "bf16", "cold_ms": 6061.902215238661, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 16}
+{"stage": "fwd_h", "K": 32, "V": 64, "dtype": "fp32", "cold_ms": 5095.738464035094, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "bwd_dh", "K": 32, "V": 64, "dtype": "fp32", "cold_ms": 5006.635976955295, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "fwd_h", "K": 96, "V": 128, "dtype": "fp16", "cold_ms": 4259.631210938096, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "bwd_dh", "K": 96, "V": 128, "dtype": "fp16", "cold_ms": 4177.570207044482, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "fwd_h", "K": 96, "V": 128, "dtype": "bf16", "cold_ms": 6125.624434091151, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 16}
+{"stage": "bwd_dh", "K": 96, "V": 128, "dtype": "bf16", "cold_ms": 6757.844577077776, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 16}
+{"stage": "fwd_h", "K": 96, "V": 128, "dtype": "fp32", "cold_ms": 5102.035093121231, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}
+{"stage": "bwd_dh", "K": 96, "V": 128, "dtype": "fp32", "cold_ms": 4998.71755996719, "device": 4, "stream": "gcu:4", "ok": true, "cache_files": 8}

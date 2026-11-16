@@ -1,0 +1,13 @@
+QUANT 32 64 fp16 1.0 path pass total True quant_effect True
+QUANT 32 64 bf16 1.0 path pass total True quant_effect True
+QUANT 32 64 fp32 1.0 path pass total True quant_effect True
+QUANT 64 64 fp16 1.0 path pass total True quant_effect True
+QUANT 64 64 bf16 1.0 path pass total True quant_effect True
+QUANT 64 64 fp32 1.0 path pass total True quant_effect True
+QUANT 96 128 fp16 1.0 path pass total True quant_effect True
+QUANT 96 128 bf16 1.0 path pass total True quant_effect True
+QUANT 96 128 fp32 1.0 path pass total True quant_effect True
+QUANT 256 64 fp16 1.0 path pass total True quant_effect True
+QUANT 256 64 bf16 1.0 path pass total True quant_effect True
+QUANT 256 64 fp32 1.0 path pass total True quant_effect True
+GLA008_QUANT_OK

@@ -1,0 +1,14 @@
+32x64 fp16: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 52860.5 ms, warm full 5.94 ms, cache 171 files / 10.0 MB
+32x64 bf16: cold fwd_h 0.2 ms, cold bwd 0.3 ms, cold full 47639.2 ms, warm full 7.93 ms, cache 146 files / 9.5 MB
+32x64 fp32: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 47536.7 ms, warm full 9.88 ms, cache 146 files / 9.1 MB
+64x64 fp16: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 55109.1 ms, warm full 16.91 ms, cache 171 files / 10.4 MB
+64x64 bf16: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 48834.3 ms, warm full 8.97 ms, cache 146 files / 9.7 MB
+64x64 fp32: cold fwd_h 0.3 ms, cold bwd 0.4 ms, cold full 48915.3 ms, warm full 5.98 ms, cache 146 files / 9.3 MB
+96x128 fp16: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 56176.7 ms, warm full 19.84 ms, cache 171 files / 10.4 MB
+96x128 bf16: cold fwd_h 0.3 ms, cold bwd 0.4 ms, cold full 50688.1 ms, warm full 3.74 ms, cache 146 files / 9.6 MB
+96x128 fp32: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 49599.2 ms, warm full 20.08 ms, cache 146 files / 9.2 MB
+256x64 fp16: cold fwd_h 0.2 ms, cold bwd 0.3 ms, cold full 58663.7 ms, warm full 7.27 ms, cache 171 files / 10.9 MB
+256x64 bf16: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 51928.4 ms, warm full 5.81 ms, cache 146 files / 10.1 MB
+256x64 fp32: cold fwd_h 0.2 ms, cold bwd 0.4 ms, cold full 50389.2 ms, warm full 5.94 ms, cache 146 files / 9.6 MB
+wrote agent-results/raw/gla008_cold.jsonl (12 rows)
+EXIT=0

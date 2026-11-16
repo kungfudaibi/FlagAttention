@@ -1,0 +1,14 @@
+DEFAULT default_fp16_32x64 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_bf16_32x64 route {'_chunk_fwd_local_state_kernel': 1, '_chunk_fwd_state_scan_kernel': 1} identical True
+DEFAULT default_fp32_32x64 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_fp16_64x64 route {'_chunk_fwd_local_state_kernel': 1, '_chunk_fwd_state_scan_kernel': 1} identical True
+DEFAULT default_bf16_64x64 route {'_chunk_fwd_local_state_kernel': 1, '_chunk_fwd_state_scan_kernel': 1} identical True
+DEFAULT default_fp32_64x64 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_fp16_96x128 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_bf16_96x128 route {'_chunk_fwd_local_state_kernel': 1, '_chunk_fwd_state_scan_kernel': 1} identical True
+DEFAULT default_fp32_96x128 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_fp16_256x64 route {'chunk_fwd_kernel_h': 1} identical True
+DEFAULT default_bf16_256x64 route {'_chunk_fwd_local_state_kernel': 1, '_chunk_fwd_state_scan_kernel': 1} identical True
+DEFAULT default_fp32_256x64 route {'chunk_fwd_kernel_h': 1} identical True
+GLA008_GUARDS_OK 12
+EXIT=0

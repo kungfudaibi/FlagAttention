@@ -1,0 +1,109 @@
+{
+ "kind": "environment",
+ "host": "vm-dhrj-gd-zone7-d-s60-48g-1-17",
+ "os": "Linux-6.8.0-117-generic-x86_64-with-glibc2.39",
+ "kernel": "6.8.0-117-generic",
+ "cpu_model": "AMD EPYC 9754 128-Core Processor",
+ "cpu_count": 256,
+ "python": "3.12.13",
+ "torch": "2.10.0+cpu",
+ "torch_gcu": "2.10.0+3.7.20260408",
+ "triton": "3.6.0",
+ "flagtree": "/workspace/agent-workspaces/gla-dtype-dispatch-policy-4/src:/workspace/agent-workspaces/gla-dtype-dispatch-policy-4:/opt/flagtree",
+ "container_device": 4,
+ "pci": "63:00.0",
+ "expected_pci": "63:00.0",
+ "device_name": "GCU",
+ "device_cc": "3.0",
+ "device_total_mem_mib": 41846.1,
+ "device_sm_count": 2,
+ "visible_device_count": 6,
+ "current_device": 4,
+ "stream_device": "gcu:4",
+ "tensor_device": "gcu:4",
+ "device_ok": true,
+ "cpu_affinity": [
+  128,
+  129,
+  130,
+  131,
+  132,
+  133,
+  134,
+  135,
+  136,
+  137,
+  138,
+  139,
+  140,
+  141,
+  142,
+  143,
+  144,
+  145,
+  146,
+  147,
+  148,
+  149,
+  150,
+  151,
+  152,
+  153,
+  154,
+  155,
+  156,
+  157,
+  158,
+  159
+ ],
+ "cpu_affinity_ok": true,
+ "efsmi": {
+  "0": {
+   "name": "ZIXIAOC200",
+   "pci": "23:00.0",
+   "mem_mib": 42976
+  },
+  "1": {
+   "name": "ZIXIAOC200",
+   "pci": "33:00.0",
+   "mem_mib": 42976
+  },
+  "2": {
+   "name": "ZIXIAOC200",
+   "pci": "34:00.0",
+   "mem_mib": 42976
+  },
+  "3": {
+   "name": "ZIXIAOC200",
+   "pci": "43:00.0",
+   "mem_mib": 42976
+  },
+  "4": {
+   "name": "ZIXIAOC200",
+   "pci": "63:00.0",
+   "mem_mib": 42976
+  },
+  "5": {
+   "name": "ZIXIAOC200",
+   "pci": "83:00.0",
+   "mem_mib": 42976
+  },
+  "6": {
+   "name": "ZIXIAOC200",
+   "pci": "84:00.0",
+   "mem_mib": 42976
+  },
+  "7": {
+   "name": "ZIXIAOC200",
+   "pci": null,
+   "mem_mib": 42976
+  }
+ },
+ "f32_default_env": "<unset>",
+ "experimental_flags": {
+  "FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP16_STATE": null,
+  "FLAGGEMS_ENFLAME_GLA_EXPERIMENTAL_FP32_STATE": null,
+  "FLAGGEMS_ENFLAME_GLA_PARALLEL_STATE": null,
+  "FLAGGEMS_ENFLAME_GLA_PARALLEL_BWD_STATE": null
+ }
+}
