@@ -1,0 +1,28 @@
+{
+  "id": "20261116T044252Z-99672caa",
+  "kind": "benchmark",
+  "name": "ab",
+  "exit_code": 0,
+  "machine": "enflame-1",
+  "device": 2,
+  "pci": "34:00.0",
+  "cpu": "64-95",
+  "started_at": 1794803840.2115781,
+  "ended_at": 1794804172.4172297,
+  "baseline": "bdf5129856cff6d9b0ad731148efd931b1a445fe",
+  "branch": "agent/enflame-msa-group16-formal-5",
+  "commit": "53b78452962e3ad6940c3352acbffa050c66d1be",
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "1800s",
+    "taskset",
+    "-c",
+    "64-95",
+    "/flagos/bin/python",
+    "agent-results/scripts/msa003_ab.py"
+  ],
+  "stdout": "/home/dsagent/gcu-agent-orchestrator/state/runs/MSA-005/20261116T021435Z-54f66220/checks/20261116T044252Z-99672caa/stdout.log",
+  "stderr": "/home/dsagent/gcu-agent-orchestrator/state/runs/MSA-005/20261116T021435Z-54f66220/checks/20261116T044252Z-99672caa/stderr.log"
+}

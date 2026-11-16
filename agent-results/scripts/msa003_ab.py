@@ -49,6 +49,10 @@ from triton.runtime.jit import JITFunction
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, ROOT)
 sys.path.insert(0, ROOT + "/src")
+SCRIPTS = os.path.join(ROOT, "agent-results", "scripts")
+sys.path.insert(0, SCRIPTS)
+
+import msa_ab_stats  # noqa: E402  (pure-Python noise/bimodality rules)
 
 from flag_attn import minimax_m3_sparse_attn  # noqa: E402
 from flag_attn.minimax_sparse_attention import (  # noqa: E402
@@ -457,6 +461,38 @@ def run_case(seqs, prefixes, kv, group, topk, case_id, failures: list, sink) -> 
     else:
         record["speedup"] = None
         failures.append(f"{case_id}: missing timing samples")
+
+    # Classify the timing distribution BEFORE the gate checks.  The legacy
+    # all-sample median ratio stays in ``speedup`` for continuity, but a ratio
+    # from bimodal samples or from rounds that disagree is not evidence of a
+    # speedup and must not be presented as one.
+    timing = msa_ab_stats.classify_case(record)
+    record["timing"] = {
+        "status": timing["timing_status"],
+        "ratio_usable": timing["ratio_usable"],
+        "verdict": timing["verdict"],
+        "round_median_speedup": timing["round_median_speedup"],
+        "round_ratio_range": timing["round_ratio_range"],
+        "ratio_delta": timing["ratio_delta"],
+        "A_kind": timing["A"]["kind"],
+        "B_kind": timing["B"]["kind"],
+        "A_largest_gap": timing["A"]["largest_gap"],
+        "B_largest_gap": timing["B"]["largest_gap"],
+    }
+    if not timing["ratio_usable"]:
+        print(
+            json.dumps(
+                {
+                    "probe": "timing_warning",
+                    "id": case_id,
+                    "status": timing["timing_status"],
+                    "legacy_speedup": timing["legacy_speedup"],
+                    "round_median_speedup": timing["round_median_speedup"],
+                    "reasons": timing["reasons"],
+                }
+            ),
+            flush=True,
+        )
     if path_changed != expect_change:
         failures.append(f"{case_id}: path_changed={path_changed} but gate expected {expect_change}")
     if path_changed:
@@ -468,8 +504,15 @@ def run_case(seqs, prefixes, kv, group, topk, case_id, failures: list, sink) -> 
         if "grouped8" not in variants["B"]["attention_kernel"]:
             failures.append(f"{case_id}: group16 did not use the grouped kernel")
         # The band is only proposable where it is an actual win on this run.
-        if record["speedup"] is None or record["speedup"] < 1.0:
-            failures.append(f"{case_id}: changed path did not improve ({record['speedup']})")
+        # For unusable (bimodal/round-flipped) timings the ratio is kept as
+        # evidence but cannot establish either a win or a regression.
+        if record["speedup"] is None:
+            failures.append(f"{case_id}: missing speedup")
+        elif timing["ratio_usable"] and timing["round_median_speedup"] < 1.0:
+            failures.append(
+                f"{case_id}: changed path did not improve "
+                f"({timing['round_median_speedup']:.4f}x, stable timing)"
+            )
     else:
         if variants["A"]["group_size_q"] != variants["B"]["group_size_q"]:
             failures.append(f"{case_id}: path did not change but group sizes differ")
@@ -641,6 +684,9 @@ def main() -> int:
             print(json.dumps(line), flush=True)
             torch.gcu.empty_cache()
 
+    timing_summary = msa_ab_stats.summarize(
+        [msa_ab_stats.classify_case(record) for record in records]
+    )
     summary = {
         "probe": "summary",
         "cases": len(records),
@@ -657,6 +703,10 @@ def main() -> int:
                 "A_ms": record["A"]["median_ms"],
                 "B_ms": record["B"]["median_ms"],
                 "speedup": record["speedup"],
+                "round_median_speedup": record["timing"]["round_median_speedup"],
+                "timing_status": record["timing"]["status"],
+                "ratio_usable": record["timing"]["ratio_usable"],
+                "verdict": record["timing"]["verdict"],
                 "A_peak_mib": record["A"]["peak_mib"],
                 "B_peak_mib": record["B"]["peak_mib"],
             }
@@ -664,11 +714,41 @@ def main() -> int:
             if record.get("path_changed")
         ],
         "unchanged_cases": [record["id"] for record in records if not record.get("path_changed")],
+        # The noise floor is *not* assumed: a control that is bimodal or
+        # round-flipped is reported as unresolved rather than averaged away.
+        "timing": timing_summary,
+        "noise_floor": timing_summary["noise_floor"],
     }
+    for key in (
+        "stable_gain_cases",
+        "stable_gain_boundary_cases",
+        "boundary_gain_geomean",
+        "boundary_gain_min",
+        "boundary_gain_max",
+        "inconclusive_small_cases",
+        "inconclusive_unstable_cases",
+        "stable_gain_geomean",
+        "stable_gain_min",
+        "stable_gain_max",
+        "stable_control_range",
+        "unstable_controls",
+    ):
+        summary[key] = timing_summary[key]
     if len(records) != len(CASES):
         failures.append(f"missing cases: {len(records)}/{len(CASES)}")
     if not math.isfinite(summary["elapsed_seconds"]) or summary["elapsed_seconds"] <= 0:
         failures.append("invalid elapsed time")
+    # A control that cannot change dispatch but shows unstable timing makes
+    # the run's noise floor unresolved.  That is a warning about the evidence,
+    # not a kernel failure, but the run must not print a bare "PASSED" that
+    # implies every ratio is trustworthy.
+    unstable_controls = [item["id"] for item in timing_summary["unstable_controls"]]
+    if unstable_controls:
+        print(
+            "NOISE FLOOR UNRESOLVED: unstable unchanged controls: "
+            + ", ".join(unstable_controls),
+            flush=True,
+        )
     summary["failures"] = failures
     sink.write(json.dumps(summary) + "\n")
     sink.close()
@@ -679,7 +759,10 @@ def main() -> int:
         for failure in failures:
             print(f"- {failure}", flush=True)
         return 1
-    print("PASSED", flush=True)
+    if unstable_controls:
+        print("PASSED WITH UNRESOLVED NOISE FLOOR", flush=True)
+    else:
+        print("PASSED", flush=True)
     return 0
 
 
