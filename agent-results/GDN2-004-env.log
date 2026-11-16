@@ -1,0 +1,71 @@
+=== date ===
+Mon Nov 16 02:34:46 UTC 2026
+Mon Nov 16 10:34:46 CST 2026
+
+=== efsmi -L ===
+-------------------------------------------------------------------------------
+--------------------- Enflame System Management Interface ---------------------
+--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------
+-------------------------------------------------------------------------------
+
+=== efsmi -q -i 0 ===
+-------------------------------------------------------------------------------
+--------------------- Enflame System Management Interface ---------------------
+--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------
+-------------------------------------------------------------------------------
+                                                                               
+DEV ID 0
+    Driver Info
+        Ver                     : 1.10.6
+    Device Info
+        Dev Name                : ZIXIAOC200
+        Dev UUID                : TS9P58200903
+        Dev SN                  : A0D5460521022
+        Dev PN                  : EFB-0088700-00
+        Dev MFD                 : 2026-5-4
+        Health                  : True
+    Firmware Info
+        AP FW Version           : 1.2.7
+        SP FW Version           : 3.4.21
+        SSM RT FW Version       : 35.6.16.5
+        SSM Boot FW Version     : 35.6.5
+        VPU FW Version          : 3.1.12
+    PCIe Info
+        Vendor ID               : 1ea0
+        Device ID               : 2a22
+        Domain                  : 0000
+        Bus                     : 23
+        Dev                     : 00
+        Func                    : 0
+        Receiver Error          : 0
+        Bad TLP                 : 0
+        Bad DLLP                : 0
+        Link Info               
+            Max Link Speed      : Gen5
+            Max Link Width      : X16
+            Cur Link Speed      : Gen5
+            Cur Link Width      : X16
+            Tx Throughput       : 500 MiB/s
+            Rx Throughput       : 506 MiB/s
+    Clock Info
+        Mem CLK                 : 7000 MHz
+
+=== loadavg ===
+52.52 51.75 42.02 67/14452 1157899
+
+=== python/torch/triton ===
+[W1116 02:34:47.860260464 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+3.12.13 (main, Jul 18 2026, 17:02:19) [Clang 22.1.3 ]
+torch 2.10.0+cpu
+triton 3.6.0
+torch_gcu ok
+
+=== git ===
+5f14f43 bench(gdn2): make the GDN2-004 checker accept the split, not reject it
+b77207f fix(gdn2): keep the GDN2-003 K2 V tile when the split is disabled
+ce60c4c bench(gdn2): add the GDN2-004 full-forward A/B harness
+513a0e8 perf(gdn2): split the S60 K2 state V tile in two when 128 < V <= 256
+?? agent-results/GDN2-004-ab-final.jsonl
+?? agent-results/GDN2-004-ab.jsonl
+?? agent-results/GDN2-004-state-bk.jsonl
+?? benchmark/gdn2_state_bk_probe.py

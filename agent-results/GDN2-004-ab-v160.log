@@ -1,0 +1,5 @@
+OK: 4 (dtype, shape) groups validated in /workspace/agent-workspaces/gdn2-irregular-tiles-0/agent-results/GDN2-004-ab-v160.jsonl
+  bfloat16  (2, 512, 4, 64, 128)       base=0.6893ms cand=0.6551ms speedup=1.052x rounds=[0.999, 1.067, 1.068, 1.041, 0.953] cold=15.31/15.30s bv=[128]->[128] peak=5.75/5.75MiB
+  bfloat16  (2, 512, 4, 160, 160)      base=0.9950ms cand=0.9385ms speedup=1.060x rounds=[1.06, 1.159, 1.062, 0.98, 1.074] cold=15.26/15.21s bv=[256]->[128] peak=10.53/10.53MiB
+  float16   (2, 512, 4, 64, 128)       base=0.6605ms cand=0.6610ms speedup=0.999x rounds=[1.01, 0.952, 1.071, 0.982, 0.999] cold=15.27/15.28s bv=[128]->[128] peak=5.75/5.75MiB
+  float16   (2, 512, 4, 160, 160)      base=0.9299ms cand=0.8659ms speedup=1.074x rounds=[1.153, 1.071, 1.02, 1.061, 1.156] cold=15.27/15.26s bv=[256]->[128] peak=10.53/10.53MiB

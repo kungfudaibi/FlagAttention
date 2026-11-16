@@ -1,0 +1,5 @@
+WARN: ('bfloat16', (2, 512, 4, 96, 384)) round 1: neutral control drifted 1.111x
+WARN: ('bfloat16', (2, 512, 4, 96, 384)) round 2: neutral control drifted 1.115x
+OK: 2 (dtype, shape) groups validated in /workspace/agent-workspaces/gdn2-irregular-tiles-0/agent-results/GDN2-004-ab-wideV.jsonl
+  bfloat16  (2, 512, 4, 64, 257)       base=0.8157ms cand=0.8082ms speedup=1.009x rounds=[0.92, 1.06, 0.997] cold=15.63/15.55s bv=[256]->[256] peak=8.02/8.02MiB
+  bfloat16  (2, 512, 4, 96, 384)       base=1.0193ms cand=0.9189ms speedup=1.109x rounds=[1.111, 1.115, 1.081] cold=15.95/15.86s bv=[256]->[256] peak=12.25/12.25MiB

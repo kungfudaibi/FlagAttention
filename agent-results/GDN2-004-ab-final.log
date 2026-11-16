@@ -1,0 +1,13 @@
+OK: 12 (dtype, shape) groups validated in /workspace/agent-workspaces/gdn2-irregular-tiles-0/agent-results/GDN2-004-ab-final.jsonl
+  bfloat16  (1, 1024, 4, 256, 256)     base=1.1848ms cand=1.1046ms speedup=1.073x rounds=[1.106, 1.077, 1.068] cold=17.08/17.11s bv=[256]->[128] peak=16.00/16.00MiB
+  bfloat16  (2, 512, 4, 64, 128)       base=0.6887ms cand=0.7014ms speedup=0.982x rounds=[0.918, 1.058, 0.983] cold=15.34/15.22s bv=[128]->[128] peak=5.75/5.75MiB
+  bfloat16  (2, 512, 4, 96, 96)        base=0.7544ms cand=0.7116ms speedup=1.060x rounds=[1.09, 0.953, 1.06] cold=14.54/14.47s bv=[128]->[128] peak=6.53/6.53MiB
+  bfloat16  (2, 512, 4, 96, 128)       base=0.7459ms cand=0.7221ms speedup=1.033x rounds=[0.954, 1.054, 1.043] cold=14.63/14.68s bv=[128]->[128] peak=7.12/7.12MiB
+  bfloat16  (2, 512, 4, 128, 64)       base=0.6997ms cand=0.6892ms speedup=1.015x rounds=[0.992, 1.028, 1.05] cold=16.76/16.87s bv=[64]->[64] peak=7.25/7.25MiB
+  bfloat16  (2, 512, 4, 160, 160)      base=0.9686ms cand=0.9409ms speedup=1.029x rounds=[0.993, 1.123, 1.042] cold=15.27/15.24s bv=[256]->[128] peak=10.53/10.53MiB
+  bfloat16  (2, 512, 8, 64, 64)        base=0.7949ms cand=0.7897ms speedup=1.007x rounds=[1.025, 0.954, 0.988] cold=14.47/14.28s bv=[64]->[64] peak=9.25/9.25MiB
+  bfloat16  (2, 2048, 4, 256, 256)     base=2.3550ms cand=2.1244ms speedup=1.109x rounds=[1.048, 1.179, 1.116] cold=17.09/17.17s bv=[256]->[128] peak=62.00/62.00MiB
+  float16   (1, 1024, 4, 256, 256)     base=1.1822ms cand=1.0673ms speedup=1.108x rounds=[1.016, 1.131, 1.108] cold=17.17/17.14s bv=[256]->[128] peak=16.00/16.00MiB
+  float16   (2, 512, 4, 64, 128)       base=0.6463ms cand=0.6833ms speedup=0.946x rounds=[0.941, 0.951, 1.002] cold=15.60/15.26s bv=[128]->[128] peak=5.75/5.75MiB
+  float16   (2, 512, 4, 128, 64)       base=0.6990ms cand=0.6995ms speedup=0.999x rounds=[0.935, 0.999, 1.074] cold=16.85/16.87s bv=[64]->[64] peak=7.25/7.25MiB
+  float16   (2, 512, 4, 160, 160)      base=0.9189ms cand=0.8999ms speedup=1.021x rounds=[1.015, 1.079, 1.017] cold=15.31/15.23s bv=[256]->[128] peak=10.53/10.53MiB
