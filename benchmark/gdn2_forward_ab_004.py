@@ -651,7 +651,7 @@ def command_check(args) -> int:
 
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    sub = parser.add_subparsers(dest="command", required=True)
+    sub = parser.add_subparsers(dest="command")
 
     run = sub.add_parser("run", help="measure one variant (single process)")
     run.add_argument("--tree", required=True)
@@ -679,7 +679,15 @@ def main(argv=None) -> int:
     check.add_argument("--rounds", type=int, default=None)
     check.set_defaults(func=command_check)
 
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if not argv:
+        # The task configuration invokes this file with no arguments; default to
+        # the full three-round A/B of the accepted baseline against HEAD so that
+        # command is reproducible instead of an argparse usage error.
+        argv = ["drive", "--out", "agent-results/GDN2-004-repro.jsonl"]
     args = parser.parse_args(argv)
+    if getattr(args, "func", None) is None:
+        parser.error("a subcommand is required")
     return args.func(args)
 
 
