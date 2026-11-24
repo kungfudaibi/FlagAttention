@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import os
+
 import torch
 import triton
 import triton.language as tl
@@ -19,6 +21,17 @@ from flag_attn.runtime.backend._enflame.utils import SPARSE_BLOCK_SIZE
 
 
 _PREFILL_HALF_KV_MAX_BLOCK_SIZE_QH = 8
+
+# MSA-009 experimental switch.  Unset/0 keeps the shipped default route, so the
+# stock BF16 long-prefill path is bit-for-bit unchanged unless a caller opts in:
+#     FLAG_ATTN_MSA_EARLY_V_DMA=1
+# Opt-in only issues the per-page V DMA before the QK convgen (scheduling), the
+# arithmetic and the page/accumulation order stay identical.
+_MSA_EARLY_V_DMA_ENV = "FLAG_ATTN_MSA_EARLY_V_DMA"
+
+
+def _use_early_v_dma() -> bool:
+    return os.environ.get(_MSA_EARLY_V_DMA_ENV, "0").strip().lower() in {"1", "true", "yes", "on"}
 
 
 @triton.jit
@@ -179,6 +192,7 @@ def _gqa_sparse_fwd_direct(
     STRIDE_PD: tl.constexpr = 0,
     STRIDE_SN: tl.constexpr = 0,
     USE_SHARED_PREFIX: tl.constexpr = False,
+    EARLY_V_DMA: tl.constexpr = False,
 ):
     sm_scale_log2e = sm_scale * 1.4426950409
     pid_q = tl.program_id(0)
@@ -283,6 +297,26 @@ def _gqa_sparse_fwd_direct(
                         mask=pos_mask,
                         other=1.0,
                     )
+            # MSA-009 candidate (experimental, opt-in): build the V block
+            # pointer and issue the BF16 V DMA *before* the QK convgen, so the
+            # DTE transfer overlaps the dot and the online softmax instead of
+            # sitting serially between them.  Pure scheduling change: the math,
+            # the page order and the accumulation order are untouched.
+            v_base_ptr = k_base_ptr + head_dim * stride_kv_d
+            v_ptrs = tl.make_block_ptr(
+                base=v_base_ptr,
+                shape=(BLOCK_SIZE_K, head_dim),
+                strides=(stride_kv_pos, stride_kv_d),
+                offsets=(0, 0),
+                block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
+                order=(1, 0),
+            )
+            if EARLY_V_DMA and not USE_FP8:
+                v = tl.load(
+                    v_ptrs,
+                    boundary_check=(0, 1),
+                    padding_option="zero",
+                )
             qk_dot = tl.dot(q_qk, tl.trans(k))
             if USE_FP8:
                 qk_dot *= qk_q_scale[:, None]
@@ -322,20 +356,12 @@ def _gqa_sparse_fwd_direct(
             else:
                 l_acc = l_acc * alpha[:, None] + p
 
-            v_base_ptr = k_base_ptr + head_dim * stride_kv_d
-            v_ptrs = tl.make_block_ptr(
-                base=v_base_ptr,
-                shape=(BLOCK_SIZE_K, head_dim),
-                strides=(stride_kv_pos, stride_kv_d),
-                offsets=(0, 0),
-                block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
-                order=(1, 0),
-            )
-            v = tl.load(
-                v_ptrs,
-                boundary_check=(0, 1),
-                padding_option="zero",
-            )
+            if not (EARLY_V_DMA and not USE_FP8):
+                v = tl.load(
+                    v_ptrs,
+                    boundary_check=(0, 1),
+                    padding_option="zero",
+                )
 
             if USE_FP8:
                 if KV_SCALE_MODE == 2:
@@ -849,6 +875,8 @@ def minimax_m3_sparse_attn(
         and total_q * num_heads * (head_dim + 2) * 4 <= 64 * 1024 * 1024
     )
     partial = maximum = denom = counts = output
+    # Experimental: only the BF16 direct page loop has the alternate DMA order.
+    use_early_v_dma = head_dim == 128 and block_size_h <= 8 and _use_early_v_dma()
     if use_shared_prefix:
         partial = torch.empty(q.shape, device=q.device, dtype=torch.float32)
         maximum = torch.empty(q.shape[:2], device=q.device, dtype=torch.float32)
@@ -947,6 +975,7 @@ def minimax_m3_sparse_attn(
         STRIDE_PD=partial.stride(2),
         STRIDE_SN=maximum.stride(0),
         USE_SHARED_PREFIX=use_shared_prefix,
+        EARLY_V_DMA=use_early_v_dma,
     )
 
 
