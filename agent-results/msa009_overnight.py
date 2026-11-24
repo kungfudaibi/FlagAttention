@@ -470,18 +470,24 @@ def run_benchmark(device, env, rounds=7, out_path=None):
 
     fns = {}
 
-    def set_base():
-        os.environ.pop(CANDIDATE_ENV, None)
+    def _base(fn):
+        def wrapper():
+            with with_env(None):
+                fn()
+        return wrapper
 
-    def set_cand():
-        os.environ[CANDIDATE_ENV] = "1"
+    def _cand(fn):
+        def wrapper():
+            with with_env("1"):
+                fn()
+        return wrapper
 
     if valid_base:
-        fns["baseline"] = lambda: (set_base(), call_sparse(bench, data, tk, out["baseline"], qlen, kvh))
-        fns["baseline_chain"] = lambda: (set_base(), run_chain(bench, data, out["chain_base"], qlen, seq, kvh))
+        fns["baseline"] = _base(lambda: call_sparse(bench, data, tk, out["baseline"], qlen, kvh))
+        fns["baseline_chain"] = _base(lambda: run_chain(bench, data, out["chain_base"], qlen, seq, kvh))
     if valid_cand:
-        fns["candidate"] = lambda: (set_cand(), call_sparse(bench, data, tk, out["candidate"], qlen, kvh))
-        fns["candidate_chain"] = lambda: (set_cand(), run_chain(bench, data, out["chain_cand"], qlen, seq, kvh))
+        fns["candidate"] = _cand(lambda: call_sparse(bench, data, tk, out["candidate"], qlen, kvh))
+        fns["candidate_chain"] = _cand(lambda: run_chain(bench, data, out["chain_cand"], qlen, seq, kvh))
 
     samples, orders = paired_samples(fns, rounds)
     res["samples"] = {k: summarize(v) for k, v in samples.items()}
@@ -498,10 +504,23 @@ def run_benchmark(device, env, rounds=7, out_path=None):
             speedup=statistics.median(bc) / statistics.median(cc),
             paired_deltas=[bb - cccc for bb, cccc in zip(bc, cc)])
 
-    # staged profile, both routes, outside the paired A/B
-    res["staged_baseline"] = staged_samples(bench, data, tk, out["baseline"], qlen, seq, kvh)
+    # staged profile, both routes, outside the paired A/B.  Each arm is run
+    # under an explicit switch context so a leftover env value cannot leak in.
+    with with_env(None):
+        res["staged_baseline"] = staged_samples(bench, data, tk, out["baseline"], qlen, seq, kvh)
     with with_env("1"):
         res["staged_candidate"] = staged_samples(bench, data, tk, out["candidate"], qlen, seq, kvh)
+    res["env_after_benchmark"] = os.environ.get(CANDIDATE_ENV)
+
+    # confirm the staged arms really used different routes
+    with with_env(None):
+        _b = torch.empty_like(data.q)
+        call_sparse(bench, data, tk, _b, qlen, kvh)
+    with with_env("1"):
+        _c = torch.empty_like(data.q)
+        call_sparse(bench, data, tk, _c, qlen, kvh)
+    # both routes must produce the same values (the candidate is a pure reorder)
+    res["routes_bit_identical"] = bool(torch.equal(_b, _c))
 
     # launches/IR for both routes
     out2 = torch.empty_like(data.q)
