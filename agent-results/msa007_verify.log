@@ -1,0 +1,93 @@
+[verify] PASS task id :: MSA-007
+[verify] PASS shape :: [1, 1024, 16384, 1, 8]
+[verify] PASS seed :: 6
+[verify] PASS topk/init/local
+[verify] PASS device index :: 5
+[verify] PASS device current :: 5
+[verify] PASS page bytes :: 65536
+[verify] PASS topk rows :: 1024
+[verify] PASS topk width
+[verify] PASS topk sha256
+[verify] PASS page table size
+[verify] PASS cu_q :: [0, 1024]
+[verify] PASS seq/prefix :: 16384/15360
+[verify] PASS dtype :: bf16
+[verify] PASS shared prefix selected
+[verify] PASS grouped8 not selected
+[verify] PASS counts shape :: 64
+[verify] PASS counts16 exact match :: [3, 3, 3, 3, 3, 3, 3, 3] vs [3, 3, 3, 3, 3, 3, 3, 3]
+[verify] PASS counts<=4 (kernel cap) :: 3
+[verify] PASS counts utf8 ordering
+[verify] PASS analysis.page_bytes
+[verify] PASS analysis.real_topk_values
+[verify] PASS analysis.valid_blocks_range
+[verify] PASS analysis.counts16_device
+[verify] PASS analysis.counts16_recomputed
+[verify] PASS analysis.counts16_match
+[verify] PASS analysis.counts16_hist
+[verify] PASS analysis.counts16_max
+[verify] PASS analysis.counts8_emulated
+[verify] PASS analysis.counts8_diagnostic_hist
+[verify] PASS analysis.current_prefix
+[verify] PASS analysis.group8
+[verify] PASS analysis.group8_emulated_prefix
+[verify] PASS analysis.group16
+[verify] PASS analysis.logical_total_access_bytes
+[verify] PASS group8 accesses<=slots
+[verify] PASS group8 union<=accesses
+[verify] PASS group8 remaining<=accesses
+[verify] PASS group8 no fully masked page
+[verify] PASS group8 no sentinel
+[verify] PASS group8 active>=1
+[verify] PASS group16 accesses<=slots
+[verify] PASS group16 union<=accesses
+[verify] PASS group16 remaining<=accesses
+[verify] PASS group16 no fully masked page
+[verify] PASS group16 no sentinel
+[verify] PASS group16 active>=1
+[verify] PASS accesses width-invariant
+[verify] PASS active queries width-invariant
+[verify] PASS prefix saving width-invariant
+[verify] PASS group16 remaining == direct loop
+[verify] PASS payload identity :: 1073741824
+[verify] PASS diag device :: 5
+[verify] PASS diag shape
+[verify] PASS diag seed
+[verify] PASS diag gate is 2*topk
+[verify] PASS diag gate excludes table :: 128 > 32
+[verify] PASS diag direct median
+[verify] PASS diag direct min
+[verify] PASS diag direct sorted
+[verify] PASS diag grouped8 median
+[verify] PASS diag grouped8 min
+[verify] PASS diag grouped8 sorted
+[verify] PASS diag grouped16 median
+[verify] PASS diag grouped16 min
+[verify] PASS diag grouped16 sorted
+[verify] PASS diag grouped8 speedup :: 0.600338
+[verify] PASS diag grouped8 slower than direct :: 9.084 vs 5.453 ms
+[verify] PASS diag grouped8 agrees with direct
+[verify] PASS diag grouped16 speedup :: 0.765347
+[verify] PASS diag grouped16 slower than direct :: 7.125 vs 5.453 ms
+[verify] PASS diag grouped16 agrees with direct
+[verify] PASS diag grouped16 faster than grouped8
+[verify] PASS prefix diag device
+[verify] PASS prefix diag seed
+[verify] PASS prefix diag counts == raw counts :: {3}
+[verify] PASS prefix diag prefix_kernel median
+[verify] PASS prefix diag direct_real_count median
+[verify] PASS prefix diag direct_no_prefix median
+[verify] PASS prefix diag marginal saving :: +1.0460 ms
+[verify] PASS prefix diag net :: +0.6220 ms
+[verify] PASS prefix diag verdict :: True
+[verify] PASS prefix diag real<=no-prefix
+[verify] PASS prefix diag arms agree :: cos=0.99991479 maxdiff/rms=0.0210
+[verify] PASS prefix+direct == pipeline direct :: 5.492 vs 5.453 ms (0.72%)
+[verify] PASS grouped8 verdict vs pipeline :: 9.084 vs 5.453 ms
+[verify] marginal saving per skipped page load: 0.363 us
+
+[verify] group8 : {"accesses": 16384, "union_pages": 9637, "reused_accesses": 6747, "reuse_ratio": 0.41180419921875, "remaining_accesses": 13312, "remaining_union_pages": 9253, "remaining_reused_accesses": 4059, "remaining_reuse_ratio": 0.3049128605769231}
+[verify] group16: {"accesses": 16384, "union_pages": 6640, "reused_accesses": 9744, "reuse_ratio": 0.5947265625, "remaining_accesses": 13312, "remaining_union_pages": 6448, "remaining_reused_accesses": 6864, "remaining_reuse_ratio": 0.515625}
+[verify] counts16 hist: {'3': 64}
+[verify] current prefix saved page loads: 2880 (0.1758 of accesses)
+[verify] OK: all checks passed offline (no torch, no device)
