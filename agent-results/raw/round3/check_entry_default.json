@@ -1,0 +1,16 @@
+{
+ "shape6": {
+  "sha": "4559539690ae255a79bef16fbdfdcba89d1ebaeb70642a02681e56528fd4a9cd",
+  "pristine_sha": "4559539690ae255a79bef16fbdfdcba89d1ebaeb70642a02681e56528fd4a9cd",
+  "equal": true,
+  "topk_equal": true,
+  "maxdiff": 0.0
+ },
+ "shape1": {
+  "sha": "f684383fc6941ea7eada64ff7f64e7d8bc2af3c7ac9288a243b4e540f86797bb",
+  "pristine_sha": "f684383fc6941ea7eada64ff7f64e7d8bc2af3c7ac9288a243b4e540f86797bb",
+  "equal": true,
+  "topk_equal": true,
+  "maxdiff": 0.0
+ }
+}

@@ -1,0 +1,38 @@
+{
+ "bypass": {
+  "block_table_width": 32,
+  "topk": 16,
+  "launches": [
+   {
+    "kernel": "_gqa_sparse_fwd_grouped8",
+    "grid": [
+     64,
+     1,
+     1
+    ]
+   }
+  ]
+ },
+ "main": {
+  "block_table_width": 128,
+  "topk": 16,
+  "launches": [
+   {
+    "kernel": "_gqa_sparse_common_prefix",
+    "grid": [
+     64,
+     1,
+     1
+    ]
+   },
+   {
+    "kernel": "_gqa_sparse_fwd_direct",
+    "grid": [
+     1024,
+     1,
+     1
+    ]
+   }
+  ]
+ }
+}

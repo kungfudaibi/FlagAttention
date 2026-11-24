@@ -1,0 +1,343 @@
+{
+ "mode": "verify",
+ "env": {
+  "timestamp_utc": "2026-11-24T14:48:47.211494+00:00",
+  "device_index": 5,
+  "torch_gcu_current_device": 5,
+  "device_name": "GCU",
+  "torch": "2.10.0+cpu",
+  "triton": "3.6.0",
+  "python": "3.12.13",
+  "props": {
+   "major": 3,
+   "minor": 0,
+   "total_memory_mb": 41846,
+   "multi_processor_count": 2,
+   "sip_count": 24
+  },
+  "cpu_affinity": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ],
+  "pci": "0000:83:00.0",
+  "candidate_env": {
+   "FLAG_ATTN_MSA_EARLY_V_DMA": null
+  },
+  "efsmi_query_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Driver Info\n        Ver                     : 1.10.6\n    Device Info\n        Dev Name                : ZIXIAOC200\n        Dev UUID                : TS9B37120204\n        Dev SN                  : A0D5460520864\n        Dev PN                  : EFB-0088700-00\n        Dev MFD                 : 2026-5-4\n        Health                  : True\n    Firmware Info\n        AP FW Version           : 1.2.7\n        SP FW Version           : 3.4.21\n        SSM RT FW Version       : 35.6.16.5\n        SSM Boot FW Version     : 35.6.5\n        VPU FW Version          : 3.1.12\n    PCIe Info\n        Vendor ID               : 1ea0\n        Device ID               : 2a22\n        Domain                  : 0000\n        Bus                     : 83\n        Dev                     : 00\n        Func                    : 0\n        Receiver Error          : 0\n        Bad TLP                 : 0\n        Bad DLLP                : 0\n        Link Info               \n            Max Link Speed      : Gen5\n            Max Link Width      : X16\n            Cur Link Speed      : Gen5\n            Cur Link Width      : X16\n            Tx Throughput       : 0 MiB/s\n            Rx Throughput       : 0 MiB/s\n    Clock Info\n        Mem CLK                 : 7000 MHz\n    GCU Power Readings\n        Power Usage             : 135 W\n        Current Power Limit     : 300 W\n        Requested Power Limit   : 300 W\n        Default Power Limit     : 300 W\n        Min Power Limit         : N/A\n        Max Power Limit         : N/A\n    Low Power Mode\n        Low Power Mode          : LP0\n    Device Mem Info\n        Total Size              : 42976 MiB\n        Reserved Size           : 1129 MiB\n        Used Size               : 81 MiB\n        Free Size               : 41765 MiB\n    BAR1 Mem Info\n        Total Size              : 16 MiB\n    BAR2 Mem Info\n        Total Size              : 64 GiB\n    Temperature Info\n        GCU Temp                : 54 \u2103\n        Memory Temp             : N/A\n        Board Temp              : 38 \u2103\n    Voltage Info\n        VDD GCU                 : 0.887 V\n        VDD SOC                 : 0.827 V\n        VDD MEMQC               : 1.349 V\n    Device Usage Info\n        GCU Usage               : 0.0 %\n    ECC Mode\n        Current                 : Enable\n        Pending                 : Enable\n    ECC Errors\n        Volatile\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n        Aggregate\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n    MCM Info\n        MCM Mode                : Dual\n    RMA Info\n        Flags                   : False\n        Total DBE               : 0\n    Power Cable\n        Status                  : Normal\n    VPU Info\n        Encoder Usage           : 0 %\n        Decoder Usage           : 0 %\n    Error Records\n        Total Error Count       : 7\n        Reset Count             : 7\n        Last Reset Date         : 2026-11-24 14:06:12\n    Error Details\n        User Triggered Reset    : 0\n        Internal Error          : 0\n        SIP Error               : 7\n        Bus Error               : 0\n        FW Error                : 0\n        DTE Error               : 0\n        DRAM HBM Error          : 0\n        PCIE Error              : 0\n        GCU-LARE Error          : 0\n        Unknown Error           : 0\n",
+  "driver_version": "1.10.6",
+  "ap_fw": "1.2.7",
+  "sp_fw": "3.4.21",
+  "mem_clock_mhz": "7000",
+  "health": "True"
+ },
+ "torch": "2.10.0+cpu",
+ "candidate_env": "FLAG_ATTN_MSA_EARLY_V_DMA",
+ "checks": {
+  "main": {
+   "shape": {
+    "batch": 1,
+    "query_len": 1024,
+    "seq_len": 16384,
+    "num_kv_heads": 1,
+    "num_heads": 8,
+    "head_dim": 128,
+    "topk": 16
+   },
+   "reference_rows": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    256,
+    512,
+    1000,
+    1023
+   ],
+   "baseline_vs_fp32": {
+    "max_abs": 0.0001448504626750946,
+    "mean_abs": 2.1335343262762763e-05,
+    "nonzero": 12288,
+    "numel": 12288,
+    "cosine": 0.9999984502792358
+   },
+   "candidate_vs_fp32": {
+    "max_abs": 0.0001448504626750946,
+    "mean_abs": 2.1335343262762763e-05,
+    "nonzero": 12288,
+    "numel": 12288,
+    "cosine": 0.9999984502792358
+   },
+   "baseline_vs_candidate": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "nonzero": 0,
+    "numel": 1048576,
+    "cosine": 0.9999178647994995
+   },
+   "baseline_vs_fp32_pass": true,
+   "candidate_vs_fp32_pass": true,
+   "topk_unchanged_by_switch": true,
+   "all_finite": true,
+   "mask_enforced": true,
+   "mask_detail": {
+    "row0": {
+     "q_abs": 15360,
+     "future_positions": 1023,
+     "future_changed": 0,
+     "control_positions": 15361,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row1": {
+     "q_abs": 15361,
+     "future_positions": 1022,
+     "future_changed": 0,
+     "control_positions": 15362,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row512": {
+     "q_abs": 15872,
+     "future_positions": 511,
+     "future_changed": 0,
+     "control_positions": 15873,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row1023": {
+     "q_abs": 16383,
+     "future_positions": 0,
+     "future_changed": 0,
+     "control_positions": 16384,
+     "control_changed": 1024,
+     "enforced": true
+    }
+   }
+  },
+  "bypass": {
+   "shape": {
+    "batch": 1,
+    "query_len": 512,
+    "seq_len": 4096,
+    "num_kv_heads": 1,
+    "num_heads": 8,
+    "head_dim": 128,
+    "topk": 16
+   },
+   "reference_rows": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    128,
+    256,
+    488,
+    511
+   ],
+   "baseline_vs_fp32": {
+    "max_abs": 0.00013528764247894287,
+    "mean_abs": 2.073944779112935e-05,
+    "nonzero": 12288,
+    "numel": 12288,
+    "cosine": 0.9999983906745911
+   },
+   "candidate_vs_fp32": {
+    "max_abs": 0.00013528764247894287,
+    "mean_abs": 2.073944779112935e-05,
+    "nonzero": 12288,
+    "numel": 12288,
+    "cosine": 0.9999983906745911
+   },
+   "baseline_vs_candidate": {
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "nonzero": 0,
+    "numel": 524288,
+    "cosine": 0.9999635219573975
+   },
+   "baseline_vs_fp32_pass": true,
+   "candidate_vs_fp32_pass": true,
+   "topk_unchanged_by_switch": true,
+   "all_finite": true,
+   "mask_enforced": true,
+   "mask_detail": {
+    "row0": {
+     "q_abs": 3584,
+     "future_positions": 511,
+     "future_changed": 0,
+     "control_positions": 3585,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row1": {
+     "q_abs": 3585,
+     "future_positions": 510,
+     "future_changed": 0,
+     "control_positions": 3586,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row256": {
+     "q_abs": 3840,
+     "future_positions": 255,
+     "future_changed": 0,
+     "control_positions": 3841,
+     "control_changed": 1024,
+     "enforced": true
+    },
+    "row511": {
+     "q_abs": 4095,
+     "future_positions": 0,
+     "future_changed": 0,
+     "control_positions": 4096,
+     "control_changed": 1024,
+     "enforced": true
+    }
+   }
+  }
+ },
+ "launch": {
+  "baseline": [
+   {
+    "kernel": "_gqa_sparse_common_prefix",
+    "grid": [
+     64,
+     1,
+     1
+    ],
+    "constexpr": {
+     "num_warps": 1,
+     "num_stages": 1
+    }
+   },
+   {
+    "kernel": "_gqa_sparse_fwd_direct",
+    "grid": [
+     1024,
+     1,
+     1
+    ],
+    "constexpr": {
+     "BLOCK_SIZE_Q": 1,
+     "BLOCK_SIZE_K": 128,
+     "BLOCK_SIZE_D": 128,
+     "BLOCK_SIZE_H": 8,
+     "BLOCK_SIZE_QH": 8,
+     "USE_FP8": false,
+     "KV_SCALE_MODE": 0,
+     "num_warps": 1,
+     "num_stages": 1,
+     "GROUP_Q": 16,
+     "NUM_GROUPS": 64,
+     "STRIDE_PN": 1024,
+     "STRIDE_PH": 128,
+     "STRIDE_PD": 1,
+     "STRIDE_SN": 8,
+     "USE_SHARED_PREFIX": true,
+     "EARLY_V_DMA": false
+    }
+   }
+  ],
+  "candidate": [
+   {
+    "kernel": "_gqa_sparse_common_prefix",
+    "grid": [
+     64,
+     1,
+     1
+    ],
+    "constexpr": {
+     "num_warps": 1,
+     "num_stages": 1
+    }
+   },
+   {
+    "kernel": "_gqa_sparse_fwd_direct",
+    "grid": [
+     1024,
+     1,
+     1
+    ],
+    "constexpr": {
+     "BLOCK_SIZE_Q": 1,
+     "BLOCK_SIZE_K": 128,
+     "BLOCK_SIZE_D": 128,
+     "BLOCK_SIZE_H": 8,
+     "BLOCK_SIZE_QH": 8,
+     "USE_FP8": false,
+     "KV_SCALE_MODE": 0,
+     "num_warps": 1,
+     "num_stages": 1,
+     "GROUP_Q": 16,
+     "NUM_GROUPS": 64,
+     "STRIDE_PN": 1024,
+     "STRIDE_PH": 128,
+     "STRIDE_PD": 1,
+     "STRIDE_SN": 8,
+     "USE_SHARED_PREFIX": true,
+     "EARLY_V_DMA": true
+    }
+   }
+  ]
+ },
+ "default_route_unchanged": true,
+ "candidate_opt_in_reached": true,
+ "ir": [
+  {
+   "mode": "candidate",
+   "direct_source_sha256": "177f858fa1eb3cd6677087b960ef3e9b1b3a8203ea786e38dcb4b38c0b8e70d8",
+   "early_v_dma_lowered": true
+  }
+ ],
+ "default_route_bit_exact": {
+  "shape6": {
+   "digest": "4559539690ae255a79bef16fbdfdcba89d1ebaeb70642a02681e56528fd4a9cd",
+   "pristine_digest": "4559539690ae255a79bef16fbdfdcba89d1ebaeb70642a02681e56528fd4a9cd",
+   "bit_identical": true
+  },
+  "shape1": {
+   "digest": "f684383fc6941ea7eada64ff7f64e7d8bc2af3c7ac9288a243b4e540f86797bb",
+   "pristine_digest": "f684383fc6941ea7eada64ff7f64e7d8bc2af3c7ac9288a243b4e540f86797bb",
+   "bit_identical": true
+  }
+ },
+ "pass": true
+}

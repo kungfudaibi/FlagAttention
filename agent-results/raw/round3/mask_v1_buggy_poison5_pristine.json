@@ -1,0 +1,20 @@
+{
+ "row0": {
+  "q_abs": 3584,
+  "poisoned": 511,
+  "changed": 0,
+  "max_delta": 0.0
+ },
+ "row1": {
+  "q_abs": 3585,
+  "poisoned": 510,
+  "changed": 1024,
+  "max_delta": 4.963623046875
+ },
+ "row7": {
+  "q_abs": 3591,
+  "poisoned": 504,
+  "changed": 1024,
+  "max_delta": 1.9410400390625
+ }
+}

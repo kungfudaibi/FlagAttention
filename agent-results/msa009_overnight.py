@@ -265,6 +265,69 @@ def torch_reference(data, tk, rows, scale, seq_len, num_heads):
     return out
 
 
+BLOCK = 128
+
+
+def mask_check(bench, data, tk, clean, qlen, kvh, rows, poison=30000.0):
+    """Falsifiable per-row causal-mask test on logical positions.
+
+    The kernels mask on the *logical* position blk*BLOCK + o, where blk indexes
+    the page table; the physical page is a random permutation of blk.  So the
+    poison set is built from the logical position and written into the physical
+    page the block table maps it to.
+
+      future  : positions > q_abs(row r)  -> row r must be bit-identical
+      control : positions <= q_abs(row r) -> row r must change (poison reaches it)
+
+    Only row r is asserted: the same pages are legitimately visible to other rows.
+    """
+    bt = data.block_table.cpu()
+    blocks = sorted({int(x) for x in tk[0].reshape(-1).tolist() if int(x) >= 0})
+    page_of = {blk: int(bt[0, blk]) for blk in blocks}
+    prefix_len = int(data.prefix_lens[0].item())
+
+    def run(edits):
+        kv = data.kv_cache.clone()
+        big = torch.tensor(poison, dtype=kv.dtype, device=kv.device)
+        n = 0
+        for page, offs in edits.items():
+            if offs:
+                kv[page, :, torch.tensor(sorted(offs), device=kv.device), :] = big
+                n += len(offs)
+        saved = data.kv_cache
+        data.kv_cache = kv
+        try:
+            out = torch.empty_like(data.q)
+            call_sparse(bench, data, tk, out, qlen, kvh)
+        finally:
+            data.kv_cache = saved
+        return out, n
+
+    res = {}
+    for r in rows:
+        q_abs = prefix_len + r
+        fut, vis = {}, {}
+        for blk in blocks:
+            page, base = page_of[blk], blk * BLOCK
+            f = [o for o in range(BLOCK) if base + o > q_abs]
+            v = [o for o in range(BLOCK) if base + o <= q_abs]
+            if f:
+                fut[page] = f
+            if v:
+                vis[page] = v
+        dirty, n_f = run(fut)
+        ch_f = int((dirty[r] != clean[r]).sum())
+        ctrl, n_v = run(vis)
+        ch_v = int((ctrl[r] != clean[r]).sum())
+        res[f"row{r}"] = dict(q_abs=q_abs, future_positions=n_f, future_changed=ch_f,
+                              control_positions=n_v, control_changed=ch_v,
+                              enforced=(ch_f == 0 and ch_v > 0))
+        print(f"[mask r={r}] q_abs={q_abs} future n={n_f} changed={ch_f} | "
+              f"control n={n_v} changed={ch_v} -> "
+              f"{'ENFORCED' if ch_f == 0 and ch_v > 0 else 'LEAK/INCONCLUSIVE'}")
+    return res
+
+
 def diff_stats(a, b):
     d = (a.float().cpu() - b.float().cpu()).abs()
     af, bf = a.float().cpu().reshape(-1), b.float().cpu().reshape(-1)
@@ -312,14 +375,10 @@ def run_verify(device, env):
 
         finite = bool(torch.isfinite(outs["baseline"]).all().item()
                       and torch.isfinite(outs["candidate"]).all().item())
-        # mask semantics: no position beyond seq_len / q_abs may contribute, so a
-        # query whose whole selected window is out of range yields exactly 0.
-        prefix_len = int(data.prefix_lens[0].item())
-        masked_zero_ok = True
-        for r in rows:
-            q_abs = prefix_len + r
-            if q_abs < 0:
-                masked_zero_ok &= bool((outs["baseline"][r].abs().max().item() == 0.0))
+        # falsifiable causal-mask test (logical positions), both routes
+        mask_rows = [0, 1, qlen // 2, qlen - 1]
+        mask_res = mask_check(bench, data, tk, outs["baseline"], qlen, kvh, mask_rows)
+        masked_zero_ok = all(v["enforced"] for v in mask_res.values())
         base_ok = (d_base["max_abs"] <= BF16_ATOL + BF16_RTOL * ref.abs().max().item()
                    and d_base["cosine"] > 0.999)
         cand_ok = (d_cand["max_abs"] <= BF16_ATOL + BF16_RTOL * ref.abs().max().item()
@@ -332,7 +391,8 @@ def run_verify(device, env):
             "baseline_vs_candidate": d_pair,
             "baseline_vs_fp32_pass": base_ok, "candidate_vs_fp32_pass": cand_ok,
             "topk_unchanged_by_switch": bool(topk_same),
-            "all_finite": finite, "mask_zero_ok": bool(masked_zero_ok),
+            "all_finite": finite, "mask_enforced": bool(masked_zero_ok),
+            "mask_detail": mask_res,
         }
         res["checks"][tag] = entry
         ok &= base_ok and cand_ok and topk_same and finite and masked_zero_ok
@@ -437,7 +497,7 @@ def staged_samples(bench, data, tk, out, qlen, seq, kvh, rounds=7):
     return paired_samples(stages, rounds)[0]
 
 
-def run_benchmark(device, env, rounds=7, out_path=None):
+def run_benchmark(device, env, rounds=11, out_path=None):
     from benchmark import test_minimax_sparse_attention_benchmark as bench
     from flag_attn.runtime.backend._enflame.msa import sparse_attn as sa
 
@@ -553,7 +613,7 @@ def main():
     ap.add_argument("--device", type=int, default=5)
     ap.add_argument("--verify", action="store_true")
     ap.add_argument("--benchmark", action="store_true")
-    ap.add_argument("--rounds", type=int, default=7)
+    ap.add_argument("--rounds", type=int, default=11)
     ap.add_argument("--out", default=None, help="optional JSON output path")
     args = ap.parse_args()
     if args.device != 5:
@@ -580,7 +640,15 @@ def main():
         print(f"[verify] wrote {out_path}")
         rc = 0 if res["pass"] else 1
     elif args.benchmark:
-        res = run_benchmark(5, env, rounds=args.rounds, out_path=args.out)
+        out_path = args.out or os.path.join(
+            "/tmp", f"msa009_bench_{time.strftime('%Y%m%dT%H%M%SZ', time.gmtime())}.json")
+        if not os.environ.get("MSA009_ALLOW_WORKTREE_WRITE") and \
+                os.path.abspath(out_path).startswith(os.path.abspath(REPO) + os.sep):
+            print(f"FATAL: refusing to write {out_path} inside the Git worktree "
+                  f"(set MSA009_ALLOW_WORKTREE_WRITE=1 for a deliberate session-artifact write)")
+            return 5
+        res = run_benchmark(5, env, rounds=args.rounds, out_path=out_path)
+        print(f"[benchmark] wrote {out_path}")
         rc = 0 if res["baseline_valid"] else 1
     else:
         ap.error("choose --verify or --benchmark")

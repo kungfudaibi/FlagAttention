@@ -1,0 +1,176 @@
+{
+ "main": {
+  "seq_len": 16384,
+  "qlen": 1024,
+  "prefix_len": 15360,
+  "rows": {
+   "row0": {
+    "q_abs": 15360,
+    "future_positions": 1023,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15361,
+    "control_changed": 1024,
+    "control_max_delta": 29952.037109375,
+    "mask_enforced": true
+   },
+   "row1": {
+    "q_abs": 15361,
+    "future_positions": 1022,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15362,
+    "control_changed": 1024,
+    "control_max_delta": 29952.033203125,
+    "mask_enforced": true
+   },
+   "row7": {
+    "q_abs": 15367,
+    "future_positions": 1016,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15368,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03125,
+    "mask_enforced": true
+   },
+   "row15": {
+    "q_abs": 15375,
+    "future_positions": 1008,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15376,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03515625,
+    "mask_enforced": true
+   },
+   "row16": {
+    "q_abs": 15376,
+    "future_positions": 1007,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15377,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03515625,
+    "mask_enforced": true
+   },
+   "row256": {
+    "q_abs": 15616,
+    "future_positions": 767,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15617,
+    "control_changed": 1024,
+    "control_max_delta": 29952.02734375,
+    "mask_enforced": true
+   },
+   "row512": {
+    "q_abs": 15872,
+    "future_positions": 511,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 15873,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03515625,
+    "mask_enforced": true
+   },
+   "row1023": {
+    "q_abs": 16383,
+    "future_positions": 0,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 16384,
+    "control_changed": 1024,
+    "control_max_delta": 29952.0390625,
+    "mask_enforced": true
+   }
+  }
+ },
+ "bypass": {
+  "seq_len": 4096,
+  "qlen": 512,
+  "prefix_len": 3584,
+  "rows": {
+   "row0": {
+    "q_abs": 3584,
+    "future_positions": 511,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3585,
+    "control_changed": 1024,
+    "control_max_delta": 29952.033203125,
+    "mask_enforced": true
+   },
+   "row1": {
+    "q_abs": 3585,
+    "future_positions": 510,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3586,
+    "control_changed": 1024,
+    "control_max_delta": 29952.029296875,
+    "mask_enforced": true
+   },
+   "row7": {
+    "q_abs": 3591,
+    "future_positions": 504,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3592,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03125,
+    "mask_enforced": true
+   },
+   "row15": {
+    "q_abs": 3599,
+    "future_positions": 496,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3600,
+    "control_changed": 1024,
+    "control_max_delta": 29952.02734375,
+    "mask_enforced": true
+   },
+   "row16": {
+    "q_abs": 3600,
+    "future_positions": 495,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3601,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03125,
+    "mask_enforced": true
+   },
+   "row128": {
+    "q_abs": 3712,
+    "future_positions": 383,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3713,
+    "control_changed": 1024,
+    "control_max_delta": 29952.03125,
+    "mask_enforced": true
+   },
+   "row256": {
+    "q_abs": 3840,
+    "future_positions": 255,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 3841,
+    "control_changed": 1024,
+    "control_max_delta": 29952.029296875,
+    "mask_enforced": true
+   },
+   "row511": {
+    "q_abs": 4095,
+    "future_positions": 0,
+    "future_changed": 0,
+    "future_max_delta": 0.0,
+    "control_positions": 4096,
+    "control_changed": 1024,
+    "control_max_delta": 29952.029296875,
+    "mask_enforced": true
+   }
+  }
+ }
+}

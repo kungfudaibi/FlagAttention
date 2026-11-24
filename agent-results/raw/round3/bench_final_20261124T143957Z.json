@@ -1,0 +1,457 @@
+{
+ "mode": "benchmark",
+ "env": {
+  "timestamp_utc": "2026-11-24T14:39:59.654433+00:00",
+  "device_index": 5,
+  "torch_gcu_current_device": 5,
+  "device_name": "GCU",
+  "torch": "2.10.0+cpu",
+  "triton": "3.6.0",
+  "python": "3.12.13",
+  "props": {
+   "major": 3,
+   "minor": 0,
+   "total_memory_mb": 41846,
+   "multi_processor_count": 2,
+   "sip_count": 24
+  },
+  "cpu_affinity": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ],
+  "pci": "0000:83:00.0",
+  "candidate_env": {
+   "FLAG_ATTN_MSA_EARLY_V_DMA": null
+  },
+  "efsmi_query_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Driver Info\n        Ver                     : 1.10.6\n    Device Info\n        Dev Name                : ZIXIAOC200\n        Dev UUID                : TS9B37120204\n        Dev SN                  : A0D5460520864\n        Dev PN                  : EFB-0088700-00\n        Dev MFD                 : 2026-5-4\n        Health                  : True\n    Firmware Info\n        AP FW Version           : 1.2.7\n        SP FW Version           : 3.4.21\n        SSM RT FW Version       : 35.6.16.5\n        SSM Boot FW Version     : 35.6.5\n        VPU FW Version          : 3.1.12\n    PCIe Info\n        Vendor ID               : 1ea0\n        Device ID               : 2a22\n        Domain                  : 0000\n        Bus                     : 83\n        Dev                     : 00\n        Func                    : 0\n        Receiver Error          : 0\n        Bad TLP                 : 0\n        Bad DLLP                : 0\n        Link Info               \n            Max Link Speed      : Gen5\n            Max Link Width      : X16\n            Cur Link Speed      : Gen5\n            Cur Link Width      : X16\n            Tx Throughput       : 0 MiB/s\n            Rx Throughput       : 0 MiB/s\n    Clock Info\n        Mem CLK                 : 7000 MHz\n    GCU Power Readings\n        Power Usage             : 135 W\n        Current Power Limit     : 300 W\n        Requested Power Limit   : 300 W\n        Default Power Limit     : 300 W\n        Min Power Limit         : N/A\n        Max Power Limit         : N/A\n    Low Power Mode\n        Low Power Mode          : LP0\n    Device Mem Info\n        Total Size              : 42976 MiB\n        Reserved Size           : 1129 MiB\n        Used Size               : 81 MiB\n        Free Size               : 41765 MiB\n    BAR1 Mem Info\n        Total Size              : 16 MiB\n    BAR2 Mem Info\n        Total Size              : 64 GiB\n    Temperature Info\n        GCU Temp                : 54 \u2103\n        Memory Temp             : N/A\n        Board Temp              : 38 \u2103\n    Voltage Info\n        VDD GCU                 : 0.887 V\n        VDD SOC                 : 0.831 V\n        VDD MEMQC               : 1.349 V\n    Device Usage Info\n        GCU Usage               : 0.0 %\n    ECC Mode\n        Current                 : Enable\n        Pending                 : Enable\n    ECC Errors\n        Volatile\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n        Aggregate\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n    MCM Info\n        MCM Mode                : Dual\n    RMA Info\n        Flags                   : False\n        Total DBE               : 0\n    Power Cable\n        Status                  : Normal\n    VPU Info\n        Encoder Usage           : 0 %\n        Decoder Usage           : 0 %\n    Error Records\n        Total Error Count       : 7\n        Reset Count             : 7\n        Last Reset Date         : 2026-11-24 14:06:12\n    Error Details\n        User Triggered Reset    : 0\n        Internal Error          : 0\n        SIP Error               : 7\n        Bus Error               : 0\n        FW Error                : 0\n        DTE Error               : 0\n        DRAM HBM Error          : 0\n        PCIE Error              : 0\n        GCU-LARE Error          : 0\n        Unknown Error           : 0\n",
+  "driver_version": "1.10.6",
+  "ap_fw": "1.2.7",
+  "sp_fw": "3.4.21",
+  "mem_clock_mhz": "7000",
+  "health": "True"
+ },
+ "shape": {
+  "batch": 1,
+  "query_len": 1024,
+  "seq_len": 16384,
+  "num_kv_heads": 1,
+  "num_heads": 8,
+  "head_dim": 128,
+  "topk": 16,
+  "shape_index": 6
+ },
+ "rounds": 11,
+ "correctness_gate": {
+  "baseline_vs_fp32": {
+   "max_abs": 0.0001448504626750946,
+   "mean_abs": 2.1452777218655683e-05,
+   "nonzero": 10240,
+   "numel": 10240,
+   "cosine": 0.9999982118606567
+  },
+  "candidate_vs_fp32": {
+   "max_abs": 0.0001448504626750946,
+   "mean_abs": 2.1452777218655683e-05,
+   "nonzero": 10240,
+   "numel": 10240,
+   "cosine": 0.9999982118606567
+  },
+  "baseline_vs_candidate": {
+   "max_abs": 0.0,
+   "mean_abs": 0.0,
+   "nonzero": 0,
+   "numel": 1048576,
+   "cosine": 0.9999178647994995
+  }
+ },
+ "baseline_valid": true,
+ "candidate_valid": true,
+ "candidate_env": "FLAG_ATTN_MSA_EARLY_V_DMA",
+ "samples": {
+  "baseline": {
+   "n": 11,
+   "samples": [
+    5.560245990753174,
+    5.394390106201172,
+    5.39371395111084,
+    5.393655776977539,
+    5.390356063842773,
+    5.401830196380615,
+    5.386486053466797,
+    5.384940147399902,
+    5.383649826049805,
+    5.396609783172607,
+    5.384099960327148
+   ],
+   "median": 5.393655776977539,
+   "mean": 5.4063616232438525,
+   "min": 5.383649826049805,
+   "max": 5.560245990753174,
+   "stdev": 0.051363657714968064
+  },
+  "baseline_chain": {
+   "n": 11,
+   "samples": [
+    6.806250095367432,
+    6.782773971557617,
+    6.782219886779785,
+    6.778260231018066,
+    6.798913955688477,
+    6.7899298667907715,
+    6.7707600593566895,
+    6.787199974060059,
+    6.77647590637207,
+    7.0514397621154785,
+    6.776383876800537
+   ],
+   "median": 6.782773971557617,
+   "mean": 6.809146144173362,
+   "min": 6.7707600593566895,
+   "max": 7.0514397621154785,
+   "stdev": 0.08103014151569404
+  },
+  "candidate": {
+   "n": 11,
+   "samples": [
+    4.845779895782471,
+    4.832176208496094,
+    4.809239864349365,
+    4.8011860847473145,
+    4.818960189819336,
+    4.794283866882324,
+    4.800375938415527,
+    4.796939849853516,
+    4.803390026092529,
+    4.8043060302734375,
+    4.80171012878418
+   ],
+   "median": 4.803390026092529,
+   "mean": 4.809849825772372,
+   "min": 4.794283866882324,
+   "max": 4.845779895782471,
+   "stdev": 0.016078889683530107
+  },
+  "candidate_chain": {
+   "n": 11,
+   "samples": [
+    6.189030170440674,
+    6.179850101470947,
+    6.192014217376709,
+    6.184319972991943,
+    6.183030128479004,
+    6.185009956359863,
+    6.177043914794922,
+    6.187290191650391,
+    6.175516128540039,
+    6.181680202484131,
+    6.174930095672607
+   ],
+   "median": 6.183030128479004,
+   "mean": 6.182701370932839,
+   "min": 6.174930095672607,
+   "max": 6.192014217376709,
+   "stdev": 0.005559652582761405
+  }
+ },
+ "order": [
+  [
+   "baseline",
+   "baseline_chain",
+   "candidate",
+   "candidate_chain"
+  ],
+  [
+   "baseline_chain",
+   "candidate",
+   "candidate_chain",
+   "baseline"
+  ],
+  [
+   "candidate",
+   "candidate_chain",
+   "baseline",
+   "baseline_chain"
+  ],
+  [
+   "candidate_chain",
+   "baseline",
+   "baseline_chain",
+   "candidate"
+  ],
+  [
+   "baseline",
+   "baseline_chain",
+   "candidate",
+   "candidate_chain"
+  ],
+  [
+   "baseline_chain",
+   "candidate",
+   "candidate_chain",
+   "baseline"
+  ],
+  [
+   "candidate",
+   "candidate_chain",
+   "baseline",
+   "baseline_chain"
+  ],
+  [
+   "candidate_chain",
+   "baseline",
+   "baseline_chain",
+   "candidate"
+  ],
+  [
+   "baseline",
+   "baseline_chain",
+   "candidate",
+   "candidate_chain"
+  ],
+  [
+   "baseline_chain",
+   "candidate",
+   "candidate_chain",
+   "baseline"
+  ],
+  [
+   "candidate",
+   "candidate_chain",
+   "baseline",
+   "baseline_chain"
+  ]
+ ],
+ "delta_sparse_attn": {
+  "baseline_median": 5.393655776977539,
+  "candidate_median": 4.803390026092529,
+  "speedup": 1.1228852430634662,
+  "paired_deltas": [
+   0.7144660949707031,
+   0.5622138977050781,
+   0.5844740867614746,
+   0.5924696922302246,
+   0.5713958740234375,
+   0.607546329498291,
+   0.5861101150512695,
+   0.5880002975463867,
+   0.5802597999572754,
+   0.5923037528991699,
+   0.5823898315429688
+  ]
+ },
+ "delta_full_chain": {
+  "baseline_median": 6.782773971557617,
+  "candidate_median": 6.183030128479004,
+  "speedup": 1.096998369831031,
+  "paired_deltas": [
+   0.6172199249267578,
+   0.6029238700866699,
+   0.5902056694030762,
+   0.593940258026123,
+   0.6158838272094727,
+   0.6049199104309082,
+   0.5937161445617676,
+   0.599909782409668,
+   0.6009597778320312,
+   0.8697595596313477,
+   0.6014537811279297
+  ]
+ },
+ "staged_baseline": {
+  "index_score": [
+   1.0671600103378296,
+   0.9395560026168823,
+   0.9426460266113281,
+   0.934440016746521,
+   0.934033989906311,
+   0.9513139724731445,
+   0.9367200136184692
+  ],
+  "index_topk": [
+   1.521615982055664,
+   1.5354299545288086,
+   1.5162440538406372,
+   1.5172200202941895,
+   1.5097060203552246,
+   1.5276600122451782,
+   1.5023540258407593
+  ],
+  "sparse_attn": [
+   5.399940013885498,
+   5.367300033569336,
+   5.363339900970459,
+   5.364719867706299,
+   5.358883857727051,
+   5.358704090118408,
+   5.372804164886475
+  ],
+  "full_chain": [
+   6.765870094299316,
+   6.7703537940979,
+   6.75894021987915,
+   7.155613899230957,
+   6.7696661949157715,
+   6.75560998916626,
+   6.7557759284973145
+  ]
+ },
+ "staged_candidate": {
+  "index_score": [
+   0.9998559951782227,
+   0.934723973274231,
+   0.9330599904060364,
+   0.9265639781951904,
+   0.9303299784660339,
+   0.9332839846611023,
+   0.9292200207710266
+  ],
+  "index_topk": [
+   1.525696039199829,
+   1.5364960432052612,
+   1.5045900344848633,
+   1.5127500295639038,
+   1.5166939496994019,
+   1.5315300226211548,
+   1.5108000040054321
+  ],
+  "sparse_attn": [
+   4.811639785766602,
+   4.770676136016846,
+   4.766866207122803,
+   4.80418586730957,
+   4.766503810882568,
+   4.773270130157471,
+   4.763803958892822
+  ],
+  "full_chain": [
+   6.146609783172607,
+   6.144750118255615,
+   6.159374237060547,
+   6.14971399307251,
+   6.1679840087890625,
+   6.164639949798584,
+   6.1875901222229
+  ]
+ },
+ "env_after_benchmark": null,
+ "routes_bit_identical": true,
+ "launch_baseline": [
+  {
+   "kernel": "_gqa_sparse_common_prefix",
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "constexpr": {
+    "num_warps": 1,
+    "num_stages": 1
+   }
+  },
+  {
+   "kernel": "_gqa_sparse_fwd_direct",
+   "grid": [
+    1024,
+    1,
+    1
+   ],
+   "constexpr": {
+    "BLOCK_SIZE_Q": 1,
+    "BLOCK_SIZE_K": 128,
+    "BLOCK_SIZE_D": 128,
+    "BLOCK_SIZE_H": 8,
+    "BLOCK_SIZE_QH": 8,
+    "USE_FP8": false,
+    "KV_SCALE_MODE": 0,
+    "num_warps": 1,
+    "num_stages": 1,
+    "GROUP_Q": 16,
+    "NUM_GROUPS": 64,
+    "STRIDE_PN": 1024,
+    "STRIDE_PH": 128,
+    "STRIDE_PD": 1,
+    "STRIDE_SN": 8,
+    "USE_SHARED_PREFIX": true,
+    "EARLY_V_DMA": false
+   }
+  }
+ ],
+ "launch_candidate": [
+  {
+   "kernel": "_gqa_sparse_common_prefix",
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "constexpr": {
+    "num_warps": 1,
+    "num_stages": 1
+   }
+  },
+  {
+   "kernel": "_gqa_sparse_fwd_direct",
+   "grid": [
+    1024,
+    1,
+    1
+   ],
+   "constexpr": {
+    "BLOCK_SIZE_Q": 1,
+    "BLOCK_SIZE_K": 128,
+    "BLOCK_SIZE_D": 128,
+    "BLOCK_SIZE_H": 8,
+    "BLOCK_SIZE_QH": 8,
+    "USE_FP8": false,
+    "KV_SCALE_MODE": 0,
+    "num_warps": 1,
+    "num_stages": 1,
+    "GROUP_Q": 16,
+    "NUM_GROUPS": 64,
+    "STRIDE_PN": 1024,
+    "STRIDE_PH": 128,
+    "STRIDE_PD": 1,
+    "STRIDE_SN": 8,
+    "USE_SHARED_PREFIX": true,
+    "EARLY_V_DMA": true
+   }
+  }
+ ],
+ "ir": [
+  {
+   "mode": "candidate",
+   "direct_source_sha256": "177f858fa1eb3cd6677087b960ef3e9b1b3a8203ea786e38dcb4b38c0b8e70d8",
+   "early_v_dma_lowered": true
+  }
+ ]
+}
