@@ -1,0 +1,135 @@
+{
+ "meta": {
+  "device_index": 5,
+  "shape": [
+   1,
+   1024,
+   16384,
+   1,
+   8
+  ],
+  "seed": 6,
+  "counts": [
+   [
+    [
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3,
+     3
+    ]
+   ]
+  ],
+  "counts_hist": {
+   "3": 64
+  },
+  "note": "diagnostic only; prefix cost and direct-kernel delta measured separately. The no-prefix arm neutralises the prefix state (count=0, m=-inf, l=0, partial=0) so both arms compute the same attention and differ only in whether the shared pages are re-loaded."
+ },
+ "prefix_kernel": {
+  "samples_ms": [
+   0.41443202644586563,
+   0.4163319244980812,
+   0.4209112375974655,
+   0.42404234409332275,
+   0.4241820424795151,
+   0.4310114309191704,
+   0.43298210948705673
+  ],
+  "median_ms": 0.42404234409332275,
+  "min_ms": 0.41443202644586563
+ },
+ "direct_real_count": {
+  "samples_ms": [
+   5.057382397353649,
+   5.061441101133823,
+   5.061601288616657,
+   5.06818201392889,
+   5.076941102743149,
+   5.085340701043606,
+   5.0869295373559
+  ],
+  "median_ms": 5.06818201392889,
+  "min_ms": 5.057382397353649
+ },
+ "direct_no_prefix": {
+  "samples_ms": [
+   6.109351292252541,
+   6.111960858106613,
+   6.113051436841488,
+   6.114210933446884,
+   6.1196694150567055,
+   6.121831946074963,
+   6.151890382170677
+  ],
+  "median_ms": 6.114210933446884,
+  "min_ms": 6.109351292252541
+ },
+ "output_max_abs_diff_real_vs_no_prefix": 0.000244140625,
+ "output_mean_abs_diff_real_vs_no_prefix": 6.129994289949536e-10,
+ "output_rms": 0.011625749059021473,
+ "output_cosine": 0.9999147860196652,
+ "output_max_rel_diff_vs_rms": 0.020999990947727292,
+ "prefix_ms": 0.42404234409332275,
+ "marginal_saving_ms": 1.046028919517994,
+ "net_ms": 0.6219865754246712,
+ "prefix_pays_for_itself": true
+}

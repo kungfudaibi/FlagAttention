@@ -1,0 +1,3 @@
+# GCU5 occupancy scan, 2026-11-24T13:49:08Z
+# method: list /proc/*/fd symlinks and grep for gcu5 (fuser/lsof unavailable in container)
+holders_found=0
