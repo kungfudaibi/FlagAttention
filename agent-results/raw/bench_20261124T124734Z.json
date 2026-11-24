@@ -1,0 +1,1762 @@
+{
+ "env": {
+  "timestamp_utc": "2026-11-24T12:47:34.229088+00:00",
+  "device_index": 5,
+  "device_name": "GCU",
+  "torch": "2.10.0+cpu",
+  "triton": "3.6.0",
+  "python": "3.12.13",
+  "gcu_toolkit": "",
+  "privateuse1_kineto": true,
+  "props": {
+   "major": 3,
+   "minor": 0,
+   "total_memory_mb": 41846,
+   "multi_processor_count": 2,
+   "sip_count": 24
+  },
+  "cpu_affinity": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ],
+  "env": {
+   "PYTHONPATH": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src:/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d:/opt/flagtree:/opt/flagtree",
+   "TRITON_GCU_OP_TRACE": null,
+   "TRITON_GCU_DEBUG": null,
+   "TRITON_CACHE_DIR": null
+  },
+  "efsmi_pmon_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev Pid      DevMem  SysMem  Command           \n*Idx #        %       M       Name              \n5    2412605  0.2     172.0   /flagos/bin/python agent-results/msa008_direct_pipeline.py --device 5 --benchmark --rounds 7 \n",
+  "own_pids": [
+   55,
+   2412591,
+   2412602,
+   2412603,
+   2412605
+  ],
+  "foreign_pids": [],
+  "efsmi_dmon_idle_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev  DramRd     DramWr     SIPUtil    \n*Idx  MiB/s      MiB/s      %          \n5     0.0        0.0        0.0        \n5     N/A        N/A        N/A        \n5     0.0        0.0        0.0        \n",
+  "efsmi_query_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Driver Info\n        Ver                     : 1.10.6\n    Device Info\n        Dev Name                : ZIXIAOC200\n        Dev UUID                : TS9B37120204\n        Dev SN                  : A0D5460520864\n        Dev PN                  : EFB-0088700-00\n        Dev MFD                 : 2026-5-4\n        Health                  : True\n    Firmware Info\n        AP FW Version           : 1.2.7\n        SP FW Version           : 3.4.21\n        SSM RT FW Version       : 35.6.16.5\n        SSM Boot FW Version     : 35.6.5\n        VPU FW Version          : 3.1.12\n    PCIe Info\n        Vendor ID               : 1ea0\n        Device ID               : 2a22\n        Domain                  : 0000\n        Bus                     : 83\n        Dev                     : 00\n        Func                    : 0\n        Receiver Error          : 0\n        Bad TLP                 : 0\n        Bad DLLP                : 0\n        Link Info               \n            Max Link Speed      : Gen5\n            Max Link Width      : X16\n            Cur Link Speed      : Gen5\n            Cur Link Width      : X16\n            Tx Throughput       : 0 MiB/s\n            Rx Throughput       : 0 MiB/s\n    Clock Info\n        Mem CLK                 : 7000 MHz\n    GCU Power Readings\n        Power Usage             : 136 W\n        Current Power Limit     : 300 W\n        Requested Power Limit   : 300 W\n        Default Power Limit     : 300 W\n        Min Power Limit         : N/A\n        Max Power Limit         : N/A\n    Low Power Mode\n        Low Power Mode          : LP0\n    Device Mem Info\n        Total Size              : 42976 MiB\n        Reserved Size           : 1129 MiB\n        Used Size               : 81 MiB\n        Free Size               : 41765 MiB\n    BAR1 Mem Info\n        Total Size              : 16 MiB\n    BAR2 Mem Info\n        Total Size              : 64 GiB\n    Temperature Info\n        GCU Temp                : 54 \u2103\n        Memory Temp             : N/A\n        Board Temp              : 39 \u2103\n    Voltage Info\n        VDD GCU                 : 0.887 V\n        VDD SOC                 : 0.827 V\n        VDD MEMQC               : 1.345 V\n    Device Usage Info\n        GCU Usage               : 0.0 %\n    ECC Mode\n        Current                 : Enable\n        Pending                 : Enable\n    ECC Errors\n        Volatile\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n        Aggregate\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n    MCM Info\n        MCM Mode                : Dual\n    RMA Info\n        Flags                   : False\n        Total DBE               : 0\n    Power Cable\n        Status                  : Normal\n    VPU Info\n        Encoder Usage           : 0 %\n        Decoder Usage           : 0 %\n    Error Records\n        Total Error Count       : 6\n        Reset Count             : 6\n        Last Reset Date         : 2026-11-22 05:02:46\n    Error Details\n        User Triggered Reset    : 0\n        Internal Error          : 0\n        SIP Error               : 6\n        Bus Error               : 0\n        FW Error                : 0\n        DTE Error               : 0\n        DRAM HBM Error          : 0\n        PCIE Error              : 0\n        GCU-LARE Error          : 0\n        Unknown Error           : 0\n",
+  "pci": "0000:83:00.0",
+  "pci_from_sysfs": "/sys/bus/pci/devices/0000:23:00.0/gcu_reload\n/sys/bus/pci/devices/0000:33:00.0/gcu_reload\n/sys/bus/pci/devices/0000:34:00.0/gcu_reload",
+  "driver_version": "1.10.6",
+  "dev_name": "ZIXIAOC200",
+  "ap_fw": "1.2.7",
+  "sp_fw": "3.4.21",
+  "mem_clock_mhz": "7000",
+  "power_w": "136",
+  "gcu_usage_pct_before": 0.0,
+  "busy_before": false,
+  "gcu_usage_raw_before": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Device Usage Info\n        GCU Usage               : 0.0 %\n",
+  "cwd": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d",
+  "cpu_affinity_after_pin": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ]
+ },
+ "shape": {
+  "batch": 1,
+  "query_len": 1024,
+  "seq_len": 16384,
+  "num_kv_heads": 1,
+  "num_heads": 8,
+  "head_dim": 128,
+  "topk": 16,
+  "rounds": 7
+ },
+ "shared_prefix_count_hist": {
+  "0": 0,
+  "1": 0,
+  "2": 0,
+  "3": 64,
+  "4": 0
+ },
+ "shared_prefix_mean_pages": 3.0,
+ "grid": {
+  "prefix": [
+   64,
+   1,
+   1
+  ],
+  "direct": [
+   1024,
+   1,
+   1
+  ]
+ },
+ "end_to_end_ms": {
+  "stock": {
+   "n": 7,
+   "samples": [
+    5.57914400100708,
+    5.432429790496826,
+    5.477550029754639,
+    5.415840148925781,
+    5.419680118560791,
+    5.429145812988281,
+    5.41180419921875
+   ],
+   "median": 5.429145812988281,
+   "mean": 5.45222772870745,
+   "min": 5.41180419921875,
+   "max": 5.57914400100708
+  },
+  "copy_on": {
+   "n": 7,
+   "samples": [
+    5.372429847717285,
+    5.398349761962891,
+    5.363580226898193,
+    5.357580184936523,
+    5.359573841094971,
+    5.349689960479736,
+    5.410379886627197
+   ],
+   "median": 5.363580226898193,
+   "mean": 5.373083387102399,
+   "min": 5.349689960479736,
+   "max": 5.410379886627197
+  },
+  "copy_off": {
+   "n": 7,
+   "samples": [
+    5.932516098022461,
+    5.914393901824951,
+    5.921175956726074,
+    5.917243957519531,
+    5.924623966217041,
+    5.915266036987305,
+    5.9201860427856445
+   ],
+   "median": 5.9201860427856445,
+   "mean": 5.9207722800118585,
+   "min": 5.914393901824951,
+   "max": 5.932516098022461
+  },
+  "copy_pin": {
+   "n": 7,
+   "samples": [
+    5.332709789276123,
+    5.327414035797119,
+    5.324069976806641,
+    5.472856044769287,
+    5.320303916931152,
+    5.326303958892822,
+    5.315310001373291
+   ],
+   "median": 5.326303958892822,
+   "mean": 5.345566817692348,
+   "min": 5.315310001373291,
+   "max": 5.472856044769287
+  },
+  "copy_on_s2": {
+   "n": 7,
+   "samples": [
+    5.3770341873168945,
+    5.36587381362915,
+    5.357639789581299,
+    5.365454196929932,
+    5.372220039367676,
+    5.363009929656982,
+    5.367914199829102
+   ],
+   "median": 5.36587381362915,
+   "mean": 5.367020879473005,
+   "min": 5.357639789581299,
+   "max": 5.3770341873168945
+  },
+  "abl_qk_only": {
+   "n": 7,
+   "samples": [
+    3.7311298847198486,
+    3.7296299934387207,
+    3.730966091156006,
+    3.7283101081848145,
+    3.728804111480713,
+    3.7329599857330322,
+    3.727786064147949
+   ],
+   "median": 3.7296299934387207,
+   "mean": 3.729940891265869,
+   "min": 3.727786064147949,
+   "max": 3.7329599857330322
+  },
+  "abl_no_pv": {
+   "n": 7,
+   "samples": [
+    4.709444999694824,
+    4.704989910125732,
+    4.694414138793945,
+    4.696139812469482,
+    4.690425872802734,
+    4.6917901039123535,
+    4.699289798736572
+   ],
+   "median": 4.696139812469482,
+   "mean": 4.698070662362235,
+   "min": 4.690425872802734,
+   "max": 4.709444999694824
+  },
+  "abl_no_softmax": {
+   "n": 7,
+   "samples": [
+    4.774799823760986,
+    4.760159969329834,
+    4.761285781860352,
+    4.731825828552246,
+    4.77318000793457,
+    4.765079975128174,
+    4.764959812164307
+   ],
+   "median": 4.764959812164307,
+   "mean": 4.761613028390067,
+   "min": 4.731825828552246,
+   "max": 4.774799823760986
+  },
+  "abl_no_v_dma": {
+   "n": 7,
+   "samples": [
+    4.751473903656006,
+    4.774529933929443,
+    4.751850128173828,
+    4.754848957061768,
+    4.756050109863281,
+    4.7781901359558105,
+    4.7750701904296875
+   ],
+   "median": 4.756050109863281,
+   "mean": 4.763144765581403,
+   "min": 4.751473903656006,
+   "max": 4.7781901359558105
+  },
+  "copy_on_pipe2": {
+   "n": 7,
+   "samples": [
+    5.365349769592285,
+    5.3638200759887695,
+    5.359573841094971,
+    5.35545015335083,
+    5.3729400634765625,
+    5.356184005737305,
+    5.361825942993164
+   ],
+   "median": 5.361825942993164,
+   "mean": 5.362163407461984,
+   "min": 5.35545015335083,
+   "max": 5.3729400634765625
+  },
+  "copy_on_w2": {
+   "n": 7,
+   "samples": [
+    19.173343658447266,
+    19.17506980895996,
+    19.17313575744629,
+    19.16521453857422,
+    19.16132926940918,
+    19.237619400024414,
+    19.161314010620117
+   ],
+   "median": 19.17313575744629,
+   "mean": 19.178146634783065,
+   "min": 19.161314010620117,
+   "max": 19.237619400024414
+  }
+ },
+ "full_chain_ms": {
+  "full_chain": {
+   "n": 7,
+   "samples": [
+    6.811709880828857,
+    6.771389961242676,
+    6.787424087524414,
+    6.77008581161499,
+    6.782400131225586,
+    6.7706098556518555,
+    6.77842378616333
+   ],
+   "median": 6.77842378616333,
+   "mean": 6.7817205020359586,
+   "min": 6.77008581161499,
+   "max": 6.811709880828857
+  }
+ },
+ "staged_ms": {
+  "index_score": {
+   "n": 7,
+   "samples": [
+    1.0970100164413452,
+    0.9815400242805481,
+    0.973904013633728,
+    0.9762139916419983,
+    0.9676799774169922,
+    0.9805639982223511,
+    0.9772199988365173
+   ],
+   "median": 0.9772199988365173,
+   "mean": 0.9934474314962115,
+   "min": 0.9676799774169922,
+   "max": 1.0970100164413452
+  },
+  "index_topk": {
+   "n": 7,
+   "samples": [
+    0.700950026512146,
+    0.7178559899330139,
+    0.6808940172195435,
+    0.6814339756965637,
+    0.673740029335022,
+    0.678059995174408,
+    0.6767699718475342
+   ],
+   "median": 0.6808940172195435,
+   "mean": 0.6871005722454616,
+   "min": 0.673740029335022,
+   "max": 0.7178559899330139
+  },
+  "prefix_kernel": {
+   "n": 7,
+   "samples": [
+    0.3870599865913391,
+    0.3708600103855133,
+    0.370633989572525,
+    0.37248000502586365,
+    0.36414000391960144,
+    0.3656100034713745,
+    0.3668699860572815
+   ],
+   "median": 0.370633989572525,
+   "mean": 0.3710934264319284,
+   "min": 0.36414000391960144,
+   "max": 0.3870599865913391
+  },
+  "direct_reuse_13p": {
+   "n": 7,
+   "samples": [
+    5.012475967407227,
+    4.999350070953369,
+    5.019390106201172,
+    5.007090091705322,
+    5.006609916687012,
+    5.006474018096924,
+    4.999094009399414
+   ],
+   "median": 5.006609916687012,
+   "mean": 5.007212025778634,
+   "min": 4.999094009399414,
+   "max": 5.019390106201172
+  },
+  "direct_no_prefix_16p": {
+   "n": 7,
+   "samples": [
+    5.918146133422852,
+    5.916103839874268,
+    5.912293910980225,
+    5.90802001953125,
+    5.9063401222229,
+    5.909175872802734,
+    5.90595006942749
+   ],
+   "median": 5.909175872802734,
+   "mean": 5.910861424037388,
+   "min": 5.90595006942749,
+   "max": 5.918146133422852
+  },
+  "pages1": {
+   "n": 7,
+   "samples": [
+    0.7558640241622925,
+    0.7445539832115173,
+    0.7498199939727783,
+    0.7411059737205505,
+    0.740086019039154,
+    0.7431600093841553,
+    0.7512159943580627
+   ],
+   "median": 0.7445539832115173,
+   "mean": 0.7465437139783587,
+   "min": 0.740086019039154,
+   "max": 0.7558640241622925
+  },
+  "pages4": {
+   "n": 7,
+   "samples": [
+    1.7701499462127686,
+    1.7617640495300293,
+    1.7579400539398193,
+    1.7574299573898315,
+    1.7590960264205933,
+    1.7563639879226685,
+    1.7764060497283936
+   ],
+   "median": 1.7590960264205933,
+   "mean": 1.7627357244491577,
+   "min": 1.7563639879226685,
+   "max": 1.7764060497283936
+  },
+  "pages8": {
+   "n": 7,
+   "samples": [
+    3.1516199111938477,
+    3.1502840518951416,
+    3.1427700519561768,
+    3.149806022644043,
+    3.1460258960723877,
+    3.1479740142822266,
+    3.1483500003814697
+   ],
+   "median": 3.1483500003814697,
+   "mean": 3.148118564060756,
+   "min": 3.1427700519561768,
+   "max": 3.1516199111938477
+  },
+  "pages12": {
+   "n": 7,
+   "samples": [
+    4.523086071014404,
+    4.533884048461914,
+    4.513800144195557,
+    4.519800186157227,
+    4.513800144195557,
+    4.513319969177246,
+    4.514369964599609
+   ],
+   "median": 4.514369964599609,
+   "mean": 4.518865789685931,
+   "min": 4.513319969177246,
+   "max": 4.533884048461914
+  },
+  "pages16": {
+   "n": 7,
+   "samples": [
+    5.9132537841796875,
+    5.914095878601074,
+    5.90123987197876,
+    5.903535842895508,
+    5.9077959060668945,
+    5.908184051513672,
+    5.905409812927246
+   ],
+   "median": 5.9077959060668945,
+   "mean": 5.90764502116612,
+   "min": 5.90123987197876,
+   "max": 5.914095878601074
+  }
+ },
+ "launch_meta": [
+  {
+   "kernel": "_index_block_score_kernel",
+   "grid": [
+    16,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "BLOCK_SIZE_Q": 64,
+    "BLOCK_SIZE_K": 128,
+    "num_warps": 1
+   }
+  },
+  {
+   "kernel": "_prefill_topk_rows_enflame",
+   "grid": [
+    128,
+    1,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "TOPK": 16,
+    "BLOCK_SIZE_N": 128,
+    "SPARSE_BLOCK": 128,
+    "BLOCK_SIZE_Q": 8,
+    "num_warps": 1,
+    "num_stages": 1
+   }
+  },
+  {
+   "kernel": "_gqa_sparse_common_prefix",
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "num_warps": 1,
+    "num_stages": 1
+   }
+  },
+  {
+   "kernel": "_gqa_sparse_fwd_direct",
+   "grid": [
+    1024,
+    1,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "BLOCK_SIZE_Q": 1,
+    "BLOCK_SIZE_K": 128,
+    "BLOCK_SIZE_D": 128,
+    "BLOCK_SIZE_H": 8,
+    "BLOCK_SIZE_QH": 8,
+    "USE_FP8": false,
+    "KV_SCALE_MODE": 0,
+    "num_warps": 1,
+    "num_stages": 1,
+    "GROUP_Q": 16,
+    "NUM_GROUPS": 64,
+    "STRIDE_PN": 1024,
+    "STRIDE_PH": 128,
+    "STRIDE_PD": 1,
+    "STRIDE_SN": 8,
+    "USE_SHARED_PREFIX": true
+   }
+  }
+ ],
+ "hardware_counters": {
+  "positive_control": {
+   "tag": "positive_control_matmul_4096x4096x4096",
+   "samples": [
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ]
+   ],
+   "raw_header": [
+    "*Dev  SIPUtil    SIPUsed    DramRd     DramWr     Dec0       Dec1       Dec2       Dec3       ",
+    "*Idx  %          %          MiB/s      MiB/s      %          %          %          %          ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        "
+   ],
+   "nonzero_samples": 0
+  },
+  "msa_full_chain": {
+   "tag": "msa_full_chain",
+   "samples": [
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ]
+   ],
+   "raw_header": [
+    "*Dev  SIPUtil    SIPUsed    DramRd     DramWr     Dec0       Dec1       Dec2       Dec3       ",
+    "*Idx  %          %          MiB/s      MiB/s      %          %          %          %          ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        "
+   ],
+   "nonzero_samples": 0
+  },
+  "verdict": "GPM counters report zero even under the positive control, so they carry no information on this card; they are NOT used to attribute time."
+ },
+ "numeric_diffs_vs_copy_on": {
+  "copy_on_vs_copy_off": {
+   "max_abs": 0.000244140625,
+   "mean_abs": 6.129994289949536e-10,
+   "nonzero": 7,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_copy_pin": {
+   "max_abs": 0.2193603515625,
+   "mean_abs": 0.036444712430238724,
+   "nonzero": 1048092,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_copy_on_s2": {
+   "max_abs": 0.0,
+   "mean_abs": 0.0,
+   "nonzero": 0,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_copy_on_pipe2": {
+   "max_abs": 0.0,
+   "mean_abs": 0.0,
+   "nonzero": 0,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_copy_on_w2": {
+   "max_abs": 0.000244140625,
+   "mean_abs": 5.820766091346741e-10,
+   "nonzero": 5,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_abl_qk_only": {
+   "max_abs": 0.39166259765625,
+   "mean_abs": 0.05412701517343521,
+   "nonzero": 1048290,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_abl_no_pv": {
+   "max_abs": 6.76873779296875,
+   "mean_abs": 4.609973430633545,
+   "nonzero": 1048576,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_abl_no_softmax": {
+   "max_abs": 0.341796875,
+   "mean_abs": 0.04006819427013397,
+   "nonzero": 1048112,
+   "numel": 1048576,
+   "finite": true
+  },
+  "copy_on_vs_abl_no_v_dma": {
+   "max_abs": 0.08349609375,
+   "mean_abs": 0.013984729535877705,
+   "nonzero": 1047614,
+   "numel": 1048576,
+   "finite": true
+  },
+  "stock_vs_copy_on": {
+   "max_abs": 0.0,
+   "numel": 1048576
+  }
+ },
+ "per_page_marginal": {
+  "full": {
+   "ms_at_4_pages": 1.7711700201034546,
+   "ms_at_16_pages": 5.910523891448975,
+   "marginal_ms_per_page": 0.34494615594546,
+   "fixed_ms": 0.3913853963216145
+  },
+  "qk_only": {
+   "ms_at_4_pages": 1.2608259916305542,
+   "ms_at_16_pages": 3.945796012878418,
+   "marginal_ms_per_page": 0.2237475017706553,
+   "fixed_ms": 0.365835984547933
+  },
+  "qk_softmax": {
+   "ms_at_4_pages": 1.574489951133728,
+   "ms_at_16_pages": 5.090849876403809,
+   "marginal_ms_per_page": 0.2930299937725067,
+   "fixed_ms": 0.40236997604370117
+  },
+  "both_dots": {
+   "ms_at_4_pages": 1.587030053138733,
+   "ms_at_16_pages": 5.2231340408325195,
+   "marginal_ms_per_page": 0.30300866564114887,
+   "fixed_ms": 0.37499539057413744
+  },
+  "no_v_dma": {
+   "ms_at_4_pages": 1.5890840291976929,
+   "ms_at_16_pages": 5.128905773162842,
+   "marginal_ms_per_page": 0.2949851453304291,
+   "fixed_ms": 0.40914344787597656
+  },
+  "pipelined": {
+   "ms_at_4_pages": 1.767930030822754,
+   "ms_at_16_pages": 5.901373863220215,
+   "marginal_ms_per_page": 0.3444536526997884,
+   "fixed_ms": 0.39011542002360033
+  }
+ },
+ "page_sweep": {
+  "topk": {
+   "1": {
+    "shared_prefix_pages_prefix_on": 1.0,
+    "pages_in_direct_loop_prefix_off": 1
+   },
+   "4": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 4
+   },
+   "8": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 8
+   },
+   "12": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 12
+   },
+   "16": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 16
+   }
+  },
+  "median_ms": {
+   "pages1": 0.7445539832115173,
+   "pages4": 1.7590960264205933,
+   "pages8": 3.1483500003814697,
+   "pages12": 4.514369964599609,
+   "pages16": 5.9077959060668945
+  },
+  "linear_fit": {
+   "slope_ms_per_page": 0.34431458523918906,
+   "intercept_ms": 0.391453577174667,
+   "r2": 0.9999821039961454
+  },
+  "samples": {
+   "pages1": [
+    0.7558640241622925,
+    0.7445539832115173,
+    0.7498199939727783,
+    0.7411059737205505,
+    0.740086019039154,
+    0.7431600093841553,
+    0.7512159943580627
+   ],
+   "pages4": [
+    1.7701499462127686,
+    1.7617640495300293,
+    1.7579400539398193,
+    1.7574299573898315,
+    1.7590960264205933,
+    1.7563639879226685,
+    1.7764060497283936
+   ],
+   "pages8": [
+    3.1516199111938477,
+    3.1502840518951416,
+    3.1427700519561768,
+    3.149806022644043,
+    3.1460258960723877,
+    3.1479740142822266,
+    3.1483500003814697
+   ],
+   "pages12": [
+    4.523086071014404,
+    4.533884048461914,
+    4.513800144195557,
+    4.519800186157227,
+    4.513800144195557,
+    4.513319969177246,
+    4.514369964599609
+   ],
+   "pages16": [
+    5.9132537841796875,
+    5.914095878601074,
+    5.90123987197876,
+    5.903535842895508,
+    5.9077959060668945,
+    5.908184051513672,
+    5.905409812927246
+   ]
+  }
+ },
+ "notes": {
+  "copy_pin": "block_table forced to page 0: identical instruction path and identical masks, only KV addresses change (locality probe, wrong numerics).",
+  "abl_*": "MODE 1/2/3/4 ablation probes, wrong numerics by construction.",
+  "copy_on_w2": "same math with num_warps=2 (diagnostic, numerics recorded).",
+  "copy_on_s2": "num_stages=2 pipeline probe on the copied kernel."
+ },
+ "ir_census": {
+  "source": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src/flag_attn/runtime/backend/_enflame/msa/sparse_attn.py",
+  "cache_dirs": [
+   "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+   "/home/gcuagent/.triton/cache/L7O6KQKMDMNKSZCV7EMAU56OXDH6TEJMBU2JCQT74O2DTAEPANRA",
+   "/home/gcuagent/.triton/cache/7AWRN4M4HWSEDW7XA4GR7KY2HXGPFIIKKZM56ZL6MUDFNDAZN7PA"
+  ],
+  "per_file": {
+   "gcuir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.gcuir",
+    "size": 116245,
+    "counts": {
+     "gcu.border": 161,
+     "vector.load": 145,
+     "vector.store": 82,
+     "arith.addf": 73,
+     "memref.reinterpret_cast": 60,
+     "memref.alloc": 49,
+     "arith.constant": 40,
+     "memref.dealloc": 38,
+     "arith.addi": 32,
+     "gcu.vector_movsft": 32,
+     "memref.dma_wait": 26,
+     "arith.muli": 20,
+     "gcu.int2ptr": 20,
+     "gcu.ptr2int": 19,
+     "gcu.ptr2memref": 19,
+     "gcu.vector_convert": 19,
+     "gcu.extern_elementwise_op": 16,
+     "memref.store": 16,
+     "arith.mulf": 16,
+     "arith.truncf": 16,
+     "vector.extract": 16,
+     "arith.select": 13,
+     "arith.index_cast": 12,
+     "vector.broadcast": 11,
+     "memref.dma_start": 9,
+     "arith.subf": 9,
+     "math.exp2": 9,
+     "arith.extsi": 8,
+     "memref.load": 8,
+     "vector.reduction": 8,
+     "arith.cmpi": 7,
+     "memref_ext.broadcast_start": 7,
+     "memref_ext.slice_start": 7,
+     "scf.yield": 7,
+     "gcu.memref2ptr": 4,
+     "gpu.block_id": 3,
+     "scf.if": 3,
+     "arith.subi": 2,
+     "func.return": 2,
+     "arith.minsi": 2,
+     "scf.for": 2,
+     "arith.divsi": 2,
+     "memref_ext.deslice_start": 2,
+     "gpu.barrier": 2,
+     "gcu.matmul": 2,
+     "gcu.mfence": 2,
+     "builtin.module": 1,
+     "gpu.module": 1,
+     "func.func": 1,
+     "cf.cond_br": 1,
+     "gcu.vector_step": 1,
+     "gpu.thread_id": 1,
+     "memref_ext.transpose_start": 1,
+     "arith.maxnumf": 1,
+     "arith.cmpf": 1,
+     "arith.divf": 1,
+     "gpu.func": 1,
+     "func.call": 1,
+     "gpu.return": 1
+    },
+    "region": {
+     "chars": 52696,
+     "lines": 469,
+     "counts": {
+      "scf.for": 1,
+      "gcu.border": 68,
+      "memref.alloc": 23,
+      "gcu.ptr2memref": 6,
+      "memref.reinterpret_cast": 30,
+      "memref.dma_start": 3,
+      "memref.dma_wait": 12,
+      "memref.load": 2,
+      "gcu.ptr2int": 2,
+      "arith.addi": 8,
+      "gcu.int2ptr": 4,
+      "arith.muli": 5,
+      "arith.extsi": 1,
+      "arith.index_cast": 3,
+      "gcu.memref2ptr": 2,
+      "vector.broadcast": 3,
+      "vector.load": 103,
+      "arith.cmpi": 5,
+      "gcu.vector_convert": 2,
+      "vector.store": 54,
+      "memref_ext.slice_start": 3,
+      "gpu.thread_id": 1,
+      "memref_ext.deslice_start": 1,
+      "gpu.barrier": 2,
+      "scf.if": 3,
+      "memref_ext.transpose_start": 1,
+      "scf.yield": 6,
+      "memref.dealloc": 21,
+      "gcu.matmul": 2,
+      "arith.select": 4,
+      "arith.addf": 9,
+      "memref_ext.broadcast_start": 4,
+      "gcu.extern_elementwise_op": 16,
+      "vector.reduction": 8,
+      "memref.store": 8,
+      "gcu.mfence": 1,
+      "arith.maxnumf": 1,
+      "arith.subf": 9,
+      "math.exp2": 9,
+      "arith.mulf": 8,
+      "arith.truncf": 8
+     }
+    },
+    "landmarks": {
+     "outer_query_loop": [
+      207
+     ],
+     "page_loop": [
+      372
+     ],
+     "gcu_matmul": [
+      {
+       "line": 459,
+       "text": "\"gcu.matmul\"(%469, %152, %468) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 0, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>) -> ()",
+       "has_accumulator": false
+      },
+      {
+       "line": 832,
+       "text": "\"gcu.matmul\"(%234, %635, %632, %578) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 1, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>, memref<8x128xf32>) ->",
+       "has_accumulator": true
+      }
+     ],
+     "convgen_call": [],
+     "dma_wait": [],
+     "transpose": [],
+     "deslice": []
+    }
+   },
+   "llir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.llir",
+    "size": 212529,
+    "counts": {
+     "tops_wait_dte": 26,
+     "tops_mac_v4_fp32": 16,
+     "tops_truncf_v4_fp32_to_v2_bf16": 16,
+     "tops_select_v4_fp32": 11,
+     "tops_memcpy_async": 9,
+     "tops_cvt_v1_si8_to_vbool": 9,
+     "tops_exp2_v4_fp32": 9,
+     "tops_extsi_si32_to_si64": 8,
+     "tops_redmaxnumf_v4_fp32": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__0_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__1_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__2_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__3_of_4": 8,
+     "tops_vector_movsft_r_qw2": 8,
+     "tops_vector_movsft_r_qw1": 8,
+     "tops_vector_movsft_r_b8": 8,
+     "tops_vector_movsft_r_b4": 8,
+     "tops_broadcast_v1_fp32": 8,
+     "tops_broadcast_async_2_fp32": 6,
+     "tops_private_dte_ctr": 5,
+     "tops_slice_async_2_bf16": 4,
+     "tops_get_block_id": 3,
+     "tops_broadcast_v4_si32": 3,
+     "tops_minsi_si32": 2,
+     "tops_cvt_vbool_to_v1_si8": 2,
+     "tops_slice_async_1_fp32": 2,
+     "tops_deslice_async_2_bf16": 2,
+     "tops_syncthreads": 2,
+     "tops_fence_local_memory": 2,
+     "tops_get_local_memory": 1,
+     "tops_vector_step_v4_ui32": 1,
+     "tops_broadcast_async_2_si8": 1,
+     "tops_get_shared_memory": 1,
+     "tops_get_thread_id": 1,
+     "tops_slice_async_2_fp32": 1,
+     "tops_transpose_async_2_bf16": 1,
+     "tops_convgen_m8_n128_k128_bf16_fp32": 1,
+     "tops_maxf_v4_fp32": 1,
+     "tops_convgen_m8_n128_k128_bias_bf16_fp32": 1,
+     "tops_floordivf_v4_fp32": 1
+    },
+    "region": null,
+    "landmarks": {
+     "outer_query_loop": [],
+     "page_loop": [],
+     "gcu_matmul": [],
+     "convgen_call": [
+      {
+       "line": 654,
+       "callee": "tops_convgen_m8_n128_k128_bf16_fp32"
+      },
+      {
+       "line": 1150,
+       "callee": "tops_convgen_m8_n128_k128_bias_bf16_fp32"
+      }
+     ],
+     "dma_wait": [
+      193,
+      210,
+      227,
+      245,
+      262,
+      305,
+      452,
+      484,
+      492,
+      561,
+      564,
+      567,
+      582,
+      601,
+      623,
+      631,
+      642,
+      653,
+      673,
+      746,
+      912,
+      988,
+      1149,
+      1158,
+      1480,
+      1552
+     ],
+     "transpose": [
+      640
+     ],
+     "deslice": [
+      629,
+      1550
+     ]
+    }
+   },
+   "ttir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.ttir",
+    "size": 44916,
+    "counts": {},
+    "region": null
+   }
+  },
+  "cache_dir": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+  "meta": {
+   "hash": "496f31830e0e82bef57d1ce8affb639107d47c3f9b1f3f6f1da839a3568bb29d",
+   "target": {
+    "backend": "gcu",
+    "arch": "dtu-enflame-tops--gcu300",
+    "warp_size": 12
+   },
+   "num_warps": 1,
+   "warp_size": 1,
+   "num_ctas": 1,
+   "num_stages": 2,
+   "vector_length": 512,
+   "debug": false,
+   "cluster_dims": [
+    1,
+    1,
+    1
+   ],
+   "allow_fp8e4nv": false,
+   "allow_fp8e4b15": false,
+   "supported_fp8_dtypes": [],
+   "deprecated_fp8_dot_operand_dtypes": [],
+   "default_dot_input_precision": "ieee",
+   "allowed_dot_input_precisions": [
+    "ieee"
+   ],
+   "backend_name": "gcu",
+   "max_num_imprecise_acc_default": 0,
+   "enable_fp_fusion": false,
+   "enable_stride0": false,
+   "redundant_sip": false,
+   "enable_i64": true,
+   "launch_cooperative_grid": false,
+   "extern_libs": [],
+   "sanitize_overflow": false,
+   "num_buffers_warp_spec": 0,
+   "num_consumer_groups": 0,
+   "reg_dec_producer": 0,
+   "reg_inc_consumer": 0,
+   "arch": "gcu300",
+   "max_shared": 8388608,
+   "max_local": 1572352,
+   "max_dsm": 0,
+   "instrumentation_mode": "",
+   "launch_pdl": false,
+   "triton_version": "3.6.0",
+   "ptr_int_args": [],
+   "name": "_gqa_sparse_fwd_direct",
+   "tle_raw": false,
+   "tle_raw_deferred": false,
+   "shared": 65536
+  },
+  "ttir_ops": {
+   "tt.addptr": 26,
+   "arith.constant": 22,
+   "tt.load": 14,
+   "arith.muli": 11,
+   "arith.addi": 9,
+   "arith.cmpi": 7,
+   "tt.expand_dims": 7,
+   "tt.broadcast": 7,
+   "tt.make_tensor_ptr": 5,
+   "tt.splat": 5,
+   "arith.addf": 5,
+   "arith.select": 4,
+   "arith.mulf": 4,
+   "tt.get_program_id": 3,
+   "arith.subi": 2,
+   "arith.minsi": 2,
+   "tt.make_range": 2,
+   "arith.divsi": 2,
+   "tt.dot": 2,
+   "scf.if": 2,
+   "arith.maxnumf": 2,
+   "arith.subf": 2,
+   "math.exp2": 2,
+   "arith.truncf": 2,
+   "scf.for": 1,
+   "tt.trans": 1,
+   "arith.cmpf": 1,
+   "arith.divf": 1
+  },
+  "ttir_ops_per_source_line": {
+   "128": 2,
+   "184": 1,
+   "185": 1,
+   "186": 1,
+   "187": 2,
+   "188": 2,
+   "189": 3,
+   "190": 2,
+   "191": 2,
+   "192": 2,
+   "193": 1,
+   "194": 2,
+   "195": 2,
+   "196": 1,
+   "202": 2,
+   "203": 1,
+   "204": 5,
+   "206": 1,
+   "207": 2,
+   "208": 1,
+   "210": 5,
+   "215": 1,
+   "217": 1,
+   "230": 6,
+   "231": 1,
+   "232": 3,
+   "233": 5,
+   "234": 4,
+   "236": 2,
+   "241": 1,
+   "243": 1,
+   "244": 6,
+   "245": 1,
+   "256": 1,
+   "257": 1,
+   "258": 1,
+   "259": 1,
+   "260": 2,
+   "262": 2,
+   "263": 2,
+   "265": 4,
+   "272": 1,
+   "275": 1,
+   "286": 2,
+   "290": 1,
+   "294": 2,
+   "295": 7,
+   "308": 2,
+   "310": 2,
+   "311": 5,
+   "313": 1,
+   "314": 4,
+   "318": 2,
+   "319": 3,
+   "323": 2,
+   "325": 1,
+   "332": 1,
+   "335": 1,
+   "363": 1,
+   "366": 1,
+   "367": 1,
+   "371": 3,
+   "374": 3,
+   "377": 2,
+   "382": 1,
+   "384": 2
+  },
+  "ttir_loc_aliases": {
+   "aliases": 267,
+   "resolved": 139,
+   "unresolved": 30
+  },
+  "source_line_text": {
+   "184": "pid_q = tl.program_id(0)",
+   "185": "pid_kh = tl.program_id(1)",
+   "186": "pid_b = tl.program_id(2)",
+   "187": "q_start = tl.load(cu_seqlens_q + pid_b)",
+   "188": "q_block_start = tl.load(cu_seqblocks_q + pid_b)",
+   "189": "q_block_len = tl.load(cu_seqblocks_q + pid_b + 1) - q_block_start",
+   "190": "seq_len = tl.load(seq_lens + pid_b)",
+   "191": "prefix_len = tl.load(prefix_lens + pid_b)",
+   "192": "if pid_q * num_q_loop >= q_block_len:",
+   "193": "return",
+   "194": "real_q_loop = min(num_q_loop, q_block_len - pid_q * num_q_loop)",
+   "195": "bt_row = block_table_ptr + pid_b * stride_bt_b",
+   "196": "off_n = tl.arange(0, BLOCK_SIZE_K)",
+   "203": "pid_q_j = pid_q * num_q_loop + j",
+   "204": "t_ptr_j = t_ptr + (q_block_start + pid_q_j) * stride_tn + pid_kh * stride_th",
+   "206": "q_abs = prefix_len + pid_q_j * BLOCK_SIZE_Q",
+   "207": "valid_blocks = (q_abs + BLOCK_SIZE_K) // BLOCK_SIZE_K",
+   "208": "real_topk = tl.minimum(max_topk, valid_blocks)",
+   "210": "base=q_ptr + (q_start + pid_q_j) * stride_qn + pid_kh * gqa_group_size * stride_qh,",
+   "215": "order=(1, 0),",
+   "217": "q = tl.load(q_ptrs, boundary_check=(0, 1), padding_option=\"zero\")",
+   "230": "shared_count = tl.load(count_ptr + (pid_b * num_kv_heads + pid_kh) * NUM_GROUPS + pid_q_j // GROUP_Q)",
+   "231": "hs = tl.arange(0, BLOCK_SIZE_QH)",
+   "232": "state_base = (q_start + pid_q_j) * STRIDE_SN + pid_kh * gqa_group_size",
+   "233": "m_i = tl.load(maximum_ptr + state_base + hs, mask=hs < gqa_group_size, other=float(\"-inf\"))",
+   "234": "l_i = tl.load(denom_ptr + state_base + hs, mask=hs < gqa_group_size, other=0.0)",
+   "236": "partial_ptr + (q_start + pid_q_j) * STRIDE_PN + pid_kh * gqa_group_size * STRIDE_PH,",
+   "241": "(1, 0),",
+   "243": "acc_o = tl.load(pp, boundary_check=(0, 1), padding_option=\"zero\")",
+   "244": "l_acc = tl.where(off_n[None, :] == 0, l_i[:, None], 0.0)",
+   "245": "t_ptr_j += shared_count * stride_tk",
+   "257": "blk = tl.load(t_ptr_j).to(tl.int32)",
+   "258": "t_ptr_j = t_ptr_j + stride_tk",
+   "259": "c = blk * BLOCK_SIZE_K",
+   "260": "page = tl.load(bt_row + blk).to(tl.int32)",
+   "262": "pos = c + off_n",
+   "263": "pos_mask = pos < seq_len",
+   "265": "k_base_ptr = kv_cache_ptr + page * stride_kv_blk + pid_kh * stride_kv_h",
+   "272": "order=(1, 0),",
+   "275": "k_ptrs,",
+   "286": "qk_dot = tl.dot(q_qk, tl.trans(k))",
+   "290": "is_full_causal = (c + BLOCK_SIZE_K) <= q_abs",
+   "295": "qk += tl.where(q_abs >= pos[None, :], 0, float(\"-inf\"))",
+   "294": "if not is_full_causal:",
+   "308": "qk += qk_dot * sm_scale_log2e",
+   "311": "qk += tl.where(pos_mask[None, :], 0, float(\"-inf\"))",
+   "310": "if not is_full_seq:",
+   "313": "m_ij = tl.maximum(m_i, tl.max(qk, axis=1))",
+   "314": "p = tl.exp2(qk - m_ij[:, None])",
+   "318": "alpha = tl.exp2(m_i - m_ij)",
+   "319": "acc_o = acc_o * alpha[:, None]",
+   "323": "l_acc = l_acc * alpha[:, None] + p",
+   "325": "v_base_ptr = k_base_ptr + head_dim * stride_kv_d",
+   "332": "order=(1, 0),",
+   "335": "v_ptrs,",
+   "363": "p_dot = p.to(v.dtype)",
+   "366": "acc_o += tl.dot(p_dot, v)",
+   "367": "m_i = m_ij",
+   "256": "for _ in range(shared_count, real_topk):",
+   "371": "inv_l = tl.where(l_i > 0, 1.0 / l_i, 0.0)",
+   "374": "acc_o = acc_o * inv_l[:, None]",
+   "377": "base=o_ptr + (q_start + pid_q_j) * stride_on + pid_kh * gqa_group_size * stride_oh,",
+   "382": "order=(1, 0),",
+   "384": "tl.store(o_ptrs, acc_o.to(o_ptr.dtype.element_ty), boundary_check=(0, 1))",
+   "202": "for j in range(real_q_loop):",
+   "128": "def _gqa_sparse_fwd_direct("
+  }
+ },
+ "raw": {
+  "end_to_end": {
+   "stock": [
+    5.57914400100708,
+    5.432429790496826,
+    5.477550029754639,
+    5.415840148925781,
+    5.419680118560791,
+    5.429145812988281,
+    5.41180419921875
+   ],
+   "copy_on": [
+    5.372429847717285,
+    5.398349761962891,
+    5.363580226898193,
+    5.357580184936523,
+    5.359573841094971,
+    5.349689960479736,
+    5.410379886627197
+   ],
+   "copy_off": [
+    5.932516098022461,
+    5.914393901824951,
+    5.921175956726074,
+    5.917243957519531,
+    5.924623966217041,
+    5.915266036987305,
+    5.9201860427856445
+   ],
+   "copy_pin": [
+    5.332709789276123,
+    5.327414035797119,
+    5.324069976806641,
+    5.472856044769287,
+    5.320303916931152,
+    5.326303958892822,
+    5.315310001373291
+   ],
+   "copy_on_s2": [
+    5.3770341873168945,
+    5.36587381362915,
+    5.357639789581299,
+    5.365454196929932,
+    5.372220039367676,
+    5.363009929656982,
+    5.367914199829102
+   ],
+   "abl_qk_only": [
+    3.7311298847198486,
+    3.7296299934387207,
+    3.730966091156006,
+    3.7283101081848145,
+    3.728804111480713,
+    3.7329599857330322,
+    3.727786064147949
+   ],
+   "abl_no_pv": [
+    4.709444999694824,
+    4.704989910125732,
+    4.694414138793945,
+    4.696139812469482,
+    4.690425872802734,
+    4.6917901039123535,
+    4.699289798736572
+   ],
+   "abl_no_softmax": [
+    4.774799823760986,
+    4.760159969329834,
+    4.761285781860352,
+    4.731825828552246,
+    4.77318000793457,
+    4.765079975128174,
+    4.764959812164307
+   ],
+   "abl_no_v_dma": [
+    4.751473903656006,
+    4.774529933929443,
+    4.751850128173828,
+    4.754848957061768,
+    4.756050109863281,
+    4.7781901359558105,
+    4.7750701904296875
+   ],
+   "copy_on_pipe2": [
+    5.365349769592285,
+    5.3638200759887695,
+    5.359573841094971,
+    5.35545015335083,
+    5.3729400634765625,
+    5.356184005737305,
+    5.361825942993164
+   ],
+   "copy_on_w2": [
+    19.173343658447266,
+    19.17506980895996,
+    19.17313575744629,
+    19.16521453857422,
+    19.16132926940918,
+    19.237619400024414,
+    19.161314010620117
+   ]
+  },
+  "full_chain": {
+   "full_chain": [
+    6.811709880828857,
+    6.771389961242676,
+    6.787424087524414,
+    6.77008581161499,
+    6.782400131225586,
+    6.7706098556518555,
+    6.77842378616333
+   ]
+  },
+  "staged": {
+   "index_score": [
+    1.0970100164413452,
+    0.9815400242805481,
+    0.973904013633728,
+    0.9762139916419983,
+    0.9676799774169922,
+    0.9805639982223511,
+    0.9772199988365173
+   ],
+   "index_topk": [
+    0.700950026512146,
+    0.7178559899330139,
+    0.6808940172195435,
+    0.6814339756965637,
+    0.673740029335022,
+    0.678059995174408,
+    0.6767699718475342
+   ],
+   "prefix_kernel": [
+    0.3870599865913391,
+    0.3708600103855133,
+    0.370633989572525,
+    0.37248000502586365,
+    0.36414000391960144,
+    0.3656100034713745,
+    0.3668699860572815
+   ],
+   "direct_reuse_13p": [
+    5.012475967407227,
+    4.999350070953369,
+    5.019390106201172,
+    5.007090091705322,
+    5.006609916687012,
+    5.006474018096924,
+    4.999094009399414
+   ],
+   "direct_no_prefix_16p": [
+    5.918146133422852,
+    5.916103839874268,
+    5.912293910980225,
+    5.90802001953125,
+    5.9063401222229,
+    5.909175872802734,
+    5.90595006942749
+   ],
+   "pages1": [
+    0.7558640241622925,
+    0.7445539832115173,
+    0.7498199939727783,
+    0.7411059737205505,
+    0.740086019039154,
+    0.7431600093841553,
+    0.7512159943580627
+   ],
+   "pages4": [
+    1.7701499462127686,
+    1.7617640495300293,
+    1.7579400539398193,
+    1.7574299573898315,
+    1.7590960264205933,
+    1.7563639879226685,
+    1.7764060497283936
+   ],
+   "pages8": [
+    3.1516199111938477,
+    3.1502840518951416,
+    3.1427700519561768,
+    3.149806022644043,
+    3.1460258960723877,
+    3.1479740142822266,
+    3.1483500003814697
+   ],
+   "pages12": [
+    4.523086071014404,
+    4.533884048461914,
+    4.513800144195557,
+    4.519800186157227,
+    4.513800144195557,
+    4.513319969177246,
+    4.514369964599609
+   ],
+   "pages16": [
+    5.9132537841796875,
+    5.914095878601074,
+    5.90123987197876,
+    5.903535842895508,
+    5.9077959060668945,
+    5.908184051513672,
+    5.905409812927246
+   ]
+  }
+ }
+}

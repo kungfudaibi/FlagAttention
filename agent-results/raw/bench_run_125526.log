@@ -1,0 +1,149 @@
+[W1124 12:55:25.487419998 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+{
+ "pci": "0000:83:00.0",
+ "dev_name": "ZIXIAOC200",
+ "driver_version": "1.10.6",
+ "ap_fw": "1.2.7",
+ "mem_clock_mhz": "7000",
+ "gcu_usage_pct_before": 0.0,
+ "busy_before": false,
+ "cpu_affinity_after_pin": [
+  160,
+  161,
+  162,
+  163,
+  164,
+  165,
+  166,
+  167,
+  168,
+  169,
+  170,
+  171,
+  172,
+  173,
+  174,
+  175,
+  176,
+  177,
+  178,
+  179,
+  180,
+  181,
+  182,
+  183,
+  184,
+  185,
+  186,
+  187,
+  188,
+  189,
+  190,
+  191
+ ],
+ "torch": "2.10.0+cpu",
+ "triton": "3.6.0"
+}
+INFO 11-24 12:55:27 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 11-24 12:55:27 [__init__.py:46] - fl -> vllm_fl:register
+INFO 11-24 12:55:27 [__init__.py:58] Loading plugin fl
+INFO 11-24 12:55:31 [__init__.py:237] Platform plugin fl is activated
+WARNING 11-24 12:55:32 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+/flagos/lib/python3.12/site-packages/torch/jit/_script.py:362: DeprecationWarning: `torch.jit.script_method` is deprecated. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+WARNING 11-24 12:55:33 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-24 12:55:33] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.chunk_delta_h] Patched chunk_gated_delta_rule_fwd_h for GCU (grid.x <= 65535, grid.y <= 255)
+[2026-11-24 12:55:33] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+[2026-11-24 12:55:33] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.slot_mapping] Patched BlockTable.compute_slot_mapping for GCU (on-device int32; avoids int64 Triton kernel).
+[2026-11-24 12:55:33] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.flash_attn_backend] GCU: enabled native FLASH_ATTN backend (FA2; vendor flash_attn_varlen_func + flag_gems reshape_and_cache_flash)
+WARNING 11-24 12:55:33 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+WARNING 11-24 12:55:33 [interface.py:358] Failed to import from vllm._C: ModuleNotFoundError("No module named 'vllm._C'")
+[2026-11-24 12:55:33] [INFO] [vllm_fl.dispatch.backends.vendor.gcu.impl.bilinear_pos_embed] Patched Qwen3-VL bilinear pos embed for GCU (grid.x <= 65535)
+[2026-11-24 12:55:33] [WARNING] [vllm_fl.dispatch.backends.vendor.gcu.impl.fused_recurrent_packed_decode] Failed to patch fused_recurrent_gated_delta_rule_packed_decode for GCU: No module named 'vllm.model_executor.layers.mamba.gdn_linear_attn'
+EE: [2026-11-24 12:55:44.028] [tid:2414257] efdrv/src/platform/tops_memory_mgr.hpp:130:FindMemObj DeviceId[5] of memory VA[0x85460261248000] is not match for DeviceId[0] of stream
+EE: [2026-11-24 12:55:44.028] [tid:2414257] efdrv/src/platform/api_execution_control.cpp:648:processKernelParameter Lookup memory VA in memMgr failed!!
+Exception in thread Thread-2 (loop):
+RuntimeError: Kurama Error [TOPS]: topsErrorInvalidValue
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "/root/.local/share/uv/python/cpython-3.12.13-linux-x86_64-gnu/lib/python3.12/threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/agent-results/msa008_direct_pipeline.py", line 817, in loop
+    work()
+  File "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/agent-results/msa008_direct_pipeline.py", line 924, in <lambda>
+    fns["full_chain"] = lambda: (index_score(), b.minimax_m3_index_topk(
+                                 ^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/agent-results/msa008_direct_pipeline.py", line 886, in index_score
+    return b.minimax_m3_index_score(data.idx_q, data.index_kv_cache, data.block_table,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/flagos/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src/flag_attn/runtime/backend/_enflame/msa/index_topk.py", line 53, in minimax_m3_index_score
+    _index_block_score_kernel[grid_score](
+  File "/opt/flagtree/triton/runtime/jit.py", line 400, in <lambda>
+    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/flagtree/triton/runtime/jit.py", line 796, in run
+    kernel.run(grid_0, grid_1, grid_2, stream, kernel.function, kernel.packed_metadata,
+  File "/opt/flagtree/triton/backends/enflame/backend.py", line 727, in __call__
+    self.launch(*args, **kwargs)
+  File "/opt/flagtree/triton/knobs.py", line 499, in __call__
+    for call in self.calls if not self.reversed else reversed(self.calls):
+                                                     ^^^^^^^^^^^^^^^^^^^^
+SystemError: <built-in method __reversed__ of list object at 0x74cd660c2e80> returned a result with an exception set
+/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/agent-results/msa008_direct_pipeline.py:661: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/gcuagent/.triton/cache/L7O6KQKMDMNKSZCV7EMAU56OXDH6TEJMBU2JCQT74O2DTAEPANRA/_gqa_sparse_fwd_direct.json' mode='r' encoding='UTF-8'>
+  rep["meta"] = json.load(open(os.path.join(d, "_gqa_sparse_fwd_direct.json")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+{
+ "end_to_end_ms": {
+  "stock": 5.4322,
+  "copy_on": 5.3617,
+  "copy_off": 5.9177,
+  "copy_pin": 5.3293,
+  "copy_on_s2": 5.3621,
+  "abl_qk_only": 3.728,
+  "abl_no_pv": 4.6959,
+  "abl_no_softmax": 4.7621,
+  "abl_no_v_dma": 4.7543,
+  "copy_on_pipe2": 5.3554,
+  "copy_on_w2": 19.1669
+ },
+ "full_chain_ms": {
+  "full_chain": 6.7835
+ },
+ "staged_ms": {
+  "index_score": 0.97,
+  "index_topk": 0.6751,
+  "prefix_kernel": 0.3648,
+  "direct_reuse_13p": 4.998,
+  "direct_no_prefix_16p": 5.901,
+  "pages1": 0.7424,
+  "pages4": 1.7566,
+  "pages8": 3.1437,
+  "pages12": 4.5115,
+  "pages16": 5.9049
+ },
+ "shared_prefix_count_hist": {
+  "0": 0,
+  "1": 0,
+  "2": 0,
+  "3": 64,
+  "4": 0
+ }
+}
+wrote /workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/agent-results/raw/bench_20261124T125526Z.json

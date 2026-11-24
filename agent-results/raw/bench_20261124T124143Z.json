@@ -1,0 +1,1611 @@
+{
+ "env": {
+  "timestamp_utc": "2026-11-24T12:41:43.892346+00:00",
+  "device_index": 5,
+  "device_name": "GCU",
+  "torch": "2.10.0+cpu",
+  "triton": "3.6.0",
+  "python": "3.12.13",
+  "gcu_toolkit": "",
+  "privateuse1_kineto": true,
+  "props": {
+   "major": 3,
+   "minor": 0,
+   "total_memory_mb": 41846,
+   "multi_processor_count": 2,
+   "sip_count": 24
+  },
+  "cpu_affinity": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ],
+  "env": {
+   "PYTHONPATH": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src:/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d:/opt/flagtree:/opt/flagtree",
+   "TRITON_GCU_OP_TRACE": null,
+   "TRITON_GCU_DEBUG": null,
+   "TRITON_CACHE_DIR": null
+  },
+  "efsmi_pmon_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev Pid      DevMem  SysMem  Command           \n*Idx #        %       M       Name              \n5    2410071  0.2     172.0   /flagos/bin/python agent-results/msa008_direct_pipeline.py --device 5 --benchmark --rounds 7 \n",
+  "own_pids": [
+   55,
+   2410057,
+   2410068,
+   2410069,
+   2410071
+  ],
+  "foreign_pids": [],
+  "efsmi_dmon_idle_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev  DramRd     DramWr     SIPUtil    \n*Idx  MiB/s      MiB/s      %          \n5     0.0        0.0        0.0        \n5     0.0        0.0        0.0        \n5     0.0        0.0        0.0        \n",
+  "efsmi_query_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Driver Info\n        Ver                     : 1.10.6\n    Device Info\n        Dev Name                : ZIXIAOC200\n        Dev UUID                : TS9B37120204\n        Dev SN                  : A0D5460520864\n        Dev PN                  : EFB-0088700-00\n        Dev MFD                 : 2026-5-4\n        Health                  : True\n    Firmware Info\n        AP FW Version           : 1.2.7\n        SP FW Version           : 3.4.21\n        SSM RT FW Version       : 35.6.16.5\n        SSM Boot FW Version     : 35.6.5\n        VPU FW Version          : 3.1.12\n    PCIe Info\n        Vendor ID               : 1ea0\n        Device ID               : 2a22\n        Domain                  : 0000\n        Bus                     : 83\n        Dev                     : 00\n        Func                    : 0\n        Receiver Error          : 0\n        Bad TLP                 : 0\n        Bad DLLP                : 0\n        Link Info               \n            Max Link Speed      : Gen5\n            Max Link Width      : X16\n            Cur Link Speed      : Gen5\n            Cur Link Width      : X16\n            Tx Throughput       : 0 MiB/s\n            Rx Throughput       : 0 MiB/s\n    Clock Info\n        Mem CLK                 : 7000 MHz\n    GCU Power Readings\n        Power Usage             : 136 W\n        Current Power Limit     : 300 W\n        Requested Power Limit   : 300 W\n        Default Power Limit     : 300 W\n        Min Power Limit         : N/A\n        Max Power Limit         : N/A\n    Low Power Mode\n        Low Power Mode          : LP0\n    Device Mem Info\n        Total Size              : 42976 MiB\n        Reserved Size           : 1129 MiB\n        Used Size               : 81 MiB\n        Free Size               : 41765 MiB\n    BAR1 Mem Info\n        Total Size              : 16 MiB\n    BAR2 Mem Info\n        Total Size              : 64 GiB\n    Temperature Info\n        GCU Temp                : 54 \u2103\n        Memory Temp             : N/A\n        Board Temp              : 39 \u2103\n    Voltage Info\n        VDD GCU                 : 0.887 V\n        VDD SOC                 : 0.827 V\n        VDD MEMQC               : 1.349 V\n    Device Usage Info\n        GCU Usage               : 0.0 %\n    ECC Mode\n        Current                 : Enable\n        Pending                 : Enable\n    ECC Errors\n        Volatile\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n        Aggregate\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n    MCM Info\n        MCM Mode                : Dual\n    RMA Info\n        Flags                   : False\n        Total DBE               : 0\n    Power Cable\n        Status                  : Normal\n    VPU Info\n        Encoder Usage           : 0 %\n        Decoder Usage           : 0 %\n    Error Records\n        Total Error Count       : 6\n        Reset Count             : 6\n        Last Reset Date         : 2026-11-22 05:02:46\n    Error Details\n        User Triggered Reset    : 0\n        Internal Error          : 0\n        SIP Error               : 6\n        Bus Error               : 0\n        FW Error                : 0\n        DTE Error               : 0\n        DRAM HBM Error          : 0\n        PCIE Error              : 0\n        GCU-LARE Error          : 0\n        Unknown Error           : 0\n",
+  "pci": "0000:83:00.0",
+  "pci_from_sysfs": "/sys/bus/pci/devices/0000:23:00.0/gcu_reload\n/sys/bus/pci/devices/0000:33:00.0/gcu_reload\n/sys/bus/pci/devices/0000:34:00.0/gcu_reload",
+  "driver_version": "1.10.6",
+  "dev_name": "ZIXIAOC200",
+  "ap_fw": "1.2.7",
+  "sp_fw": "3.4.21",
+  "mem_clock_mhz": "7000",
+  "power_w": "136",
+  "gcu_usage_pct_before": 0.0,
+  "busy_before": false,
+  "gcu_usage_raw_before": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Device Usage Info\n        GCU Usage               : 0.0 %\n",
+  "cwd": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d",
+  "cpu_affinity_after_pin": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ]
+ },
+ "shape": {
+  "batch": 1,
+  "query_len": 1024,
+  "seq_len": 16384,
+  "num_kv_heads": 1,
+  "num_heads": 8,
+  "head_dim": 128,
+  "topk": 16,
+  "rounds": 7
+ },
+ "shared_prefix_count_hist": {
+  "0": 0,
+  "1": 0,
+  "2": 0,
+  "3": 64,
+  "4": 0
+ },
+ "shared_prefix_mean_pages": 3.0,
+ "grid": {
+  "prefix": [
+   64,
+   1,
+   1
+  ],
+  "direct": [
+   1024,
+   1,
+   1
+  ]
+ },
+ "end_to_end_ms": {
+  "stock": {
+   "n": 7,
+   "samples": [
+    5.623350143432617,
+    5.452035903930664,
+    5.445630073547363,
+    5.426025867462158,
+    5.420804023742676,
+    5.4503560066223145,
+    5.486114025115967
+   ],
+   "median": 5.4503560066223145,
+   "mean": 5.472045149121966,
+   "min": 5.420804023742676,
+   "max": 5.623350143432617
+  },
+  "copy_on": {
+   "n": 7,
+   "samples": [
+    5.38291597366333,
+    5.392950057983398,
+    5.359454154968262,
+    5.350215911865234,
+    5.354324817657471,
+    5.358345985412598,
+    5.350783824920654
+   ],
+   "median": 5.358345985412598,
+   "mean": 5.364141532352993,
+   "min": 5.350215911865234,
+   "max": 5.392950057983398
+  },
+  "copy_off": {
+   "n": 7,
+   "samples": [
+    5.925883769989014,
+    5.919164180755615,
+    5.914095878601074,
+    5.924086093902588,
+    5.912446022033691,
+    5.934030055999756,
+    5.921070098876953
+   ],
+   "median": 5.921070098876953,
+   "mean": 5.921539442879813,
+   "min": 5.912446022033691,
+   "max": 5.934030055999756
+  },
+  "copy_pin": {
+   "n": 7,
+   "samples": [
+    5.348865985870361,
+    5.327159881591797,
+    5.336113929748535,
+    5.319210052490234,
+    5.32712984085083,
+    5.346330165863037,
+    5.334494113922119
+   ],
+   "median": 5.334494113922119,
+   "mean": 5.334186281476702,
+   "min": 5.319210052490234,
+   "max": 5.348865985870361
+  },
+  "copy_on_s2": {
+   "n": 7,
+   "samples": [
+    5.383230209350586,
+    5.360055923461914,
+    5.366219997406006,
+    5.386096000671387,
+    5.371319770812988,
+    5.355000019073486,
+    5.366596221923828
+   ],
+   "median": 5.366596221923828,
+   "mean": 5.369788306100028,
+   "min": 5.355000019073486,
+   "max": 5.386096000671387
+  },
+  "abl_qk_only": {
+   "n": 7,
+   "samples": [
+    3.725506067276001,
+    3.7350900173187256,
+    3.737610101699829,
+    3.73759388923645,
+    3.7328860759735107,
+    3.74833607673645,
+    3.7165639400482178
+   ],
+   "median": 3.7350900173187256,
+   "mean": 3.733369452612741,
+   "min": 3.7165639400482178,
+   "max": 3.74833607673645
+  },
+  "abl_no_pv": {
+   "n": 7,
+   "samples": [
+    4.696485996246338,
+    4.738905906677246,
+    4.69950008392334,
+    4.692553997039795,
+    4.693019866943359,
+    4.6867499351501465,
+    4.69527006149292
+   ],
+   "median": 4.69527006149292,
+   "mean": 4.7003551210675925,
+   "min": 4.6867499351501465,
+   "max": 4.738905906677246
+  },
+  "abl_no_softmax": {
+   "n": 7,
+   "samples": [
+    4.772446155548096,
+    4.763309955596924,
+    4.759530067443848,
+    4.774620056152344,
+    4.764915943145752,
+    4.757053852081299,
+    4.741154193878174
+   ],
+   "median": 4.763309955596924,
+   "mean": 4.761861460549491,
+   "min": 4.741154193878174,
+   "max": 4.774620056152344
+  },
+  "abl_no_v_dma": {
+   "n": 7,
+   "samples": [
+    4.758644104003906,
+    4.7650041580200195,
+    4.788976192474365,
+    4.763266086578369,
+    4.75093412399292,
+    4.75843620300293,
+    4.7497358322143555
+   ],
+   "median": 4.758644104003906,
+   "mean": 4.762142385755267,
+   "min": 4.7497358322143555,
+   "max": 4.788976192474365
+  },
+  "copy_on_pipe2": {
+   "n": 7,
+   "samples": [
+    5.363100051879883,
+    5.35368013381958,
+    5.347933769226074,
+    5.35713005065918,
+    5.382750034332275,
+    5.356093883514404,
+    5.353576183319092
+   ],
+   "median": 5.356093883514404,
+   "mean": 5.359180586678641,
+   "min": 5.347933769226074,
+   "max": 5.382750034332275
+  },
+  "copy_on_w2": {
+   "n": 7,
+   "samples": [
+    19.210693359375,
+    19.174333572387695,
+    19.16803550720215,
+    19.142879486083984,
+    19.17024040222168,
+    19.129453659057617,
+    19.16197395324707
+   ],
+   "median": 19.16803550720215,
+   "mean": 19.165372848510742,
+   "min": 19.129453659057617,
+   "max": 19.210693359375
+  }
+ },
+ "full_chain_ms": {
+  "full_chain": {
+   "n": 7,
+   "samples": [
+    6.793320178985596,
+    6.790589809417725,
+    6.786853790283203,
+    6.769289970397949,
+    6.781949996948242,
+    6.776683807373047,
+    6.763333797454834
+   ],
+   "median": 6.781949996948242,
+   "mean": 6.780288764408657,
+   "min": 6.763333797454834,
+   "max": 6.793320178985596
+  }
+ },
+ "staged_ms": {
+  "index_score": {
+   "n": 7,
+   "samples": [
+    1.1019740104675293,
+    0.9808340072631836,
+    0.973770022392273,
+    0.9731559753417969,
+    0.9764699935913086,
+    0.9717599749565125,
+    0.9732159972190857
+   ],
+   "median": 0.973770022392273,
+   "mean": 0.993025711604527,
+   "min": 0.9717599749565125,
+   "max": 1.1019740104675293
+  },
+  "index_topk": {
+   "n": 7,
+   "samples": [
+    0.6956859827041626,
+    0.7256100177764893,
+    0.682096004486084,
+    0.6744599938392639,
+    0.6733199954032898,
+    0.6723440289497375,
+    0.6701239943504333
+   ],
+   "median": 0.6744599938392639,
+   "mean": 0.6848057167870658,
+   "min": 0.6701239943504333,
+   "max": 0.7256100177764893
+  },
+  "prefix_kernel": {
+   "n": 7,
+   "samples": [
+    0.38523000478744507,
+    0.36588001251220703,
+    0.36893999576568604,
+    0.37116000056266785,
+    0.36349600553512573,
+    0.3660160005092621,
+    0.35997000336647034
+   ],
+   "median": 0.3660160005092621,
+   "mean": 0.36867028900555204,
+   "min": 0.35997000336647034,
+   "max": 0.38523000478744507
+  },
+  "direct_reuse_13p": {
+   "n": 7,
+   "samples": [
+    5.0175299644470215,
+    5.00857400894165,
+    5.003444194793701,
+    4.9950761795043945,
+    5.001914024353027,
+    4.995674133300781,
+    4.998899936676025
+   ],
+   "median": 5.001914024353027,
+   "mean": 5.003016063145229,
+   "min": 4.9950761795043945,
+   "max": 5.0175299644470215
+  },
+  "direct_no_prefix_16p": {
+   "n": 7,
+   "samples": [
+    5.920276165008545,
+    5.918129920959473,
+    5.908649921417236,
+    5.924069881439209,
+    5.8957200050354,
+    5.902544021606445,
+    5.909023761749268
+   ],
+   "median": 5.909023761749268,
+   "mean": 5.9112019538879395,
+   "min": 5.8957200050354,
+   "max": 5.924069881439209
+  },
+  "pages1": {
+   "n": 7,
+   "samples": [
+    0.7597659826278687,
+    0.7428600192070007,
+    0.7447360157966614,
+    0.7548760175704956,
+    0.7377300262451172,
+    0.7538099884986877,
+    0.7444940209388733
+   ],
+   "median": 0.7447360157966614,
+   "mean": 0.7483245815549578,
+   "min": 0.7377300262451172,
+   "max": 0.7597659826278687
+  },
+  "pages4": {
+   "n": 7,
+   "samples": [
+    1.764523983001709,
+    1.7582999467849731,
+    1.7585999965667725,
+    1.7547459602355957,
+    1.7596659660339355,
+    1.7560360431671143,
+    1.7705999612808228
+   ],
+   "median": 1.7585999965667725,
+   "mean": 1.7603531224387032,
+   "min": 1.7547459602355957,
+   "max": 1.7705999612808228
+  },
+  "pages8": {
+   "n": 7,
+   "samples": [
+    3.1618940830230713,
+    3.143656015396118,
+    3.1365299224853516,
+    3.1427700519561768,
+    3.149970054626465,
+    3.142303943634033,
+    3.1489200592041016
+   ],
+   "median": 3.143656015396118,
+   "mean": 3.1465777329036166,
+   "min": 3.1365299224853516,
+   "max": 3.1618940830230713
+  },
+  "pages12": {
+   "n": 7,
+   "samples": [
+    4.526730060577393,
+    4.5173540115356445,
+    4.512509822845459,
+    4.519979953765869,
+    4.510484218597412,
+    4.523009777069092,
+    4.512629985809326
+   ],
+   "median": 4.5173540115356445,
+   "mean": 4.517528261457171,
+   "min": 4.510484218597412,
+   "max": 4.526730060577393
+  },
+  "pages16": {
+   "n": 7,
+   "samples": [
+    5.914979934692383,
+    5.89670991897583,
+    5.907390117645264,
+    5.898255825042725,
+    5.897535800933838,
+    5.89670991897583,
+    5.905846118927002
+   ],
+   "median": 5.898255825042725,
+   "mean": 5.90248966217041,
+   "min": 5.89670991897583,
+   "max": 5.914979934692383
+  }
+ },
+ "launch_meta": [
+  {
+   "kernel": "_gqa_sparse_common_prefix",
+   "grid": [
+    64,
+    1,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "num_warps": 1,
+    "num_stages": 1
+   }
+  },
+  {
+   "kernel": "_gqa_sparse_fwd_direct",
+   "grid": [
+    1024,
+    1,
+    1
+   ],
+   "kwargs": {
+    "warmup": false,
+    "BLOCK_SIZE_Q": 1,
+    "BLOCK_SIZE_K": 128,
+    "BLOCK_SIZE_D": 128,
+    "BLOCK_SIZE_H": 8,
+    "BLOCK_SIZE_QH": 8,
+    "USE_FP8": false,
+    "KV_SCALE_MODE": 0,
+    "num_warps": 1,
+    "num_stages": 1,
+    "GROUP_Q": 16,
+    "NUM_GROUPS": 64,
+    "STRIDE_PN": 1024,
+    "STRIDE_PH": 128,
+    "STRIDE_PD": 1,
+    "STRIDE_SN": 8,
+    "USE_SHARED_PREFIX": true
+   }
+  }
+ ],
+ "hardware_counters": {
+  "positive_control": {
+   "tag": "positive_control_matmul_4096x4096x4096",
+   "samples": [
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ]
+   ],
+   "raw_header": [
+    "*Dev  SIPUtil    SIPUsed    DramRd     DramWr     Dec0       Dec1       Dec2       Dec3       ",
+    "*Idx  %          %          MiB/s      MiB/s      %          %          %          %          ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        "
+   ],
+   "nonzero_samples": 0
+  },
+  "msa_full_chain": {
+   "tag": "msa_full_chain",
+   "samples": [
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ],
+    [
+     "5",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0",
+     "0.0"
+    ]
+   ],
+   "raw_header": [
+    "*Dev  SIPUtil    SIPUsed    DramRd     DramWr     Dec0       Dec1       Dec2       Dec3       ",
+    "*Idx  %          %          MiB/s      MiB/s      %          %          %          %          ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        ",
+    "5     0.0        0.0        0.0        0.0        0.0        0.0        0.0        0.0        "
+   ],
+   "nonzero_samples": 0
+  },
+  "verdict": "GPM counters report zero even under the positive control, so they carry no information on this card; they are NOT used to attribute time."
+ },
+ "per_page_marginal": {
+  "full": {
+   "ms_at_4_pages": 1.7707940340042114,
+   "ms_at_16_pages": 5.901150226593018,
+   "marginal_ms_per_page": 0.3441963493824005,
+   "fixed_ms": 0.3940086364746094
+  },
+  "qk_only": {
+   "ms_at_4_pages": 1.2552299499511719,
+   "ms_at_16_pages": 3.9405760765075684,
+   "marginal_ms_per_page": 0.2237788438796997,
+   "fixed_ms": 0.36011457443237305
+  },
+  "qk_softmax": {
+   "ms_at_4_pages": 1.5749839544296265,
+   "ms_at_16_pages": 5.091015815734863,
+   "marginal_ms_per_page": 0.2930026551087697,
+   "fixed_ms": 0.4029733339945476
+  },
+  "both_dots": {
+   "ms_at_4_pages": 1.5867459774017334,
+   "ms_at_16_pages": 5.222189903259277,
+   "marginal_ms_per_page": 0.30295366048812866,
+   "fixed_ms": 0.37493133544921875
+  },
+  "no_v_dma": {
+   "ms_at_4_pages": 1.586534023284912,
+   "ms_at_16_pages": 5.1256937980651855,
+   "marginal_ms_per_page": 0.29492998123168945,
+   "fixed_ms": 0.4068140983581543
+  },
+  "pipelined": {
+   "ms_at_4_pages": 1.762753963470459,
+   "ms_at_16_pages": 5.892509937286377,
+   "marginal_ms_per_page": 0.3441463311513265,
+   "fixed_ms": 0.38616863886515307
+  }
+ },
+ "page_sweep": {
+  "topk": {
+   "1": {
+    "shared_prefix_pages_prefix_on": 1.0,
+    "pages_in_direct_loop_prefix_off": 1
+   },
+   "4": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 4
+   },
+   "8": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 8
+   },
+   "12": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 12
+   },
+   "16": {
+    "shared_prefix_pages_prefix_on": 3.0,
+    "pages_in_direct_loop_prefix_off": 16
+   }
+  },
+  "median_ms": {
+   "pages1": 0.7447360157966614,
+   "pages4": 1.7585999965667725,
+   "pages8": 3.143656015396118,
+   "pages12": 4.5173540115356445,
+   "pages16": 5.898255825042725
+  }
+ },
+ "notes": {
+  "copy_pin": "block_table forced to page 0: identical instruction path and identical masks, only KV addresses change (locality probe, wrong numerics).",
+  "abl_*": "MODE 1/2/3/4 ablation probes, wrong numerics by construction.",
+  "copy_on_w2": "same math with num_warps=2 (diagnostic, numerics recorded).",
+  "copy_on_s2": "num_stages=2 pipeline probe on the copied kernel."
+ },
+ "ir_census": {
+  "source": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src/flag_attn/runtime/backend/_enflame/msa/sparse_attn.py",
+  "cache_dirs": [
+   "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+   "/home/gcuagent/.triton/cache/L7O6KQKMDMNKSZCV7EMAU56OXDH6TEJMBU2JCQT74O2DTAEPANRA",
+   "/home/gcuagent/.triton/cache/7AWRN4M4HWSEDW7XA4GR7KY2HXGPFIIKKZM56ZL6MUDFNDAZN7PA"
+  ],
+  "per_file": {
+   "gcuir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.gcuir",
+    "size": 116245,
+    "counts": {
+     "gcu.border": 161,
+     "vector.load": 145,
+     "vector.store": 82,
+     "arith.addf": 73,
+     "memref.reinterpret_cast": 60,
+     "memref.alloc": 49,
+     "arith.constant": 40,
+     "memref.dealloc": 38,
+     "arith.addi": 32,
+     "gcu.vector_movsft": 32,
+     "memref.dma_wait": 26,
+     "arith.muli": 20,
+     "gcu.int2ptr": 20,
+     "gcu.ptr2int": 19,
+     "gcu.ptr2memref": 19,
+     "gcu.vector_convert": 19,
+     "gcu.extern_elementwise_op": 16,
+     "memref.store": 16,
+     "arith.mulf": 16,
+     "arith.truncf": 16,
+     "vector.extract": 16,
+     "arith.select": 13,
+     "arith.index_cast": 12,
+     "vector.broadcast": 11,
+     "memref.dma_start": 9,
+     "arith.subf": 9,
+     "math.exp2": 9,
+     "arith.extsi": 8,
+     "memref.load": 8,
+     "vector.reduction": 8,
+     "arith.cmpi": 7,
+     "memref_ext.broadcast_start": 7,
+     "memref_ext.slice_start": 7,
+     "scf.yield": 7,
+     "gcu.memref2ptr": 4,
+     "gpu.block_id": 3,
+     "scf.if": 3,
+     "arith.subi": 2,
+     "func.return": 2,
+     "arith.minsi": 2,
+     "scf.for": 2,
+     "arith.divsi": 2,
+     "memref_ext.deslice_start": 2,
+     "gpu.barrier": 2,
+     "gcu.matmul": 2,
+     "gcu.mfence": 2,
+     "builtin.module": 1,
+     "gpu.module": 1,
+     "func.func": 1,
+     "cf.cond_br": 1,
+     "gcu.vector_step": 1,
+     "gpu.thread_id": 1,
+     "memref_ext.transpose_start": 1,
+     "arith.maxnumf": 1,
+     "arith.cmpf": 1,
+     "arith.divf": 1,
+     "gpu.func": 1,
+     "func.call": 1,
+     "gpu.return": 1
+    },
+    "region": {
+     "chars": 52696,
+     "lines": 469,
+     "counts": {
+      "scf.for": 1,
+      "gcu.border": 68,
+      "memref.alloc": 23,
+      "gcu.ptr2memref": 6,
+      "memref.reinterpret_cast": 30,
+      "memref.dma_start": 3,
+      "memref.dma_wait": 12,
+      "memref.load": 2,
+      "gcu.ptr2int": 2,
+      "arith.addi": 8,
+      "gcu.int2ptr": 4,
+      "arith.muli": 5,
+      "arith.extsi": 1,
+      "arith.index_cast": 3,
+      "gcu.memref2ptr": 2,
+      "vector.broadcast": 3,
+      "vector.load": 103,
+      "arith.cmpi": 5,
+      "gcu.vector_convert": 2,
+      "vector.store": 54,
+      "memref_ext.slice_start": 3,
+      "gpu.thread_id": 1,
+      "memref_ext.deslice_start": 1,
+      "gpu.barrier": 2,
+      "scf.if": 3,
+      "memref_ext.transpose_start": 1,
+      "scf.yield": 6,
+      "memref.dealloc": 21,
+      "gcu.matmul": 2,
+      "arith.select": 4,
+      "arith.addf": 9,
+      "memref_ext.broadcast_start": 4,
+      "gcu.extern_elementwise_op": 16,
+      "vector.reduction": 8,
+      "memref.store": 8,
+      "gcu.mfence": 1,
+      "arith.maxnumf": 1,
+      "arith.subf": 9,
+      "math.exp2": 9,
+      "arith.mulf": 8,
+      "arith.truncf": 8
+     }
+    },
+    "landmarks": {
+     "outer_query_loop": [
+      207
+     ],
+     "page_loop": [
+      372
+     ],
+     "gcu_matmul": [
+      {
+       "line": 459,
+       "text": "\"gcu.matmul\"(%469, %152, %468) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 0, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>) -> ()",
+       "has_accumulator": false
+      },
+      {
+       "line": 832,
+       "text": "\"gcu.matmul\"(%234, %635, %632, %578) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 1, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>, memref<8x128xf32>) ->",
+       "has_accumulator": true
+      }
+     ],
+     "convgen_call": [],
+     "dma_wait": [],
+     "transpose": [],
+     "deslice": []
+    }
+   },
+   "llir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.llir",
+    "size": 212529,
+    "counts": {
+     "tops_wait_dte": 26,
+     "tops_mac_v4_fp32": 16,
+     "tops_truncf_v4_fp32_to_v2_bf16": 16,
+     "tops_select_v4_fp32": 11,
+     "tops_memcpy_async": 9,
+     "tops_cvt_v1_si8_to_vbool": 9,
+     "tops_exp2_v4_fp32": 9,
+     "tops_extsi_si32_to_si64": 8,
+     "tops_redmaxnumf_v4_fp32": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__0_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__1_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__2_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__3_of_4": 8,
+     "tops_vector_movsft_r_qw2": 8,
+     "tops_vector_movsft_r_qw1": 8,
+     "tops_vector_movsft_r_b8": 8,
+     "tops_vector_movsft_r_b4": 8,
+     "tops_broadcast_v1_fp32": 8,
+     "tops_broadcast_async_2_fp32": 6,
+     "tops_private_dte_ctr": 5,
+     "tops_slice_async_2_bf16": 4,
+     "tops_get_block_id": 3,
+     "tops_broadcast_v4_si32": 3,
+     "tops_minsi_si32": 2,
+     "tops_cvt_vbool_to_v1_si8": 2,
+     "tops_slice_async_1_fp32": 2,
+     "tops_deslice_async_2_bf16": 2,
+     "tops_syncthreads": 2,
+     "tops_fence_local_memory": 2,
+     "tops_get_local_memory": 1,
+     "tops_vector_step_v4_ui32": 1,
+     "tops_broadcast_async_2_si8": 1,
+     "tops_get_shared_memory": 1,
+     "tops_get_thread_id": 1,
+     "tops_slice_async_2_fp32": 1,
+     "tops_transpose_async_2_bf16": 1,
+     "tops_convgen_m8_n128_k128_bf16_fp32": 1,
+     "tops_maxf_v4_fp32": 1,
+     "tops_convgen_m8_n128_k128_bias_bf16_fp32": 1,
+     "tops_floordivf_v4_fp32": 1
+    },
+    "region": null,
+    "landmarks": {
+     "outer_query_loop": [],
+     "page_loop": [],
+     "gcu_matmul": [],
+     "convgen_call": [
+      {
+       "line": 654,
+       "callee": "tops_convgen_m8_n128_k128_bf16_fp32"
+      },
+      {
+       "line": 1150,
+       "callee": "tops_convgen_m8_n128_k128_bias_bf16_fp32"
+      }
+     ],
+     "dma_wait": [
+      193,
+      210,
+      227,
+      245,
+      262,
+      305,
+      452,
+      484,
+      492,
+      561,
+      564,
+      567,
+      582,
+      601,
+      623,
+      631,
+      642,
+      653,
+      673,
+      746,
+      912,
+      988,
+      1149,
+      1158,
+      1480,
+      1552
+     ],
+     "transpose": [
+      640
+     ],
+     "deslice": [
+      629,
+      1550
+     ]
+    }
+   },
+   "ttir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.ttir",
+    "size": 44916,
+    "counts": {},
+    "region": null
+   }
+  },
+  "cache_dir": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+  "meta": {
+   "hash": "496f31830e0e82bef57d1ce8affb639107d47c3f9b1f3f6f1da839a3568bb29d",
+   "target": {
+    "backend": "gcu",
+    "arch": "dtu-enflame-tops--gcu300",
+    "warp_size": 12
+   },
+   "num_warps": 1,
+   "warp_size": 1,
+   "num_ctas": 1,
+   "num_stages": 2,
+   "vector_length": 512,
+   "debug": false,
+   "cluster_dims": [
+    1,
+    1,
+    1
+   ],
+   "allow_fp8e4nv": false,
+   "allow_fp8e4b15": false,
+   "supported_fp8_dtypes": [],
+   "deprecated_fp8_dot_operand_dtypes": [],
+   "default_dot_input_precision": "ieee",
+   "allowed_dot_input_precisions": [
+    "ieee"
+   ],
+   "backend_name": "gcu",
+   "max_num_imprecise_acc_default": 0,
+   "enable_fp_fusion": false,
+   "enable_stride0": false,
+   "redundant_sip": false,
+   "enable_i64": true,
+   "launch_cooperative_grid": false,
+   "extern_libs": [],
+   "sanitize_overflow": false,
+   "num_buffers_warp_spec": 0,
+   "num_consumer_groups": 0,
+   "reg_dec_producer": 0,
+   "reg_inc_consumer": 0,
+   "arch": "gcu300",
+   "max_shared": 8388608,
+   "max_local": 1572352,
+   "max_dsm": 0,
+   "instrumentation_mode": "",
+   "launch_pdl": false,
+   "triton_version": "3.6.0",
+   "ptr_int_args": [],
+   "name": "_gqa_sparse_fwd_direct",
+   "tle_raw": false,
+   "tle_raw_deferred": false,
+   "shared": 65536
+  },
+  "ttir_ops": {
+   "tt.addptr": 26,
+   "arith.constant": 22,
+   "tt.load": 14,
+   "arith.muli": 11,
+   "arith.addi": 9,
+   "arith.cmpi": 7,
+   "tt.expand_dims": 7,
+   "tt.broadcast": 7,
+   "tt.make_tensor_ptr": 5,
+   "tt.splat": 5,
+   "arith.addf": 5,
+   "arith.select": 4,
+   "arith.mulf": 4,
+   "tt.get_program_id": 3,
+   "arith.subi": 2,
+   "arith.minsi": 2,
+   "tt.make_range": 2,
+   "arith.divsi": 2,
+   "tt.dot": 2,
+   "scf.if": 2,
+   "arith.maxnumf": 2,
+   "arith.subf": 2,
+   "math.exp2": 2,
+   "arith.truncf": 2,
+   "scf.for": 1,
+   "tt.trans": 1,
+   "arith.cmpf": 1,
+   "arith.divf": 1
+  },
+  "ttir_ops_per_source_line": {
+   "128": 2,
+   "184": 1,
+   "185": 1,
+   "186": 1,
+   "187": 2,
+   "188": 2,
+   "189": 3,
+   "190": 2,
+   "191": 2,
+   "192": 2,
+   "193": 1,
+   "194": 2,
+   "195": 2,
+   "196": 1,
+   "202": 2,
+   "203": 1,
+   "204": 5,
+   "206": 1,
+   "207": 2,
+   "208": 1,
+   "210": 5,
+   "215": 1,
+   "217": 1,
+   "230": 6,
+   "231": 1,
+   "232": 3,
+   "233": 5,
+   "234": 4,
+   "236": 2,
+   "241": 1,
+   "243": 1,
+   "244": 6,
+   "245": 1,
+   "256": 1,
+   "257": 1,
+   "258": 1,
+   "259": 1,
+   "260": 2,
+   "262": 2,
+   "263": 2,
+   "265": 4,
+   "272": 1,
+   "275": 1,
+   "286": 2,
+   "290": 1,
+   "294": 2,
+   "295": 7,
+   "308": 2,
+   "310": 2,
+   "311": 5,
+   "313": 1,
+   "314": 4,
+   "318": 2,
+   "319": 3,
+   "323": 2,
+   "325": 1,
+   "332": 1,
+   "335": 1,
+   "363": 1,
+   "366": 1,
+   "367": 1,
+   "371": 3,
+   "374": 3,
+   "377": 2,
+   "382": 1,
+   "384": 2
+  },
+  "ttir_loc_aliases": {
+   "aliases": 267,
+   "resolved": 139,
+   "unresolved": 30
+  },
+  "source_line_text": {
+   "184": "pid_q = tl.program_id(0)",
+   "185": "pid_kh = tl.program_id(1)",
+   "186": "pid_b = tl.program_id(2)",
+   "187": "q_start = tl.load(cu_seqlens_q + pid_b)",
+   "188": "q_block_start = tl.load(cu_seqblocks_q + pid_b)",
+   "189": "q_block_len = tl.load(cu_seqblocks_q + pid_b + 1) - q_block_start",
+   "190": "seq_len = tl.load(seq_lens + pid_b)",
+   "191": "prefix_len = tl.load(prefix_lens + pid_b)",
+   "192": "if pid_q * num_q_loop >= q_block_len:",
+   "193": "return",
+   "194": "real_q_loop = min(num_q_loop, q_block_len - pid_q * num_q_loop)",
+   "195": "bt_row = block_table_ptr + pid_b * stride_bt_b",
+   "196": "off_n = tl.arange(0, BLOCK_SIZE_K)",
+   "203": "pid_q_j = pid_q * num_q_loop + j",
+   "204": "t_ptr_j = t_ptr + (q_block_start + pid_q_j) * stride_tn + pid_kh * stride_th",
+   "206": "q_abs = prefix_len + pid_q_j * BLOCK_SIZE_Q",
+   "207": "valid_blocks = (q_abs + BLOCK_SIZE_K) // BLOCK_SIZE_K",
+   "208": "real_topk = tl.minimum(max_topk, valid_blocks)",
+   "210": "base=q_ptr + (q_start + pid_q_j) * stride_qn + pid_kh * gqa_group_size * stride_qh,",
+   "215": "order=(1, 0),",
+   "217": "q = tl.load(q_ptrs, boundary_check=(0, 1), padding_option=\"zero\")",
+   "230": "shared_count = tl.load(count_ptr + (pid_b * num_kv_heads + pid_kh) * NUM_GROUPS + pid_q_j // GROUP_Q)",
+   "231": "hs = tl.arange(0, BLOCK_SIZE_QH)",
+   "232": "state_base = (q_start + pid_q_j) * STRIDE_SN + pid_kh * gqa_group_size",
+   "233": "m_i = tl.load(maximum_ptr + state_base + hs, mask=hs < gqa_group_size, other=float(\"-inf\"))",
+   "234": "l_i = tl.load(denom_ptr + state_base + hs, mask=hs < gqa_group_size, other=0.0)",
+   "236": "partial_ptr + (q_start + pid_q_j) * STRIDE_PN + pid_kh * gqa_group_size * STRIDE_PH,",
+   "241": "(1, 0),",
+   "243": "acc_o = tl.load(pp, boundary_check=(0, 1), padding_option=\"zero\")",
+   "244": "l_acc = tl.where(off_n[None, :] == 0, l_i[:, None], 0.0)",
+   "245": "t_ptr_j += shared_count * stride_tk",
+   "257": "blk = tl.load(t_ptr_j).to(tl.int32)",
+   "258": "t_ptr_j = t_ptr_j + stride_tk",
+   "259": "c = blk * BLOCK_SIZE_K",
+   "260": "page = tl.load(bt_row + blk).to(tl.int32)",
+   "262": "pos = c + off_n",
+   "263": "pos_mask = pos < seq_len",
+   "265": "k_base_ptr = kv_cache_ptr + page * stride_kv_blk + pid_kh * stride_kv_h",
+   "272": "order=(1, 0),",
+   "275": "k_ptrs,",
+   "286": "qk_dot = tl.dot(q_qk, tl.trans(k))",
+   "290": "is_full_causal = (c + BLOCK_SIZE_K) <= q_abs",
+   "295": "qk += tl.where(q_abs >= pos[None, :], 0, float(\"-inf\"))",
+   "294": "if not is_full_causal:",
+   "308": "qk += qk_dot * sm_scale_log2e",
+   "311": "qk += tl.where(pos_mask[None, :], 0, float(\"-inf\"))",
+   "310": "if not is_full_seq:",
+   "313": "m_ij = tl.maximum(m_i, tl.max(qk, axis=1))",
+   "314": "p = tl.exp2(qk - m_ij[:, None])",
+   "318": "alpha = tl.exp2(m_i - m_ij)",
+   "319": "acc_o = acc_o * alpha[:, None]",
+   "323": "l_acc = l_acc * alpha[:, None] + p",
+   "325": "v_base_ptr = k_base_ptr + head_dim * stride_kv_d",
+   "332": "order=(1, 0),",
+   "335": "v_ptrs,",
+   "363": "p_dot = p.to(v.dtype)",
+   "366": "acc_o += tl.dot(p_dot, v)",
+   "367": "m_i = m_ij",
+   "256": "for _ in range(shared_count, real_topk):",
+   "371": "inv_l = tl.where(l_i > 0, 1.0 / l_i, 0.0)",
+   "374": "acc_o = acc_o * inv_l[:, None]",
+   "377": "base=o_ptr + (q_start + pid_q_j) * stride_on + pid_kh * gqa_group_size * stride_oh,",
+   "382": "order=(1, 0),",
+   "384": "tl.store(o_ptrs, acc_o.to(o_ptr.dtype.element_ty), boundary_check=(0, 1))",
+   "202": "for j in range(real_q_loop):",
+   "128": "def _gqa_sparse_fwd_direct("
+  }
+ },
+ "raw": {
+  "end_to_end": {
+   "stock": [
+    5.623350143432617,
+    5.452035903930664,
+    5.445630073547363,
+    5.426025867462158,
+    5.420804023742676,
+    5.4503560066223145,
+    5.486114025115967
+   ],
+   "copy_on": [
+    5.38291597366333,
+    5.392950057983398,
+    5.359454154968262,
+    5.350215911865234,
+    5.354324817657471,
+    5.358345985412598,
+    5.350783824920654
+   ],
+   "copy_off": [
+    5.925883769989014,
+    5.919164180755615,
+    5.914095878601074,
+    5.924086093902588,
+    5.912446022033691,
+    5.934030055999756,
+    5.921070098876953
+   ],
+   "copy_pin": [
+    5.348865985870361,
+    5.327159881591797,
+    5.336113929748535,
+    5.319210052490234,
+    5.32712984085083,
+    5.346330165863037,
+    5.334494113922119
+   ],
+   "copy_on_s2": [
+    5.383230209350586,
+    5.360055923461914,
+    5.366219997406006,
+    5.386096000671387,
+    5.371319770812988,
+    5.355000019073486,
+    5.366596221923828
+   ],
+   "abl_qk_only": [
+    3.725506067276001,
+    3.7350900173187256,
+    3.737610101699829,
+    3.73759388923645,
+    3.7328860759735107,
+    3.74833607673645,
+    3.7165639400482178
+   ],
+   "abl_no_pv": [
+    4.696485996246338,
+    4.738905906677246,
+    4.69950008392334,
+    4.692553997039795,
+    4.693019866943359,
+    4.6867499351501465,
+    4.69527006149292
+   ],
+   "abl_no_softmax": [
+    4.772446155548096,
+    4.763309955596924,
+    4.759530067443848,
+    4.774620056152344,
+    4.764915943145752,
+    4.757053852081299,
+    4.741154193878174
+   ],
+   "abl_no_v_dma": [
+    4.758644104003906,
+    4.7650041580200195,
+    4.788976192474365,
+    4.763266086578369,
+    4.75093412399292,
+    4.75843620300293,
+    4.7497358322143555
+   ],
+   "copy_on_pipe2": [
+    5.363100051879883,
+    5.35368013381958,
+    5.347933769226074,
+    5.35713005065918,
+    5.382750034332275,
+    5.356093883514404,
+    5.353576183319092
+   ],
+   "copy_on_w2": [
+    19.210693359375,
+    19.174333572387695,
+    19.16803550720215,
+    19.142879486083984,
+    19.17024040222168,
+    19.129453659057617,
+    19.16197395324707
+   ]
+  },
+  "full_chain": {
+   "full_chain": [
+    6.793320178985596,
+    6.790589809417725,
+    6.786853790283203,
+    6.769289970397949,
+    6.781949996948242,
+    6.776683807373047,
+    6.763333797454834
+   ]
+  },
+  "staged": {
+   "index_score": [
+    1.1019740104675293,
+    0.9808340072631836,
+    0.973770022392273,
+    0.9731559753417969,
+    0.9764699935913086,
+    0.9717599749565125,
+    0.9732159972190857
+   ],
+   "index_topk": [
+    0.6956859827041626,
+    0.7256100177764893,
+    0.682096004486084,
+    0.6744599938392639,
+    0.6733199954032898,
+    0.6723440289497375,
+    0.6701239943504333
+   ],
+   "prefix_kernel": [
+    0.38523000478744507,
+    0.36588001251220703,
+    0.36893999576568604,
+    0.37116000056266785,
+    0.36349600553512573,
+    0.3660160005092621,
+    0.35997000336647034
+   ],
+   "direct_reuse_13p": [
+    5.0175299644470215,
+    5.00857400894165,
+    5.003444194793701,
+    4.9950761795043945,
+    5.001914024353027,
+    4.995674133300781,
+    4.998899936676025
+   ],
+   "direct_no_prefix_16p": [
+    5.920276165008545,
+    5.918129920959473,
+    5.908649921417236,
+    5.924069881439209,
+    5.8957200050354,
+    5.902544021606445,
+    5.909023761749268
+   ],
+   "pages1": [
+    0.7597659826278687,
+    0.7428600192070007,
+    0.7447360157966614,
+    0.7548760175704956,
+    0.7377300262451172,
+    0.7538099884986877,
+    0.7444940209388733
+   ],
+   "pages4": [
+    1.764523983001709,
+    1.7582999467849731,
+    1.7585999965667725,
+    1.7547459602355957,
+    1.7596659660339355,
+    1.7560360431671143,
+    1.7705999612808228
+   ],
+   "pages8": [
+    3.1618940830230713,
+    3.143656015396118,
+    3.1365299224853516,
+    3.1427700519561768,
+    3.149970054626465,
+    3.142303943634033,
+    3.1489200592041016
+   ],
+   "pages12": [
+    4.526730060577393,
+    4.5173540115356445,
+    4.512509822845459,
+    4.519979953765869,
+    4.510484218597412,
+    4.523009777069092,
+    4.512629985809326
+   ],
+   "pages16": [
+    5.914979934692383,
+    5.89670991897583,
+    5.907390117645264,
+    5.898255825042725,
+    5.897535800933838,
+    5.89670991897583,
+    5.905846118927002
+   ]
+  }
+ }
+}

@@ -1,0 +1,753 @@
+{
+ "env": {
+  "timestamp_utc": "2026-11-24T12:20:07.457889+00:00",
+  "device_index": 5,
+  "device_name": "GCU",
+  "torch": "2.10.0+cpu",
+  "triton": "3.6.0",
+  "python": "3.12.13",
+  "gcu_toolkit": "",
+  "privateuse1_kineto": true,
+  "props": {
+   "major": 3,
+   "minor": 0,
+   "total_memory_mb": 41846,
+   "multi_processor_count": 2,
+   "sip_count": 24
+  },
+  "cpu_affinity": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ],
+  "env": {
+   "PYTHONPATH": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src:/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d:/opt/flagtree:/opt/flagtree",
+   "TRITON_GCU_OP_TRACE": null,
+   "TRITON_GCU_DEBUG": null,
+   "TRITON_CACHE_DIR": null
+  },
+  "efsmi_pmon_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev Pid      DevMem  SysMem  Command           \n*Idx #        %       M       Name              \n5    2397351  0.2     172.0   /flagos/bin/python agent-results/msa008_direct_pipeline.py --device 5 --benchmark --rounds 7 \n",
+  "own_pids": [
+   55,
+   2397337,
+   2397348,
+   2397349,
+   2397351
+  ],
+  "foreign_pids": [],
+  "efsmi_dmon_idle_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \n*Dev  DramRd     DramWr     SIPUtil    \n*Idx  MiB/s      MiB/s      %          \n5     N/A        N/A        N/A        \n5     0.0        0.0        0.0        \n5     0.0        0.0        0.0        \n",
+  "efsmi_query_raw": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Driver Info\n        Ver                     : 1.10.6\n    Device Info\n        Dev Name                : ZIXIAOC200\n        Dev UUID                : TS9B37120204\n        Dev SN                  : A0D5460520864\n        Dev PN                  : EFB-0088700-00\n        Dev MFD                 : 2026-5-4\n        Health                  : True\n    Firmware Info\n        AP FW Version           : 1.2.7\n        SP FW Version           : 3.4.21\n        SSM RT FW Version       : 35.6.16.5\n        SSM Boot FW Version     : 35.6.5\n        VPU FW Version          : 3.1.12\n    PCIe Info\n        Vendor ID               : 1ea0\n        Device ID               : 2a22\n        Domain                  : 0000\n        Bus                     : 83\n        Dev                     : 00\n        Func                    : 0\n        Receiver Error          : 0\n        Bad TLP                 : 0\n        Bad DLLP                : 0\n        Link Info               \n            Max Link Speed      : Gen5\n            Max Link Width      : X16\n            Cur Link Speed      : Gen5\n            Cur Link Width      : X16\n            Tx Throughput       : 0 MiB/s\n            Rx Throughput       : 0 MiB/s\n    Clock Info\n        Mem CLK                 : 7000 MHz\n    GCU Power Readings\n        Power Usage             : 136 W\n        Current Power Limit     : 300 W\n        Requested Power Limit   : 300 W\n        Default Power Limit     : 300 W\n        Min Power Limit         : N/A\n        Max Power Limit         : N/A\n    Low Power Mode\n        Low Power Mode          : LP0\n    Device Mem Info\n        Total Size              : 42976 MiB\n        Reserved Size           : 1129 MiB\n        Used Size               : 81 MiB\n        Free Size               : 41765 MiB\n    BAR1 Mem Info\n        Total Size              : 16 MiB\n    BAR2 Mem Info\n        Total Size              : 64 GiB\n    Temperature Info\n        GCU Temp                : 54 \u2103\n        Memory Temp             : N/A\n        Board Temp              : 39 \u2103\n    Voltage Info\n        VDD GCU                 : 0.887 V\n        VDD SOC                 : 0.831 V\n        VDD MEMQC               : 1.349 V\n    Device Usage Info\n        GCU Usage               : 0.0 %\n    ECC Mode\n        Current                 : Enable\n        Pending                 : Enable\n    ECC Errors\n        Volatile\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n        Aggregate\n            L1 Cache CECC       : N/A\n            L1 Cache UECC/Parity: N/A\n            L2 Cache CECC       : N/A\n            L2 Cache UECC       : N/A\n            Device Memory CECC  : N/A\n            Device Memory UECC  : N/A\n    MCM Info\n        MCM Mode                : Dual\n    RMA Info\n        Flags                   : False\n        Total DBE               : 0\n    Power Cable\n        Status                  : Normal\n    VPU Info\n        Encoder Usage           : 0 %\n        Decoder Usage           : 0 %\n    Error Records\n        Total Error Count       : 6\n        Reset Count             : 6\n        Last Reset Date         : 2026-11-22 05:02:46\n    Error Details\n        User Triggered Reset    : 0\n        Internal Error          : 0\n        SIP Error               : 6\n        Bus Error               : 0\n        FW Error                : 0\n        DTE Error               : 0\n        DRAM HBM Error          : 0\n        PCIE Error              : 0\n        GCU-LARE Error          : 0\n        Unknown Error           : 0\n",
+  "pci": "0000:83:00.0",
+  "pci_from_sysfs": "/sys/bus/pci/devices/0000:23:00.0/gcu_reload\n/sys/bus/pci/devices/0000:33:00.0/gcu_reload\n/sys/bus/pci/devices/0000:34:00.0/gcu_reload",
+  "driver_version": "1.10.6",
+  "dev_name": "ZIXIAOC200",
+  "ap_fw": "1.2.7",
+  "sp_fw": "3.4.21",
+  "mem_clock_mhz": "7000",
+  "power_w": "136",
+  "gcu_usage_pct_before": 0.0,
+  "busy_before": false,
+  "gcu_usage_raw_before": "-------------------------------------------------------------------------------\n--------------------- Enflame System Management Interface ---------------------\n--------- Enflame Tech, All Rights Reserved. 2024-2026 Copyright (C) ----------\n-------------------------------------------------------------------------------\n                                                                               \nDEV ID 5\n    Device Usage Info\n        GCU Usage               : 0.0 %\n",
+  "cwd": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d",
+  "cpu_affinity_after_pin": [
+   160,
+   161,
+   162,
+   163,
+   164,
+   165,
+   166,
+   167,
+   168,
+   169,
+   170,
+   171,
+   172,
+   173,
+   174,
+   175,
+   176,
+   177,
+   178,
+   179,
+   180,
+   181,
+   182,
+   183,
+   184,
+   185,
+   186,
+   187,
+   188,
+   189,
+   190,
+   191
+  ]
+ },
+ "shape": {
+  "batch": 1,
+  "query_len": 1024,
+  "seq_len": 16384,
+  "num_kv_heads": 1,
+  "num_heads": 8,
+  "head_dim": 128,
+  "topk": 16,
+  "rounds": 7
+ },
+ "shared_prefix_count_hist": {
+  "0": 0,
+  "1": 0,
+  "2": 0,
+  "3": 64,
+  "4": 0
+ },
+ "shared_prefix_mean_pages": 3.0,
+ "grid": {
+  "prefix": [
+   64,
+   1,
+   1
+  ],
+  "direct": [
+   1024,
+   1,
+   1
+  ]
+ },
+ "end_to_end_ms": {
+  "stock": {
+   "n": 7,
+   "samples": [
+    5.597670078277588,
+    5.4158101081848145,
+    5.3887038230896,
+    5.380829811096191,
+    5.381773948669434,
+    5.376389980316162,
+    5.401979923248291
+   ],
+   "median": 5.3887038230896,
+   "mean": 5.420451096126011,
+   "min": 5.376389980316162,
+   "max": 5.597670078277588
+  },
+  "copy_on": {
+   "n": 7,
+   "samples": [
+    5.380770206451416,
+    5.400269985198975,
+    5.498805999755859,
+    5.366926193237305,
+    5.353260040283203,
+    5.369999885559082,
+    5.48020601272583
+   ],
+   "median": 5.380770206451416,
+   "mean": 5.4071769033159525,
+   "min": 5.353260040283203,
+   "max": 5.498805999755859
+  },
+  "copy_off": {
+   "n": 7,
+   "samples": [
+    5.917230129241943,
+    5.905139923095703,
+    5.914696216583252,
+    5.916059970855713,
+    5.913315773010254,
+    5.902574062347412,
+    5.9146199226379395
+   ],
+   "median": 5.9146199226379395,
+   "mean": 5.911947999681745,
+   "min": 5.902574062347412,
+   "max": 5.917230129241943
+  },
+  "copy_pin": {
+   "n": 7,
+   "samples": [
+    5.326845169067383,
+    5.328330039978027,
+    5.32082986831665,
+    5.308154106140137,
+    5.325106143951416,
+    5.323453903198242,
+    5.323080062866211
+   ],
+   "median": 5.323453903198242,
+   "mean": 5.322257041931152,
+   "min": 5.308154106140137,
+   "max": 5.328330039978027
+  },
+  "copy_on_s2": {
+   "n": 7,
+   "samples": [
+    5.367465972900391,
+    5.341469764709473,
+    5.364433765411377,
+    5.3685760498046875,
+    5.371513843536377,
+    5.346374034881592,
+    5.355480194091797
+   ],
+   "median": 5.364433765411377,
+   "mean": 5.359330517905099,
+   "min": 5.341469764709473,
+   "max": 5.371513843536377
+  },
+  "abl_load_only": {
+   "n": 7,
+   "samples": [
+    6.327089786529541,
+    6.326879978179932,
+    6.326459884643555,
+    6.32482385635376,
+    6.329895973205566,
+    6.325920104980469,
+    6.3130059242248535
+   ],
+   "median": 6.326459884643555,
+   "mean": 6.324867929731097,
+   "min": 6.3130059242248535,
+   "max": 6.329895973205566
+  },
+  "abl_no_pv": {
+   "n": 7,
+   "samples": [
+    4.676819801330566,
+    4.690514087677002,
+    4.694866180419922,
+    4.689209938049316,
+    4.691716194152832,
+    4.6896138191223145,
+    4.6905598640441895
+   ],
+   "median": 4.690514087677002,
+   "mean": 4.689042840685163,
+   "min": 4.676819801330566,
+   "max": 4.694866180419922
+  },
+  "abl_no_softmax": {
+   "n": 7,
+   "samples": [
+    4.75478982925415,
+    4.765066146850586,
+    4.748956203460693,
+    4.761913776397705,
+    4.747935771942139,
+    4.757023811340332,
+    4.752689838409424
+   ],
+   "median": 4.75478982925415,
+   "mean": 4.755482196807861,
+   "min": 4.747935771942139,
+   "max": 4.765066146850586
+  },
+  "abl_no_v_dma": {
+   "n": 7,
+   "samples": [
+    4.743733882904053,
+    4.744740009307861,
+    4.750095844268799,
+    4.738170146942139,
+    4.763130187988281,
+    4.741695880889893,
+    4.742790222167969
+   ],
+   "median": 4.743733882904053,
+   "mean": 4.746336596352713,
+   "min": 4.738170146942139,
+   "max": 4.763130187988281
+  }
+ },
+ "full_chain_ms": {
+  "full_chain": {
+   "n": 7,
+   "samples": [
+    6.793064117431641,
+    6.7748260498046875,
+    6.782083988189697,
+    6.7639641761779785,
+    6.7746758460998535,
+    6.798570156097412,
+    6.7767438888549805
+   ],
+   "median": 6.7767438888549805,
+   "mean": 6.780561174665179,
+   "min": 6.7639641761779785,
+   "max": 6.798570156097412
+  }
+ },
+ "staged_ms": {
+  "index_score": {
+   "n": 3,
+   "samples": [
+    1.0746300220489502,
+    0.956250011920929,
+    0.9443860054016113
+   ],
+   "median": 0.956250011920929,
+   "mean": 0.9917553464571635,
+   "min": 0.9443860054016113,
+   "max": 1.0746300220489502
+  },
+  "index_topk": {
+   "n": 3,
+   "samples": [
+    0.7160099744796753,
+    0.7062739729881287,
+    0.6830250024795532
+   ],
+   "median": 0.7062739729881287,
+   "mean": 0.7017696499824524,
+   "min": 0.6830250024795532,
+   "max": 0.7160099744796753
+  },
+  "prefix_kernel": {
+   "n": 3,
+   "samples": [
+    0.37639400362968445,
+    0.36199599504470825,
+    0.36465001106262207
+   ],
+   "median": 0.36465001106262207,
+   "mean": 0.36768000324567157,
+   "min": 0.36199599504470825,
+   "max": 0.37639400362968445
+  },
+  "direct_reuse_13p": {
+   "n": 3,
+   "samples": [
+    5.045070171356201,
+    5.003744125366211,
+    4.993828773498535
+   ],
+   "median": 5.003744125366211,
+   "mean": 5.0142143567403155,
+   "min": 4.993828773498535,
+   "max": 5.045070171356201
+  },
+  "direct_no_prefix_16p": {
+   "n": 3,
+   "samples": [
+    5.914785861968994,
+    5.904660224914551,
+    5.906834125518799
+   ],
+   "median": 5.906834125518799,
+   "mean": 5.908760070800781,
+   "min": 5.904660224914551,
+   "max": 5.914785861968994
+  },
+  "pages1": {
+   "n": 3,
+   "samples": [
+    0.7344300150871277,
+    0.7161160111427307,
+    0.713129997253418
+   ],
+   "median": 0.7161160111427307,
+   "mean": 0.7212253411610922,
+   "min": 0.713129997253418,
+   "max": 0.7344300150871277
+  },
+  "pages4": {
+   "n": 3,
+   "samples": [
+    1.205683946609497,
+    1.1928000450134277,
+    1.1927399635314941
+   ],
+   "median": 1.1928000450134277,
+   "mean": 1.1970746517181396,
+   "min": 1.1927399635314941,
+   "max": 1.205683946609497
+  },
+  "pages8": {
+   "n": 3,
+   "samples": [
+    2.5734899044036865,
+    2.5675361156463623,
+    2.587049961090088
+   ],
+   "median": 2.5734899044036865,
+   "mean": 2.5760253270467124,
+   "min": 2.5675361156463623,
+   "max": 2.587049961090088
+  },
+  "pages12": {
+   "n": 3,
+   "samples": [
+    3.9876160621643066,
+    3.9698240756988525,
+    3.9739038944244385
+   ],
+   "median": 3.9739038944244385,
+   "mean": 3.977114677429199,
+   "min": 3.9698240756988525,
+   "max": 3.9876160621643066
+  },
+  "pages16": {
+   "n": 3,
+   "samples": [
+    5.3545942306518555,
+    5.319314002990723,
+    5.332784175872803
+   ],
+   "median": 5.332784175872803,
+   "mean": 5.335564136505127,
+   "min": 5.319314002990723,
+   "max": 5.3545942306518555
+  }
+ },
+ "page_sweep": {
+  "topk": {
+   "1": {
+    "shared_prefix_pages": 1.0,
+    "pages_after_prefix": 0.0
+   },
+   "4": {
+    "shared_prefix_pages": 3.0,
+    "pages_after_prefix": 1.0
+   },
+   "8": {
+    "shared_prefix_pages": 3.0,
+    "pages_after_prefix": 5.0
+   },
+   "12": {
+    "shared_prefix_pages": 3.0,
+    "pages_after_prefix": 9.0
+   },
+   "16": {
+    "shared_prefix_pages": 3.0,
+    "pages_after_prefix": 13.0
+   }
+  },
+  "median_ms": {
+   "pages1": 0.7161160111427307,
+   "pages4": 1.1928000450134277,
+   "pages8": 2.5734899044036865,
+   "pages12": 3.9739038944244385,
+   "pages16": 5.332784175872803
+  }
+ },
+ "notes": {
+  "copy_pin": "block_table forced to page 0: identical instruction path and identical masks, only KV addresses change (locality probe, wrong numerics).",
+  "abl_*": "MODE 1/2/3/4 ablation probes, wrong numerics by construction.",
+  "copy_on_s2": "num_stages=2 pipeline probe on the copied kernel."
+ },
+ "ir_census": {
+  "source": "/workspace/agent-workspaces/msa-stage-profile/.cache/agent-workspaces/msa-long-prefill-direct-pipeline-984069d/src/flag_attn/runtime/backend/_enflame/msa/sparse_attn.py",
+  "cache_dirs": [
+   "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+   "/home/gcuagent/.triton/cache/L7O6KQKMDMNKSZCV7EMAU56OXDH6TEJMBU2JCQT74O2DTAEPANRA",
+   "/home/gcuagent/.triton/cache/7AWRN4M4HWSEDW7XA4GR7KY2HXGPFIIKKZM56ZL6MUDFNDAZN7PA"
+  ],
+  "per_file": {
+   "gcuir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.gcuir",
+    "size": 116245,
+    "counts": {
+     "gcu.border": 161,
+     "vector.load": 145,
+     "vector.store": 82,
+     "arith.addf": 73,
+     "memref.reinterpret_cast": 60,
+     "memref.alloc": 49,
+     "arith.constant": 40,
+     "memref.dealloc": 38,
+     "arith.addi": 32,
+     "gcu.vector_movsft": 32,
+     "memref.dma_wait": 26,
+     "arith.muli": 20,
+     "gcu.int2ptr": 20,
+     "gcu.ptr2int": 19,
+     "gcu.ptr2memref": 19,
+     "gcu.vector_convert": 19,
+     "gcu.extern_elementwise_op": 16,
+     "memref.store": 16,
+     "arith.mulf": 16,
+     "arith.truncf": 16,
+     "vector.extract": 16,
+     "arith.select": 13,
+     "arith.index_cast": 12,
+     "vector.broadcast": 11,
+     "memref.dma_start": 9,
+     "arith.subf": 9,
+     "math.exp2": 9,
+     "arith.extsi": 8,
+     "memref.load": 8,
+     "vector.reduction": 8,
+     "arith.cmpi": 7,
+     "memref_ext.broadcast_start": 7,
+     "memref_ext.slice_start": 7,
+     "scf.yield": 7,
+     "gcu.memref2ptr": 4,
+     "gpu.block_id": 3,
+     "scf.if": 3,
+     "arith.subi": 2,
+     "func.return": 2,
+     "arith.minsi": 2,
+     "scf.for": 2,
+     "arith.divsi": 2,
+     "memref_ext.deslice_start": 2,
+     "gpu.barrier": 2,
+     "gcu.matmul": 2,
+     "gcu.mfence": 2,
+     "builtin.module": 1,
+     "gpu.module": 1,
+     "func.func": 1,
+     "cf.cond_br": 1,
+     "gcu.vector_step": 1,
+     "gpu.thread_id": 1,
+     "memref_ext.transpose_start": 1,
+     "arith.maxnumf": 1,
+     "arith.cmpf": 1,
+     "arith.divf": 1,
+     "gpu.func": 1,
+     "func.call": 1,
+     "gpu.return": 1
+    },
+    "region": {
+     "chars": 53,
+     "lines": 0,
+     "counts": {
+      "gcu.border": 1
+     }
+    }
+   },
+   "llir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.llir",
+    "size": 212529,
+    "counts": {
+     "tops_wait_dte": 26,
+     "tops_mac_v4_fp32": 16,
+     "tops_truncf_v4_fp32_to_v2_bf16": 16,
+     "tops_select_v4_fp32": 11,
+     "tops_memcpy_async": 9,
+     "tops_cvt_v1_si8_to_vbool": 9,
+     "tops_exp2_v4_fp32": 9,
+     "tops_extsi_si32_to_si64": 8,
+     "tops_redmaxnumf_v4_fp32": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__0_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__1_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__2_of_4": 8,
+     "tops_cvt_v4_fp32_to_v1_fp32__3_of_4": 8,
+     "tops_vector_movsft_r_qw2": 8,
+     "tops_vector_movsft_r_qw1": 8,
+     "tops_vector_movsft_r_b8": 8,
+     "tops_vector_movsft_r_b4": 8,
+     "tops_broadcast_v1_fp32": 8,
+     "tops_broadcast_async_2_fp32": 6,
+     "tops_private_dte_ctr": 5,
+     "tops_slice_async_2_bf16": 4,
+     "tops_get_block_id": 3,
+     "tops_broadcast_v4_si32": 3,
+     "tops_minsi_si32": 2,
+     "tops_cvt_vbool_to_v1_si8": 2,
+     "tops_slice_async_1_fp32": 2,
+     "tops_deslice_async_2_bf16": 2,
+     "tops_syncthreads": 2,
+     "tops_fence_local_memory": 2,
+     "tops_get_local_memory": 1,
+     "tops_vector_step_v4_ui32": 1,
+     "tops_broadcast_async_2_si8": 1,
+     "tops_get_shared_memory": 1,
+     "tops_get_thread_id": 1,
+     "tops_slice_async_2_fp32": 1,
+     "tops_transpose_async_2_bf16": 1,
+     "tops_convgen_m8_n128_k128_bf16_fp32": 1,
+     "tops_maxf_v4_fp32": 1,
+     "tops_convgen_m8_n128_k128_bias_bf16_fp32": 1,
+     "tops_floordivf_v4_fp32": 1
+    },
+    "region": null
+   },
+   "ttir": {
+    "path": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ/_gqa_sparse_fwd_direct.ttir",
+    "size": 44916,
+    "counts": {},
+    "region": null
+   }
+  },
+  "cache_dir": "/home/gcuagent/.triton/cache/JFXTDAYOB2BL55L5DTUK763DSED5I7B7TMPT63Y5VA42GVULWKOQ",
+  "ttir_loc_ops_per_line": {}
+ },
+ "raw": {
+  "end_to_end": {
+   "stock": [
+    5.597670078277588,
+    5.4158101081848145,
+    5.3887038230896,
+    5.380829811096191,
+    5.381773948669434,
+    5.376389980316162,
+    5.401979923248291
+   ],
+   "copy_on": [
+    5.380770206451416,
+    5.400269985198975,
+    5.498805999755859,
+    5.366926193237305,
+    5.353260040283203,
+    5.369999885559082,
+    5.48020601272583
+   ],
+   "copy_off": [
+    5.917230129241943,
+    5.905139923095703,
+    5.914696216583252,
+    5.916059970855713,
+    5.913315773010254,
+    5.902574062347412,
+    5.9146199226379395
+   ],
+   "copy_pin": [
+    5.326845169067383,
+    5.328330039978027,
+    5.32082986831665,
+    5.308154106140137,
+    5.325106143951416,
+    5.323453903198242,
+    5.323080062866211
+   ],
+   "copy_on_s2": [
+    5.367465972900391,
+    5.341469764709473,
+    5.364433765411377,
+    5.3685760498046875,
+    5.371513843536377,
+    5.346374034881592,
+    5.355480194091797
+   ],
+   "abl_load_only": [
+    6.327089786529541,
+    6.326879978179932,
+    6.326459884643555,
+    6.32482385635376,
+    6.329895973205566,
+    6.325920104980469,
+    6.3130059242248535
+   ],
+   "abl_no_pv": [
+    4.676819801330566,
+    4.690514087677002,
+    4.694866180419922,
+    4.689209938049316,
+    4.691716194152832,
+    4.6896138191223145,
+    4.6905598640441895
+   ],
+   "abl_no_softmax": [
+    4.75478982925415,
+    4.765066146850586,
+    4.748956203460693,
+    4.761913776397705,
+    4.747935771942139,
+    4.757023811340332,
+    4.752689838409424
+   ],
+   "abl_no_v_dma": [
+    4.743733882904053,
+    4.744740009307861,
+    4.750095844268799,
+    4.738170146942139,
+    4.763130187988281,
+    4.741695880889893,
+    4.742790222167969
+   ]
+  },
+  "full_chain": {
+   "full_chain": [
+    6.793064117431641,
+    6.7748260498046875,
+    6.782083988189697,
+    6.7639641761779785,
+    6.7746758460998535,
+    6.798570156097412,
+    6.7767438888549805
+   ]
+  },
+  "staged": {
+   "index_score": [
+    1.0746300220489502,
+    0.956250011920929,
+    0.9443860054016113
+   ],
+   "index_topk": [
+    0.7160099744796753,
+    0.7062739729881287,
+    0.6830250024795532
+   ],
+   "prefix_kernel": [
+    0.37639400362968445,
+    0.36199599504470825,
+    0.36465001106262207
+   ],
+   "direct_reuse_13p": [
+    5.045070171356201,
+    5.003744125366211,
+    4.993828773498535
+   ],
+   "direct_no_prefix_16p": [
+    5.914785861968994,
+    5.904660224914551,
+    5.906834125518799
+   ],
+   "pages1": [
+    0.7344300150871277,
+    0.7161160111427307,
+    0.713129997253418
+   ],
+   "pages4": [
+    1.205683946609497,
+    1.1928000450134277,
+    1.1927399635314941
+   ],
+   "pages8": [
+    2.5734899044036865,
+    2.5675361156463623,
+    2.587049961090088
+   ],
+   "pages12": [
+    3.9876160621643066,
+    3.9698240756988525,
+    3.9739038944244385
+   ],
+   "pages16": [
+    5.3545942306518555,
+    5.319314002990723,
+    5.332784175872803
+   ]
+  }
+ }
+}
