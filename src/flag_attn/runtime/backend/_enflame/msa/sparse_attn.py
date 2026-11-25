@@ -60,6 +60,9 @@ def _gqa_sparse_common_prefix(
     GQ: tl.constexpr,
     BH: tl.constexpr,
     BD: tl.constexpr,
+    phys_ids_ptr=0,
+    USE_PHYS_PAGE: tl.constexpr = False,
+    KP: tl.constexpr = 16,
 ):
     group = tl.program_id(0)
     head = tl.program_id(1)
@@ -124,6 +127,22 @@ def _gqa_sparse_common_prefix(
     tl.store(mp, m.reshape(GQ, BH), boundary_check=(0, 1))
     tl.store(lp, l.reshape(GQ, BH), boundary_check=(0, 1))
     tl.store(counts + (req * KVH + head) * NG + group, count)
+    if USE_PHYS_PAGE:
+        # Resolve this group's TopK slots once, in slot order, for the direct
+        # kernel. Logical ids stay in `ids`; only the page address is cached.
+        prow = tl.arange(0, GQ)
+        pslot = tl.arange(0, KP)
+        pidx = (
+            head * IH
+            + (begin + local + prow)[:, None] * IQ
+            + pslot[None, :] * IK
+        )
+        pvalid = ((local + prow) < length)[:, None] & (pslot[None, :] < K)
+        pblk = tl.load(ids + pidx, mask=pvalid, other=-1).to(tl.int32)
+        ppage = tl.load(
+            table + req * BT + pblk, mask=pvalid & (pblk >= 0), other=-1
+        ).to(tl.int32)
+        tl.store(phys_ids_ptr + pidx, ppage, mask=pvalid)
 
 
 @triton.jit(do_not_specialize_on_alignment=["seq_lens", "prefix_lens"])
@@ -184,6 +203,8 @@ def _gqa_sparse_fwd_direct(
     packed_k_ptr=0,
     USE_PACKED_K: tl.constexpr = False,
     EARLY_V_DMA: tl.constexpr = False,
+    phys_page_ptr=0,
+    USE_PHYS_PAGE: tl.constexpr = False,
 ):
     sm_scale_log2e = sm_scale * 1.4426950409
     pid_q = tl.program_id(0)
@@ -207,6 +228,8 @@ def _gqa_sparse_fwd_direct(
     for j in range(real_q_loop):
         pid_q_j = pid_q * num_q_loop + j
         t_ptr_j = t_ptr + (q_block_start + pid_q_j) * stride_tn + pid_kh * stride_th
+        # Resolved physical pages share topk's shape and strides.
+        phys_ptr_j = phys_page_ptr + (q_block_start + pid_q_j) * stride_tn + pid_kh * stride_th
         # Valid block count from seq position (no sentinel): block_size_q == 1.
         q_abs = prefix_len + pid_q_j * BLOCK_SIZE_Q
         valid_blocks = (q_abs + BLOCK_SIZE_K) // BLOCK_SIZE_K
@@ -248,6 +271,7 @@ def _gqa_sparse_fwd_direct(
             acc_o = tl.load(pp, boundary_check=(0, 1), padding_option="zero")
             l_acc = tl.where(off_n[None, :] == 0, l_i[:, None], 0.0)
             t_ptr_j += shared_count * stride_tk
+            phys_ptr_j += shared_count * stride_tk
         q = tl.reshape(q, BLOCK_SIZE_QH, BLOCK_SIZE_D)
         if USE_FP8:
             # Keep QK in FP8 Tensor Core form.  Q is per-head dynamically
@@ -262,7 +286,12 @@ def _gqa_sparse_fwd_direct(
             blk = tl.load(t_ptr_j).to(tl.int32)
             t_ptr_j = t_ptr_j + stride_tk
             c = blk * BLOCK_SIZE_K
-            page = tl.load(bt_row + blk).to(tl.int32)
+            if USE_PHYS_PAGE:
+                # Same slot order as topk_idx; blk still drives causal/boundary.
+                page = tl.load(phys_ptr_j).to(tl.int32)
+                phys_ptr_j = phys_ptr_j + stride_tk
+            else:
+                page = tl.load(bt_row + blk).to(tl.int32)
 
             pos = c + off_n
             pos_mask = pos < seq_len
@@ -874,12 +903,28 @@ def minimax_m3_sparse_attn(
         and triton.cdiv(total_q, prefix_group) * num_kv_heads >= 64
         and total_q * num_heads * (head_dim + 2) * 4 <= 64 * 1024 * 1024
     )
+    use_packed_k = (
+        use_shared_prefix
+        and gqa_group_size == 8
+        and head_dim == 128
+        and topk == 16
+        and max_query_len >= 1024
+        and kv_cache.shape[1] == num_kv_heads
+        and kv_cache.shape[2] == SPARSE_BLOCK_SIZE
+        and kv_cache.shape[3] >= 2 * head_dim
+        and os.environ.get("FLAG_ATTN_MSA_PACKED_K") == "1"
+    )
+    use_phys_page = use_packed_k and os.environ.get("FLAG_ATTN_MSA_PHYS_PAGE") == "1"
+
     partial = maximum = denom = counts = output
+    phys_page = output
     if use_shared_prefix:
         partial = torch.empty(q.shape, device=q.device, dtype=torch.float32)
         maximum = torch.empty(q.shape[:2], device=q.device, dtype=torch.float32)
         denom = torch.empty_like(maximum)
         counts = torch.empty((batch, num_kv_heads, prefix_groups), device=q.device, dtype=torch.int32)
+        if use_phys_page:
+            phys_page = torch.empty_like(topk_idx)
         _gqa_sparse_common_prefix[(prefix_groups, num_kv_heads, batch)](
             q,
             kv_cache,
@@ -907,6 +952,9 @@ def minimax_m3_sparse_attn(
             prefix_group,
             block_size_h,
             triton.next_power_of_2(head_dim),
+            phys_page,
+            USE_PHYS_PAGE=use_phys_page,
+            KP=triton.next_power_of_2(topk),
             num_warps=1,
             num_stages=1,
         )
@@ -919,17 +967,6 @@ def minimax_m3_sparse_attn(
 
     # The experimental packed-K path has been evaluated for this long-prefill
     # workload. Grouped prefill has already returned above.
-    use_packed_k = (
-        use_shared_prefix
-        and gqa_group_size == 8
-        and head_dim == 128
-        and topk == 16
-        and max_query_len >= 1024
-        and kv_cache.shape[1] == num_kv_heads
-        and kv_cache.shape[2] == SPARSE_BLOCK_SIZE
-        and kv_cache.shape[3] >= 2 * head_dim
-        and os.environ.get("FLAG_ATTN_MSA_PACKED_K") == "1"
-    )
     early_v_dma = use_packed_k or (
         head_dim == 128
         and block_size_h <= 8
@@ -940,6 +977,9 @@ def minimax_m3_sparse_attn(
         if use_packed_k
         else output
     )
+    # Opt-in (FLAG_ATTN_MSA_PHYS_PAGE): the prefix launch above already resolved
+    # every TopK slot's physical page. Logical ids stay authoritative for the
+    # causal position and the boundary mask; only the page address is reused.
 
     _gqa_sparse_fwd_direct[grid](
         q,
@@ -1000,6 +1040,8 @@ def minimax_m3_sparse_attn(
         packed_k_ptr=packed_k,
         USE_PACKED_K=use_packed_k,
         EARLY_V_DMA=early_v_dma,
+        phys_page_ptr=phys_page,
+        USE_PHYS_PAGE=use_phys_page,
     )
 
 
