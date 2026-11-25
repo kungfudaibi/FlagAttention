@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import os
+
 import torch
 import triton
 import triton.language as tl
@@ -179,6 +181,9 @@ def _gqa_sparse_fwd_direct(
     STRIDE_PD: tl.constexpr = 0,
     STRIDE_SN: tl.constexpr = 0,
     USE_SHARED_PREFIX: tl.constexpr = False,
+    packed_k_ptr=0,
+    USE_PACKED_K: tl.constexpr = False,
+    EARLY_V_DMA: tl.constexpr = False,
 ):
     sm_scale_log2e = sm_scale * 1.4426950409
     pid_q = tl.program_id(0)
@@ -263,19 +268,33 @@ def _gqa_sparse_fwd_direct(
             pos_mask = pos < seq_len
 
             k_base_ptr = kv_cache_ptr + page * stride_kv_blk + pid_kh * stride_kv_h
-            k_ptrs = tl.make_block_ptr(
-                base=k_base_ptr,
-                shape=(BLOCK_SIZE_K, head_dim),
-                strides=(stride_kv_pos, stride_kv_d),
-                offsets=(0, 0),
-                block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
-                order=(1, 0),
-            )
-            k = tl.load(
-                k_ptrs,
-                boundary_check=(0, 1),
-                padding_option="zero",
-            )
+            if USE_PACKED_K:
+                # Contiguous [physical page, KV head, D, token].
+                packed_tile = (page * num_kv_heads + pid_kh) * head_dim * BLOCK_SIZE_K
+                k_ptrs = tl.make_block_ptr(
+                    base=packed_k_ptr + packed_tile,
+                    shape=(head_dim, BLOCK_SIZE_K),
+                    strides=(BLOCK_SIZE_K, 1),
+                    offsets=(0, 0),
+                    block_shape=(BLOCK_SIZE_D, BLOCK_SIZE_K),
+                    order=(1, 0),
+                )
+                k_for_dot = tl.load(k_ptrs, boundary_check=(0, 1), padding_option="zero")
+            else:
+                k_ptrs = tl.make_block_ptr(
+                    base=k_base_ptr,
+                    shape=(BLOCK_SIZE_K, head_dim),
+                    strides=(stride_kv_pos, stride_kv_d),
+                    offsets=(0, 0),
+                    block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
+                    order=(1, 0),
+                )
+                k = tl.load(
+                    k_ptrs,
+                    boundary_check=(0, 1),
+                    padding_option="zero",
+                )
+                k_for_dot = tl.trans(k)
             if USE_FP8:
                 if KV_SCALE_MODE == 2:
                     k_scale = tl.load(
@@ -283,7 +302,22 @@ def _gqa_sparse_fwd_direct(
                         mask=pos_mask,
                         other=1.0,
                     )
-            qk_dot = tl.dot(q_qk, tl.trans(k))
+            v_base_ptr = k_base_ptr + head_dim * stride_kv_d
+            v_ptrs = tl.make_block_ptr(
+                base=v_base_ptr,
+                shape=(BLOCK_SIZE_K, head_dim),
+                strides=(stride_kv_pos, stride_kv_d),
+                offsets=(0, 0),
+                block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
+                order=(1, 0),
+            )
+            if EARLY_V_DMA:
+                v = tl.load(
+                    v_ptrs,
+                    boundary_check=(0, 1),
+                    padding_option="zero",
+                )
+            qk_dot = tl.dot(q_qk, k_for_dot)
             if USE_FP8:
                 qk_dot *= qk_q_scale[:, None]
 
@@ -322,20 +356,12 @@ def _gqa_sparse_fwd_direct(
             else:
                 l_acc = l_acc * alpha[:, None] + p
 
-            v_base_ptr = k_base_ptr + head_dim * stride_kv_d
-            v_ptrs = tl.make_block_ptr(
-                base=v_base_ptr,
-                shape=(BLOCK_SIZE_K, head_dim),
-                strides=(stride_kv_pos, stride_kv_d),
-                offsets=(0, 0),
-                block_shape=(BLOCK_SIZE_K, BLOCK_SIZE_D),
-                order=(1, 0),
-            )
-            v = tl.load(
-                v_ptrs,
-                boundary_check=(0, 1),
-                padding_option="zero",
-            )
+            if not EARLY_V_DMA:
+                v = tl.load(
+                    v_ptrs,
+                    boundary_check=(0, 1),
+                    padding_option="zero",
+                )
 
             if USE_FP8:
                 if KV_SCALE_MODE == 2:
@@ -891,6 +917,30 @@ def minimax_m3_sparse_attn(
         batch,
     )
 
+    # The experimental packed-K path has been evaluated for this long-prefill
+    # workload. Grouped prefill has already returned above.
+    use_packed_k = (
+        use_shared_prefix
+        and gqa_group_size == 8
+        and head_dim == 128
+        and topk == 16
+        and max_query_len >= 1024
+        and kv_cache.shape[1] == num_kv_heads
+        and kv_cache.shape[2] == SPARSE_BLOCK_SIZE
+        and kv_cache.shape[3] >= 2 * head_dim
+        and os.environ.get("FLAG_ATTN_MSA_PACKED_K") == "1"
+    )
+    early_v_dma = use_packed_k or (
+        head_dim == 128
+        and block_size_h <= 8
+        and os.environ.get("FLAG_ATTN_MSA_EARLY_V_DMA") == "1"
+    )
+    packed_k = (
+        kv_cache[..., :head_dim].transpose(-1, -2).contiguous()
+        if use_packed_k
+        else output
+    )
+
     _gqa_sparse_fwd_direct[grid](
         q,
         kv_cache,
@@ -947,6 +997,9 @@ def minimax_m3_sparse_attn(
         STRIDE_PD=partial.stride(2),
         STRIDE_SN=maximum.stride(0),
         USE_SHARED_PREFIX=use_shared_prefix,
+        packed_k_ptr=packed_k,
+        USE_PACKED_K=use_packed_k,
+        EARLY_V_DMA=early_v_dma,
     )
 
 
