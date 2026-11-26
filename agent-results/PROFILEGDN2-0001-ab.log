@@ -1,0 +1,15 @@
+OK: 13 (dtype, shape) groups validated in /workspace/agent-workspaces/gdn2-irregular-tiles-0/.cache/profile-workspaces/profilegdn2-0001/agent-results/PROFILEGDN2-0001-ab.jsonl
+  bfloat16  (1, 1024, 4, 256, 256)     base=1.0701ms cand=0.6686ms speedup=1.601x rounds=[1.517, 1.599, 1.748] bv=[128] peak=16.00/16.00MiB
+  bfloat16  (2, 512, 4, 96, 128)       base=0.7520ms cand=0.4240ms speedup=1.774x rounds=[1.782, 1.716, 1.768] bv=[128] peak=7.12/7.12MiB
+  bfloat16  (2, 512, 4, 128, 96)       base=0.7147ms cand=0.4173ms speedup=1.713x rounds=[1.712, 1.805, 1.709] bv=[128] peak=7.88/7.88MiB
+  bfloat16  (2, 512, 4, 128, 128)      base=0.7692ms cand=0.4102ms speedup=1.875x rounds=[1.783, 1.951, 1.877] bv=[128] peak=8.50/8.50MiB
+  bfloat16  (2, 512, 4, 128, 160)      base=0.7527ms cand=0.4123ms speedup=1.826x rounds=[1.821, 1.828, 1.835] bv=[128] peak=9.12/9.12MiB
+  bfloat16  (2, 512, 4, 128, 192)      base=0.8348ms cand=0.4081ms speedup=2.045x rounds=[1.885, 2.058, 2.043] bv=[128] peak=9.75/9.75MiB
+  bfloat16  (2, 512, 4, 128, 256)      base=0.8476ms cand=0.4051ms speedup=2.092x rounds=[2.098, 2.086, 2.206] bv=[128] peak=11.00/11.00MiB
+  bfloat16  (2, 512, 4, 128, 320)      base=0.9272ms cand=0.4647ms speedup=1.995x rounds=[2.204, 2.009, 1.946] bv=[256] peak=12.25/12.25MiB
+  bfloat16  (2, 512, 8, 64, 64)        base=0.7688ms cand=0.4837ms speedup=1.589x rounds=[1.589, 1.654, 1.578] bv=[64] peak=9.25/9.25MiB
+  float16   (1, 1024, 4, 256, 256)     base=1.0753ms cand=0.6628ms speedup=1.622x rounds=[1.634, 1.601, 1.608] bv=[128] peak=16.00/16.00MiB
+  float16   (2, 512, 4, 128, 128)      base=0.7656ms cand=0.4124ms speedup=1.856x rounds=[1.856, 1.796, 1.889] bv=[128] peak=8.50/8.50MiB
+  float16   (2, 512, 4, 128, 160)      base=0.7606ms cand=0.4110ms speedup=1.851x rounds=[1.829, 1.985, 1.851] bv=[128] peak=9.12/9.12MiB
+  float16   (2, 512, 4, 128, 256)      base=0.8357ms cand=0.4098ms speedup=2.039x rounds=[1.921, 2.039, 2.19] bv=[128] peak=11.00/11.00MiB
+  paired rounds: n=39 median=1.8295x geomean=1.8376x min=1.5172x max=2.2062x

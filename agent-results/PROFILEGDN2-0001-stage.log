@@ -1,0 +1,247 @@
+[W1126 10:59:50.531115866 gcu_caching_allocator.cpp:2944] Warning: [GCU Allocator] Static initialization: PYTORCH_GCU_ALLOC_CONF="(not set, using default)", selected_backend=native (function BackendStaticInitializer)
+/flagos/lib/python3.12/site-packages/torch_gcu/transfer_to_gcu.py:389: ImportWarning: 
+    *************************************************************************************************************
+    The torch.Tensor.cuda and torch.nn.Module.cuda are replaced with torch.Tensor.gcu and torch.nn.Module.gcu now..
+    The backend in torch.distributed.init_process_group set to eccl now..
+    The torch.cuda.* and torch.cuda.amp.* are replaced with torch.gcu.* and torch.gcu.amp.* now..
+    The device parameters have been replaced with gcu in the function below:
+    torch.logspace, torch.randint, torch.hann_window, torch.rand, torch.full_like, torch.ones_like, torch.rand_like, torch.randperm, torch.arange, torch.frombuffer, torch.normal, torch._empty_per_channel_affine_quantized, torch.empty_strided, torch.empty_like, torch.scalar_tensor, torch.tril_indices, torch.bartlett_window, torch.ones, torch.sparse_coo_tensor, torch.randn, torch.kaiser_window, torch.tensor, torch.triu_indices, torch.as_tensor, torch.zeros, torch.randint_like, torch.full, torch.eye, torch._sparse_csr_tensor_unsafe, torch.empty, torch._sparse_coo_tensor_unsafe, torch.blackman_window, torch.zeros_like, torch.range, torch.sparse_csr_tensor, torch.randn_like, torch.from_file, torch._cudnn_init_dropout_state, torch._empty_affine_quantized, torch.linspace, torch.hamming_window, torch.empty_quantized, torch._pin_memory, torch.autocast, torch.load, torch.Tensor.new_empty, torch.Tensor.new_empty_strided, torch.Tensor.new_full, torch.Tensor.new_ones, torch.Tensor.new_tensor, torch.Tensor.new_zeros, torch.Tensor.to, torch.nn.Module.to, torch.nn.Module.to_empty
+    *************************************************************************************************************
+    
+  warnings.warn(msg, ImportWarning)
+warning: the GCU toolkit in /opt/triton_gcu/bin does not support enable_i64, dropping it from --convert-gpu-to-gcu. Kernels that rely on 64-bit integer handling may be miscompiled; set TRITON_GCU_ENABLE_I64=1 to send the option anyway.
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 96], "k1_us": 195.33, "ht_zeros_us": 299.98, "ht_empty_us": 6.23, "k2": {"split_0_bv128": {"h0_ht": 483.9, "h0_only": 148.77, "ht_only": 504.2, "neither": 143.78, "full_empty_ht_0": 670.01, "full_empty_ht_1": 313.12}, "split_1_bv128": {"h0_ht": 454.46, "h0_only": 145.25, "ht_only": 452.42, "neither": 143.36, "full_empty_ht_0": 628.64, "full_empty_ht_1": 313.96}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 128], "k1_us": 186.86, "ht_zeros_us": 316.84, "ht_empty_us": 6.0, "k2": {"split_0_bv128": {"h0_ht": 530.14, "h0_only": 147.45, "ht_only": 514.9, "neither": 139.36, "full_empty_ht_0": 653.38, "full_empty_ht_1": 304.32}, "split_1_bv128": {"h0_ht": 488.32, "h0_only": 147.4, "ht_only": 506.68, "neither": 139.37, "full_empty_ht_0": 688.23, "full_empty_ht_1": 306.33}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 160], "k1_us": 197.29, "ht_zeros_us": 382.27, "ht_empty_us": 6.56, "k2": {"split_0_bv256": {"h0_ht": 620.23, "h0_only": 181.4, "ht_only": 609.39, "neither": 181.8, "full_empty_ht_0": 743.68, "full_empty_ht_1": 345.59}, "split_1_bv128": {"h0_ht": 443.96, "h0_only": 144.89, "ht_only": 535.86, "neither": 142.52, "full_empty_ht_0": 607.76, "full_empty_ht_1": 309.33}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 192], "k1_us": 191.12, "ht_zeros_us": 384.06, "ht_empty_us": 6.11, "k2": {"split_0_bv256": {"h0_ht": 583.62, "h0_only": 179.65, "ht_only": 560.35, "neither": 179.35, "full_empty_ht_0": 763.28, "full_empty_ht_1": 337.75}, "split_1_bv128": {"h0_ht": 558.68, "h0_only": 142.98, "ht_only": 541.08, "neither": 141.32, "full_empty_ht_0": 669.24, "full_empty_ht_1": 304.29}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 256], "k1_us": 193.29, "ht_zeros_us": 425.6, "ht_empty_us": 5.94, "k2": {"split_0_bv256": {"h0_ht": 569.29, "h0_only": 183.61, "ht_only": 622.35, "neither": 180.22, "full_empty_ht_0": 835.24, "full_empty_ht_1": 342.25}, "split_1_bv128": {"h0_ht": 532.75, "h0_only": 149.23, "ht_only": 595.71, "neither": 142.71, "full_empty_ht_0": 651.33, "full_empty_ht_1": 302.26}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [2, 512, 4, 128, 320], "k1_us": 208.18, "ht_zeros_us": 500.81, "ht_empty_us": 5.86, "k2": {"split_0_bv256": {"h0_ht": 570.06, "h0_only": 182.74, "ht_only": 678.87, "neither": 181.04, "full_empty_ht_0": 863.87, "full_empty_ht_1": 369.74}, "split_1_bv256": {"h0_ht": 687.12, "h0_only": 182.87, "ht_only": 682.55, "neither": 181.2, "full_empty_ht_0": 864.62, "full_empty_ht_1": 357.75}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "bfloat16", "shape": [1, 1024, 4, 256, 256], "k1_us": 250.59, "ht_zeros_us": 427.7, "ht_empty_us": 5.93, "k2": {"split_0_bv256": {"h0_ht": 948.13, "h0_only": 450.55, "ht_only": 794.24, "neither": 436.45, "full_empty_ht_0": 1121.24, "full_empty_ht_1": 675.12}, "split_1_bv128": {"h0_ht": 797.89, "h0_only": 337.55, "ht_only": 842.57, "neither": 344.83, "full_empty_ht_0": 1069.33, "full_empty_ht_1": 563.76}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 96], "k1_us": 196.25, "ht_zeros_us": 195.6, "ht_empty_us": 5.95, "k2": {"split_0_bv128": {"h0_ht": 421.25, "h0_only": 144.45, "ht_only": 466.16, "neither": 143.43, "full_empty_ht_0": 610.43, "full_empty_ht_1": 312.69}, "split_1_bv128": {"h0_ht": 424.93, "h0_only": 145.08, "ht_only": 442.07, "neither": 144.15, "full_empty_ht_0": 612.66, "full_empty_ht_1": 312.06}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 128], "k1_us": 184.83, "ht_zeros_us": 317.78, "ht_empty_us": 5.89, "k2": {"split_0_bv128": {"h0_ht": 421.56, "h0_only": 147.02, "ht_only": 433.72, "neither": 139.79, "full_empty_ht_0": 633.28, "full_empty_ht_1": 304.55}, "split_1_bv128": {"h0_ht": 473.41, "h0_only": 146.85, "ht_only": 468.84, "neither": 139.2, "full_empty_ht_0": 642.37, "full_empty_ht_1": 303.31}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 160], "k1_us": 196.5, "ht_zeros_us": 434.61, "ht_empty_us": 6.19, "k2": {"split_0_bv256": {"h0_ht": 604.91, "h0_only": 181.83, "ht_only": 571.44, "neither": 180.78, "full_empty_ht_0": 693.48, "full_empty_ht_1": 344.95}, "split_1_bv128": {"h0_ht": 523.94, "h0_only": 145.59, "ht_only": 486.92, "neither": 143.56, "full_empty_ht_0": 663.55, "full_empty_ht_1": 309.56}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 192], "k1_us": 193.5, "ht_zeros_us": 257.32, "ht_empty_us": 5.84, "k2": {"split_0_bv256": {"h0_ht": 545.26, "h0_only": 179.35, "ht_only": 576.56, "neither": 180.25, "full_empty_ht_0": 688.38, "full_empty_ht_1": 344.38}, "split_1_bv128": {"h0_ht": 490.57, "h0_only": 143.72, "ht_only": 527.97, "neither": 141.37, "full_empty_ht_0": 729.04, "full_empty_ht_1": 304.49}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 256], "k1_us": 192.95, "ht_zeros_us": 419.1, "ht_empty_us": 5.9, "k2": {"split_0_bv256": {"h0_ht": 614.67, "h0_only": 185.32, "ht_only": 607.31, "neither": 179.88, "full_empty_ht_0": 786.2, "full_empty_ht_1": 341.31}, "split_1_bv128": {"h0_ht": 600.56, "h0_only": 149.34, "ht_only": 608.81, "neither": 141.43, "full_empty_ht_0": 812.8, "full_empty_ht_1": 301.52}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [2, 512, 4, 128, 320], "k1_us": 205.12, "ht_zeros_us": 476.89, "ht_empty_us": 6.04, "k2": {"split_0_bv256": {"h0_ht": 694.13, "h0_only": 183.2, "ht_only": 696.16, "neither": 181.67, "full_empty_ht_0": 883.87, "full_empty_ht_1": 359.87}, "split_1_bv256": {"h0_ht": 680.18, "h0_only": 182.68, "ht_only": 673.54, "neither": 181.4, "full_empty_ht_0": 836.87, "full_empty_ht_1": 359.29}}, "bit_identical": true}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{"dtype": "float16", "shape": [1, 1024, 4, 256, 256], "k1_us": 246.9, "ht_zeros_us": 464.05, "ht_empty_us": 5.84, "k2": {"split_0_bv256": {"h0_ht": 929.3, "h0_only": 450.96, "ht_only": 858.58, "neither": 435.4, "full_empty_ht_0": 1059.95, "full_empty_ht_1": 672.45}, "split_1_bv128": {"h0_ht": 792.49, "h0_only": 338.21, "ht_only": 783.2, "neither": 344.15, "full_empty_ht_0": 961.38, "full_empty_ht_1": 562.56}}, "bit_identical": true}
+OK: agent-results/PROFILEGDN2-0001-stage.jsonl
