@@ -185,6 +185,7 @@ def _gqa_sparse_fwd_direct(
     USE_PACKED_K: tl.constexpr = False,
     EARLY_V_DMA: tl.constexpr = False,
     PRELOAD_PAGE_META: tl.constexpr = False,
+    MAX_STATE_COLUMN: tl.constexpr = False,
 ):
     sm_scale_log2e = sm_scale * 1.4426950409
     pid_q = tl.program_id(0)
@@ -249,6 +250,8 @@ def _gqa_sparse_fwd_direct(
             acc_o = tl.load(pp, boundary_check=(0, 1), padding_option="zero")
             l_acc = tl.where(off_n[None, :] == 0, l_i[:, None], 0.0)
             t_ptr_j += shared_count * stride_tk
+        if MAX_STATE_COLUMN:
+            m_i = m_i[:, None]
         q = tl.reshape(q, BLOCK_SIZE_QH, BLOCK_SIZE_D)
         if USE_FP8:
             # Keep QK in FP8 Tensor Core form.  Q is per-head dynamically
@@ -356,17 +359,22 @@ def _gqa_sparse_fwd_direct(
             if not is_full_seq:
                 qk += tl.where(pos_mask[None, :], 0, float("-inf"))
 
-            m_ij = tl.maximum(m_i, tl.max(qk, axis=1))
-            p = tl.exp2(qk - m_ij[:, None])
+            if MAX_STATE_COLUMN:
+                m_ij = tl.maximum(m_i, tl.max(qk, axis=1, keep_dims=True))
+                p = tl.exp2(qk - m_ij)
+                alpha = tl.exp2(m_i - m_ij)
+            else:
+                m_ij = tl.maximum(m_i, tl.max(qk, axis=1))
+                p = tl.exp2(qk - m_ij[:, None])
+                alpha = tl.exp2(m_i - m_ij)[:, None]
             if USE_FP8:
                 l_ij = tl.sum(p, axis=1)
 
-            alpha = tl.exp2(m_i - m_ij)
-            acc_o = acc_o * alpha[:, None]
+            acc_o = acc_o * alpha
             if USE_FP8:
-                l_i = l_i * alpha + l_ij
+                l_i = l_i * tl.reshape(alpha, (BLOCK_SIZE_QH,)) + l_ij
             else:
-                l_acc = l_acc * alpha[:, None] + p
+                l_acc = l_acc * alpha + p
 
             if not EARLY_V_DMA:
                 v = tl.load(
@@ -1013,6 +1021,7 @@ def minimax_m3_sparse_attn(
         USE_PACKED_K=use_packed_k,
         EARLY_V_DMA=early_v_dma,
         PRELOAD_PAGE_META=use_packed_k and os.environ.get("FLAG_ATTN_MSA_PRELOAD_PAGE_META") == "1",
+        MAX_STATE_COLUMN=use_packed_k and os.environ.get("FLAG_ATTN_MSA_MAX_STATE_COLUMN") == "1",
     )
 
 
