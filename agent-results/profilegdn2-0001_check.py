@@ -69,24 +69,40 @@ def _pci(index: int = HOST_DEVICE_INDEX):
     return None
 
 
-def _check_device() -> int:
+def _check_device():
+    """Verify this process is bound to physical GCU 5, and return its ordinal.
+
+    Two bindings both mean GCU 5 and both occur in practice:
+
+    * the scheduler wrapper exposes every GCU (``TOPS_VISIBLE_DEVICES`` unset or
+      ``0,1,2,3,4,5``) and calls ``torch.gcu.set_device(5)``, so the ordinal is
+      5;
+    * a self-launched child masks the device (``TOPS_VISIBLE_DEVICES=5``), so
+      the only visible ordinal is 0.
+
+    Anything else is an error: allocating on a different ordinal would run on
+    another tenant's card.
+    """
     import torch
 
     pci = _pci()
+    count = torch.gcu.device_count()
+    current = torch.gcu.current_device()
     if pci is None or pci.strip().lower() != EXPECTED_PCI:
         print(f"FAIL: host GCU {HOST_DEVICE_INDEX} is {pci!r}, expected {EXPECTED_PCI!r}",
               file=sys.stderr)
-        return 4
-    if torch.gcu.device_count() != 1:
-        print(f"FAIL: expected exactly 1 visible GCU, saw {torch.gcu.device_count()}",
-              file=sys.stderr)
-        return 4
-    if torch.gcu.current_device() != 0:
-        print(f"FAIL: current device {torch.gcu.current_device()} != 0", file=sys.stderr)
-        return 4
-    print(f"device: GCU {HOST_DEVICE_INDEX} PCI {pci}, single visible device, "
-          f"torch {torch.__version__}")
-    return 0
+        return None, 4
+    if count == 1 and current == 0:
+        ordinal = 0
+    elif count > 5 and current == HOST_DEVICE_INDEX:
+        ordinal = HOST_DEVICE_INDEX
+    else:
+        print(f"FAIL: visible={count} current={current} is not a GCU 5 binding "
+              f"(expected 1/0 or >5/{HOST_DEVICE_INDEX})", file=sys.stderr)
+        return None, 4
+    print(f"device: GCU {HOST_DEVICE_INDEX} PCI {pci}, visible={count}, "
+          f"ordinal={ordinal}, torch {torch.__version__}")
+    return ordinal, 0
 
 
 def _child_env() -> dict:
@@ -108,9 +124,10 @@ def _run(argv, label: str) -> int:
 def command_verify() -> int:
     import torch
 
-    code = _check_device()
+    ordinal, code = _check_device()
     if code:
         return code
+    dev = f"gcu:{ordinal}"
     from flag_attn import chunk_gdn2  # noqa: F401  (import must succeed)
 
     impl = __import__("flag_attn.runtime.backend._enflame.FLA.gdn2.chunk_gdn2",
@@ -154,6 +171,7 @@ def command_verify() -> int:
              ((2, 512, 4, 96, 128), torch.bfloat16),
              ((1, 1024, 4, 256, 256), torch.bfloat16),
              ((2, 512, 8, 64, 64), torch.float16)]
+    device_str = dev
     for (B, T, H, K, V), dtype in cases:
         torch.manual_seed(42)
         q = (torch.randn(B, T, H, K) / math.sqrt(K)).to(dtype)
@@ -163,7 +181,7 @@ def command_verify() -> int:
         b = torch.rand(B, T, H, K).to(dtype)
         w = torch.rand(B, T, H, V).to(dtype)
         h0 = torch.randn(B, H, K, V) * 0.01
-        dev = [x.to("gcu:0") for x in (q, k, v, g, b, w, h0)]
+        dev = [x.to(device_str) for x in (q, k, v, g, b, w, h0)]
         ref_o, ref_ht = gdn2_forward(q, k, v, g, b, w, K ** -0.5, h0)
         results = {}
         for empty in (False, True):
@@ -197,7 +215,7 @@ def command_verify() -> int:
 
 
 def command_benchmark() -> int:
-    code = _check_device()
+    _, code = _check_device()
     if code:
         return code
     out = ROOT / AB_OUT

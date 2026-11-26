@@ -98,6 +98,17 @@ _S60_STATE_EMPTY_HT_ENABLED = (
     os.environ.get("FLAG_ATTN_GDN2_STATE_EMPTY_HT", "0") == "1"
 )
 
+def _s60_state_all_written(K: int, state_bk: int) -> bool:
+    """True when K2's K block chain writes every row of the final state.
+
+    The kernel accumulates the state in ``b_h1..b_h4`` -- a chain of
+    ``ceil(K / BK)`` blocks, capped at four -- and stores each block with a
+    boundary check.  The chain covers all of ``K`` exactly when
+    ``K <= 4 * BK``; outside that, part of the state would keep whatever the
+    allocator returned, so the experiment must not skip the zero fill.
+    """
+    return K <= 4 * state_bk
+
 
 def _s60_state_bv(extent: int) -> int:
     """V tile for K2: split wide-but-not-huge V into two tiles."""
@@ -1191,7 +1202,8 @@ def chunk_gdn2_fwd_h_o_infer(
     if output_final_state:
         # The experiment changes the allocation only; the kernel writes every
         # output element, so the bytes are identical to the zero-filled path.
-        empty_ht = _S60_STATE_EMPTY_HT_ENABLED and K <= 4 * state_bk
+        empty_ht = (_S60_STATE_EMPTY_HT_ENABLED
+                    and _s60_state_all_written(K, state_bk))
         new_state = kg.new_empty if empty_ht else kg.new_zeros
         if state_v_first:
             final_state = new_state(N, H, V, K, dtype=torch.float32)

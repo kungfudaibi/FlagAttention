@@ -327,6 +327,15 @@ def test_empty_ht_allocation_is_bit_identical(shape, dtype):
     assert torch.isfinite(o_empty).all() and torch.isfinite(ht_empty).all()
 
 
+@pytest.mark.parametrize("K,bk,covered", [
+    (64, 64, True), (128, 128, True), (256, 256, True),
+    (256, 64, True), (257, 64, False), (512, 128, True), (512, 64, False),
+])
+def test_s60_state_all_written_matches_the_k_block_chain(K, bk, covered):
+    """The experiment is only safe when the K block chain covers all of K."""
+    assert gdn2_impl._s60_state_all_written(K, bk) is covered
+
+
 @pytest.mark.chunk_gdn2
 @torch.inference_mode()
 def test_empty_ht_falls_back_when_bk_does_not_cover_k(monkeypatch):

@@ -601,11 +601,20 @@ def command_check(args) -> int:
             if _launch_geometry(b) != _launch_geometry(c):
                 problems.append(f"{key} r{rnd}: launch geometry changed "
                                 f"{_launch_geometry(b)} -> {_launch_geometry(c)}")
+            # The candidate only removes a device memset, so the expected
+            # ratio is bounded by (memset + kernel) / kernel.  On this host the
+            # memset is ~0.2-0.5 ms against a ~0.14-0.45 ms K2 body, so a ~2x
+            # whole-step speedup is the *expected* result, not an anomaly; the
+            # band only has to catch a broken measurement (wrong variant, a
+            # stale tree, a mis-bound device), which would sit near 1.0 or
+            # below.  The report compares the measured ratio with the stage
+            # profile's own prediction.
             ratio = b["steady"]["median_ms"] / c["steady"]["median_ms"]
-            if not (0.5 <= ratio <= 2.0):
+            if not (0.85 <= ratio <= 3.5):
                 problems.append(f"{key} r{rnd}: implausible ratio {ratio:.3f}x")
-            if ratio < 1.0:
-                warnings.append(f"{key} r{rnd}: candidate slower {ratio:.3f}x")
+            if ratio < 1.05:
+                warnings.append(f"{key} r{rnd}: candidate only {ratio:.3f}x "
+                                f"(expected >= 1.05x from the removed memset)")
 
     for item in warnings:
         print("WARN:", item)
