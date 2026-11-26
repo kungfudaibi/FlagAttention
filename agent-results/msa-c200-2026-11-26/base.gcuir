@@ -1,0 +1,1236 @@
+#map = affine_map<() -> (0)>
+#map1 = affine_map<() -> (16)>
+"builtin.module"() ({
+  "gpu.module"() <{sym_name = "triton"}> ({
+    "func.func"() <{function_type = (!gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<i32>, !gcu.ptr<bf16>) -> (), sym_name = "_gqa_sparse_fwd_direct_triton_internal__"}> ({
+    ^bb0(%arg16: !gcu.ptr<bf16>, %arg17: !gcu.ptr<bf16>, %arg18: !gcu.ptr<bf16>, %arg19: !gcu.ptr<bf16>, %arg20: !gcu.ptr<i32>, %arg21: !gcu.ptr<bf16>, %arg22: !gcu.ptr<i32>, %arg23: !gcu.ptr<i32>, %arg24: !gcu.ptr<i32>, %arg25: !gcu.ptr<i32>, %arg26: !gcu.ptr<i32>, %arg27: !gcu.ptr<f32>, %arg28: !gcu.ptr<f32>, %arg29: !gcu.ptr<f32>, %arg30: !gcu.ptr<i32>, %arg31: !gcu.ptr<bf16>):
+      %0 = "arith.constant"() <{value = dense<1.000000e+00> : vector<128xf32>}> : () -> vector<128xf32>
+      %1 = "arith.constant"() <{value = dense<0.127517432> : vector<128xf32>}> : () -> vector<128xf32>
+      %2 = "arith.constant"() <{value = dense<0xFF800000> : vector<128xf32>}> : () -> vector<128xf32>
+      %3 = "arith.constant"() <{value = 16384 : index}> : () -> index
+      %4 = "arith.constant"() <{value = 1024 : index}> : () -> index
+      %5 = "arith.constant"() <{value = 256 : i32}> : () -> i32
+      %6 = "arith.constant"() <{value = 512 : i32}> : () -> i32
+      %7 = "arith.constant"() <{value = dense<0.000000e+00> : vector<128xf32>}> : () -> vector<128xf32>
+      %8 = "arith.constant"() <{value = dense<0> : vector<128xi32>}> : () -> vector<128xi32>
+      %9 = "arith.constant"() <{value = 7 : index}> : () -> index
+      %10 = "arith.constant"() <{value = 6 : index}> : () -> index
+      %11 = "arith.constant"() <{value = 5 : index}> : () -> index
+      %12 = "arith.constant"() <{value = 4 : index}> : () -> index
+      %13 = "arith.constant"() <{value = 3 : index}> : () -> index
+      %14 = "arith.constant"() <{value = 2 : index}> : () -> index
+      %15 = "arith.constant"() <{value = 2047 : index}> : () -> index
+      %16 = "arith.constant"() <{value = 4 : i32}> : () -> i32
+      %17 = "arith.constant"() <{value = 896 : index}> : () -> index
+      %18 = "arith.constant"() <{value = 768 : index}> : () -> index
+      %19 = "arith.constant"() <{value = 640 : index}> : () -> index
+      %20 = "arith.constant"() <{value = 512 : index}> : () -> index
+      %21 = "arith.constant"() <{value = 384 : index}> : () -> index
+      %22 = "arith.constant"() <{value = 0 : index}> : () -> index
+      %23 = "arith.constant"() <{value = 32768 : i32}> : () -> i32
+      %24 = "arith.constant"() <{value = 128 : index}> : () -> index
+      %25 = "arith.constant"() <{value = 0.000000e+00 : bf16}> : () -> bf16
+      %26 = "arith.constant"() <{value = 1 : index}> : () -> index
+      %27 = "arith.constant"() <{value = 2 : i64}> : () -> i64
+      %28 = "arith.constant"() <{value = 8 : index}> : () -> index
+      %29 = "arith.constant"() <{value = 0xFF800000 : f32}> : () -> f32
+      %30 = "arith.constant"() <{value = 4 : i64}> : () -> i64
+      %31 = "arith.constant"() <{value = 0.000000e+00 : f32}> : () -> f32
+      %32 = "arith.constant"() <{value = 16 : index}> : () -> index
+      %33 = "arith.constant"() <{value = 256 : index}> : () -> index
+      %34 = "arith.constant"() <{value = 1 : i32}> : () -> i32
+      %35 = "arith.constant"() <{value = 128 : i32}> : () -> i32
+      %36 = "arith.constant"() <{value = 0 : i32}> : () -> i32
+      %37 = "arith.constant"() <{value = 16 : i32}> : () -> i32
+      %38 = "arith.constant"() <{value = 16384 : i32}> : () -> i32
+      %39 = "arith.constant"() <{value = 1024 : i32}> : () -> i32
+      %40 = "arith.constant"() <{value = 8 : i32}> : () -> i32
+      %41 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> {gcu_private_tag} : () -> memref<5xi32>
+      "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      %42 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+      "vector.store"(%8, %42, %22) <{nontemporal = false}> : (vector<128xi32>, memref<16xi32>, index) -> ()
+      "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      %43 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+      %44 = "memref.reinterpret_cast"(%43) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+      "vector.store"(%7, %44, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "vector.store"(%7, %44, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+      "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      "gcu.border"() {enter = "tt.get_program_id"} : () -> ()
+      %45 = "gpu.block_id"() <{dimension = #gpu<dim x>}> : () -> index
+      %46 = "arith.index_cast"(%45) : (index) -> i32
+      "gcu.border"() {enter = "tt.get_program_id"} : () -> ()
+      %47 = "gpu.block_id"() <{dimension = #gpu<dim y>}> : () -> index
+      %48 = "arith.index_cast"(%47) : (index) -> i32
+      "gcu.border"() {enter = "tt.get_program_id"} : () -> ()
+      %49 = "gpu.block_id"() <{dimension = #gpu<dim z>}> : () -> index
+      %50 = "arith.index_cast"(%49) : (index) -> i32
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %51 = "arith.muli"(%50, %16) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %52 = "arith.extsi"(%51) : (i32) -> i64
+      %53 = "gcu.ptr2int"(%arg23) : (!gcu.ptr<i32>) -> i64
+      %54 = "arith.addi"(%53, %52) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %55 = "gcu.int2ptr"(%54) : (i64) -> !gcu.ptr<i32>
+      "gcu.border"() {enter = "tt.load"} : () -> ()
+      %56 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+      %57 = "gcu.ptr2memref"(%55) : (!gcu.ptr<i32>) -> memref<?xi32>
+      %58 = "memref.reinterpret_cast"(%57) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+      %59 = "memref.reinterpret_cast"(%56, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+      "memref.dma_start"(%58, %22, %59, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+      %60 = "memref.load"(%56, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+      "gcu.border"() {leave = "tt.load"} : () -> ()
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %61 = "gcu.ptr2int"(%arg24) : (!gcu.ptr<i32>) -> i64
+      %62 = "arith.addi"(%61, %52) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %63 = "gcu.int2ptr"(%62) : (i64) -> !gcu.ptr<i32>
+      "gcu.border"() {enter = "tt.load"} : () -> ()
+      %64 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+      %65 = "gcu.ptr2memref"(%63) : (!gcu.ptr<i32>) -> memref<?xi32>
+      %66 = "memref.reinterpret_cast"(%65) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+      %67 = "memref.reinterpret_cast"(%64, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+      "memref.dma_start"(%66, %22, %67, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+      %68 = "memref.load"(%64, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+      "gcu.border"() {leave = "tt.load"} : () -> ()
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %69 = "gcu.ptr2int"(%63) : (!gcu.ptr<i32>) -> i64
+      %70 = "arith.addi"(%69, %30) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %71 = "gcu.int2ptr"(%70) : (i64) -> !gcu.ptr<i32>
+      "gcu.border"() {enter = "tt.load"} : () -> ()
+      %72 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+      %73 = "gcu.ptr2memref"(%71) : (!gcu.ptr<i32>) -> memref<?xi32>
+      %74 = "memref.reinterpret_cast"(%73) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+      %75 = "memref.reinterpret_cast"(%72, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+      "memref.dma_start"(%74, %22, %75, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+      %76 = "memref.load"(%72, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+      "gcu.border"() {leave = "tt.load"} : () -> ()
+      %77 = "arith.subi"(%76, %68) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %78 = "gcu.ptr2int"(%arg25) : (!gcu.ptr<i32>) -> i64
+      %79 = "arith.addi"(%78, %52) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %80 = "gcu.int2ptr"(%79) : (i64) -> !gcu.ptr<i32>
+      "gcu.border"() {enter = "tt.load"} : () -> ()
+      %81 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+      %82 = "gcu.ptr2memref"(%80) : (!gcu.ptr<i32>) -> memref<?xi32>
+      %83 = "memref.reinterpret_cast"(%82) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+      %84 = "memref.reinterpret_cast"(%81, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+      "memref.dma_start"(%83, %22, %84, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+      %85 = "memref.load"(%81, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+      "gcu.border"() {leave = "tt.load"} : () -> ()
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %86 = "gcu.ptr2int"(%arg26) : (!gcu.ptr<i32>) -> i64
+      %87 = "arith.addi"(%86, %52) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %88 = "gcu.int2ptr"(%87) : (i64) -> !gcu.ptr<i32>
+      "gcu.border"() {enter = "tt.load"} : () -> ()
+      %89 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+      %90 = "gcu.ptr2memref"(%88) : (!gcu.ptr<i32>) -> memref<?xi32>
+      %91 = "memref.reinterpret_cast"(%90) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+      %92 = "memref.reinterpret_cast"(%89, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+      "memref.dma_start"(%91, %22, %92, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+      %93 = "memref.load"(%89, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+      "gcu.border"() {leave = "tt.load"} : () -> ()
+      %94 = "arith.cmpi"(%46, %77) <{predicate = 5 : i64}> : (i32, i32) -> i1
+      "cf.cond_br"(%94)[^bb1, ^bb2] <{operandSegmentSizes = array<i32: 1, 0, 0>}> : (i1) -> ()
+    ^bb1:  // pred: ^bb0
+      "gcu.border"() {enter = "tt.return"} : () -> ()
+      "func.return"() : () -> ()
+    ^bb2:  // pred: ^bb0
+      %95 = "arith.subi"(%77, %46) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %96 = "arith.minsi"(%95, %34) : (i32, i32) -> i32
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %97 = "arith.muli"(%50, %6) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %98 = "arith.extsi"(%97) : (i32) -> i64
+      %99 = "gcu.ptr2int"(%arg22) : (!gcu.ptr<i32>) -> i64
+      %100 = "arith.addi"(%99, %98) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %101 = "gcu.int2ptr"(%100) : (i64) -> !gcu.ptr<i32>
+      %102 = "arith.muli"(%48, %38) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %103 = "arith.muli"(%48, %39) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %104 = "arith.index_cast"(%103) : (i32) -> index
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %105 = "gcu.ptr2int"(%arg16) : (!gcu.ptr<bf16>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      %106 = "arith.addi"(%50, %48) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      "gcu.border"() {enter = "tt.addptr"} : () -> ()
+      %107 = "arith.muli"(%106, %5) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      %108 = "arith.extsi"(%107) : (i32) -> i64
+      %109 = "gcu.ptr2int"(%arg30) : (!gcu.ptr<i32>) -> i64
+      %110 = "arith.addi"(%109, %108) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+      %111 = "gcu.int2ptr"(%110) : (i64) -> !gcu.ptr<i32>
+      %112 = "arith.muli"(%48, %40) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %113 = "gcu.ptr2int"(%arg28) : (!gcu.ptr<f32>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %114 = "gcu.ptr2int"(%arg29) : (!gcu.ptr<f32>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %115 = "gcu.ptr2int"(%arg27) : (!gcu.ptr<f32>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      %116 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128xi32>
+      %117 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128xi32>
+      %118 = "gcu.vector_step"(%36) : (i32) -> vector<128xi32>
+      "vector.store"(%118, %116, %22) <{nontemporal = false}> : (vector<128xi32>, memref<128xi32>, index) -> ()
+      "vector.store"(%118, %117, %22) <{nontemporal = false}> : (vector<128xi32>, memref<128xi32>, index) -> ()
+      "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+      "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+      "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      %119 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1x128xi1>
+      %120 = "gcu.memref2ptr"(%119) : (memref<1x128xi1>) -> !gcu.ptr<i1>
+      %121 = "gcu.ptr2memref"(%120) : (!gcu.ptr<i1>) -> memref<?xi8>
+      %122 = "memref.reinterpret_cast"(%121) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 128>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<128xi8>
+      %123 = "vector.load"(%117, %22) <{nontemporal = false}> : (memref<128xi32>, index) -> vector<128xi32>
+      %124 = "arith.cmpi"(%123, %8) <{predicate = 0 : i64}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi1>
+      %125 = "gcu.vector_convert"(%124) : (vector<128xi1>) -> vector<128xi8>
+      "vector.store"(%125, %122, %22) <{nontemporal = false}> : (vector<128xi8>, memref<128xi8>, index) -> ()
+      "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      "memref.dealloc"(%117) : (memref<128xi32>) -> ()
+      "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+      %126 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xi1>
+      "memref_ext.broadcast_start"(%126, %119, %41, %22) : (memref<8x128xi1>, memref<1x128xi1>, memref<5xi32>, index) -> ()
+      "memref.dma_wait"(%41, %22, %24) : (memref<5xi32>, index, index) -> ()
+      "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+      "memref.dealloc"(%119) : (memref<1x128xi1>) -> ()
+      %127 = "arith.index_cast"(%102) : (i32) -> index
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %128 = "gcu.ptr2int"(%arg20) : (!gcu.ptr<i32>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      %129 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+      "vector.store"(%118, %129, %22) <{nontemporal = false}> : (vector<128xi32>, memref<16xi32>, index) -> ()
+      "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+      "gcu.border"() {enter = "tt.splat"} : () -> ()
+      %130 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi64>
+      %131 = "gcu.ptr2int"(%101) : (!gcu.ptr<i32>) -> i64
+      "affine.for"() <{lowerBoundMap = #map, operandSegmentSizes = array<i32: 0, 0, 0>, step = 1 : index, upperBoundMap = #map1}> ({
+      ^bb0(%arg41: index):
+        "memref.store"(%131, %130, %arg41) <{nontemporal = false}> : (i64, memref<16xi64>, index) -> ()
+        "affine.yield"() : () -> ()
+      }) : () -> ()
+      "gcu.mfence"() <{mfence_type = #gcu.mfence_type<memory>}> : () -> ()
+      "gcu.border"() {leave = "tt.splat"} : () -> ()
+      %132 = "arith.muli"(%48, %23) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %133 = "gcu.ptr2int"(%arg31) : (!gcu.ptr<bf16>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      %134 = "arith.index_cast"(%132) : (i32) -> index
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %135 = "gcu.ptr2int"(%arg17) : (!gcu.ptr<bf16>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "gcu.border"() {enter = "tt.ptr_to_int"} : () -> ()
+      %136 = "gcu.ptr2int"(%arg21) : (!gcu.ptr<bf16>) -> i64
+      "gcu.border"() {leave = "tt.ptr_to_int"} : () -> ()
+      "scf.for"(%36, %96, %34) ({
+      ^bb0(%arg32: i32):
+        %137 = "arith.addi"(%46, %arg32) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %138 = "arith.addi"(%68, %137) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %139 = "arith.muli"(%138, %37) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %140 = "arith.addi"(%93, %137) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %141 = "arith.addi"(%140, %35) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %142 = "arith.divsi"(%141, %35) : (i32, i32) -> i32
+        %143 = "arith.minsi"(%142, %37) : (i32, i32) -> i32
+        %144 = "arith.addi"(%60, %137) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %145 = "arith.muli"(%144, %39) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %146 = "arith.index_cast"(%145) : (i32) -> index
+        %147 = "arith.addi"(%146, %104) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+        %148 = "arith.index_cast"(%147) : (index) -> i64
+        %149 = "arith.muli"(%148, %27) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        %150 = "arith.addi"(%105, %149) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %151 = "gcu.int2ptr"(%150) : (i64) -> !gcu.ptr<bf16>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+        %152 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xbf16>
+        %153 = "gcu.ptr2memref"(%151) : (!gcu.ptr<bf16>) -> memref<?xbf16>
+        %154 = "memref.reinterpret_cast"(%153, %22, %28, %24, %24, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 2>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808, -9223372036854775808>, static_strides = array<i64: -9223372036854775808, -9223372036854775808>}> : (memref<?xbf16>, index, index, index, index, index) -> memref<?x?xbf16>
+        "memref_ext.slice_start"(%152, %154, %36, %36, %25, %41, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 1, 1, 1>}> : (memref<8x128xbf16>, memref<?x?xbf16>, i32, i32, bf16, memref<5xi32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+        %155 = "arith.divsi"(%137, %37) : (i32, i32) -> i32
+        "gcu.border"() {enter = "tt.addptr"} : () -> ()
+        %156 = "arith.muli"(%155, %16) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %157 = "arith.extsi"(%156) : (i32) -> i64
+        %158 = "gcu.ptr2int"(%111) : (!gcu.ptr<i32>) -> i64
+        %159 = "arith.addi"(%158, %157) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        %160 = "gcu.int2ptr"(%159) : (i64) -> !gcu.ptr<i32>
+        "gcu.border"() {enter = "tt.load"} : () -> ()
+        %161 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+        %162 = "gcu.ptr2memref"(%160) : (!gcu.ptr<i32>) -> memref<?xi32>
+        %163 = "memref.reinterpret_cast"(%162) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1>, static_strides = array<i64: 1>}> : (memref<?xi32>) -> memref<1xi32>
+        %164 = "memref.reinterpret_cast"(%161, %22, %26, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<1xi32>, index, index, index) -> memref<1xi32>
+        "memref.dma_start"(%163, %22, %164, %22, %26, %41, %22) : (memref<1xi32>, index, memref<1xi32>, index, index, memref<5xi32>, index) -> ()
+        "memref.dma_wait"(%41, %22, %26) : (memref<5xi32>, index, index) -> ()
+        %165 = "memref.load"(%161, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+        "gcu.border"() {leave = "tt.load"} : () -> ()
+        %166 = "arith.muli"(%144, %40) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %167 = "arith.addi"(%166, %112) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+        %168 = "arith.index_cast"(%167) : (i32) -> index
+        %169 = "arith.index_cast"(%168) : (index) -> i64
+        %170 = "arith.muli"(%169, %30) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        %171 = "arith.addi"(%113, %170) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %172 = "gcu.int2ptr"(%171) : (i64) -> !gcu.ptr<f32>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+        %173 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+        %174 = "gcu.ptr2memref"(%172) : (!gcu.ptr<f32>) -> memref<?xf32>
+        %175 = "memref.reinterpret_cast"(%174, %22, %28, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<?xf32>, index, index, index) -> memref<?xf32>
+        "memref_ext.slice_start"(%173, %175, %36, %29, %41, %14) <{operandSegmentSizes = array<i32: 1, 1, 1, 1, 1, 1>}> : (memref<8xf32>, memref<?xf32>, i32, f32, memref<5xi32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+        "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+        %176 = "arith.addi"(%114, %170) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %177 = "gcu.int2ptr"(%176) : (i64) -> !gcu.ptr<f32>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+        %178 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+        %179 = "gcu.ptr2memref"(%177) : (!gcu.ptr<f32>) -> memref<?xf32>
+        %180 = "memref.reinterpret_cast"(%179, %22, %28, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<?xf32>, index, index, index) -> memref<?xf32>
+        "memref_ext.slice_start"(%178, %180, %36, %31, %41, %13) <{operandSegmentSizes = array<i32: 1, 1, 1, 1, 1, 1>}> : (memref<8xf32>, memref<?xf32>, i32, f32, memref<5xi32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+        %181 = "arith.muli"(%148, %30) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        %182 = "arith.addi"(%115, %181) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %183 = "gcu.int2ptr"(%182) : (i64) -> !gcu.ptr<f32>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+        %184 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        %185 = "gcu.ptr2memref"(%183) : (!gcu.ptr<f32>) -> memref<?xf32>
+        %186 = "memref.reinterpret_cast"(%185, %22, %28, %24, %24, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 2>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808, -9223372036854775808>, static_strides = array<i64: -9223372036854775808, -9223372036854775808>}> : (memref<?xf32>, index, index, index, index, index) -> memref<?x?xf32>
+        "memref_ext.slice_start"(%184, %186, %36, %36, %31, %41, %12) <{operandSegmentSizes = array<i32: 1, 1, 2, 1, 1, 1>}> : (memref<8x128xf32>, memref<?x?xf32>, i32, i32, f32, memref<5xi32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+        "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+        "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+        "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+        %187 = "memref.reinterpret_cast"(%178) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8, 1>, static_strides = array<i64: 1, 1>}> : (memref<8xf32>) -> memref<8x1xf32>
+        "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+        "memref.dma_wait"(%41, %13, %28) : (memref<5xi32>, index, index) -> ()
+        "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+        %188 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        "memref_ext.broadcast_start"(%188, %187, %41, %22) : (memref<8x128xf32>, memref<8x1xf32>, memref<5xi32>, index) -> ()
+        "memref.dma_wait"(%41, %22, %28) : (memref<5xi32>, index, index) -> ()
+        "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+        "memref.dealloc"(%178) : (memref<8xf32>) -> ()
+        "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        %189 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        %190 = "memref.reinterpret_cast"(%189) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+        %191 = "gcu.memref2ptr"(%126) : (memref<8x128xi1>) -> !gcu.ptr<i1>
+        %192 = "gcu.ptr2memref"(%191) : (!gcu.ptr<i1>) -> memref<?xi8>
+        %193 = "memref.reinterpret_cast"(%192) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<1024xi8>
+        %194 = "memref.reinterpret_cast"(%188) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+        %195 = "vector.load"(%193, %22) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %196 = "vector.load"(%194, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %197 = "vector.load"(%193, %24) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %198 = "vector.load"(%194, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %199 = "vector.load"(%193, %33) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %200 = "vector.load"(%194, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %201 = "vector.load"(%193, %21) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %202 = "vector.load"(%194, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %203 = "vector.load"(%193, %20) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %204 = "vector.load"(%194, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %205 = "vector.load"(%193, %19) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %206 = "vector.load"(%194, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %207 = "vector.load"(%193, %18) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %208 = "vector.load"(%194, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %209 = "vector.load"(%193, %17) <{nontemporal = false}> : (memref<1024xi8>, index) -> vector<128xi8>
+        %210 = "vector.load"(%194, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %211 = "gcu.vector_convert"(%195) : (vector<128xi8>) -> vector<128xi1>
+        %212 = "arith.select"(%211, %196, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %213 = "gcu.vector_convert"(%197) : (vector<128xi8>) -> vector<128xi1>
+        %214 = "arith.select"(%213, %198, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %215 = "gcu.vector_convert"(%199) : (vector<128xi8>) -> vector<128xi1>
+        %216 = "arith.select"(%215, %200, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %217 = "gcu.vector_convert"(%201) : (vector<128xi8>) -> vector<128xi1>
+        %218 = "arith.select"(%217, %202, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %219 = "gcu.vector_convert"(%203) : (vector<128xi8>) -> vector<128xi1>
+        %220 = "arith.select"(%219, %204, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %221 = "gcu.vector_convert"(%205) : (vector<128xi8>) -> vector<128xi1>
+        %222 = "arith.select"(%221, %206, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %223 = "gcu.vector_convert"(%207) : (vector<128xi8>) -> vector<128xi1>
+        %224 = "arith.select"(%223, %208, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %225 = "gcu.vector_convert"(%209) : (vector<128xi8>) -> vector<128xi1>
+        %226 = "arith.select"(%225, %210, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        "vector.store"(%212, %190, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%214, %190, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%216, %190, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%218, %190, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%220, %190, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%222, %190, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%224, %190, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "vector.store"(%226, %190, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        "memref.dealloc"(%188) : (memref<8x128xf32>) -> ()
+        %227 = "arith.index_cast"(%165) : (i32) -> index
+        %228 = "arith.addi"(%227, %32) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+        %229 = "arith.index_cast"(%143) : (i32) -> index
+        %230 = "arith.minsi"(%228, %229) : (index, index) -> index
+        %231 = "arith.subi"(%230, %227) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+        %232 = "arith.index_cast"(%139) : (i32) -> index
+        %233 = "arith.addi"(%232, %127) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+        %234 = "arith.addi"(%233, %227) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+        %235 = "arith.index_cast"(%234) : (index) -> i64
+        %236 = "arith.muli"(%235, %30) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        %237 = "arith.addi"(%128, %236) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %238 = "gcu.int2ptr"(%237) : (i64) -> !gcu.ptr<i32>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        %239 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi1>
+        %240 = "gcu.memref2ptr"(%239) : (memref<16xi1>) -> !gcu.ptr<i1>
+        %241 = "gcu.ptr2memref"(%240) : (!gcu.ptr<i1>) -> memref<?xi8>
+        %242 = "memref.reinterpret_cast"(%241) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 16>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<16xi8>
+        %243 = "vector.broadcast"(%165) : (i32) -> vector<128xi32>
+        %244 = "vector.broadcast"(%143) : (i32) -> vector<128xi32>
+        %245 = "vector.load"(%129, %22) <{nontemporal = false}> : (memref<16xi32>, index) -> vector<128xi32>
+        %246 = "arith.addi"(%245, %243) <{overflowFlags = #arith.overflow<none>}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi32>
+        %247 = "arith.cmpi"(%246, %244) <{predicate = 2 : i64}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi1>
+        %248 = "gcu.vector_convert"(%247) : (vector<128xi1>) -> vector<128xi8>
+        "vector.store"(%248, %242, %22) <{nontemporal = false}> : (vector<128xi8>, memref<16xi8>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+        %249 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+        %250 = "arith.cmpi"(%231, %22) <{predicate = 4 : i64}> : (index, index) -> i1
+        "scf.if"(%250) ({
+          %757 = "gcu.ptr2memref"(%238) : (!gcu.ptr<i32>) -> memref<?xi32>
+          %758 = "arith.maxsi"(%231, %22) : (index, index) -> index
+          %759 = "arith.minsi"(%758, %32) : (index, index) -> index
+          %760 = "arith.index_cast"(%759) : (index) -> i32
+          %761 = "arith.subi"(%32, %759) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+          %762 = "arith.cmpi"(%761, %22) <{predicate = 4 : i64}> : (index, index) -> i1
+          %763 = "memref.reinterpret_cast"(%757, %22, %231, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<?xi32>, index, index, index) -> memref<?xi32>
+          %764 = "arith.cmpi"(%759, %22) <{predicate = 1 : i64}> : (index, index) -> i1
+          %765 = "arith.andi"(%762, %764) : (i1, i1) -> i1
+          "scf.if"(%765) ({
+            %766 = "arith.cmpi"(%761, %15) <{predicate = 3 : i64}> : (index, index) -> i1
+            "scf.if"(%766) ({
+              "memref_ext.slice_pad_start"(%249, %763, %36, %760, %36, %41, %22) <{operandSegmentSizes = array<i32: 1, 1, 1, 1, 1, 1, 1>}> : (memref<16xi32>, memref<?xi32>, i32, i32, i32, memref<5xi32>, index) -> ()
+              "scf.yield"() : () -> ()
+            }, {
+              "affine.for"() <{lowerBoundMap = #map, operandSegmentSizes = array<i32: 0, 0, 0>, step = 1 : index, upperBoundMap = #map1}> ({
+              ^bb0(%arg40: index):
+                "memref.store"(%36, %249, %arg40) <{nontemporal = false}> : (i32, memref<16xi32>, index) -> ()
+                "affine.yield"() : () -> ()
+              }) : () -> ()
+              "gcu.mfence"() <{mfence_type = #gcu.mfence_type<memory>}> : () -> ()
+              "memref_ext.slice_deslice_start"(%249, %763, %36, %760, %36, %41, %22) <{operandSegmentSizes = array<i32: 1, 1, 1, 1, 1, 1, 1>}> : (memref<16xi32>, memref<?xi32>, i32, i32, i32, memref<5xi32>, index) -> ()
+              "scf.yield"() : () -> ()
+            }) : (i1) -> ()
+            "scf.yield"() : () -> ()
+          }, {
+            "scf.if"(%764) ({
+              "memref_ext.slice_start"(%249, %763, %36, %36, %41, %22) <{operandSegmentSizes = array<i32: 1, 1, 1, 1, 1, 1>}> : (memref<16xi32>, memref<?xi32>, i32, i32, memref<5xi32>, index) -> ()
+              "scf.yield"() : () -> ()
+            }, {
+              "memref_ext.memset_start"(%249, %36, %41, %22) : (memref<16xi32>, i32, memref<5xi32>, index) -> ()
+              "scf.yield"() : () -> ()
+            }) : (i1) -> ()
+            "scf.yield"() : () -> ()
+          }) : (i1) -> ()
+          "memref.dma_wait"(%41, %22, %759) : (memref<5xi32>, index, index) -> ()
+          "scf.yield"() : () -> ()
+        }, {
+          "affine.for"() <{lowerBoundMap = #map, operandSegmentSizes = array<i32: 0, 0, 0>, step = 1 : index, upperBoundMap = #map1}> ({
+          ^bb0(%arg39: index):
+            "memref.store"(%36, %249, %arg39) <{nontemporal = false}> : (i32, memref<16xi32>, index) -> ()
+            "affine.yield"() : () -> ()
+          }) : () -> ()
+          "gcu.mfence"() <{mfence_type = #gcu.mfence_type<memory>}> : () -> ()
+          "scf.yield"() : () -> ()
+        }) : (i1) -> ()
+        "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+        "gcu.border"() {enter = "tt.addptr"} : () -> ()
+        %251 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi64>
+        "affine.for"() <{lowerBoundMap = #map, operandSegmentSizes = array<i32: 0, 0, 0>, step = 1 : index, upperBoundMap = #map1}> ({
+        ^bb0(%arg38: index):
+          %752 = "memref.load"(%130, %arg38) <{nontemporal = false}> : (memref<16xi64>, index) -> i64
+          %753 = "memref.load"(%249, %arg38) <{nontemporal = false}> : (memref<16xi32>, index) -> i32
+          %754 = "arith.extsi"(%753) : (i32) -> i64
+          %755 = "arith.muli"(%754, %30) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          %756 = "arith.addi"(%752, %755) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          "memref.store"(%756, %251, %arg38) <{nontemporal = false}> : (i64, memref<16xi64>, index) -> ()
+          "affine.yield"() : () -> ()
+        }) : () -> ()
+        "gcu.mfence"() <{mfence_type = #gcu.mfence_type<memory>}> : () -> ()
+        "gcu.border"() {leave = "tt.addptr"} : () -> ()
+        "gcu.border"() {enter = "tt.load"} : () -> ()
+        %252 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+        %253 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+        %254 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi1>
+        %255 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+        %256 = "memref.load"(%251, %22) <{nontemporal = false}> : (memref<16xi64>, index) -> i64
+        "scf.for"(%22, %32, %26) ({
+        ^bb0(%arg37: index):
+          %747 = "memref.load"(%251, %arg37) <{nontemporal = false}> : (memref<16xi64>, index) -> i64
+          %748 = "arith.subi"(%747, %256) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          %749 = "arith.trunci"(%748) <{overflowFlags = #arith.overflow<none>}> : (i64) -> i32
+          "memref.store"(%749, %253, %arg37) <{nontemporal = false}> : (i32, memref<16xi32>, index) -> ()
+          %750 = "memref.load"(%239, %arg37) <{nontemporal = false}> : (memref<16xi1>, index) -> i1
+          "memref.store"(%750, %254, %arg37) <{nontemporal = false}> : (i1, memref<16xi1>, index) -> ()
+          %751 = "memref.load"(%42, %arg37) <{nontemporal = false}> : (memref<16xi32>, index) -> i32
+          "memref.store"(%751, %255, %arg37) <{nontemporal = false}> : (i32, memref<16xi32>, index) -> ()
+          "scf.yield"() : () -> ()
+        }) : (index, index, index) -> ()
+        %257 = "memref.reinterpret_cast"(%252, %22, %32, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<16xi32>, index, index, index) -> memref<?xi32>
+        %258 = "memref.reinterpret_cast"(%253, %22, %32, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<16xi32>, index, index, index) -> memref<?xi32>
+        %259 = "memref.reinterpret_cast"(%254, %22, %32, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<16xi1>, index, index, index) -> memref<?xi1>
+        %260 = "memref.reinterpret_cast"(%255, %22, %32, %26) <{operandSegmentSizes = array<i32: 1, 1, 1, 1>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808>, static_strides = array<i64: -9223372036854775808>}> : (memref<16xi32>, index, index, index) -> memref<?xi32>
+        %261 = "gcu.memref2ptr"(%260) : (memref<?xi32>) -> !gcu.ptr<i32>
+        %262 = "gcu.memref2ptr"(%259) : (memref<?xi1>) -> !gcu.ptr<i1>
+        %263 = "gcu.memref2ptr"(%258) : (memref<?xi32>) -> !gcu.ptr<i32>
+        %264 = "gcu.int2ptr"(%256) : (i64) -> !gcu.ptr<i32>
+        %265 = "gcu.memref2ptr"(%257) : (memref<?xi32>) -> !gcu.ptr<i32>
+        "gcu.gather_load"(%265, %264, %263, %262, %261, %37) : (!gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i1>, !gcu.ptr<i32>, i32) -> ()
+        "gcu.border"() {leave = "tt.load"} : () -> ()
+        "memref.dealloc"(%255) : (memref<16xi32>) -> ()
+        "memref.dealloc"(%254) : (memref<16xi1>) -> ()
+        "memref.dealloc"(%253) : (memref<16xi32>) -> ()
+        "memref.dealloc"(%251) : (memref<16xi64>) -> ()
+        "memref.dealloc"(%239) : (memref<16xi1>) -> ()
+        "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+        "memref.dma_wait"(%41, %26, %4) : (memref<5xi32>, index, index) -> ()
+        "memref.dma_wait"(%41, %14, %28) : (memref<5xi32>, index, index) -> ()
+        "memref.dma_wait"(%41, %12, %4) : (memref<5xi32>, index, index) -> ()
+        "gcu.border"() {enter = "scf.for"} : () -> ()
+        %266 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+        %267 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        %268 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        %269 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+        %270:3 = "scf.for"(%165, %143, %34, %173, %189, %184) ({
+        ^bb0(%arg33: i32, %arg34: memref<8xf32>, %arg35: memref<8x128xf32>, %arg36: memref<8x128xf32>):
+          %458 = "arith.subi"(%arg33, %165) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %459 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi1>
+          %460 = "gcu.memref2ptr"(%459) : (memref<16xi1>) -> !gcu.ptr<i1>
+          %461 = "gcu.ptr2memref"(%460) : (!gcu.ptr<i1>) -> memref<?xi8>
+          %462 = "memref.reinterpret_cast"(%461) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 16>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<16xi8>
+          %463 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+          %464 = "vector.broadcast"(%458) : (i32) -> vector<128xi32>
+          %465 = "vector.load"(%129, %22) <{nontemporal = false}> : (memref<16xi32>, index) -> vector<128xi32>
+          %466 = "vector.load"(%249, %22) <{nontemporal = false}> : (memref<16xi32>, index) -> vector<128xi32>
+          %467 = "arith.cmpi"(%465, %464) <{predicate = 0 : i64}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi1>
+          %468 = "gcu.vector_convert"(%467) : (vector<128xi1>) -> vector<128xi8>
+          %469 = "arith.select"(%467, %466, %8) : (vector<128xi1>, vector<128xi32>, vector<128xi32>) -> vector<128xi32>
+          "vector.store"(%468, %462, %22) <{nontemporal = false}> : (vector<128xi8>, memref<16xi8>, index) -> ()
+          "vector.store"(%469, %463, %22) <{nontemporal = false}> : (vector<128xi32>, memref<16xi32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "gcu.border"() {enter = "tt.reduce"} : () -> ()
+          %470 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+          %471 = "memref.reinterpret_cast"(%463) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 1, 16>, static_strides = array<i64: 16, 16, 1>}> : (memref<16xi32>) -> memref<1x1x16xi32>
+          %472 = "memref.reinterpret_cast"(%470) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 1, 1>, static_strides = array<i64: 1, 1, 1>}> : (memref<1xi32>) -> memref<1x1x1xi32>
+          %473 = "vector.load"(%471, %22, %22, %22) <{nontemporal = false}> : (memref<1x1x16xi32>, index, index, index) -> vector<32xi32>
+          %474 = "gcu.vector_movsft"(%473) <{mode = 2 : i64, unit = 2 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %475 = "arith.addi"(%473, %474) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %476 = "gcu.vector_movsft"(%475) <{mode = 2 : i64, unit = 1 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %477 = "arith.addi"(%475, %476) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %478 = "gcu.vector_movsft"(%477) <{mode = 0 : i64, unit = 8 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %479 = "arith.addi"(%477, %478) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %480 = "gcu.vector_movsft"(%479) <{mode = 0 : i64, unit = 4 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %481 = "arith.addi"(%479, %480) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %482 = "vector.extract"(%481) <{static_position = array<i64: 15>}> : (vector<32xi32>) -> i32
+          "memref.store"(%482, %472, %22, %22, %22) <{nontemporal = false}> : (i32, memref<1x1x1xi32>, index, index, index) -> ()
+          %483 = "memref.load"(%470, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+          "gcu.border"() {leave = "tt.reduce"} : () -> ()
+          "memref.dealloc"(%463) : (memref<16xi32>) -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %484 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<16xi32>
+          %485 = "vector.load"(%462, %22) <{nontemporal = false}> : (memref<16xi8>, index) -> vector<128xi8>
+          %486 = "vector.load"(%252, %22) <{nontemporal = false}> : (memref<16xi32>, index) -> vector<128xi32>
+          %487 = "gcu.vector_convert"(%485) : (vector<128xi8>) -> vector<128xi1>
+          %488 = "arith.select"(%487, %486, %8) : (vector<128xi1>, vector<128xi32>, vector<128xi32>) -> vector<128xi32>
+          "vector.store"(%488, %484, %22) <{nontemporal = false}> : (vector<128xi32>, memref<16xi32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "memref.dealloc"(%459) : (memref<16xi1>) -> ()
+          "gcu.border"() {enter = "tt.reduce"} : () -> ()
+          %489 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1xi32>
+          %490 = "memref.reinterpret_cast"(%484) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 1, 16>, static_strides = array<i64: 16, 16, 1>}> : (memref<16xi32>) -> memref<1x1x16xi32>
+          %491 = "memref.reinterpret_cast"(%489) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 1, 1>, static_strides = array<i64: 1, 1, 1>}> : (memref<1xi32>) -> memref<1x1x1xi32>
+          %492 = "vector.load"(%490, %22, %22, %22) <{nontemporal = false}> : (memref<1x1x16xi32>, index, index, index) -> vector<32xi32>
+          %493 = "gcu.vector_movsft"(%492) <{mode = 2 : i64, unit = 2 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %494 = "arith.addi"(%492, %493) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %495 = "gcu.vector_movsft"(%494) <{mode = 2 : i64, unit = 1 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %496 = "arith.addi"(%494, %495) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %497 = "gcu.vector_movsft"(%496) <{mode = 0 : i64, unit = 8 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %498 = "arith.addi"(%496, %497) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %499 = "gcu.vector_movsft"(%498) <{mode = 0 : i64, unit = 4 : i32}> : (vector<32xi32>) -> vector<32xi32>
+          %500 = "arith.addi"(%498, %499) <{overflowFlags = #arith.overflow<none>}> : (vector<32xi32>, vector<32xi32>) -> vector<32xi32>
+          %501 = "vector.extract"(%500) <{static_position = array<i64: 15>}> : (vector<32xi32>) -> i32
+          "memref.store"(%501, %491, %22, %22, %22) <{nontemporal = false}> : (i32, memref<1x1x1xi32>, index, index, index) -> ()
+          %502 = "memref.load"(%489, %22) <{nontemporal = false}> : (memref<1xi32>, index) -> i32
+          "gcu.border"() {leave = "tt.reduce"} : () -> ()
+          "memref.dealloc"(%484) : (memref<16xi32>) -> ()
+          %503 = "arith.muli"(%483, %35) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          "memref.dealloc"(%470) : (memref<1xi32>) -> ()
+          %504 = "arith.muli"(%502, %23) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          %505 = "arith.addi"(%502, %48) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          "memref.dealloc"(%489) : (memref<1xi32>) -> ()
+          %506 = "arith.muli"(%505, %38) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          %507 = "arith.index_cast"(%506) : (i32) -> index
+          %508 = "arith.index_cast"(%507) : (index) -> i64
+          %509 = "arith.muli"(%508, %27) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          %510 = "arith.addi"(%133, %509) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+          %511 = "gcu.int2ptr"(%510) : (i64) -> !gcu.ptr<bf16>
+          "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %512 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128xi32>
+          %513 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128xi1>
+          %514 = "gcu.memref2ptr"(%513) : (memref<128xi1>) -> !gcu.ptr<i1>
+          %515 = "gcu.ptr2memref"(%514) : (!gcu.ptr<i1>) -> memref<?xi8>
+          %516 = "memref.reinterpret_cast"(%515) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 128>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<128xi8>
+          %517 = "vector.broadcast"(%503) : (i32) -> vector<128xi32>
+          %518 = "vector.broadcast"(%85) : (i32) -> vector<128xi32>
+          %519 = "vector.load"(%116, %22) <{nontemporal = false}> : (memref<128xi32>, index) -> vector<128xi32>
+          %520 = "arith.addi"(%517, %519) <{overflowFlags = #arith.overflow<none>}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi32>
+          %521 = "arith.cmpi"(%520, %518) <{predicate = 2 : i64}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi1>
+          %522 = "gcu.vector_convert"(%521) : (vector<128xi1>) -> vector<128xi8>
+          "vector.store"(%520, %512, %22) <{nontemporal = false}> : (vector<128xi32>, memref<128xi32>, index) -> ()
+          "vector.store"(%522, %516, %22) <{nontemporal = false}> : (vector<128xi8>, memref<128xi8>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+          %523 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128x128xbf16>
+          %524 = "gcu.ptr2memref"(%511) : (!gcu.ptr<bf16>) -> memref<?xbf16>
+          %525 = "memref.reinterpret_cast"(%524, %22, %24, %24, %24, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 2>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808, -9223372036854775808>, static_strides = array<i64: -9223372036854775808, -9223372036854775808>}> : (memref<?xbf16>, index, index, index, index, index) -> memref<?x?xbf16>
+          "memref_ext.slice_start"(%523, %525, %36, %36, %25, %41, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 1, 1, 1>}> : (memref<128x128xbf16>, memref<?x?xbf16>, i32, i32, bf16, memref<5xi32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+          %526 = "arith.index_cast"(%504) : (i32) -> index
+          %527 = "arith.addi"(%526, %134) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+          %528 = "arith.addi"(%527, %24) <{overflowFlags = #arith.overflow<none>}> : (index, index) -> index
+          %529 = "arith.index_cast"(%528) : (index) -> i64
+          %530 = "arith.muli"(%529, %27) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          %531 = "arith.addi"(%135, %530) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+          "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+          %532 = "gcu.int2ptr"(%531) : (i64) -> !gcu.ptr<bf16>
+          "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+          "gcu.border"() {enter = "triton_gcu.load"} : () -> ()
+          %533 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<128x128xbf16>
+          %534 = "gcu.ptr2memref"(%532) : (!gcu.ptr<bf16>) -> memref<?xbf16>
+          %535 = "memref.reinterpret_cast"(%534, %22, %24, %33, %33, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 2>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808, -9223372036854775808>, static_strides = array<i64: -9223372036854775808, -9223372036854775808>}> : (memref<?xbf16>, index, index, index, index, index) -> memref<?x?xbf16>
+          "memref_ext.slice_start"(%533, %535, %36, %36, %25, %41, %14) <{operandSegmentSizes = array<i32: 1, 1, 2, 1, 1, 1>}> : (memref<128x128xbf16>, memref<?x?xbf16>, i32, i32, bf16, memref<5xi32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.load"} : () -> ()
+          "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+          "memref.dma_wait"(%41, %26, %3) : (memref<5xi32>, index, index) -> ()
+          "gcu.border"() {enter = "triton_gcu.matmul"} : () -> ()
+          %536 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          "gcu.matmul"(%536, %152, %523) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 0, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>) -> ()
+          "gcu.border"() {leave = "triton_gcu.matmul"} : () -> ()
+          "memref.dealloc"(%523) : (memref<128x128xbf16>) -> ()
+          %537 = "arith.addi"(%503, %35) <{overflowFlags = #arith.overflow<none>}> : (i32, i32) -> i32
+          %538 = "arith.cmpi"(%537, %140) <{predicate = 4 : i64}> : (i32, i32) -> i1
+          "gcu.border"() {enter = "scf.if"} : () -> ()
+          %539 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          %540 = "arith.select"(%538, %539, %43) : (i1, memref<8x128xf32>, memref<8x128xf32>) -> memref<8x128xf32>
+          "scf.if"(%538) ({
+            "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+            "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+            "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            %740 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1x128xf32>
+            %741 = "memref.reinterpret_cast"(%740) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 128>, static_strides = array<i64: 1>}> : (memref<1x128xf32>) -> memref<128xf32>
+            %742 = "vector.broadcast"(%140) : (i32) -> vector<128xi32>
+            %743 = "vector.load"(%512, %22) <{nontemporal = false}> : (memref<128xi32>, index) -> vector<128xi32>
+            %744 = "arith.cmpi"(%742, %743) <{predicate = 5 : i64}> : (vector<128xi32>, vector<128xi32>) -> vector<128xi1>
+            %745 = "arith.select"(%744, %7, %2) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %746 = "arith.addf"(%745, %7) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            "vector.store"(%746, %741, %22) <{nontemporal = false}> : (vector<128xf32>, memref<128xf32>, index) -> ()
+            "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+            "memref_ext.broadcast_start"(%539, %740, %41, %22) : (memref<8x128xf32>, memref<1x128xf32>, memref<5xi32>, index) -> ()
+            "memref.dma_wait"(%41, %22, %24) : (memref<5xi32>, index, index) -> ()
+            "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+            "memref.dealloc"(%740) : (memref<1x128xf32>) -> ()
+            "gcu.border"() {enter = "scf.yield"} : () -> ()
+            "scf.yield"() : () -> ()
+          }, {
+            "gcu.border"() {enter = "scf.yield"} : () -> ()
+            "scf.yield"() : () -> ()
+          }) : (i1) -> ()
+          "memref.dealloc"(%512) : (memref<128xi32>) -> ()
+          %541 = "arith.cmpi"(%537, %85) <{predicate = 4 : i64}> : (i32, i32) -> i1
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %542 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          %543 = "memref.reinterpret_cast"(%542) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %544 = "memref.reinterpret_cast"(%536) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %545 = "memref.reinterpret_cast"(%540) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %546 = "vector.load"(%544, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %547 = "vector.load"(%545, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %548 = "vector.load"(%544, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %549 = "vector.load"(%545, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %550 = "vector.load"(%544, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %551 = "vector.load"(%545, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %552 = "vector.load"(%544, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %553 = "vector.load"(%545, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %554 = "vector.load"(%544, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %555 = "vector.load"(%545, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %556 = "vector.load"(%544, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %557 = "vector.load"(%545, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %558 = "vector.load"(%544, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %559 = "vector.load"(%545, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %560 = "vector.load"(%544, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %561 = "vector.load"(%545, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %562 = "gcu.extern_elementwise_op"(%546, %1, %547) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %563 = "gcu.extern_elementwise_op"(%548, %1, %549) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %564 = "gcu.extern_elementwise_op"(%550, %1, %551) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %565 = "gcu.extern_elementwise_op"(%552, %1, %553) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %566 = "gcu.extern_elementwise_op"(%554, %1, %555) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %567 = "gcu.extern_elementwise_op"(%556, %1, %557) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %568 = "gcu.extern_elementwise_op"(%558, %1, %559) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %569 = "gcu.extern_elementwise_op"(%560, %1, %561) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          "vector.store"(%562, %543, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%563, %543, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%564, %543, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%565, %543, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%566, %543, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%567, %543, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%568, %543, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%569, %543, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "memref.dealloc"(%539) : (memref<8x128xf32>) -> ()
+          "memref.dealloc"(%536) : (memref<8x128xf32>) -> ()
+          "gcu.border"() {enter = "scf.if"} : () -> ()
+          %570 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          %571 = "arith.select"(%541, %570, %542) : (i1, memref<8x128xf32>, memref<8x128xf32>) -> memref<8x128xf32>
+          "scf.if"(%541) ({
+            "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+            %704 = "memref.reinterpret_cast"(%513) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 128>, static_strides = array<i64: 128, 1>}> : (memref<128xi1>) -> memref<1x128xi1>
+            "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+            "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            %705 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<1x128xf32>
+            %706 = "memref.reinterpret_cast"(%705) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 128>, static_strides = array<i64: 1>}> : (memref<1x128xf32>) -> memref<128xf32>
+            %707 = "gcu.memref2ptr"(%704) : (memref<1x128xi1>) -> !gcu.ptr<i1>
+            %708 = "gcu.ptr2memref"(%707) : (!gcu.ptr<i1>) -> memref<?xi8>
+            %709 = "memref.reinterpret_cast"(%708) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 128>, static_strides = array<i64: 1>}> : (memref<?xi8>) -> memref<128xi8>
+            %710 = "vector.load"(%709, %22) <{nontemporal = false}> : (memref<128xi8>, index) -> vector<128xi8>
+            %711 = "gcu.vector_convert"(%710) : (vector<128xi8>) -> vector<128xi1>
+            %712 = "arith.select"(%711, %7, %2) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            "vector.store"(%712, %706, %22) <{nontemporal = false}> : (vector<128xf32>, memref<128xf32>, index) -> ()
+            "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+            %713 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+            "memref_ext.broadcast_start"(%713, %705, %41, %22) : (memref<8x128xf32>, memref<1x128xf32>, memref<5xi32>, index) -> ()
+            "memref.dma_wait"(%41, %22, %24) : (memref<5xi32>, index, index) -> ()
+            "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+            "memref.dealloc"(%705) : (memref<1x128xf32>) -> ()
+            "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            %714 = "memref.reinterpret_cast"(%570) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+            %715 = "memref.reinterpret_cast"(%713) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+            %716 = "vector.load"(%543, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %717 = "vector.load"(%715, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %718 = "vector.load"(%543, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %719 = "vector.load"(%715, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %720 = "vector.load"(%543, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %721 = "vector.load"(%715, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %722 = "vector.load"(%543, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %723 = "vector.load"(%715, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %724 = "vector.load"(%543, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %725 = "vector.load"(%715, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %726 = "vector.load"(%543, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %727 = "vector.load"(%715, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %728 = "vector.load"(%543, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %729 = "vector.load"(%715, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %730 = "vector.load"(%543, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %731 = "vector.load"(%715, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+            %732 = "arith.addf"(%716, %717) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %733 = "arith.addf"(%718, %719) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %734 = "arith.addf"(%720, %721) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %735 = "arith.addf"(%722, %723) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %736 = "arith.addf"(%724, %725) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %737 = "arith.addf"(%726, %727) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %738 = "arith.addf"(%728, %729) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            %739 = "arith.addf"(%730, %731) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+            "vector.store"(%732, %714, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%733, %714, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%734, %714, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%735, %714, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%736, %714, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%737, %714, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%738, %714, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "vector.store"(%739, %714, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+            "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+            "memref.dealloc"(%713) : (memref<8x128xf32>) -> ()
+            "gcu.border"() {enter = "scf.yield"} : () -> ()
+            "scf.yield"() : () -> ()
+          }, {
+            "gcu.border"() {enter = "scf.yield"} : () -> ()
+            "scf.yield"() : () -> ()
+          }) : (i1) -> ()
+          "memref.dealloc"(%513) : (memref<128xi1>) -> ()
+          "gcu.border"() {enter = "tt.reduce"} : () -> ()
+          %572 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x1xf32>
+          %573 = "memref.reinterpret_cast"(%571) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 8, 128>, static_strides = array<i64: 1024, 128, 1>}> : (memref<8x128xf32>) -> memref<1x8x128xf32>
+          %574 = "memref.reinterpret_cast"(%572) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 8, 1>, static_strides = array<i64: 8, 1, 1>}> : (memref<8x1xf32>) -> memref<1x8x1xf32>
+          %575 = "vector.load"(%573, %22, %22, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %576 = "vector.load"(%573, %22, %26, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %577 = "vector.load"(%573, %22, %14, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %578 = "vector.load"(%573, %22, %13, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %579 = "vector.load"(%573, %22, %12, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %580 = "vector.load"(%573, %22, %11, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %581 = "vector.load"(%573, %22, %10, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %582 = "vector.load"(%573, %22, %9, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+          %583 = "vector.reduction"(%575) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%583, %574, %22, %22, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %584 = "vector.reduction"(%576) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%584, %574, %22, %26, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %585 = "vector.reduction"(%577) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%585, %574, %22, %14, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %586 = "vector.reduction"(%578) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%586, %574, %22, %13, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %587 = "vector.reduction"(%579) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%587, %574, %22, %12, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %588 = "vector.reduction"(%580) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%588, %574, %22, %11, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %589 = "vector.reduction"(%581) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%589, %574, %22, %10, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          %590 = "vector.reduction"(%582) <{fastmath = #arith.fastmath<none>, kind = #vector.kind<maxnumf>}> : (vector<128xf32>) -> f32
+          "memref.store"(%590, %574, %22, %9, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+          "gcu.mfence"() <{mfence_type = #gcu.mfence_type<local>}> : () -> ()
+          "gcu.border"() {leave = "tt.reduce"} : () -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %591 = "memref.reinterpret_cast"(%572) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8>, static_strides = array<i64: 1>}> : (memref<8x1xf32>) -> memref<8xf32>
+          %592 = "vector.load"(%arg34, %22) <{nontemporal = false}> : (memref<8xf32>, index) -> vector<128xf32>
+          %593 = "vector.load"(%591, %22) <{nontemporal = false}> : (memref<8xf32>, index) -> vector<128xf32>
+          %594 = "arith.maxnumf"(%592, %593) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          "vector.store"(%594, %266, %22) <{nontemporal = false}> : (vector<128xf32>, memref<8xf32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "memref.dealloc"(%572) : (memref<8x1xf32>) -> ()
+          "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+          %595 = "memref.reinterpret_cast"(%266) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8, 1>, static_strides = array<i64: 1, 1>}> : (memref<8xf32>) -> memref<8x1xf32>
+          "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+          "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+          %596 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          "memref_ext.broadcast_start"(%596, %595, %41, %22) : (memref<8x128xf32>, memref<8x1xf32>, memref<5xi32>, index) -> ()
+          "memref.dma_wait"(%41, %22, %28) : (memref<5xi32>, index, index) -> ()
+          "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %597 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          %598 = "memref.reinterpret_cast"(%597) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %599 = "memref.reinterpret_cast"(%571) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %600 = "memref.reinterpret_cast"(%596) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %601 = "vector.load"(%599, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %602 = "vector.load"(%600, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %603 = "vector.load"(%599, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %604 = "vector.load"(%600, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %605 = "vector.load"(%599, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %606 = "vector.load"(%600, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %607 = "vector.load"(%599, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %608 = "vector.load"(%600, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %609 = "vector.load"(%599, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %610 = "vector.load"(%600, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %611 = "vector.load"(%599, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %612 = "vector.load"(%600, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %613 = "vector.load"(%599, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %614 = "vector.load"(%600, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %615 = "vector.load"(%599, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %616 = "vector.load"(%600, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %617 = "arith.subf"(%601, %602) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %618 = "math.exp2"(%617) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %619 = "arith.subf"(%603, %604) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %620 = "math.exp2"(%619) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %621 = "arith.subf"(%605, %606) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %622 = "math.exp2"(%621) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %623 = "arith.subf"(%607, %608) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %624 = "math.exp2"(%623) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %625 = "arith.subf"(%609, %610) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %626 = "math.exp2"(%625) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %627 = "arith.subf"(%611, %612) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %628 = "math.exp2"(%627) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %629 = "arith.subf"(%613, %614) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %630 = "math.exp2"(%629) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          %631 = "arith.subf"(%615, %616) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %632 = "math.exp2"(%631) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          "vector.store"(%618, %598, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%620, %598, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%622, %598, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%624, %598, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%626, %598, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%628, %598, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%630, %598, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%632, %598, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "memref.dealloc"(%596) : (memref<8x128xf32>) -> ()
+          "memref.dealloc"(%570) : (memref<8x128xf32>) -> ()
+          "memref.dealloc"(%542) : (memref<8x128xf32>) -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %633 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+          %634 = "vector.load"(%arg34, %22) <{nontemporal = false}> : (memref<8xf32>, index) -> vector<128xf32>
+          %635 = "vector.load"(%266, %22) <{nontemporal = false}> : (memref<8xf32>, index) -> vector<128xf32>
+          %636 = "arith.subf"(%634, %635) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %637 = "math.exp2"(%636) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>) -> vector<128xf32>
+          "vector.store"(%637, %633, %22) <{nontemporal = false}> : (vector<128xf32>, memref<8xf32>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+          %638 = "memref.reinterpret_cast"(%633) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8, 1>, static_strides = array<i64: 1, 1>}> : (memref<8xf32>) -> memref<8x1xf32>
+          "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+          "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+          %639 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          "memref_ext.broadcast_start"(%639, %638, %41, %22) : (memref<8x128xf32>, memref<8x1xf32>, memref<5xi32>, index) -> ()
+          "memref.dma_wait"(%41, %22, %28) : (memref<5xi32>, index, index) -> ()
+          "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+          "memref.dealloc"(%633) : (memref<8xf32>) -> ()
+          "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          %640 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+          %641 = "memref.reinterpret_cast"(%640) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %642 = "memref.reinterpret_cast"(%267) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %643 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xbf16>
+          %644 = "memref.reinterpret_cast"(%643) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xbf16>) -> memref<1024xbf16>
+          %645 = "memref.reinterpret_cast"(%arg36) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %646 = "memref.reinterpret_cast"(%639) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %647 = "memref.reinterpret_cast"(%arg35) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+          %648 = "vector.load"(%645, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %649 = "vector.load"(%646, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %650 = "vector.load"(%647, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %651 = "vector.load"(%598, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %652 = "vector.load"(%645, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %653 = "vector.load"(%646, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %654 = "vector.load"(%647, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %655 = "vector.load"(%598, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %656 = "vector.load"(%645, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %657 = "vector.load"(%646, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %658 = "vector.load"(%647, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %659 = "vector.load"(%598, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %660 = "vector.load"(%645, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %661 = "vector.load"(%646, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %662 = "vector.load"(%647, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %663 = "vector.load"(%598, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %664 = "vector.load"(%645, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %665 = "vector.load"(%646, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %666 = "vector.load"(%647, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %667 = "vector.load"(%598, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %668 = "vector.load"(%645, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %669 = "vector.load"(%646, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %670 = "vector.load"(%647, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %671 = "vector.load"(%598, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %672 = "vector.load"(%645, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %673 = "vector.load"(%646, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %674 = "vector.load"(%647, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %675 = "vector.load"(%598, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %676 = "vector.load"(%645, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %677 = "vector.load"(%646, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %678 = "vector.load"(%647, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %679 = "vector.load"(%598, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+          %680 = "arith.mulf"(%648, %649) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %681 = "gcu.extern_elementwise_op"(%650, %649, %651) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %682 = "arith.truncf"(%651) : (vector<128xf32>) -> vector<128xbf16>
+          %683 = "arith.mulf"(%652, %653) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %684 = "gcu.extern_elementwise_op"(%654, %653, %655) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %685 = "arith.truncf"(%655) : (vector<128xf32>) -> vector<128xbf16>
+          %686 = "arith.mulf"(%656, %657) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %687 = "gcu.extern_elementwise_op"(%658, %657, %659) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %688 = "arith.truncf"(%659) : (vector<128xf32>) -> vector<128xbf16>
+          %689 = "arith.mulf"(%660, %661) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %690 = "gcu.extern_elementwise_op"(%662, %661, %663) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %691 = "arith.truncf"(%663) : (vector<128xf32>) -> vector<128xbf16>
+          %692 = "arith.mulf"(%664, %665) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %693 = "gcu.extern_elementwise_op"(%666, %665, %667) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %694 = "arith.truncf"(%667) : (vector<128xf32>) -> vector<128xbf16>
+          %695 = "arith.mulf"(%668, %669) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %696 = "gcu.extern_elementwise_op"(%670, %669, %671) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %697 = "arith.truncf"(%671) : (vector<128xf32>) -> vector<128xbf16>
+          %698 = "arith.mulf"(%672, %673) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %699 = "gcu.extern_elementwise_op"(%674, %673, %675) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %700 = "arith.truncf"(%675) : (vector<128xf32>) -> vector<128xbf16>
+          %701 = "arith.mulf"(%676, %677) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %702 = "gcu.extern_elementwise_op"(%678, %677, %679) <{symbol = "__gcu_mac_fp32"}> : (vector<128xf32>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+          %703 = "arith.truncf"(%679) : (vector<128xf32>) -> vector<128xbf16>
+          "vector.store"(%680, %641, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%681, %642, %22) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%682, %644, %22) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%683, %641, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%684, %642, %24) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%685, %644, %24) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%686, %641, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%687, %642, %33) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%688, %644, %33) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%689, %641, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%690, %642, %21) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%691, %644, %21) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%692, %641, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%693, %642, %20) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%694, %644, %20) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%695, %641, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%696, %642, %19) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%697, %644, %19) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%698, %641, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%699, %642, %18) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%700, %644, %18) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "vector.store"(%701, %641, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%702, %642, %17) <{nontemporal = false}> : (vector<128xf32>, memref<1024xf32>, index) -> ()
+          "vector.store"(%703, %644, %17) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+          "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+          "memref.dealloc"(%639) : (memref<8x128xf32>) -> ()
+          "memref.dealloc"(%597) : (memref<8x128xf32>) -> ()
+          "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+          "gcu.border"() {enter = "ttg.convert_layout"} : () -> ()
+          "memref.dma_wait"(%41, %14, %3) : (memref<5xi32>, index, index) -> ()
+          "gcu.border"() {enter = "tt.dot"} : () -> ()
+          "gcu.matmul"(%268, %643, %533, %640) <{inputPrecision = 2 : i32, operandSegmentSizes = array<i32: 1, 1, 1, 1, 0>}> : (memref<8x128xf32>, memref<8x128xbf16>, memref<128x128xbf16>, memref<8x128xf32>) -> ()
+          "gcu.border"() {leave = "tt.dot"} : () -> ()
+          "memref.dealloc"(%643) : (memref<8x128xbf16>) -> ()
+          "memref.dealloc"(%640) : (memref<8x128xf32>) -> ()
+          "memref.dealloc"(%533) : (memref<128x128xbf16>) -> ()
+          "gcu.border"() {enter = "scf.yield"} : () -> ()
+          "memref.dma_start"(%266, %22, %269, %22, %28, %41, %22) : (memref<8xf32>, index, memref<8xf32>, index, index, memref<5xi32>, index) -> ()
+          "memref.dma_wait"(%41, %22, %28) : (memref<5xi32>, index, index) -> ()
+          "scf.yield"(%269, %267, %268) : (memref<8xf32>, memref<8x128xf32>, memref<8x128xf32>) -> ()
+        }) : (i32, i32, i32, memref<8xf32>, memref<8x128xf32>, memref<8x128xf32>) -> (memref<8xf32>, memref<8x128xf32>, memref<8x128xf32>)
+        "memref.dealloc"(%252) : (memref<16xi32>) -> ()
+        "memref.dealloc"(%249) : (memref<16xi32>) -> ()
+        "memref.dealloc"(%173) : (memref<8xf32>) -> ()
+        "memref.dealloc"(%152) : (memref<8x128xbf16>) -> ()
+        "gcu.border"() {enter = "tt.reduce"} : () -> ()
+        %271 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x1xf32>
+        %272 = "memref.reinterpret_cast"(%270#1) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 8, 128>, static_strides = array<i64: 1024, 128, 1>}> : (memref<8x128xf32>) -> memref<1x8x128xf32>
+        %273 = "memref.reinterpret_cast"(%271) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1, 8, 1>, static_strides = array<i64: 8, 1, 1>}> : (memref<8x1xf32>) -> memref<1x8x1xf32>
+        %274 = "vector.load"(%272, %22, %22, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %275 = "vector.load"(%272, %22, %26, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %276 = "vector.load"(%272, %22, %14, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %277 = "vector.load"(%272, %22, %13, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %278 = "vector.load"(%272, %22, %12, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %279 = "vector.load"(%272, %22, %11, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %280 = "vector.load"(%272, %22, %10, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %281 = "vector.load"(%272, %22, %9, %22) <{nontemporal = false}> : (memref<1x8x128xf32>, index, index, index) -> vector<128xf32>
+        %282:4 = "gcu.vector_convert"(%274) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %283 = "arith.addf"(%282#0, %282#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %284 = "arith.addf"(%282#2, %282#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %285 = "arith.addf"(%283, %284) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %286 = "gcu.vector_movsft"(%285) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %287 = "arith.addf"(%285, %286) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %288 = "gcu.vector_movsft"(%287) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %289 = "arith.addf"(%287, %288) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %290 = "gcu.vector_movsft"(%289) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %291 = "arith.addf"(%289, %290) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %292 = "gcu.vector_movsft"(%291) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %293 = "arith.addf"(%291, %292) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %294 = "vector.extract"(%293) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %295 = "vector.broadcast"(%294) : (f32) -> vector<32xf32>
+        %296 = "arith.addf"(%293, %295) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %297 = "vector.extract"(%296) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%297, %273, %22, %22, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %298:4 = "gcu.vector_convert"(%275) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %299 = "arith.addf"(%298#0, %298#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %300 = "arith.addf"(%298#2, %298#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %301 = "arith.addf"(%299, %300) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %302 = "gcu.vector_movsft"(%301) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %303 = "arith.addf"(%301, %302) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %304 = "gcu.vector_movsft"(%303) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %305 = "arith.addf"(%303, %304) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %306 = "gcu.vector_movsft"(%305) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %307 = "arith.addf"(%305, %306) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %308 = "gcu.vector_movsft"(%307) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %309 = "arith.addf"(%307, %308) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %310 = "vector.extract"(%309) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %311 = "vector.broadcast"(%310) : (f32) -> vector<32xf32>
+        %312 = "arith.addf"(%309, %311) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %313 = "vector.extract"(%312) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%313, %273, %22, %26, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %314:4 = "gcu.vector_convert"(%276) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %315 = "arith.addf"(%314#0, %314#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %316 = "arith.addf"(%314#2, %314#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %317 = "arith.addf"(%315, %316) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %318 = "gcu.vector_movsft"(%317) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %319 = "arith.addf"(%317, %318) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %320 = "gcu.vector_movsft"(%319) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %321 = "arith.addf"(%319, %320) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %322 = "gcu.vector_movsft"(%321) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %323 = "arith.addf"(%321, %322) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %324 = "gcu.vector_movsft"(%323) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %325 = "arith.addf"(%323, %324) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %326 = "vector.extract"(%325) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %327 = "vector.broadcast"(%326) : (f32) -> vector<32xf32>
+        %328 = "arith.addf"(%325, %327) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %329 = "vector.extract"(%328) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%329, %273, %22, %14, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %330:4 = "gcu.vector_convert"(%277) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %331 = "arith.addf"(%330#0, %330#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %332 = "arith.addf"(%330#2, %330#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %333 = "arith.addf"(%331, %332) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %334 = "gcu.vector_movsft"(%333) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %335 = "arith.addf"(%333, %334) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %336 = "gcu.vector_movsft"(%335) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %337 = "arith.addf"(%335, %336) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %338 = "gcu.vector_movsft"(%337) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %339 = "arith.addf"(%337, %338) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %340 = "gcu.vector_movsft"(%339) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %341 = "arith.addf"(%339, %340) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %342 = "vector.extract"(%341) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %343 = "vector.broadcast"(%342) : (f32) -> vector<32xf32>
+        %344 = "arith.addf"(%341, %343) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %345 = "vector.extract"(%344) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%345, %273, %22, %13, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %346:4 = "gcu.vector_convert"(%278) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %347 = "arith.addf"(%346#0, %346#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %348 = "arith.addf"(%346#2, %346#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %349 = "arith.addf"(%347, %348) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %350 = "gcu.vector_movsft"(%349) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %351 = "arith.addf"(%349, %350) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %352 = "gcu.vector_movsft"(%351) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %353 = "arith.addf"(%351, %352) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %354 = "gcu.vector_movsft"(%353) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %355 = "arith.addf"(%353, %354) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %356 = "gcu.vector_movsft"(%355) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %357 = "arith.addf"(%355, %356) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %358 = "vector.extract"(%357) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %359 = "vector.broadcast"(%358) : (f32) -> vector<32xf32>
+        %360 = "arith.addf"(%357, %359) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %361 = "vector.extract"(%360) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%361, %273, %22, %12, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %362:4 = "gcu.vector_convert"(%279) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %363 = "arith.addf"(%362#0, %362#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %364 = "arith.addf"(%362#2, %362#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %365 = "arith.addf"(%363, %364) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %366 = "gcu.vector_movsft"(%365) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %367 = "arith.addf"(%365, %366) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %368 = "gcu.vector_movsft"(%367) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %369 = "arith.addf"(%367, %368) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %370 = "gcu.vector_movsft"(%369) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %371 = "arith.addf"(%369, %370) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %372 = "gcu.vector_movsft"(%371) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %373 = "arith.addf"(%371, %372) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %374 = "vector.extract"(%373) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %375 = "vector.broadcast"(%374) : (f32) -> vector<32xf32>
+        %376 = "arith.addf"(%373, %375) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %377 = "vector.extract"(%376) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%377, %273, %22, %11, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %378:4 = "gcu.vector_convert"(%280) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %379 = "arith.addf"(%378#0, %378#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %380 = "arith.addf"(%378#2, %378#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %381 = "arith.addf"(%379, %380) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %382 = "gcu.vector_movsft"(%381) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %383 = "arith.addf"(%381, %382) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %384 = "gcu.vector_movsft"(%383) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %385 = "arith.addf"(%383, %384) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %386 = "gcu.vector_movsft"(%385) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %387 = "arith.addf"(%385, %386) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %388 = "gcu.vector_movsft"(%387) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %389 = "arith.addf"(%387, %388) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %390 = "vector.extract"(%389) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %391 = "vector.broadcast"(%390) : (f32) -> vector<32xf32>
+        %392 = "arith.addf"(%389, %391) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %393 = "vector.extract"(%392) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%393, %273, %22, %10, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        %394:4 = "gcu.vector_convert"(%281) : (vector<128xf32>) -> (vector<32xf32>, vector<32xf32>, vector<32xf32>, vector<32xf32>)
+        %395 = "arith.addf"(%394#0, %394#1) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %396 = "arith.addf"(%394#2, %394#3) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %397 = "arith.addf"(%395, %396) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %398 = "gcu.vector_movsft"(%397) <{mode = 3 : i64, unit = 2 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %399 = "arith.addf"(%397, %398) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %400 = "gcu.vector_movsft"(%399) <{mode = 3 : i64, unit = 1 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %401 = "arith.addf"(%399, %400) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %402 = "gcu.vector_movsft"(%401) <{mode = 1 : i64, unit = 8 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %403 = "arith.addf"(%401, %402) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %404 = "gcu.vector_movsft"(%403) <{mode = 1 : i64, unit = 4 : i32}> : (vector<32xf32>) -> vector<32xf32>
+        %405 = "arith.addf"(%403, %404) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %406 = "vector.extract"(%405) <{static_position = array<i64: 16>}> : (vector<32xf32>) -> f32
+        %407 = "vector.broadcast"(%406) : (f32) -> vector<32xf32>
+        %408 = "arith.addf"(%405, %407) <{fastmath = #arith.fastmath<none>}> : (vector<32xf32>, vector<32xf32>) -> vector<32xf32>
+        %409 = "vector.extract"(%408) <{static_position = array<i64: 0>}> : (vector<32xf32>) -> f32
+        "memref.store"(%409, %273, %22, %9, %22) <{nontemporal = false}> : (f32, memref<1x8x1xf32>, index, index, index) -> ()
+        "gcu.mfence"() <{mfence_type = #gcu.mfence_type<local>}> : () -> ()
+        "gcu.border"() {leave = "tt.reduce"} : () -> ()
+        "memref.dealloc"(%267) : (memref<8x128xf32>) -> ()
+        "memref.dealloc"(%189) : (memref<8x128xf32>) -> ()
+        "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        %410 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8xf32>
+        %411 = "memref.reinterpret_cast"(%271) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8>, static_strides = array<i64: 1>}> : (memref<8x1xf32>) -> memref<8xf32>
+        %412 = "vector.load"(%411, %22) <{nontemporal = false}> : (memref<8xf32>, index) -> vector<128xf32>
+        %413 = "arith.cmpf"(%412, %7) <{fastmath = #arith.fastmath<none>, predicate = 2 : i64}> : (vector<128xf32>, vector<128xf32>) -> vector<128xi1>
+        %414 = "arith.divf"(%0, %412) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %415 = "arith.select"(%413, %414, %7) : (vector<128xi1>, vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        "vector.store"(%415, %410, %22) <{nontemporal = false}> : (vector<128xf32>, memref<8xf32>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        "memref.dealloc"(%271) : (memref<8x1xf32>) -> ()
+        "gcu.border"() {enter = "tt.expand_dims"} : () -> ()
+        %416 = "memref.reinterpret_cast"(%410) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 8, 1>, static_strides = array<i64: 1, 1>}> : (memref<8xf32>) -> memref<8x1xf32>
+        "gcu.border"() {leave = "tt.expand_dims"} : () -> ()
+        "gcu.border"() {enter = "tt.broadcast"} : () -> ()
+        %417 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xf32>
+        "memref_ext.broadcast_start"(%417, %416, %41, %22) : (memref<8x128xf32>, memref<8x1xf32>, memref<5xi32>, index) -> ()
+        "memref.dma_wait"(%41, %22, %28) : (memref<5xi32>, index, index) -> ()
+        "gcu.border"() {leave = "tt.broadcast"} : () -> ()
+        "memref.dealloc"(%410) : (memref<8xf32>) -> ()
+        "gcu.border"() {enter = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        %418 = "memref.alloc"() <{operandSegmentSizes = array<i32: 0, 0>}> : () -> memref<8x128xbf16>
+        %419 = "memref.reinterpret_cast"(%418) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xbf16>) -> memref<1024xbf16>
+        %420 = "memref.reinterpret_cast"(%270#2) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+        %421 = "memref.reinterpret_cast"(%417) <{operandSegmentSizes = array<i32: 1, 0, 0, 0>, static_offsets = array<i64: 0>, static_sizes = array<i64: 1024>, static_strides = array<i64: 1>}> : (memref<8x128xf32>) -> memref<1024xf32>
+        %422 = "vector.load"(%420, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %423 = "vector.load"(%421, %22) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %424 = "vector.load"(%420, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %425 = "vector.load"(%421, %24) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %426 = "vector.load"(%420, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %427 = "vector.load"(%421, %33) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %428 = "vector.load"(%420, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %429 = "vector.load"(%421, %21) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %430 = "vector.load"(%420, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %431 = "vector.load"(%421, %20) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %432 = "vector.load"(%420, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %433 = "vector.load"(%421, %19) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %434 = "vector.load"(%420, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %435 = "vector.load"(%421, %18) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %436 = "vector.load"(%420, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %437 = "vector.load"(%421, %17) <{nontemporal = false}> : (memref<1024xf32>, index) -> vector<128xf32>
+        %438 = "arith.mulf"(%422, %423) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %439 = "arith.truncf"(%438) : (vector<128xf32>) -> vector<128xbf16>
+        %440 = "arith.mulf"(%424, %425) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %441 = "arith.truncf"(%440) : (vector<128xf32>) -> vector<128xbf16>
+        %442 = "arith.mulf"(%426, %427) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %443 = "arith.truncf"(%442) : (vector<128xf32>) -> vector<128xbf16>
+        %444 = "arith.mulf"(%428, %429) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %445 = "arith.truncf"(%444) : (vector<128xf32>) -> vector<128xbf16>
+        %446 = "arith.mulf"(%430, %431) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %447 = "arith.truncf"(%446) : (vector<128xf32>) -> vector<128xbf16>
+        %448 = "arith.mulf"(%432, %433) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %449 = "arith.truncf"(%448) : (vector<128xf32>) -> vector<128xbf16>
+        %450 = "arith.mulf"(%434, %435) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %451 = "arith.truncf"(%450) : (vector<128xf32>) -> vector<128xbf16>
+        %452 = "arith.mulf"(%436, %437) <{fastmath = #arith.fastmath<none>}> : (vector<128xf32>, vector<128xf32>) -> vector<128xf32>
+        %453 = "arith.truncf"(%452) : (vector<128xf32>) -> vector<128xbf16>
+        "vector.store"(%439, %419, %22) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%441, %419, %24) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%443, %419, %33) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%445, %419, %21) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%447, %419, %20) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%449, %419, %19) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%451, %419, %18) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "vector.store"(%453, %419, %17) <{nontemporal = false}> : (vector<128xbf16>, memref<1024xbf16>, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.elementwise_fusion_region"} : () -> ()
+        "memref.dealloc"(%417) : (memref<8x128xf32>) -> ()
+        "memref.dealloc"(%268) : (memref<8x128xf32>) -> ()
+        "memref.dealloc"(%184) : (memref<8x128xf32>) -> ()
+        %454 = "arith.addi"(%136, %149) <{overflowFlags = #arith.overflow<none>}> : (i64, i64) -> i64
+        "gcu.border"() {enter = "triton_gcu.int2ptr"} : () -> ()
+        %455 = "gcu.int2ptr"(%454) : (i64) -> !gcu.ptr<bf16>
+        "gcu.border"() {leave = "triton_gcu.int2ptr"} : () -> ()
+        "gcu.border"() {enter = "triton_gcu.store"} : () -> ()
+        %456 = "gcu.ptr2memref"(%455) : (!gcu.ptr<bf16>) -> memref<?xbf16>
+        %457 = "memref.reinterpret_cast"(%456, %22, %28, %24, %24, %26) <{operandSegmentSizes = array<i32: 1, 1, 2, 2>, static_offsets = array<i64: -9223372036854775808>, static_sizes = array<i64: -9223372036854775808, -9223372036854775808>, static_strides = array<i64: -9223372036854775808, -9223372036854775808>}> : (memref<?xbf16>, index, index, index, index, index) -> memref<?x?xbf16>
+        "memref_ext.deslice_start"(%457, %418, %36, %36, %41, %22) <{operandSegmentSizes = array<i32: 1, 1, 2, 1, 1>}> : (memref<?x?xbf16>, memref<8x128xbf16>, i32, i32, memref<5xi32>, index) -> ()
+        "memref.dma_wait"(%41, %22, %4) : (memref<5xi32>, index, index) -> ()
+        "gcu.border"() {leave = "triton_gcu.store"} : () -> ()
+        "memref.dealloc"(%418) : (memref<8x128xbf16>) -> ()
+        "scf.yield"() : () -> ()
+      }) : (i32, i32, i32) -> ()
+      "memref.dealloc"(%130) : (memref<16xi64>) -> ()
+      "memref.dealloc"(%129) : (memref<16xi32>) -> ()
+      "memref.dealloc"(%126) : (memref<8x128xi1>) -> ()
+      "memref.dealloc"(%116) : (memref<128xi32>) -> ()
+      "memref.dealloc"(%43) : (memref<8x128xf32>) -> ()
+      "memref.dealloc"(%42) : (memref<16xi32>) -> ()
+      "gcu.border"() {enter = "tt.return"} : () -> ()
+      "func.return"() : () -> ()
+    }) {llvm.linkage = #llvm.linkage<internal>} : () -> ()
+    "gpu.func"() <{function_type = (!gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<i32>, !gcu.ptr<bf16>) -> ()}> ({
+    ^bb0(%arg0: !gcu.ptr<bf16>, %arg1: !gcu.ptr<bf16>, %arg2: !gcu.ptr<bf16>, %arg3: !gcu.ptr<bf16>, %arg4: !gcu.ptr<i32>, %arg5: !gcu.ptr<bf16>, %arg6: !gcu.ptr<i32>, %arg7: !gcu.ptr<i32>, %arg8: !gcu.ptr<i32>, %arg9: !gcu.ptr<i32>, %arg10: !gcu.ptr<i32>, %arg11: !gcu.ptr<f32>, %arg12: !gcu.ptr<f32>, %arg13: !gcu.ptr<f32>, %arg14: !gcu.ptr<i32>, %arg15: !gcu.ptr<bf16>):
+      "func.call"(%arg0, %arg1, %arg2, %arg3, %arg4, %arg5, %arg6, %arg7, %arg8, %arg9, %arg10, %arg11, %arg12, %arg13, %arg14, %arg15) <{callee = @_gqa_sparse_fwd_direct_triton_internal__}> : (!gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<bf16>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<i32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<f32>, !gcu.ptr<i32>, !gcu.ptr<bf16>) -> ()
+      "gpu.return"() : () -> ()
+    }) {gpu.kernel, sym_name = "_gqa_sparse_fwd_direct", workgroup_attributions = 0 : i64} : () -> ()
+  }) : () -> ()
+}) {"ttg.cluster-dims-x" = 1 : i32, "ttg.cluster-dims-y" = 1 : i32, "ttg.cluster-dims-z" = 1 : i32, "ttg.num-ctas" = 1 : i32, "ttg.num-warps" = 1 : i32, ttg.target = "gcu:gcu300", "ttg.threads-per-warp" = 1 : i32} : () -> ()
