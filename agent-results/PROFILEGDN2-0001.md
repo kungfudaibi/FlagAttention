@@ -127,6 +127,12 @@ export TOPS_VISIBLE_DEVICES=5                       # 只让物理 GCU 5 可见 
 `agent-results/profilegdn2-0001_check.py --verify` / `--benchmark`；该脚本本身只做
 "跑仓库自带测试 + 调用上面的 A/B 脚本"，不另写一套数值参考。
 
+调度器在 agent 退出后、在**已提交的树**上重跑 `--benchmark`。为了不弄脏工作区、
+也不覆盖它自己正在对照的那份记录，重跑结果写到仓库外的
+`/tmp/PROFILEGDN2-0001-ab-rerun.jsonl`（可用 `PROFILEGDN2_AB_OUT` 改），并把完整
+check 表打到 stdout 进调度器运行记录；仓库内的 `PROFILEGDN2-0001-ab.jsonl` 保持为
+本轮冻结证据，两份可直接 diff。
+
 它接受**两种合法绑定**：调度器 wrapper 的"6 卡可见、`set_device(5)`"（进程内序号 5），
 以及本报告用的"`TOPS_VISIBLE_DEVICES=5`、序号 0"。其余组合一律拒绝。这条判定矩阵
 用桩对象逐个验证过（7/7 正确）：合法 `(83:00.0, 1 卡可见, 序号 0)` → 接受；
