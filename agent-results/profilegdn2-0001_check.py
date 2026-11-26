@@ -44,7 +44,14 @@ ROOT = Path(__file__).resolve().parents[1]
 EXPECTED_PCI = "83:00.0"
 HOST_DEVICE_INDEX = 5
 CPU_LIST = "160-191"
-AB_OUT = "agent-results/PROFILEGDN2-0001-ab.jsonl"
+# The scheduler runs --benchmark *after* the agent exits, on the committed
+# tree.  Reproducing the A/B must not touch the committed evidence file, or the
+# rerun would both dirty the workspace and overwrite the record it is being
+# compared against.  The fresh run therefore writes outside the repository, to
+# a path derived from this file's name, and prints its full check table to
+# stdout (which the scheduler captures in the run record).
+AB_OUT = os.environ.get(
+    "PROFILEGDN2_AB_OUT", "/tmp/PROFILEGDN2-0001-ab-rerun.jsonl")
 AB_SCRIPT = "benchmark/gdn2_final_state_ab.py"
 ENV_SWITCH = "FLAG_ATTN_GDN2_STATE_EMPTY_HT"
 
@@ -128,6 +135,13 @@ def command_verify() -> int:
     if code:
         return code
     dev = f"gcu:{ordinal}"
+
+    # The scheduler exports PYTHONPATH="$PWD/src:$PWD:$PYTHONPATH", but the
+    # script must also work when invoked directly, so make the same two roots
+    # importable before touching the operator.
+    for extra in (str(ROOT / "src"), str(ROOT)):
+        if extra not in sys.path:
+            sys.path.insert(0, extra)
     from flag_attn import chunk_gdn2  # noqa: F401  (import must succeed)
 
     impl = __import__("flag_attn.runtime.backend._enflame.FLA.gdn2.chunk_gdn2",
@@ -152,8 +166,9 @@ def command_verify() -> int:
     # Independent numerical check of the experiment path: the default and the
     # opt-in allocation must produce identical bits, and both must stay inside
     # the operator's own gate against the FP64 CPU recurrence.
-    sys.path.insert(0, str(ROOT / "src"))
-    sys.path.insert(0, str(ROOT / "tests" / "flag_attn"))
+    test_dir = str(ROOT / "tests" / "flag_attn")
+    if test_dir not in sys.path:
+        sys.path.insert(0, test_dir)
     import hashlib
     import math
 
