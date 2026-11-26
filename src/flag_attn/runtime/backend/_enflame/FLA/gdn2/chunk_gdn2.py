@@ -82,6 +82,22 @@ _S60_STATE_BV_SPLIT_ENABLED = (
     os.environ.get("FLAG_ATTN_GDN2_STATE_BV_SPLIT", "1") != "0"
 )
 
+# PROFILEGDN2-0001 experiment (opt-in, default off).  K2's ``final_state`` is
+# zero-filled with ``new_zeros`` before the launch, but the kernel writes every
+# element of it: the grid covers all V tiles, and the K block chain covers
+# K <= 4*BK, which holds for every K the S60 BK ladder admits (BK >= K/4).
+# The fill is therefore a device memset that the kernel immediately overwrites.
+# On GCU 5 it costs 0.25-0.56 ms for the shapes in
+# agent-results/PROFILEGDN2-0001.md -- as much as the whole K2 kernel -- so it
+# was masking the K2 V-tile effect that GDN2-004 measured.
+# FLAG_ATTN_GDN2_STATE_EMPTY_HT=1 selects the experiment; the default keeps
+# ``new_zeros`` and is unchanged.  The tile-coverage guard below falls back to
+# ``new_zeros`` if a future BK policy ever made the kernel write only part of
+# the state, so the experiment can never return uninitialised memory.
+_S60_STATE_EMPTY_HT_ENABLED = (
+    os.environ.get("FLAG_ATTN_GDN2_STATE_EMPTY_HT", "0") == "1"
+)
+
 
 def _s60_state_bv(extent: int) -> int:
     """V tile for K2: split wide-but-not-huge V into two tiles."""
@@ -1173,10 +1189,14 @@ def chunk_gdn2_fwd_h_o_infer(
 
     final_state = None
     if output_final_state:
+        # The experiment changes the allocation only; the kernel writes every
+        # output element, so the bytes are identical to the zero-filled path.
+        empty_ht = _S60_STATE_EMPTY_HT_ENABLED and K <= 4 * state_bk
+        new_state = kg.new_empty if empty_ht else kg.new_zeros
         if state_v_first:
-            final_state = kg.new_zeros(N, H, V, K, dtype=torch.float32)
+            final_state = new_state(N, H, V, K, dtype=torch.float32)
         else:
-            final_state = kg.new_zeros(N, H, K, V, dtype=torch.float32)
+            final_state = new_state(N, H, K, V, dtype=torch.float32)
 
     h = None
     if return_intermediate_states:

@@ -267,3 +267,90 @@ def test_state_bv_split_is_bit_identical(V):
     assert torch.equal(o_split, o_whole), f"V={V}: output changed"
     assert torch.equal(ht_split, ht_whole), f"V={V}: final state changed"
     assert torch.isfinite(o_split).all() and torch.isfinite(ht_split).all()
+
+# --- PROFILEGDN2-0001: opt-in K2 final-state allocation --------------------
+#
+# K2's ``final_state`` is zero-filled with ``new_zeros`` before the launch, but
+# the kernel stores every element of it, so the fill is a device memset that is
+# immediately overwritten.  The experiment allocates it with ``new_empty`` when
+# FLAG_ATTN_GDN2_STATE_EMPTY_HT=1; the default must stay ``new_zeros``.
+
+
+def test_empty_ht_switch_is_off_by_default():
+    """The shipped operator must keep the zero-filled allocation."""
+    assert gdn2_impl._S60_STATE_EMPTY_HT_ENABLED is False
+
+
+def test_empty_ht_switch_reads_the_environment(monkeypatch):
+    import importlib as _importlib
+
+    monkeypatch.setenv("FLAG_ATTN_GDN2_STATE_EMPTY_HT", "1")
+    reloaded = _importlib.reload(gdn2_impl)
+    try:
+        assert reloaded._S60_STATE_EMPTY_HT_ENABLED is True
+    finally:
+        monkeypatch.delenv("FLAG_ATTN_GDN2_STATE_EMPTY_HT", raising=False)
+        _importlib.reload(gdn2_impl)
+
+
+@pytest.mark.chunk_gdn2
+@pytest.mark.parametrize(
+    "shape,dtype",
+    [((2, 65, 2, 64, 96), torch.float16),
+     ((2, 130, 3, 128, 160), torch.bfloat16),
+     ((1, 65, 2, 96, 128), torch.float16),
+     ((2, 65, 2, 256, 256), torch.bfloat16)],
+    ids=lambda x: str(x),
+)
+@torch.inference_mode()
+def test_empty_ht_allocation_is_bit_identical(shape, dtype):
+    """Skipping the zero fill cannot change any output bit."""
+    from flag_attn import chunk_gdn2
+
+    B, T, H, K, V = shape
+    args = _make(B, T, H, K, V, dtype, test_backend.device)
+    kwargs = dict(scale=K ** -0.5, initial_state=args[6],
+                  output_final_state=True, chunk_size=64)
+
+    old = gdn2_impl._S60_STATE_EMPTY_HT_ENABLED
+    try:
+        gdn2_impl._S60_STATE_EMPTY_HT_ENABLED = False
+        o_zeros, ht_zeros = chunk_gdn2(*args[:6], **kwargs)
+        gdn2_impl._S60_STATE_EMPTY_HT_ENABLED = True
+        o_empty, ht_empty = chunk_gdn2(*args[:6], **kwargs)
+        torch.gcu.synchronize()
+    finally:
+        gdn2_impl._S60_STATE_EMPTY_HT_ENABLED = old
+
+    assert torch.equal(o_zeros, o_empty), f"{shape}: output changed"
+    assert torch.equal(ht_zeros, ht_empty), f"{shape}: final state changed"
+    assert torch.isfinite(o_empty).all() and torch.isfinite(ht_empty).all()
+
+
+@pytest.mark.chunk_gdn2
+@torch.inference_mode()
+def test_empty_ht_falls_back_when_bk_does_not_cover_k(monkeypatch):
+    """The guard must refuse the experiment if K is beyond the BK chain.
+
+    ``K <= 4 * state_bk`` is what makes the kernel write the whole state.  With
+    an artificially small BK ladder the guard has to fall back to the zeroed
+    allocation rather than return uninitialised memory.
+    """
+    from flag_attn import chunk_gdn2
+
+    monkeypatch.setattr(gdn2_impl, "_S60_STATE_BK_SMALL", 16)
+    monkeypatch.setattr(gdn2_impl, "_S60_STATE_BK_MEDIUM", 16)
+    monkeypatch.setattr(gdn2_impl, "_S60_STATE_BK_LARGE", 16)
+    monkeypatch.setattr(gdn2_impl, "_S60_STATE_EMPTY_HT_ENABLED", True)
+
+    args = _make(1, 65, 2, 256, 64, torch.float16, test_backend.device)
+    o, ht = chunk_gdn2(*args[:6], scale=256 ** -0.5, initial_state=args[6],
+                       output_final_state=True, chunk_size=64)
+    torch.gcu.synchronize()
+    # K=256 > 4*16 means the guarded path stays on new_zeros; the state must be
+    # fully finite and equal to the default run.
+    assert torch.isfinite(ht).all()
+    gdn2_impl._S60_STATE_EMPTY_HT_ENABLED = False
+    o_ref, ht_ref = chunk_gdn2(*args[:6], scale=256 ** -0.5, initial_state=args[6],
+                               output_final_state=True, chunk_size=64)
+    assert torch.equal(o, o_ref) and torch.equal(ht, ht_ref)
