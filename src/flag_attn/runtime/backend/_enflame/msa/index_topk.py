@@ -6,6 +6,8 @@
 
 from __future__ import annotations
 
+import os
+
 import torch
 import triton
 import triton.language as tl
@@ -35,19 +37,29 @@ def minimax_m3_index_score(
 
     Returns score [num_kv_heads, total_q, max_block], where each score is the
     max over a 128-token index-K block. M3 has num_idx_heads == num_kv_heads.
+    The page-major experiment returns a strided score with the same axes.
     """
     total_q, num_idx_heads, head_dim = idx_q.shape
     assert num_idx_heads == num_kv_heads, "M3 expects num_idx_heads == num_kv_heads (no topk index reduce)"
     batch = cu_seqlens_q.shape[0] - 1
     max_block = triton.cdiv(max_seq_len, SPARSE_BLOCK_SIZE)
 
-    # Keep score strides 16-divisible to avoid Triton recompiles.
+    # Keep the padded page extent used by prefill TopK.
     score_block_stride = round_up(max_block, 16)
-    score = torch.empty(
-        (num_idx_heads, total_q, score_block_stride),
-        dtype=torch.float32,
-        device=idx_q.device,
-    )
+    page_major = os.environ.get("FLAG_ATTN_MSA_SCORE_PAGE_MAJOR") == "1"
+    if page_major:
+        # A scoring tile writes consecutive queries for each page.
+        score = torch.empty(
+            (num_idx_heads, score_block_stride, total_q),
+            dtype=torch.float32,
+            device=idx_q.device,
+        ).transpose(-1, -2)
+    else:
+        score = torch.empty(
+            (num_idx_heads, total_q, score_block_stride),
+            dtype=torch.float32,
+            device=idx_q.device,
+        )
     BLOCK_SIZE_Q = 64
     grid_score = (triton.cdiv(max_query_len, BLOCK_SIZE_Q), batch * num_idx_heads)
     _index_block_score_kernel[grid_score](
