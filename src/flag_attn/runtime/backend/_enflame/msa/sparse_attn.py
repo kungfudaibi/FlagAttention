@@ -184,6 +184,7 @@ def _gqa_sparse_fwd_direct(
     packed_k_ptr=0,
     USE_PACKED_K: tl.constexpr = False,
     EARLY_V_DMA: tl.constexpr = False,
+    PRELOAD_PAGE_META: tl.constexpr = False,
 ):
     sm_scale_log2e = sm_scale * 1.4426950409
     pid_q = tl.program_id(0)
@@ -258,11 +259,22 @@ def _gqa_sparse_fwd_direct(
             q_qk = (q / qk_q_scale[:, None]).to(tl.float8e4nv)
         else:
             q_qk = q
-        for _ in range(shared_count, real_topk):
-            blk = tl.load(t_ptr_j).to(tl.int32)
-            t_ptr_j = t_ptr_j + stride_tk
+        if PRELOAD_PAGE_META:
+            slots = tl.arange(0, max_topk)
+            valid = (slots + shared_count) < real_topk
+            blocks = tl.load(t_ptr_j + slots * stride_tk, mask=valid, other=0).to(tl.int32)
+            pages = tl.load(bt_row + blocks, mask=valid, other=0).to(tl.int32)
+        for i in range(shared_count, real_topk):
+            if PRELOAD_PAGE_META:
+                index = tl.full((1,), i - shared_count, tl.int32)
+                blk = tl.sum(tl.gather(blocks, index, 0), 0)
+                page = tl.sum(tl.gather(pages, index, 0), 0)
+            else:
+                blk = tl.load(t_ptr_j).to(tl.int32)
+                t_ptr_j = t_ptr_j + stride_tk
             c = blk * BLOCK_SIZE_K
-            page = tl.load(bt_row + blk).to(tl.int32)
+            if not PRELOAD_PAGE_META:
+                page = tl.load(bt_row + blk).to(tl.int32)
 
             pos = c + off_n
             pos_mask = pos < seq_len
@@ -1000,6 +1012,7 @@ def minimax_m3_sparse_attn(
         packed_k_ptr=packed_k,
         USE_PACKED_K=use_packed_k,
         EARLY_V_DMA=early_v_dma,
+        PRELOAD_PAGE_META=use_packed_k and os.environ.get("FLAG_ATTN_MSA_PRELOAD_PAGE_META") == "1",
     )
 
 
