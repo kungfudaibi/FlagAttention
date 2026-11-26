@@ -266,9 +266,9 @@ def _gqa_sparse_fwd_direct(
             pages = tl.load(bt_row + blocks, mask=valid, other=0).to(tl.int32)
         for i in range(shared_count, real_topk):
             if PRELOAD_PAGE_META:
-                index = tl.full((1,), i - shared_count, tl.int32)
-                blk = tl.sum(tl.gather(blocks, index, 0), 0)
-                page = tl.sum(tl.gather(pages, index, 0), 0)
+                selected = slots == i - shared_count
+                blk = tl.sum(tl.where(selected, blocks, 0), 0)
+                page = tl.sum(tl.where(selected, pages, 0), 0)
             else:
                 blk = tl.load(t_ptr_j).to(tl.int32)
                 t_ptr_j = t_ptr_j + stride_tk
