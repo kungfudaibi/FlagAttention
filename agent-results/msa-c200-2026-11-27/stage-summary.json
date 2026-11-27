@@ -1,0 +1,188 @@
+{
+  "clock.log": {
+    "arms": {
+      "stream": {
+        "empty_us": 0.15,
+        "pair_span_raw_us": 9.3675,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 0.735,
+            "QK": 0.48,
+            "mask_max": 1.2825,
+            "exp2_alpha": 0.165,
+            "state_and_cast": 0.315,
+            "wait_V": 0.0,
+            "PV": 0.54,
+            "softmax_and_state": 1.7625
+          },
+          "B": {
+            "wait_K": 0.008,
+            "QK": 0.465,
+            "mask_max": 0.525,
+            "exp2_alpha": 0.165,
+            "state_and_cast": 0.3,
+            "wait_V": 0.0,
+            "PV": 0.54,
+            "softmax_and_state": 0.99
+          }
+        }
+      },
+      "keep_kv": {
+        "empty_us": 0.15,
+        "pair_span_raw_us": 7.26,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 0.0,
+            "QK": 0.48,
+            "mask_max": 0.495,
+            "exp2_alpha": 0.15,
+            "state_and_cast": 0.345,
+            "wait_V": 0.0,
+            "PV": 0.555,
+            "softmax_and_state": 0.99
+          },
+          "B": {
+            "wait_K": 0.0,
+            "QK": 0.48,
+            "mask_max": 0.555,
+            "exp2_alpha": 0.135,
+            "state_and_cast": 0.39,
+            "wait_V": 0.0,
+            "PV": 0.525,
+            "softmax_and_state": 1.08
+          }
+        }
+      }
+    },
+    "pipeline_ms": {
+      "('stream', False)": 4.4255921840667725,
+      "('stream', True)": 4.445849895477295,
+      "('keep_kv', False)": 3.826575994491577,
+      "('keep_kv', True)": 3.855810046195984
+    }
+  },
+  "clock-3-0.log": {
+    "arms": {
+      "stream": {
+        "empty_us": 0.15,
+        "pair_span_raw_us": 11.385,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 1.6495,
+            "QK": 1.68,
+            "mask_max": 0.87,
+            "exp2_alpha": 0.157,
+            "state_and_cast": 0.6225,
+            "wait_V": 0.0,
+            "PV": 0.54,
+            "softmax_and_state": 1.65
+          },
+          "B": {
+            "wait_K": 0.0,
+            "QK": 0.465,
+            "mask_max": 0.81,
+            "exp2_alpha": 0.1575,
+            "state_and_cast": 0.45,
+            "wait_V": 0.0,
+            "PV": 0.525,
+            "softmax_and_state": 1.41
+          }
+        }
+      },
+      "keep_kv": {
+        "empty_us": 0.15,
+        "pair_span_raw_us": 8.715,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 0.0,
+            "QK": 0.48,
+            "mask_max": 0.78,
+            "exp2_alpha": 0.135,
+            "state_and_cast": 0.345,
+            "wait_V": 0.0,
+            "PV": 0.54,
+            "softmax_and_state": 1.275
+          },
+          "B": {
+            "wait_K": 0.0,
+            "QK": 0.465,
+            "mask_max": 0.855,
+            "exp2_alpha": 0.135,
+            "state_and_cast": 0.375,
+            "wait_V": 0.0,
+            "PV": 0.825,
+            "softmax_and_state": 1.3725
+          }
+        }
+      }
+    },
+    "pipeline_ms": {
+      "('stream', False)": 4.40339994430542,
+      "('stream', True)": 4.440644979476929,
+      "('keep_kv', False)": 3.8234779834747314,
+      "('keep_kv', True)": 3.8603919744491577
+    }
+  },
+  "clock-489-12.log": {
+    "arms": {
+      "stream": {
+        "empty_us": 0.15,
+        "pair_span_raw_us": 8.3475,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 0.705,
+            "QK": 0.4725,
+            "mask_max": 0.7725,
+            "exp2_alpha": 0.165,
+            "state_and_cast": 0.315,
+            "wait_V": 0.0,
+            "PV": 0.54,
+            "softmax_and_state": 1.2675
+          },
+          "B": {
+            "wait_K": 0.0,
+            "QK": 0.465,
+            "mask_max": 0.525,
+            "exp2_alpha": 0.1575,
+            "state_and_cast": 0.3,
+            "wait_V": 0.0,
+            "PV": 0.525,
+            "softmax_and_state": 0.975
+          }
+        }
+      },
+      "keep_kv": {
+        "empty_us": 0.1425,
+        "pair_span_raw_us": 7.17,
+        "medians_corrected_us": {
+          "A": {
+            "wait_K": 0.0,
+            "QK": 0.48,
+            "mask_max": 0.51,
+            "exp2_alpha": 0.15,
+            "state_and_cast": 0.345,
+            "wait_V": 0.0,
+            "PV": 0.5475,
+            "softmax_and_state": 0.9975
+          },
+          "B": {
+            "wait_K": 0.0,
+            "QK": 0.4725,
+            "mask_max": 0.555,
+            "exp2_alpha": 0.1425,
+            "state_and_cast": 0.3825,
+            "wait_V": 0.0,
+            "PV": 0.525,
+            "softmax_and_state": 1.08
+          }
+        }
+      }
+    },
+    "pipeline_ms": {
+      "('stream', False)": 4.403910160064697,
+      "('stream', True)": 4.453049898147583,
+      "('keep_kv', False)": 3.8232229948043823,
+      "('keep_kv', True)": 3.8588030338287354
+    }
+  }
+}

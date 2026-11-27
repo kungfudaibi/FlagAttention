@@ -1,0 +1,353 @@
+[prefill/gemm-control.log]
+  Device 5, Kernel 131074  void matmul_kernel_shared_one_l2_template<256, false, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, false, false, false>(char*, char*, char*, char*, char*, char*, char*, char*, char*, PRELU_OP_PARAS, GEMM_OP_TEMPLATE_PARAS) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 64.21ms, Duration 148.22us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 44.053
+  Device 5, Kernel 131075  void matmul_kernel_shared_one_l2_template<256, false, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, false, false, false>(char*, char*, char*, char*, char*, char*, char*, char*, char*, PRELU_OP_PARAS, GEMM_OP_TEMPLATE_PARAS) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 64.62ms, Duration 145.72us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 45.423
+  Device 5, Kernel 131076  void matmul_kernel_shared_one_l2_template<256, false, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, false, false, false>(char*, char*, char*, char*, char*, char*, char*, char*, char*, PRELU_OP_PARAS, GEMM_OP_TEMPLATE_PARAS) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 64.85ms, Duration 146.09us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 45.065
+  Device 5, Kernel 131077  void matmul_kernel_shared_one_l2_template<256, false, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, tops::__ef_bfloat16, false, false, false>(char*, char*, char*, char*, char*, char*, char*, char*, char*, PRELU_OP_PARAS, GEMM_OP_TEMPLATE_PARAS) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 65.08ms, Duration 146.15us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 45.390
+
+[prefill/tcu-2D_EFFICIENCY.log]
+  Device 5, Kernel 131095  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.72s, Duration 555.52us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 4.357
+  Device 5, Kernel 131096  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 628.68us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131097  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 307.25us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 2.184
+  Device 5, Kernel 131098  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 24.11us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.884
+  Device 5, Kernel 131100  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 556.25us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 4.355
+  Device 5, Kernel 131101  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 629.55us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131102  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 307.06us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 2.186
+  Device 5, Kernel 131103  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 25.34us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131104  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.09ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.885
+  Device 5, Kernel 131105  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 555.24us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 4.364
+  Device 5, Kernel 131106  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 622.23us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131107  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 307.49us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 2.185
+  Device 5, Kernel 131108  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 23.16us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131109  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.883
+  Device 5, Kernel 131110  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 556.15us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 4.364
+  Device 5, Kernel 131111  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 621.78us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131112  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 307.67us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 2.185
+  Device 5, Kernel 131113  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 22.83us
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131114  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 3.09ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.885
+
+[prefill/tcu-1D_EFFICIENCY.log]
+  Device 5, Kernel 131095  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.71s, Duration 555.33us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 8.753
+  Device 5, Kernel 131096  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.72s, Duration 630.14us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.441
+  Device 5, Kernel 131097  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 378.69us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 3.956
+  Device 5, Kernel 131098  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 24.02us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.10ms
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.775
+  Device 5, Kernel 131100  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 555.48us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 8.748
+  Device 5, Kernel 131101  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 628.68us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.435
+  Device 5, Kernel 131102  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 307.35us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 5.490
+  Device 5, Kernel 131103  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 24.84us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131104  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.10ms
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.777
+  Device 5, Kernel 131105  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 555.54us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 8.764
+  Device 5, Kernel 131106  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 621.84us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.432
+  Device 5, Kernel 131107  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 307.46us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 5.492
+  Device 5, Kernel 131108  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 24.55us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131109  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 3.10ms
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.772
+  Device 5, Kernel 131110  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 556.25us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 8.759
+  Device 5, Kernel 131111  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 620.29us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.428
+  Device 5, Kernel 131112  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 307.20us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 5.494
+  Device 5, Kernel 131113  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 23.70us
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131114  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 3.10ms
+    Metric name: SIP/1D_EFFICIENCY, Unit: %, Value: 2.779
+
+[prefill/tcu-BUSY.log]
+  Device 5, Kernel 131095  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.71s, Duration 555.38us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 732632.938
+  Device 5, Kernel 131096  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.72s, Duration 629.01us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 143690.417
+  Device 5, Kernel 131097  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 307.21us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 140525.333
+  Device 5, Kernel 131098  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 23.98us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 28913.458
+  Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 3.10ms
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 94142.958
+  Device 5, Kernel 131100  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 555.75us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 732859.688
+  Device 5, Kernel 131101  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 626.43us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 143790.375
+  Device 5, Kernel 131102  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 307.20us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 140610.667
+  Device 5, Kernel 131103  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 25.27us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 29988.792
+  Device 5, Kernel 131104  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.09ms
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 94003.583
+  Device 5, Kernel 131105  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 555.99us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 731876.500
+  Device 5, Kernel 131106  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 622.29us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 144264
+  Device 5, Kernel 131107  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 307.29us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 140461.958
+  Device 5, Kernel 131108  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 24.57us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 28347.167
+  Device 5, Kernel 131109  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.10ms
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 94293.417
+  Device 5, Kernel 131110  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 556.22us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 731505.188
+  Device 5, Kernel 131111  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 621.54us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 143662.750
+  Device 5, Kernel 131112  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 307.33us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 140578.875
+  Device 5, Kernel 131113  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 22.98us
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 27287.750
+  Device 5, Kernel 131114  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.76s, Duration 3.09ms
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 94142.917
+
+[prefill/tcu-MSF_EFFICIENCY.log]
+  Device 5, Kernel 131095  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.70s, Duration 555.39us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131096  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.71s, Duration 629.91us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131097  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.72s, Duration 307.14us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 1.179
+  Device 5, Kernel 131098  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.72s, Duration 23.80us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 3.10ms
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0.557
+  Device 5, Kernel 131100  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 555.68us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131101  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.73s, Duration 632.34us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131102  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 307.17us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 1.178
+  Device 5, Kernel 131103  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 24.69us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131104  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 3.10ms
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0.558
+  Device 5, Kernel 131105  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 556.41us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131106  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 622.02us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131107  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 307.43us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 1.178
+  Device 5, Kernel 131108  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 23.05us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131109  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 3.10ms
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0.557
+  Device 5, Kernel 131110  _index_block_score_kernel <<<16,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.74s, Duration 556.65us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131111  _prefill_topk_rows_enflame <<<128,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 620.52us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131112  _gqa_sparse_common_prefix <<<64,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 307.27us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 1.178
+  Device 5, Kernel 131113  void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams) <<<2,1,1>>> <<<12,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 24.52us
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0
+  Device 5, Kernel 131114  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 2.75s, Duration 3.10ms
+    Metric name: SIP/MSF_EFFICIENCY, Unit: %, Value: 0.557
+
+[pair-pmu/tcu.log]
+PROFILE 0 baseline
+PROFILE 0 single_fixed
+PROFILE 0 paired_serial
+PROFILE 0 paired_k
+PROFILE 1 single_fixed
+PROFILE 1 paired_serial
+PROFILE 1 paired_k
+PROFILE 1 baseline
+PROFILE 2 paired_serial
+PROFILE 2 paired_k
+PROFILE 2 baseline
+PROFILE 2 single_fixed
+PROFILE 3 paired_k
+PROFILE 3 baseline
+PROFILE 3 single_fixed
+PROFILE 3 paired_serial
+PROFILE 4 baseline
+PROFILE 4 single_fixed
+PROFILE 4 paired_serial
+PROFILE 4 paired_k
+==2701640==   Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 0.00ns, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.882
+  Device 5, Kernel 131104  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 17.06ms, Duration 2.95ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.924
+  Device 5, Kernel 131109  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 32.02ms, Duration 2.98ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.929
+  Device 5, Kernel 131114  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 42.01ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.973
+  Device 5, Kernel 131119  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 47.96ms, Duration 3.11ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.883
+  Device 5, Kernel 131124  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 53.39ms, Duration 2.95ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.924
+  Device 5, Kernel 131129  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 58.65ms, Duration 2.99ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.932
+  Device 5, Kernel 131134  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 63.91ms, Duration 2.93ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.973
+  Device 5, Kernel 131139  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 69.13ms, Duration 2.96ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.924
+  Device 5, Kernel 131144  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 74.33ms, Duration 2.99ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.932
+  Device 5, Kernel 131149  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 79.63ms, Duration 2.92ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.977
+  Device 5, Kernel 131154  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 84.79ms, Duration 3.11ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.882
+  Device 5, Kernel 131159  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 90.19ms, Duration 2.98ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.930
+  Device 5, Kernel 131164  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 95.41ms, Duration 2.92ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.981
+  Device 5, Kernel 131169  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 100.61ms, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.882
+  Device 5, Kernel 131174  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 105.96ms, Duration 2.95ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.926
+  Device 5, Kernel 131179  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 111.19ms, Duration 2.92ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.982
+  Device 5, Kernel 131184  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 116.34ms, Duration 3.11ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.884
+  Device 5, Kernel 131189  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 121.72ms, Duration 2.95ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.925
+  Device 5, Kernel 131194  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 126.92ms, Duration 2.99ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.928
+  Device 5, Kernel 131199  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 132.18ms, Duration 3.11ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.882
+  Device 5, Kernel 131204  _single_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 137.54ms, Duration 2.95ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.926
+  Device 5, Kernel 131209  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 142.76ms, Duration 2.98ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.930
+  Device 5, Kernel 131214  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 148.00ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.988
+
+[pair-state/tcu.log]
+PROFILE 0 baseline
+PROFILE 0 paired_k
+PROFILE 0 inplace
+PROFILE 1 paired_k
+PROFILE 1 inplace
+PROFILE 1 baseline
+PROFILE 2 inplace
+PROFILE 2 baseline
+PROFILE 2 paired_k
+PROFILE 3 baseline
+PROFILE 3 paired_k
+PROFILE 3 inplace
+PROFILE 4 paired_k
+PROFILE 4 inplace
+PROFILE 4 baseline
+==2709646==   Device 5, Kernel 131099  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 0.00ns, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.882
+  Device 5, Kernel 131104  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 19.25ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.970
+  Device 5, Kernel 131109  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 29.13ms, Duration 2.83ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.025
+  Device 5, Kernel 131114  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 34.98ms, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.883
+  Device 5, Kernel 131119  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 40.41ms, Duration 2.89ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.982
+  Device 5, Kernel 131124  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 45.61ms, Duration 2.83ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.015
+  Device 5, Kernel 131129  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 50.73ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.983
+  Device 5, Kernel 131134  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 55.94ms, Duration 2.83ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.018
+  Device 5, Kernel 131139  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 61.01ms, Duration 3.09ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.885
+  Device 5, Kernel 131144  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 66.38ms, Duration 2.84ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.020
+  Device 5, Kernel 131149  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 71.48ms, Duration 3.09ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.883
+  Device 5, Kernel 131154  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 76.84ms, Duration 2.92ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.981
+  Device 5, Kernel 131159  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 82.01ms, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.885
+  Device 5, Kernel 131164  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 87.38ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.983
+  Device 5, Kernel 131169  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 92.55ms, Duration 2.82ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.021
+  Device 5, Kernel 131174  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 97.65ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.975
+  Device 5, Kernel 131179  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 102.80ms, Duration 2.82ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.023
+  Device 5, Kernel 131184  _gqa_sparse_fwd_direct <<<1024,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 107.91ms, Duration 3.10ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.884
+
+[meta-ahead/tcu.log]
+PROFILE 0 paired_k
+PROFILE 0 inplace
+PROFILE 0 ahead
+PROFILE 1 inplace
+PROFILE 1 ahead
+PROFILE 1 paired_k
+PROFILE 2 ahead
+PROFILE 2 paired_k
+PROFILE 2 inplace
+PROFILE 3 paired_k
+PROFILE 3 inplace
+PROFILE 3 ahead
+PROFILE 4 inplace
+PROFILE 4 ahead
+PROFILE 4 paired_k
+==2715925==   Device 5, Kernel 131099  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 0.00ns, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.984
+  Device 5, Kernel 131104  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 10.32ms, Duration 2.84ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.020
+  Device 5, Kernel 131109  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 25.44ms, Duration 2.80ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.017
+  Device 5, Kernel 131114  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 31.35ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.980
+  Device 5, Kernel 131119  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 36.59ms, Duration 2.83ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.022
+  Device 5, Kernel 131124  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 41.75ms, Duration 2.81ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.021
+  Device 5, Kernel 131129  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 46.87ms, Duration 2.83ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.009
+  Device 5, Kernel 131134  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 52.02ms, Duration 2.80ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.021
+  Device 5, Kernel 131139  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 57.13ms, Duration 2.90ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.981
+  Device 5, Kernel 131144  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 62.33ms, Duration 2.81ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.017
+  Device 5, Kernel 131149  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 67.42ms, Duration 2.92ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.980
+  Device 5, Kernel 131154  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 72.71ms, Duration 2.84ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.015
+  Device 5, Kernel 131159  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 77.88ms, Duration 2.90ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.978
+  Device 5, Kernel 131164  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 83.14ms, Duration 2.82ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.014
+  Device 5, Kernel 131169  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 88.24ms, Duration 2.81ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.003
+  Device 5, Kernel 131174  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 93.37ms, Duration 2.84ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.020
+  Device 5, Kernel 131179  _ahead_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 98.52ms, Duration 2.82ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 1.008
+  Device 5, Kernel 131184  _paired_direct <<<512,1,1>>> <<<1,1,1>>> <<<1,1,1>>>, Start 103.70ms, Duration 2.91ms
+    Metric name: SIP/2D_EFFICIENCY, Unit: %, Value: 0.981

@@ -1,0 +1,31 @@
+[msa-topsprof-cap-check.log]
+RESULT root_drop_all 134
+CapEff:	0000000000000000
+RESULT root_drop_sys_rawio 0
+CapEff:	000001fffffdffff
+RESULT root_drop_sys_admin 0
+CapEff:	000001ffffdfffff
+RESULT tcu_root 0
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 3586.333
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 3573.583
+    Metric name: SIP/BUSY, Unit: CYCLE, Value: 3585.167
+
+[msa-topsprof-cap-narrow.log]
+RESULT -sys_admin,-sys_rawio 134
+CapEff:	000001ffffddffff
+RESULT -all,+sys_admin 0
+CapEff:	0000000000200000
+RESULT -all,+sys_rawio 0
+CapEff:	0000000000020000
+RESULT -all,+sys_ptrace 134
+CapEff:	0000000000080000
+
+[msa-topsprof-user-context.log]
+RESULT native 0 0
+CapEff:	000001ffffffffff
+RESULT native gcuagent 134
+CapEff:	0000000000000000
+RESULT triton 0 0
+CapEff:	000001ffffffffff
+RESULT triton gcuagent 134
+CapEff:	0000000000000000

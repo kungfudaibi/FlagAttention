@@ -1,0 +1,182 @@
+{
+  "17-0": {
+    "physical_page": 107,
+    "slot": 3,
+    "measures": {
+      "issueK_to_waitK": {
+        "late_ticks": 405.0,
+        "early_ticks": 825.0,
+        "paired_delta_ticks": 420.0,
+        "faster": 0
+      },
+      "waitK": {
+        "late_ticks": 907.5,
+        "early_ticks": 450.0,
+        "paired_delta_ticks": -472.5,
+        "faster": 8
+      },
+      "issueK_to_QK": {
+        "late_ticks": 1312.5,
+        "early_ticks": 1275.0,
+        "paired_delta_ticks": -45.0,
+        "faster": 6
+      },
+      "issueV_return_to_waitV": {
+        "late_ticks": 180.0,
+        "early_ticks": 3217.5,
+        "paired_delta_ticks": 3037.5,
+        "faster": 0
+      },
+      "waitV": {
+        "late_ticks": 915.0,
+        "early_ticks": 165.0,
+        "paired_delta_ticks": -750.0,
+        "faster": 8
+      },
+      "issueK_to_PV": {
+        "late_ticks": 5130.0,
+        "early_ticks": 4050.0,
+        "paired_delta_ticks": -1080.0,
+        "faster": 8
+      },
+      "entry_to_issueK": {
+        "late_ticks": 1747.5,
+        "early_ticks": 1770.0,
+        "paired_delta_ticks": 45.0,
+        "faster": 2
+      },
+      "entry_to_QK": {
+        "late_ticks": 3022.5,
+        "early_ticks": 3030.0,
+        "paired_delta_ticks": 0.0,
+        "faster": 4
+      },
+      "entry_to_PV": {
+        "late_ticks": 6885.0,
+        "early_ticks": 5812.5,
+        "paired_delta_ticks": -1050.0,
+        "faster": 8
+      }
+    }
+  },
+  "273-6": {
+    "physical_page": 127,
+    "slot": 9,
+    "measures": {
+      "issueK_to_waitK": {
+        "late_ticks": 315.0,
+        "early_ticks": 690.0,
+        "paired_delta_ticks": 367.5,
+        "faster": 0
+      },
+      "waitK": {
+        "late_ticks": 900.0,
+        "early_ticks": 532.5,
+        "paired_delta_ticks": -382.5,
+        "faster": 8
+      },
+      "issueK_to_QK": {
+        "late_ticks": 1215.0,
+        "early_ticks": 1215.0,
+        "paired_delta_ticks": -15.0,
+        "faster": 4
+      },
+      "issueV_return_to_waitV": {
+        "late_ticks": 135.0,
+        "early_ticks": 2272.5,
+        "paired_delta_ticks": 2130.0,
+        "faster": 0
+      },
+      "waitV": {
+        "late_ticks": 937.5,
+        "early_ticks": 120.0,
+        "paired_delta_ticks": -810.0,
+        "faster": 8
+      },
+      "issueK_to_PV": {
+        "late_ticks": 4065.0,
+        "early_ticks": 2947.5,
+        "paired_delta_ticks": -1095.0,
+        "faster": 8
+      },
+      "entry_to_issueK": {
+        "late_ticks": 1380.0,
+        "early_ticks": 1410.0,
+        "paired_delta_ticks": 45.0,
+        "faster": 2
+      },
+      "entry_to_QK": {
+        "late_ticks": 2595.0,
+        "early_ticks": 2610.0,
+        "paired_delta_ticks": 37.5,
+        "faster": 3
+      },
+      "entry_to_PV": {
+        "late_ticks": 5460.0,
+        "early_ticks": 4350.0,
+        "paired_delta_ticks": -1102.5,
+        "faster": 8
+      }
+    }
+  },
+  "989-12": {
+    "physical_page": 30,
+    "slot": 15,
+    "measures": {
+      "issueK_to_waitK": {
+        "late_ticks": 315.0,
+        "early_ticks": 675.0,
+        "paired_delta_ticks": 360.0,
+        "faster": 0
+      },
+      "waitK": {
+        "late_ticks": 862.5,
+        "early_ticks": 517.5,
+        "paired_delta_ticks": -352.5,
+        "faster": 8
+      },
+      "issueK_to_QK": {
+        "late_ticks": 1177.5,
+        "early_ticks": 1192.5,
+        "paired_delta_ticks": 0.0,
+        "faster": 4
+      },
+      "issueV_return_to_waitV": {
+        "late_ticks": 142.5,
+        "early_ticks": 2257.5,
+        "paired_delta_ticks": 2107.5,
+        "faster": 0
+      },
+      "waitV": {
+        "late_ticks": 855.0,
+        "early_ticks": 120.0,
+        "paired_delta_ticks": -735.0,
+        "faster": 8
+      },
+      "issueK_to_PV": {
+        "late_ticks": 3982.5,
+        "early_ticks": 2917.5,
+        "paired_delta_ticks": -1050.0,
+        "faster": 8
+      },
+      "entry_to_issueK": {
+        "late_ticks": 1680.0,
+        "early_ticks": 1702.5,
+        "paired_delta_ticks": 30.0,
+        "faster": 2
+      },
+      "entry_to_QK": {
+        "late_ticks": 2850.0,
+        "early_ticks": 2895.0,
+        "paired_delta_ticks": 75.0,
+        "faster": 3
+      },
+      "entry_to_PV": {
+        "late_ticks": 5647.5,
+        "early_ticks": 4620.0,
+        "paired_delta_ticks": -997.5,
+        "faster": 8
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+[operator-trace.log — last 3 post-warmup chains, us]
+==2699917==   5687937.68          555.88 _index_block_score_kernel
+==2699917==   5688493.96          630.25 _prefill_topk_rows_enflame
+==2699917==   5689124.72          307.19 _gqa_sparse_common_prefix
+==2699917==   5689432.33           23.71 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2699917==   5689456.48         3113.51 _gqa_sparse_fwd_direct
+==2699917==   5692754.62          556.42 _index_block_score_kernel
+==2699917==   5693311.60          624.60 _prefill_topk_rows_enflame
+==2699917==   5693936.77          303.86 _gqa_sparse_common_prefix
+==2699917==   5694241.13           22.89 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2699917==   5694264.46         3112.84 _gqa_sparse_fwd_direct
+==2699917==   5697564.30          556.66 _index_block_score_kernel
+==2699917==   5698121.45          625.11 _prefill_topk_rows_enflame
+==2699917==   5698747.08          303.90 _gqa_sparse_common_prefix
+==2699917==   5699051.43           22.79 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2699917==   5699074.68         3103.78 _gqa_sparse_fwd_direct
+
+[trace.log — last 3 post-warmup chains, us]
+==2698215==   5694673.59          605.64 _index_block_score_kernel
+==2698215==   5695279.69          663.98 _prefill_topk_rows_enflame
+==2698215==   5695944.16          329.94 _gqa_sparse_common_prefix
+==2698215==   5696274.61           23.97 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2698215==   5696298.96         3364.22 _gqa_sparse_fwd_direct
+==2698215==   5699855.19          606.48 _index_block_score_kernel
+==2698215==   5700462.15          656.99 _prefill_topk_rows_enflame
+==2698215==   5701119.55          329.25 _gqa_sparse_common_prefix
+==2698215==   5701449.30           23.05 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2698215==   5701472.76         3337.05 _gqa_sparse_fwd_direct
+==2698215==   5705011.17          607.05 _index_block_score_kernel
+==2698215==   5705618.79          656.45 _prefill_topk_rows_enflame
+==2698215==   5706275.71          328.77 _gqa_sparse_common_prefix
+==2698215==   5706605.05           22.96 void topsop_global_kernels::slice_and_transpose<3, 2>(void*, void*, SliceAndTransposeParams)
+==2698215==   5706628.45         3342.27 _gqa_sparse_fwd_direct

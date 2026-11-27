@@ -1,0 +1,36 @@
+stream GCUIR loop 705 1607 matmul pre/loop 0 4 K/V slice pre/loop 0 4
+725 KV_SLICE "memref_ext.slice_start"(%796, %798, %41, %41, %25, %42, %26)
+740 KV_SLICE "memref_ext.slice_start"(%806, %808, %41, %41, %25, %42, %13)
+755 KV_SLICE "memref_ext.slice_start"(%816, %818, %41, %41, %25, %42, %31)
+761 MATMUL "gcu.matmul"(%819, %96, %796)
+1114 MATMUL "gcu.matmul"(%398, %931, %806, %928)
+1133 KV_SLICE "memref_ext.slice_start"(%1000, %1002, %41, %41, %25, %42, %26)
+1248 MATMUL "gcu.matmul"(%1082, %105, %816)
+1601 MATMUL "gcu.matmul"(%405, %1194, %1000, %1191)
+stream LLVM matmul (line, block, in_cycle) [(1016, 'bb17', True), (1489, 'bb21', True), (1651, 'bb21', True), (2123, 'bb25', True)]
+keep_k GCUIR loop 727 1585 matmul pre/loop 0 4 K/V slice pre/loop 1 2
+690 KV_SLICE "memref_ext.slice_start"(%398, %400, %41, %41, %25, %42, %9)
+747 KV_SLICE "memref_ext.slice_start"(%808, %810, %41, %41, %25, %42, %26)
+790 MATMUL "gcu.matmul"(%405, %96, %398)
+1099 MATMUL "gcu.matmul"(%410, %922, %808, %919)
+1118 KV_SLICE "memref_ext.slice_start"(%991, %993, %41, %41, %25, %42, %26)
+1270 MATMUL "gcu.matmul"(%407, %105, %398)
+1579 MATMUL "gcu.matmul"(%417, %1184, %991, %1181)
+keep_k LLVM matmul (line, block, in_cycle) [(1012, 'bb19', True), (1457, 'bb21', True), (1644, 'bb23', True), (2089, 'bb25', True)]
+keep_v GCUIR loop 722 1586 matmul pre/loop 0 4 K/V slice pre/loop 1 2
+693 KV_SLICE "memref_ext.slice_start"(%401, %403, %41, %41, %25, %42, %9)
+741 KV_SLICE "memref_ext.slice_start"(%806, %808, %41, %41, %25, %42, %26)
+756 KV_SLICE "memref_ext.slice_start"(%816, %818, %41, %41, %25, %42, %13)
+762 MATMUL "gcu.matmul"(%819, %96, %806)
+1113 MATMUL "gcu.matmul"(%409, %931, %401, %928)
+1230 MATMUL "gcu.matmul"(%1071, %105, %816)
+1581 MATMUL "gcu.matmul"(%416, %1183, %401, %1180)
+keep_v LLVM matmul (line, block, in_cycle) [(1019, 'bb17', True), (1489, 'bb21', True), (1637, 'bb21', True), (2106, 'bb25', True)]
+keep_kv GCUIR loop 744 1564 matmul pre/loop 0 4 K/V slice pre/loop 2 0
+690 KV_SLICE "memref_ext.slice_start"(%398, %400, %41, %41, %25, %42, %9)
+711 KV_SLICE "memref_ext.slice_start"(%412, %414, %41, %41, %25, %42, %28)
+791 MATMUL "gcu.matmul"(%416, %96, %398)
+1098 MATMUL "gcu.matmul"(%421, %922, %412, %919)
+1252 MATMUL "gcu.matmul"(%418, %105, %398)
+1559 MATMUL "gcu.matmul"(%428, %1173, %412, %1170)
+keep_kv LLVM matmul (line, block, in_cycle) [(1014, 'bb19', True), (1456, 'bb21', True), (1629, 'bb23', True), (2071, 'bb25', True)]
