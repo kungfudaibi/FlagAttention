@@ -1,0 +1,230 @@
+{
+  "capture_date": "2026-11-27",
+  "units": "ms unless explicitly stated",
+  "timing_notes": "Native kernel rows are vendor profiler means except S60, which uses medians. Uninstrumented device Event values are separate runs. This file records extracted output and measurements.",
+  "shape": {
+    "dtype": "bf16",
+    "batch": 1,
+    "query": 1024,
+    "context": 16384,
+    "query_heads": 8,
+    "kv_heads": 1,
+    "head_dim": 128,
+    "page_tokens": 128,
+    "topk": 16,
+    "init_blocks": 1,
+    "local_blocks": 2,
+    "cpu_seed": 6
+  },
+  "hash_sha256_prefix": {
+    "q": "635bb52604d80b00",
+    "index_q": "3c498b3291371446",
+    "kv": "fc3ff4bb2e67244a",
+    "index_kv": "30c07cac6313d02d",
+    "block_table": "38947b677568a983",
+    "topk": "b2532e7704aba7db",
+    "output_biv150": "6c63cba3b9db994b",
+    "output_810e": "79759d42419de359"
+  },
+  "platforms": {
+    "biv150": {
+      "source": "abc0837561b1d52d1d59f7cfe727d8c4000b8136",
+      "tool": "ixSYS / ixKN",
+      "torch": "2.7.1",
+      "triton": "3.6.0",
+      "fp32_reference_max_abs": 0.00013642758131027222,
+      "device_events_ms": {
+        "score": 0.526115357875824,
+        "topk": 0.01954567246139,
+        "attention": 0.635197103023529,
+        "chain": 1.1799157857894897,
+        "dense_bf16_2048": 0.1632968783378601,
+        "batch_bf16_1024x8x128x128": 0.07150000333786011
+      },
+      "native_kernels_us": [
+        {
+          "kernel": "_index_block_score_kernel",
+          "calls": 158,
+          "avg": 527.76,
+          "min": 496.92,
+          "max": 532.19
+        },
+        {
+          "kernel": "_topk_index_kernel_streaming",
+          "calls": 158,
+          "avg": 20.402,
+          "min": 19.596,
+          "max": 21.173
+        },
+        {
+          "kernel": "_gqa_sparse_fwd_direct",
+          "calls": 158,
+          "avg": 640.06,
+          "min": 632.13,
+          "max": 720.65
+        }
+      ],
+      "ixkn_direct": {
+        "duration_ns": 643634,
+        "grid": [
+          1024,
+          1,
+          1
+        ],
+        "block": [
+          128,
+          1,
+          1
+        ],
+        "dynamic_shared_bytes_per_block": 6144,
+        "vector_registers_per_thread": 105,
+        "tcu_efficiency_pct": 45.8432,
+        "dram_read_efficiency_pct": 2.0761,
+        "l1_read_efficiency_pct": 47.4716,
+        "l2_read_efficiency_pct": 91.8738,
+        "achieved_occupancy_pct": 24.66,
+        "theoretical_occupancy_pct": 25
+      }
+    },
+    "ppu810e": {
+      "source": "d01b5dd1",
+      "tool": "Asight Systems / Asight Compute",
+      "torch": "2.10.0",
+      "triton": "3.6.0",
+      "fp32_reference_max_abs": 0.00013643130660057068,
+      "device_events_ms": {
+        "score": 0.0768200010061264,
+        "topk": 0.0489949993789196,
+        "attention": 0.678534984588623,
+        "chain": 0.7615349888801575,
+        "dense_bf16_2048": 0.1797875016927719,
+        "batch_bf16_1024x8x128x128": 0.023957500234246254
+      },
+      "native_kernels_ns": [
+        {
+          "kernel": "_index_block_score_kernel",
+          "calls": 13,
+          "total": 920723,
+          "avg": 70824,
+          "median": 70360,
+          "min": 68680,
+          "max": 75000
+        },
+        {
+          "kernel": "_topk_index_kernel_streaming",
+          "calls": 13,
+          "total": 77960,
+          "avg": 5996,
+          "median": 5960,
+          "min": 5880,
+          "max": 6320
+        },
+        {
+          "kernel": "_gqa_sparse_fwd_kernel",
+          "calls": 13,
+          "total": 8721907,
+          "avg": 670915,
+          "median": 671522,
+          "min": 658362,
+          "max": 679762
+        }
+      ],
+      "acu": {
+        "exit_code": 101,
+        "message": "Device is not ready for profiling",
+        "metrics_captured": 0
+      }
+    },
+    "s60": {
+      "reference": "../MSA-C200-prefill-profile-2026-11-27.md",
+      "tool": "TopsProf",
+      "native_medians_ms": {
+        "score": 0.556,
+        "topk": 0.625,
+        "shared_prefix": 0.304,
+        "k_layout": 0.023,
+        "direct": 3.113
+      },
+      "uninstrumented_chain_ms": 4.716
+    }
+  },
+  "ppu_implementation_ab": {
+    "native_kv_splits": 16,
+    "visible_scores_and_topk_bitwise_equal": true,
+    "split_grid": "[16, 1, kv_splits]",
+    "device_event_medians_ms": [
+      {
+        "variant": "native_first",
+        "splits": 16,
+        "score": 0.07452000180880229,
+        "chain": 0.7557266553243002
+      },
+      {
+        "variant": "forced",
+        "splits": 1,
+        "score": 0.2138433257738749,
+        "chain": 0.8927632967631022
+      },
+      {
+        "variant": "forced",
+        "splits": 2,
+        "score": 0.11487999558448792,
+        "chain": 0.7954400380452474
+      },
+      {
+        "variant": "forced",
+        "splits": 4,
+        "score": 0.08226666847864787,
+        "chain": 0.764520009358724
+      },
+      {
+        "variant": "forced",
+        "splits": 8,
+        "score": 0.09388333559036255,
+        "chain": 0.773603359858195
+      },
+      {
+        "variant": "forced",
+        "splits": 16,
+        "score": 0.0749066670735677,
+        "chain": 0.7569533189137778
+      },
+      {
+        "variant": "native_last",
+        "splits": 16,
+        "score": 0.07488666474819183,
+        "chain": 0.7573233445485433
+      }
+    ]
+  },
+  "matched_score": {
+    "source": "d01b5dd1 _index_block_score_kernel",
+    "query_tile": 64,
+    "kv_tile": 128,
+    "warps": 4,
+    "stages": 1,
+    "splits": [
+      1,
+      2,
+      4,
+      8,
+      16
+    ],
+    "biv150_median_ms": [
+      0.6801570256551107,
+      0.4241955280303955,
+      0.4232339859008789,
+      0.42724355061848956,
+      0.41806089878082275
+    ],
+    "ppu810e_median_ms": [
+      0.21376999219258627,
+      0.11017333467801411,
+      0.0852566659450531,
+      0.08501999576886494,
+      0.08392999569574992
+    ],
+    "visible_score_max_error_vs_native": 0,
+    "topk_bitwise_equal": true
+  }
+}
